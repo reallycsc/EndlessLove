@@ -17,17 +17,20 @@ public:
 
 	void update(float dt);
 
+	bool playerEnemyIntersect(Player* player);
+	int playerItemIntersect(Player* player);
+	bool isJumpOver(Player* player);
+
+	void increaseGameLevel();
+private:
 	void addEnemyDown(bool isWithUp);
 	void addEnemyUp(int speed);
 	void addItem();
 	int moveAllEnemys(Vector<Enemy*>* pAllEnemys, float dt);
 	int moveAllItems(float dt);
 
-	bool playerEnemyIntersect(Player* player);
-	int playerItemIntersect(Player* player);
-	bool isJumpOver(Player* player);
-
-	void increaseGameLevel();
+public:
+	CC_SYNTHESIZE(bool, m_bIsPlayerJump, IsPlayerJump);
 private:
 	GameMediator*	_gameMediator;
 	Text*	_textLevelUp;
