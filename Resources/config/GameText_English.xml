@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GameText xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Text id="1">Endless Love</Text>
+	<Text id="2">HighScore:</Text>
+	<Text id="3">Start</Text>
+	<Text id="4">Exit</Text>
+	<Text id="5">Touch anywhere for start</Text>
+	<Text id="6">Pause</Text>
+	<Text id="7">Level Up</Text>
+	<Text id="8">Game Over</Text>
+	<Text id="9">Restart</Text>
+	<Text id="10">Quit</Text>
+	<Text id="11">Game Paused</Text>
+	<Text id="12">Resume</Text>
+	<Text id="13">Score:</Text>
+	<Text id="14">Guide Line:</Text>
+	<Text id="15">Enlarge:</Text>
+	<Text id="16">Shrink:</Text>
+	<Text id="17">Shield:</Text>
+	<Text id="18">Good</Text>
+	<Text id="19">Great</Text>
+	<Text id="20">Perfect</Text>
+	<Text id="21">Player Upgrade</Text>
+	<Text id="22">Upgrade</Text>
+	<Text id="23">Jump Type:</Text>
+	<Text id="24">Max Heart Number: </Text>
+	<Text id="25">Jump Strength：</Text>
+	<Text id="26">Focus Duration: </Text>
+	<Text id="27">Item Duration (Guideline):</Text>
+	<Text id="28">Item Duration (Enlarge):</Text>
+	<Text id="29">Item Duration (Shrink):</Text>
+	<Text id="30">Item Duration (Shield):</Text>
+	<Text id="31">Notification</Text>
+	<Text id="32">Not enough gold, can't upgrade.</Text>
+</GameText>

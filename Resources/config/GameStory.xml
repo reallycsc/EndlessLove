@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GameStory>
+    <GameOver>
+        <Bomb>You intersect with the enemy and dead1!\n</Bomb>
+        <Bomb>You intersect with the enemy and dead2!\n</Bomb>
+        <Bomb>You intersect with the enemy and dead3!\n</Bomb>
+        <Bomb>You intersect with the enemy and dead4!\n</Bomb>
+
+        <Noheart>You have no heart left and all alone1!\n</Noheart>
+        <Noheart>You have no heart left and all alone2!\n</Noheart>
+        <Noheart>You have no heart left and all alone3!\n</Noheart>
+        <Noheart>You have no heart left and all alone4!\n</Noheart>
+        <Noheart>You have no heart left and all alone5!\n</Noheart>
+    </GameOver>
+</GameStory>

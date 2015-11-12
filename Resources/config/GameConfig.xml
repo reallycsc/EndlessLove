@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<GameConfig>
+	<!-- 	
+	1 ITEMTYPE_GOLD,
+	2 ITEMTYPE_HEART,
+	3 ITEMTYPE_GUIDELINE,
+	4 ITEMTYPE_ENLARGE,
+	5 ITEMTYPE_SHRINK,
+	6 ITEMTYPE_BOMB,
+	7 ITEMTYPE_HEARTBROKENLEFT,
+	8 ITEMTYPE_HEARTBROKENRIGHT,
+	9 ITEMTYPE_HEARTPLUS,
+	10 ITEMTYPE_HEARTSECRET,
+	11 ITEMTYPE_HEARTGREENTEA,
+	12 ITEMTYPE_SHIELD,
+	-->
+	<GameLevel>
+		<Level level="1" levelUpScore="5"> <!-- Always for debug -->
+			<Player>
+				<PlayerMoveTime time="2"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+			<EnemyDown isShow="true" isBindItem="false">
+				<EnemyHeight minScale="0.1" minOffset="0" maxScale="0.3" maxOffset="0"/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
+				<EnemyWidth minScale="0.2" maxScale="0.4"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+				<EnemyMoveSpeed minScale="0" maxScale="0"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
+				<EnemyInterval minScale="1.0" maxScale="1.5"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+			</EnemyDown>
+		</Level>
+		<Level level="2" levelUpScore="5">
+			<Player>
+				<PlayerMoveTime time="1.95"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+			<Item isCurve="false">
+				<ItemMoveSpeed minScale="0" maxScale="0.5"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
+				<ItemInterval minScale="1.0" maxScale="2.0"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="2" ItemProp="80" />
+					<Item ItemType="3" ItemProp="20" />
+				</ItemAddProp>
+			</Item>
+		</Level>
+		<Level level="3" levelUpScore="5">
+			<Player>
+				<PlayerMoveTime time="1.9"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+			<EnemyDown isShow="true" isBindItem="true">
+			</EnemyDown>
+		</Level>
+		<Level level="4" levelUpScore="5">
+			<EnemyUp isShow="true" isSamePos="false"> <!-- if isSamePos == true, enemyUp Pos same as enemyDown, and enemyUp.maxHeight + enemyDown.maxHeight + n < winSize.height -->
+				<EnemyHeight minOffset="200" maxOffset="400"/> <!-- relevent with enemyDownHeight, like maxHeight = winSize.height - enemyDownHeight - minOffset-->
+				<EnemyWidth minScale="0.2" maxScale="0.4"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+				<EnemyMoveSpeed minScale="0.0" maxScale="0.0"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
+				<EnemyInterval minScale="1.0" maxScale="1.5"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+			</EnemyUp>
+		</Level>
+		<Level level="5" levelUpScore="5">
+			<Player>
+				<PlayerMoveTime time="1.85"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+			<Item isCurve="false">
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="2" ItemProp="30" />
+					<Item ItemType="3" ItemProp="10" />
+					<Item ItemType="4" ItemProp="30" />
+					<Item ItemType="5" ItemProp="30" />
+				</ItemAddProp>
+			</Item>
+		</Level>
+		<Level level="6" levelUpScore="5">
+			<Item isCurve="false">
+				<ItemInterval minScale="1.0" maxScale="1.5"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="2" ItemProp="15" />
+					<Item ItemType="3" ItemProp="10" />
+					<Item ItemType="4" ItemProp="20" />
+					<Item ItemType="5" ItemProp="20" />
+					<Item ItemType="7" ItemProp="15" />
+					<Item ItemType="8" ItemProp="15" />
+					<Item ItemType="9" ItemProp="5" />
+				</ItemAddProp>
+			</Item>
+		</Level>
+		<Level level="7" levelUpScore="5">
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyHeight minScale="0.1" minOffset="0" maxScale="0.4" maxOffset="0"/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
+			</EnemyDown>
+			<EnemyUp isShow="true" isSamePos="false"> <!-- if isSamePos == true, enemyUp Pos same as enemyDown, and enemyUp.maxHeight + enemyDown.maxHeight + n < winSize.height -->
+				<EnemyHeight minOffset="150" maxOffset="300"/> <!-- relevent with enemyDownHeight, like maxHeight = winSize.height - enemyDownHeight - minOffset-->
+			</EnemyUp>
+		</Level>
+		<Level level="8" levelUpScore="5">
+			<Player>
+				<PlayerMoveTime time="1.8"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+		</Level>
+		<Level level="9" levelUpScore="5">
+			<Item isCurve="false">
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="2" ItemProp="10" />
+					<Item ItemType="3" ItemProp="5" />
+					<Item ItemType="4" ItemProp="10" />
+					<Item ItemType="5" ItemProp="10" />
+					<Item ItemType="7" ItemProp="15" />
+					<Item ItemType="8" ItemProp="15" />
+					<Item ItemType="9" ItemProp="5" />
+					<Item ItemType="10" ItemProp="15" />
+					<Item ItemType="11" ItemProp="15" />
+				</ItemAddProp>
+			</Item>
+		</Level>
+		<Level level="10" levelUpScore="5">
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyWidth minScale="0.2" maxScale="0.6"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+				<EnemyMoveSpeed minScale="0" maxScale="0.1"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
+			</EnemyDown>
+			<EnemyUp isShow="true" isSamePos="false">
+				<EnemyWidth minScale="0.2" maxScale="0.6"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+				<EnemyMoveSpeed minScale="0" maxScale="0.1"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
+			</EnemyUp>
+		</Level>
+		<Level level="11" levelUpScore="5">
+			<Player>
+				<PlayerMoveTime time="1.7"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyInterval minScale="1.0" maxScale="1.25"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+			</EnemyDown>
+		</Level>
+		<Level level="12" levelUpScore="5">
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyHeight minScale="0.2" minOffset="0" maxScale="0.5" maxOffset="0"/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
+			</EnemyDown>
+		</Level>
+		<Level level="13" levelUpScore="5">
+			<EnemyUp isShow="true" isSamePos="true"> <!-- if isSamePos == true, enemyUp Pos same as enemyDown, and enemyUp.maxHeight + enemyDown.maxHeight + n < winSize.height -->
+				<EnemyHeight minOffset="150" maxOffset="200"/> <!-- relevent with enemyDownHeight, like maxHeight = winSize.height - enemyDownHeight - minOffset-->
+			</EnemyUp>
+		</Level>
+		<Level level="14" levelUpScore="5">
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyWidth minScale="0.2" maxScale="0.8"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+			</EnemyDown>
+			<EnemyUp isShow="true" isSamePos="true">
+				<EnemyWidth minScale="0.2" maxScale="0.8"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+			</EnemyUp>
+		</Level>
+		<Level level="15" levelUpScore="5">
+			<Player>
+				<PlayerMoveTime time="1.6"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+			<Item isCurve="false">
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="2" ItemProp="5" />
+					<Item ItemType="3" ItemProp="5" />
+					<Item ItemType="4" ItemProp="10" />
+					<Item ItemType="5" ItemProp="10" />
+					<Item ItemType="7" ItemProp="10" />
+					<Item ItemType="8" ItemProp="10" />
+					<Item ItemType="9" ItemProp="2" />
+					<Item ItemType="10" ItemProp="10" />
+					<Item ItemType="11" ItemProp="10" />
+					<Item ItemType="12" ItemProp="8" />
+				</ItemAddProp>
+			</Item>
+		</Level>
+		<Level level="16" levelUpScore="5">
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyHeight minScale="0.2" minOffset="0" maxScale="0.5" maxOffset="0"/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
+			</EnemyDown>
+			<EnemyUp isShow="true" isSamePos="true"> <!-- if isSamePos == true, enemyUp Pos same as enemyDown, and enemyUp.maxHeight + enemyDown.maxHeight + n < winSize.height -->
+				<EnemyHeight minOffset="150" maxOffset="150"/> <!-- relevent with enemyDownHeight, like maxHeight = winSize.height - enemyDownHeight - minOffset-->
+			</EnemyUp>
+		</Level>
+		<Level level="17" levelUpScore="5">
+			<Item isCurve="false">
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="2" ItemProp="5" />
+					<Item ItemType="3" ItemProp="5" />
+					<Item ItemType="4" ItemProp="10" />
+					<Item ItemType="5" ItemProp="10" />
+					<Item ItemType="6" ItemProp="10" />
+					<Item ItemType="7" ItemProp="5" />
+					<Item ItemType="8" ItemProp="5" />
+					<Item ItemType="9" ItemProp="2" />
+					<Item ItemType="10" ItemProp="10" />
+					<Item ItemType="11" ItemProp="10" />
+					<Item ItemType="12" ItemProp="8" />
+				</ItemAddProp>
+			</Item>
+		</Level>
+		<Level level="18" levelUpScore="5">
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyWidth minScale="0.2" maxScale="1"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+			</EnemyDown>
+			<EnemyUp isShow="true" isSamePos="true">
+				<EnemyWidth minScale="0.2" maxScale="1"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+			</EnemyUp>
+		</Level>
+		<Level level="19" levelUpScore="5">
+			<Player>
+				<PlayerMoveTime time="1.5"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
+			</Player>
+			<Item isCurve="false">
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="1" ItemProp="10" />
+					<Item ItemType="2" ItemProp="5" />
+					<Item ItemType="3" ItemProp="5" />
+					<Item ItemType="4" ItemProp="10" />
+					<Item ItemType="5" ItemProp="10" />
+					<Item ItemType="6" ItemProp="10" />
+					<Item ItemType="7" ItemProp="5" />
+					<Item ItemType="8" ItemProp="5" />
+					<Item ItemType="9" ItemProp="2" />
+					<Item ItemType="10" ItemProp="15" />
+					<Item ItemType="11" ItemProp="15" />
+					<Item ItemType="12" ItemProp="8" />
+				</ItemAddProp>
+			</Item>
+		</Level>
+	</GameLevel>
+</GameConfig>

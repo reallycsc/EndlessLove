@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GameText xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Text id="1">无尽的爱</Text>
+	<Text id="2">最高分：</Text>
+	<Text id="3">开始游戏</Text>
+	<Text id="4">退出游戏</Text>
+	<Text id="5">点击屏幕任意地方开始</Text>
+	<Text id="6">暂停游戏</Text>
+	<Text id="7">难度提升</Text>
+	<Text id="8">游戏结束</Text>
+	<Text id="9">重  试</Text>
+	<Text id="10">主菜单</Text>
+	<Text id="11">游戏暂停</Text>
+	<Text id="12">继续游戏</Text>
+	<Text id="13">分数：</Text>
+	<Text id="14">辅助线：</Text>
+	<Text id="15">角色放大：</Text>
+	<Text id="16">角色缩小：</Text>
+	<Text id="17">无敌护盾：</Text>
+	<Text id="18">Good</Text>
+	<Text id="19">Great</Text>
+	<Text id="20">Perfect</Text>
+	<Text id="21">角色升级</Text>
+	<Text id="22">升  级</Text>
+	<Text id="23">跳跃类型：</Text>
+	<Text id="24">最大生命：</Text>
+	<Text id="25">跳跃力度：</Text>
+	<Text id="26">蓄力时间：</Text>
+	<Text id="27">效果持续时间（辅助线）：</Text>
+	<Text id="28">效果持续时间（角色放大）：</Text>
+	<Text id="29">效果持续时间（角色缩小）：</Text>
+	<Text id="30">效果持续时间（无敌护盾）：</Text>
+	<Text id="31">通  知</Text>
+	<Text id="32">金币数量不足，无法升级。</Text>
+</GameText>

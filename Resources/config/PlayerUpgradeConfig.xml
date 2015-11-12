@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PlayerUpgradeConfig>
+	<JumpType>
+		<Level level="1" needGold="1" powerUpOnTheGround="true" jumpOnTheGround="true" freeJumpTime="0"/>
+		<Level level="2" needGold="2" powerUpOnTheGround="false" jumpOnTheGround="true" freeJumpTime="0"/>
+		<Level level="3" needGold="3" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="1"/>
+		<Level level="4" needGold="4" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="2"/>
+		<Level level="5" needGold="5" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="3"/>
+		<Level level="6" needGold="6" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="4"/>
+		<Level level="7" needGold="7" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="5"/>
+		<Level level="8" needGold="8" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="6"/>
+		<Level level="9" needGold="9" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="7"/>
+		<Level level="10" needGold="10" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="8"/>
+	</JumpType>
+	<MaxHeartNumber>
+		<Level level="1" needGold="1" number="1"/>
+		<Level level="2" needGold="2" number="1.5"/>
+		<Level level="3" needGold="3" number="2"/>
+		<Level level="4" needGold="4" number="2.5"/>
+		<Level level="5" needGold="5" number="3"/>
+		<Level level="6" needGold="6" number="3.5"/>
+		<Level level="7" needGold="7" number="4"/>
+		<Level level="8" needGold="8" number="4.5"/>
+		<Level level="9" needGold="9" number="5"/>
+	</MaxHeartNumber>
+	<Strength> <!-- strength = minStrength*number + 99 -->
+		<Level level="1" needGold="1" number="1"/>
+		<Level level="2" needGold="2" number="2"/>
+		<Level level="3" needGold="3" number="3"/>
+		<Level level="4" needGold="4" number="4"/>
+		<Level level="5" needGold="5" number="5"/>
+		<Level level="6" needGold="6" number="6"/>
+		<Level level="7" needGold="7" number="7"/>
+		<Level level="8" needGold="8" number="8"/>
+		<Level level="9" needGold="9" number="9"/>
+		<Level level="10" needGold="10" number="10"/>
+		<Level level="11" needGold="11" number="11"/>
+		<Level level="12" needGold="12" number="12"/>
+		<Level level="13" needGold="13" number="13"/>
+		<Level level="14" needGold="14" number="14"/>
+		<Level level="15" needGold="15" number="15"/>
+		<Level level="16" needGold="16" number="16"/>
+		<Level level="17" needGold="17" number="17"/>
+		<Level level="18" needGold="18" number="18"/>
+	</Strength>
+	<PowerTime>
+		<Level level="1" needGold="1" number="1"/>
+		<Level level="2" needGold="2" number="0.95"/>
+		<Level level="3" needGold="3" number="0.9"/>
+		<Level level="4" needGold="4" number="0.85"/>
+		<Level level="5" needGold="5" number="0.8"/>
+		<Level level="6" needGold="6" number="0.75"/>
+		<Level level="7" needGold="7" number="0.7"/>
+		<Level level="8" needGold="8" number="0.65"/>
+		<Level level="9" needGold="9" number="0.6"/>
+		<Level level="10" needGold="10" number="0.55"/>
+		<Level level="11" needGold="11" number="0.5"/>
+	</PowerTime>
+	<GuidelineTime>
+		<Level level="1" needGold="1" number="10"/>
+		<Level level="2" needGold="2" number="11"/>
+		<Level level="3" needGold="3" number="12"/>
+		<Level level="4" needGold="4" number="13"/>
+		<Level level="5" needGold="5" number="14"/>
+		<Level level="6" needGold="6" number="15"/>
+		<Level level="7" needGold="7" number="16"/>
+		<Level level="8" needGold="8" number="17"/>
+		<Level level="9" needGold="9" number="18"/>
+		<Level level="10" needGold="10" number="19"/>
+	</GuidelineTime>
+	<EnlargeTime>
+		<Level level="1" needGold="1" number="10"/>
+		<Level level="2" needGold="2" number="9.5"/>
+		<Level level="3" needGold="3" number="9"/>
+		<Level level="4" needGold="4" number="8.5"/>
+		<Level level="5" needGold="5" number="8"/>
+		<Level level="6" needGold="6" number="7.5"/>
+		<Level level="7" needGold="7" number="7"/>
+		<Level level="8" needGold="8" number="6.5"/>
+		<Level level="9" needGold="9" number="6"/>
+		<Level level="10" needGold="10" number="5.5"/>
+	</EnlargeTime>
+	<ShrinkTime>
+		<Level level="1" needGold="1" number="5"/>
+		<Level level="2" needGold="2" number="6"/>
+		<Level level="3" needGold="3" number="7"/>
+		<Level level="4" needGold="4" number="8"/>
+		<Level level="5" needGold="5" number="9"/>
+		<Level level="6" needGold="6" number="10"/>
+		<Level level="7" needGold="7" number="11"/>
+		<Level level="8" needGold="8" number="12"/>
+		<Level level="9" needGold="9" number="13"/>
+		<Level level="10" needGold="10" number="14"/>
+	</ShrinkTime>
+	<ShieldTime>
+		<Level level="1" needGold="1" number="5"/>
+		<Level level="2" needGold="2" number="6"/>
+		<Level level="3" needGold="3" number="7"/>
+		<Level level="4" needGold="4" number="8"/>
+		<Level level="5" needGold="5" number="9"/>
+		<Level level="6" needGold="6" number="10"/>
+		<Level level="7" needGold="7" number="11"/>
+		<Level level="8" needGold="8" number="12"/>
+		<Level level="9" needGold="9" number="13"/>
+		<Level level="10" needGold="10" number="14"/>
+	</ShieldTime>
+</PlayerUpgradeConfig>
