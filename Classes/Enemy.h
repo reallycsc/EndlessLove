@@ -19,4 +19,5 @@ public:
 	CC_SYNTHESIZE(int, m_iMoveSpeed, MoveSpeed);
 	CC_SYNTHESIZE(bool, m_bIsOver, IsOver);
 	CC_SYNTHESIZE(bool, m_bIsIntersect, IsIntersect);
+	CC_SYNTHESIZE(bool, m_bIsEvluate, IsEvluate);
 };

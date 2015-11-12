@@ -15,6 +15,8 @@ public:
 
 	void initGame();
 
+	void reloadAllConfigFiles();
+
 	// getter function
 	map<int, string>* getGameText() { return &_mapGameText; }
 	map<int, vector<string>>* getGameStory() { return &_mapGameStory; }

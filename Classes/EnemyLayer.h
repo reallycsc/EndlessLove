@@ -40,12 +40,14 @@ private:
 
 	GameLevelData*	_levelData;
 
-	int mAddEnemyDownDistance; // 敌人间隔距离像素
-	int mAccEnemyDownDistance;
-	int mAddEnemyUpDistance;
-	int mAccEnemyUpDistance;
+	int m_nEnemyDownMinInterval; // 敌人最小间隔
 
-	int mAddItemDistance; // 道具间隔距离像素
-	int mAccItemDistance;
+	int m_nAddEnemyDownDistance; // 敌人间隔距离像素
+	int m_nAccEnemyDownDistance;
+	int m_nAddEnemyUpDistance;
+	int m_nAccEnemyUpDistance;
+
+	int m_nAddItemDistance; // 道具间隔距离像素
+	int m_nAccItemDistance;
 };
 

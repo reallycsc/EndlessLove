@@ -114,10 +114,10 @@ void GameLayer::update(float dt)
 		// game over if heart is zero
 		if (_playerData->getHeartNumber() <= 0)
 		{
-			//_controlLayer->gameOver();
-			//auto gameOverLayer = GameOverLayer::create();
-			//this->addChild(gameOverLayer, ZORDER_GAMEOVER_LAYER);
-			//gameOverLayer->showScoreAndStory(GAMEOVER_REASON_NOHEART);
+			_controlLayer->gameOver();
+			auto gameOverLayer = GameOverLayer::create();
+			this->addChild(gameOverLayer, ZORDER_GAMEOVER_LAYER);
+			gameOverLayer->showScoreAndStory(GAMEOVER_REASON_NOHEART);
 		}
 		// check if jump over & update score
 		do

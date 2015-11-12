@@ -29,13 +29,9 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="PlayerUpgradeScene.csd" />
-          <FilePathData Path="NormalNoticeLayer.csd" />
-          <FilePathData Path="GameOverLayer.csd" />
-          <FilePathData Path="GameScene.csd" />
           <FilePathData Path="MainMenuScene.csd" />
-          <FilePathData Path="PlayerLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="PlayerUpgradeScene.csd" />
+        <ActiveDocument Path="MainMenuScene.csd" />
       </Value>
     </Item>
   </Properties>

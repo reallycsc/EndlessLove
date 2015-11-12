@@ -33,6 +33,9 @@ bool MainMenuLayer::init()
 	auto buttonUpgrade = dynamic_cast<Button*>(rootNode->getChildByName("Button_Upgrade"));
 	buttonUpgrade->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Upgrade, this));
 
+	auto buttonReload = dynamic_cast<Button*>(rootNode->getChildByName("Button_Reload"));
+	buttonReload->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Reload, this));
+
 	// get gold number
 	dynamic_cast<Text*>(rootNode->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"))
 		->setString(String::createWithFormat("%d", data->getGoldNumberAll())->getCString());
@@ -70,4 +73,10 @@ void MainMenuLayer::menuCallback_Exit(Ref* pSender)
 void MainMenuLayer::menuCallback_Upgrade(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(PlayerUpgradeScene::create());
+}
+
+// DEBUG only
+void MainMenuLayer::menuCallback_Reload(Ref* pSender)
+{
+	GameMediator::getInstance()->reloadAllConfigFiles();
 }

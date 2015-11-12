@@ -6,6 +6,7 @@ Enemy::Enemy(void)
 	m_iMoveSpeed = 0;
 	m_bIsOver = false;
 	m_bIsIntersect = false;
+	m_bIsEvluate = false;
 }
 
 

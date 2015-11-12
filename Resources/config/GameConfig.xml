@@ -15,16 +15,40 @@
 	12 ITEMTYPE_SHIELD,
 	-->
 	<GameLevel>
-		<Level level="1" levelUpScore="5"> <!-- Always for debug -->
+		<Level level="1" levelUpScore="5000"> <!-- Always for debug -->
 			<Player>
 				<PlayerMoveTime time="2"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
 			</Player>
-			<EnemyDown isShow="true" isBindItem="false">
-				<EnemyHeight minScale="0.1" minOffset="0" maxScale="0.3" maxOffset="0"/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
-				<EnemyWidth minScale="0.2" maxScale="0.4"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+			<EnemyDown isShow="true" isBindItem="true">
+				<EnemyHeight minScale="0.1" minOffset="0" maxScale="0.5" maxOffset="-50"/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
+				<EnemyWidth minScale="0.2" maxScale="1"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
 				<EnemyMoveSpeed minScale="0" maxScale="0"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
-				<EnemyInterval minScale="1.0" maxScale="1.5"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+				<EnemyInterval minScale="0.1" maxScale="0.1"/> <!-- relevent with winSize.width, like minInterval = winSize.width * minScale -->
 			</EnemyDown>
+			<EnemyUp isShow="true" isSamePos="true"> <!-- if isSamePos == true, enemyUp Pos same as enemyDown, and enemyUp.maxHeight + enemyDown.maxHeight + n < winSize.height -->
+				<EnemyHeight minOffset="150" maxOffset="200"/> <!-- relevent with enemyDownHeight, like maxHeight = winSize.height - enemyDownHeight - minOffset-->
+				<EnemyWidth minScale="0.2" maxScale="1"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
+				<EnemyMoveSpeed minScale="0" maxScale="0"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
+				<EnemyInterval minScale="1" maxScale="1.5"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+			</EnemyUp>
+			<Item isCurve="false">
+				<ItemMoveSpeed minScale="0" maxScale="0.5"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
+				<ItemInterval minScale="1.0" maxScale="2.0"/> <!-- relevent with MINITERVAL = playerSpeed*(2 * winSize.height / GRAVITY + 1), like minInterval = MINITERVAL * minScale -->
+				<ItemAddProp MaxProp="100">
+					<Item ItemType="1" ItemProp="10" />
+					<Item ItemType="2" ItemProp="5" />
+					<Item ItemType="3" ItemProp="5" />
+					<Item ItemType="4" ItemProp="10" />
+					<Item ItemType="5" ItemProp="10" />
+					<Item ItemType="6" ItemProp="10" />
+					<Item ItemType="7" ItemProp="5" />
+					<Item ItemType="8" ItemProp="5" />
+					<Item ItemType="9" ItemProp="2" />
+					<Item ItemType="10" ItemProp="15" />
+					<Item ItemType="11" ItemProp="15" />
+					<Item ItemType="12" ItemProp="8" />
+				</ItemAddProp>
+			</Item>
 		</Level>
 		<Level level="2" levelUpScore="5">
 			<Player>

@@ -11,6 +11,14 @@ EnemyLayer::EnemyLayer(void)
 	_allEnemysUp.clear();
 	_allItems.clear();
 	_spriteMap.clear();
+
+	m_nEnemyDownMinInterval = 0;
+	m_nAddEnemyDownDistance = 0;
+	m_nAccEnemyDownDistance = 0;
+	m_nAddEnemyUpDistance = 0;
+	m_nAccEnemyUpDistance = 0;
+	m_nAddItemDistance = 0;
+	m_nAccItemDistance = 0;
 }
 
 
@@ -61,17 +69,21 @@ bool EnemyLayer::init()
 		_gameMediator->setGameLevel(_levelData->getLevel());
 
 		// 累积移动距离初始化
-		mAddEnemyDownDistance = _levelData->getEnemyDownInterval();
-		mAddEnemyUpDistance = _levelData->getEnemyUpInterval();
-		mAddItemDistance = _levelData->getItemInterval();
-		mAccEnemyDownDistance = mAccEnemyUpDistance = mAccItemDistance = 0;
+		float jumpTime = sqrt((float)(2 * _levelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
+		float powerTime = _gameMediator->getPlayerData()->getPowerTime();
+		float speed = _levelData->getPlayerMoveSpeed();
+		m_nEnemyDownMinInterval = int(speed * (jumpTime + powerTime));
+		m_nAddEnemyDownDistance = MAX(_levelData->getEnemyDownInterval(), m_nEnemyDownMinInterval);
+		m_nAddEnemyUpDistance = _levelData->getEnemyUpInterval();
+		m_nAddItemDistance = _levelData->getItemInterval();
+		m_nAccEnemyDownDistance = m_nAccEnemyUpDistance = m_nAccItemDistance = winSize.width * 0.75;
 
 		// 加入第一个敌人
-		this->addEnemyDown(_levelData->getEnemyUpIsSamePos() && _levelData->getEnemyUpIsShow());
+		//this->addEnemyDown(_levelData->getEnemyUpIsSamePos() && _levelData->getEnemyUpIsShow());
 
 		// 加入第一个辅助虚线道具在玩家面前
 		Item* item = Item::createItem(_spriteMap.at(ITEMTYPE_GUIDELINE)->getSpriteFrame(), ITEMTYPE_GUIDELINE, _levelData->getItemMoveSpeed());
-		item->setPosition(winSize.width / 4 + 150, 0);
+		item->setPosition(winSize.width * 0.25 + 150, 0);
 		this->addChild(item, ZORDER_ENEMYLAYER_ITEM);
 		_allItems.pushBack(item);
 
@@ -87,35 +99,35 @@ void EnemyLayer::update(float dt)
 	if (_gameMediator->getGameState() == STATE_GAME_RUN)
 	{
 		// add random item
-		mAccItemDistance += moveAllItems(dt);
-		if (mAccItemDistance > mAddItemDistance)
+		m_nAccItemDistance += moveAllItems(dt);
+		if (m_nAccItemDistance > m_nAddItemDistance)
 		{
 			this->addItem();
-			mAccItemDistance = 0;
-			mAddItemDistance = _levelData->getItemInterval();
+			m_nAccItemDistance = 0;
+			m_nAddItemDistance = _levelData->getItemInterval();
 		}
 		// add Enemy Up
 		bool isWithUp = _levelData->getEnemyUpIsSamePos();
 		bool isEnemyUpShow = _levelData->getEnemyUpIsShow();
-		mAccEnemyUpDistance += moveAllEnemys(&_allEnemysUp, dt);
+		m_nAccEnemyUpDistance += moveAllEnemys(&_allEnemysUp, dt);
 		if (isEnemyUpShow && !isWithUp)
 		{
-			if (mAccEnemyUpDistance > mAddEnemyUpDistance)
+			if (m_nAccEnemyUpDistance > m_nAddEnemyUpDistance)
 			{
 				this->addEnemyUp(_levelData->getEnemyUpMoveSpeed());
-				mAccEnemyUpDistance = 0;
-				mAddEnemyUpDistance = _levelData->getEnemyUpInterval();
+				m_nAccEnemyUpDistance = 0;
+				m_nAddEnemyUpDistance = _levelData->getEnemyUpInterval();
 			}
 		}
 		// add Enemy Down
 		if (_levelData->getEnemyDownIsShow())
 		{
-			mAccEnemyDownDistance += moveAllEnemys(&_allEnemysDown, dt);
-			if (mAccEnemyDownDistance > mAddEnemyDownDistance)
+			m_nAccEnemyDownDistance += moveAllEnemys(&_allEnemysDown, dt);
+			if (m_nAccEnemyDownDistance > m_nAddEnemyDownDistance)
 			{
 				this->addEnemyDown(isWithUp && isEnemyUpShow);
-				mAccEnemyDownDistance = 0;
-				mAddEnemyDownDistance = _levelData->getEnemyDownInterval();
+				m_nAccEnemyDownDistance = 0;
+				m_nAddEnemyDownDistance = MAX(_levelData->getEnemyDownInterval(), m_nEnemyDownMinInterval);
 			}
 		}
 	}
@@ -334,12 +346,16 @@ bool EnemyLayer::isJumpOver(Player* player)
 			Point pos2 = player->getPosition();
 			Size size1 = obj->getSprite()->getBoundingBox().size;
 			Size size2 = player->getSprite()->getBoundingBox().size * player->getScale();
-			if (pos1.x+size1.width/2 < pos2.x-size2.width/2)
+			if (pos2.x >= pos1.x && !obj->getIsEvluate())
 			{
-				obj->setIsOver(true);
+				player->showEvaluation(pos2.y - size1.height);
+				obj->setIsEvluate(true);
+			}
+			else if (pos1.x+size1.width/2 < pos2.x-size2.width/2)
+			{
 				isJumpOver = true;
 				count++;
-				player->showEvaluation(pos2.y - size1.height);
+				obj->setIsOver(true);
 			}
 		}
 	}
@@ -362,6 +378,13 @@ void EnemyLayer::increaseGameLevel()
 	level++;
 	_gameMediator->setGameLevel(level);
 	_levelData = &(*_gameMediator->getGameLevelData())[level-1];
+
+	// change the min Interval
+	float jumpTime = sqrt((float)(2 * _levelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
+	float powerTime = _gameMediator->getPlayerData()->getPowerTime();
+	float speed = _levelData->getPlayerMoveSpeed();
+	m_nEnemyDownMinInterval = int(speed * (jumpTime + powerTime));
+
 	// flow the text
 	_textLevelUp->setVisible(true);
 	_textLevelUp->setOpacity(255);

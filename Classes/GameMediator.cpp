@@ -57,6 +57,30 @@ string& replace_all_distinct(string& str, const string& old_value, const string&
 	return   str;
 }
 
+void GameMediator::reloadAllConfigFiles()
+{
+	bool ret;
+
+	m_iGameLevelMax = 0;
+
+	_vectorGameLevelData.clear();
+	ret = this->loadGameConfigFile();
+	if (!ret)
+		return;
+
+	_mapGameText.clear();
+	ret = this->loadGameTextFile();
+	if (!ret)
+		return;
+
+	_mapGameStory.clear();
+	ret = this->loadGameStoryFile();
+	if (!ret)
+		return;
+
+	_playerData->loadPlayerData();
+}
+
 bool GameMediator::loadGameConfigFile()
 {
 	tinyxml2::XMLDocument document;
@@ -99,7 +123,6 @@ bool GameMediator::loadGameConfigFile()
 			}
 		} while (false);
 
-		int mostMinInterval = int(data->getPlayerMoveSpeed() * (2 * winSize.height / GRAVITY + 1));
 		// Enemy down attribute
 		do
 		{
@@ -136,8 +159,8 @@ bool GameMediator::loadGameConfigFile()
 			surface4 = surface3->FirstChildElement("EnemyInterval");
 			if (surface4)
 			{
-				data->setEnemyDownMinInterval(MAX(int(mostMinInterval * surface4->FloatAttribute("minScale")), mostMinInterval));
-				data->setEnemyDownMaxInterval(MAX(int(mostMinInterval * surface4->FloatAttribute("maxScale")), mostMinInterval));
+				data->setEnemyDownMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
+				data->setEnemyDownMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
 			}
 		} while (false);
 
@@ -177,8 +200,8 @@ bool GameMediator::loadGameConfigFile()
 			surface4 = surface3->FirstChildElement("EnemyInterval");
 			if (surface4)
 			{
-				data->setEnemyUpMinInterval(MAX(int(mostMinInterval * surface4->FloatAttribute("minScale")), mostMinInterval));
-				data->setEnemyUpMaxInterval(MAX(int(mostMinInterval * surface4->FloatAttribute("maxScale")), mostMinInterval));
+				data->setEnemyUpMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
+				data->setEnemyUpMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
 			}
 		} while (false);
 		
@@ -200,8 +223,8 @@ bool GameMediator::loadGameConfigFile()
 			surface4 = surface3->FirstChildElement("ItemInterval");
 			if (surface4)
 			{
-				data->setItemMinInterval(MAX(int(mostMinInterval * surface4->FloatAttribute("minScale")), mostMinInterval));
-				data->setItemMaxInterval(MAX(int(mostMinInterval * surface4->FloatAttribute("maxScale")), mostMinInterval));
+				data->setItemMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
+				data->setItemMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
 			}
 
 			surface4 = surface3->FirstChildElement("ItemAddProp");
