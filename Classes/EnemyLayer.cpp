@@ -7,6 +7,8 @@ EnemyLayer::EnemyLayer(void)
 	_spriteEnemyBar = NULL;
 	_levelData = NULL;
 
+	m_bIsPlayerJump = false;
+
 	_allEnemysDown.clear();
 	_allEnemysUp.clear();
 	_allItems.clear();
@@ -35,7 +37,7 @@ bool EnemyLayer::init()
 		this->addChild(rootNode);
 
 		_spriteEnemyBar = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_EnemyBar"));
-		
+
 		_spriteMap.insert(ITEMTYPE_GOLD, dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_Item_GoldCoin")));
 		_spriteMap.insert(ITEMTYPE_GUIDELINE, dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_Item_GuideLine")));
 		_spriteMap.insert(ITEMTYPE_HEART, dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_Item_Heart")));
@@ -94,28 +96,31 @@ void EnemyLayer::update(float dt)
 			mAccItemDistance = 0;
 			mAddItemDistance = _levelData->getItemInterval();
 		}
-		// add Enemy Up
-		bool isWithUp = _levelData->getEnemyUpIsSamePos();
-		bool isEnemyUpShow = _levelData->getEnemyUpIsShow();
-		mAccEnemyUpDistance += moveAllEnemys(&_allEnemysUp, dt);
-		if (isEnemyUpShow && !isWithUp)
+		if (m_bIsPlayerJump)
 		{
-			if (mAccEnemyUpDistance > mAddEnemyUpDistance)
+			// add Enemy Up
+			bool isWithUp = _levelData->getEnemyUpIsSamePos();
+			bool isEnemyUpShow = _levelData->getEnemyUpIsShow();
+			mAccEnemyUpDistance += moveAllEnemys(&_allEnemysUp, dt);
+			if (isEnemyUpShow && !isWithUp)
 			{
-				this->addEnemyUp(_levelData->getEnemyUpMoveSpeed());
-				mAccEnemyUpDistance = 0;
-				mAddEnemyUpDistance = _levelData->getEnemyUpInterval();
+				if (mAccEnemyUpDistance > mAddEnemyUpDistance)
+				{
+					this->addEnemyUp(_levelData->getEnemyUpMoveSpeed());
+					mAccEnemyUpDistance = 0;
+					mAddEnemyUpDistance = _levelData->getEnemyUpInterval();
+				}
 			}
-		}
-		// add Enemy Down
-		if (_levelData->getEnemyDownIsShow())
-		{
-			mAccEnemyDownDistance += moveAllEnemys(&_allEnemysDown, dt);
-			if (mAccEnemyDownDistance > mAddEnemyDownDistance)
+			// add Enemy Down
+			if (_levelData->getEnemyDownIsShow())
 			{
-				this->addEnemyDown(isWithUp && isEnemyUpShow);
-				mAccEnemyDownDistance = 0;
-				mAddEnemyDownDistance = _levelData->getEnemyDownInterval();
+				mAccEnemyDownDistance += moveAllEnemys(&_allEnemysDown, dt);
+				if (mAccEnemyDownDistance > mAddEnemyDownDistance)
+				{
+					this->addEnemyDown(isWithUp && isEnemyUpShow);
+					mAccEnemyDownDistance = 0;
+					mAddEnemyDownDistance = _levelData->getEnemyDownInterval();
+				}
 			}
 		}
 	}

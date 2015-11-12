@@ -92,6 +92,7 @@ void GameLayer::onTouchEnded(Touch *touch, Event *event)
 	else if(_gameMediator->getGameState() == STATE_GAME_RUN)
 	{
 		_playerLayer->schedulePlayerJump();
+		_enemyLayer->setIsPlayerJump(true);
 	}
 }
 
@@ -99,7 +100,19 @@ void GameLayer::update(float dt)
 {
 	if(_gameMediator->getGameState() == STATE_GAME_RUN)
 	{
+		// test item itersection
+		this->checkItemIntersect();
+
 		Player* player = _playerLayer->getPlayer();
+		if (player->getIsOnTheGround())
+		{
+			if (_enemyLayer->getIsPlayerJump())
+			{
+				_enemyLayer->setIsPlayerJump(false);
+			}
+			return;
+		}
+
 		// intersect reduce heart (when without shield)
 		if (!player->getIsShield())
 		{
@@ -109,8 +122,6 @@ void GameLayer::update(float dt)
 				_playerLayer->updateHeartNumber(player->addHeartNumber(-1));
 			}
 		}
-		// test item itersection
-		this->checkItemIntersect();
 		// game over if heart is zero
 		if (_playerData->getHeartNumber() <= 0)
 		{
