@@ -35,7 +35,7 @@
           <FilePathData Path="MainMenuScene.csd" />
           <FilePathData Path="PlayerLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="PlayerUpgradeScene.csd" />
+        <ActiveDocument Path="GameScene.csd" />
       </Value>
     </Item>
   </Properties>

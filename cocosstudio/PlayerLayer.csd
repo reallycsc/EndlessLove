@@ -346,6 +346,50 @@
             <FileData Type="Normal" Path="Resource/Heart_Broken_Right.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
+          <AbstractNodeData Name="Node_LevelProgress" ActionTag="-1054439684" Tag="182" IconVisible="True" RightMargin="960.0000" TopMargin="600.0000" BottomMargin="40.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <Children>
+              <AbstractNodeData Name="Sprite_player" ActionTag="1921251676" Tag="260" IconVisible="False" LeftMargin="50.0000" RightMargin="-82.0000" TopMargin="-54.0000" BottomMargin="5.0000" ctype="SpriteObjectData">
+                <Size X="32.0000" Y="49.0000" />
+                <AnchorPoint />
+                <Position X="50.0000" Y="5.0000" />
+                <Scale ScaleX="0.5000" ScaleY="0.5000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="Resource/Hero_right.png" Plist="" />
+                <BlendFunc Src="770" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="LoadingBar_1" ActionTag="1159128381" Tag="261" IconVisible="False" LeftMargin="50.0000" RightMargin="-910.0000" TopMargin="-5.0000" ProgressInfo="100" ctype="LoadingBarObjectData">
+                <Size X="860.0000" Y="5.0000" />
+                <AnchorPoint />
+                <Position X="50.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="165" B="0" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_Finish" ActionTag="-1336207719" Tag="272" IconVisible="False" LeftMargin="855.0000" RightMargin="-910.0000" TopMargin="-35.0000" BottomMargin="5.0000" FontSize="20" LabelText="Finish" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="55.0000" Y="30.0000" />
+                <AnchorPoint ScaleX="1.0000" />
+                <Position X="910.0000" Y="5.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.4823" Y="0.1484" />
+                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <OutlineColor A="255" R="255" G="165" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position Y="40.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition Y="0.0625" />
+            <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

@@ -17,6 +17,17 @@
             <FileData Type="Normal" Path="Resource/background.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
+          <AbstractNodeData Name="earth_2" ActionTag="-406167947" Tag="183" IconVisible="False" TopMargin="545.0000" ctype="SpriteObjectData">
+            <Size X="960.0000" Y="95.0000" />
+            <AnchorPoint ScaleX="0.5000" />
+            <Position X="480.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="0.5000" />
+            <PreSize X="0.0000" Y="0.0000" />
+            <FileData Type="Normal" Path="Resource/earth.png" Plist="" />
+            <BlendFunc Src="770" Dst="771" />
+          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

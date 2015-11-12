@@ -27,6 +27,7 @@
           <Image Name="shrinkItem1.png" />
           <Image Name="enlargeItem1.png" />
           <Image Name="heart_left_grey.png" />
+          <Image Name="earth.png" />
         </Folder>
         <Folder Name="Font">
           <TTF Name="arial.ttf" />
