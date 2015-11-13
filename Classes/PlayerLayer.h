@@ -41,6 +41,7 @@ private:
 	void heartFadeOutFinished(Node* pSender);
 	inline void createProgressAction(Sprite* obj, float duration, int type);
 	void progressToFinished(Node* pSender, Sprite* obj, int type);
+	void goldMoveFinished(Node* pSender);
 
 public:
 	CC_SYNTHESIZE(Player*, _player, Player);
@@ -53,6 +54,9 @@ private:
 	Text*	_textScore;
 	Text*	_textGoldNum;
 	Text*	_textHeartNum;
+	Sprite*	_spriteGold;
+	Node*	_nodeGoldNum;
+
 	Vector<Sprite*>	_vectorSpriteHeart;
 	Sprite* _spriteHeart;
 	Sprite*	_spriteHalfHeartLeft;

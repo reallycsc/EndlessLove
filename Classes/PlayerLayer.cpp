@@ -9,6 +9,8 @@ PlayerLayer::PlayerLayer(void)
 
 	_textScore = NULL;
 	_textGoldNum = NULL;
+	_spriteGold = NULL;
+	_nodeGoldNum = NULL;
 	_spriteHeart = NULL;
 	_spriteHalfHeartLeft = NULL;
 	_spriteHalfHeartRight = NULL;
@@ -46,11 +48,13 @@ bool PlayerLayer::init()
 		// Add Player
 		_player = Player::create();
 		_player->setPosition(winSize.width / 4, 0);
-		this->addChild(_player);
+		this->addChild(_player, ZORDER_PLAYERLAYER_PLAYER);
 
 		// Add text
 		_textScore = dynamic_cast<Text*>(rootNode->getChildByName("Text_Score"));
-		_textGoldNum = dynamic_cast<Text*>(rootNode->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"));
+		_nodeGoldNum = dynamic_cast<Node*>(rootNode->getChildByName("Node_GoldNumber"));
+		_textGoldNum = dynamic_cast<Text*>(_nodeGoldNum->getChildByName("Text_GoldNumber"));
+		_spriteGold = dynamic_cast<Sprite*>(_nodeGoldNum->getChildByName("Sprite_GoldCoin"));
 		_textHeartNum = dynamic_cast<Text*>(rootNode->getChildByName("Text_HeartNumber"));
 		_textHeartNum->setVisible(false);
 
@@ -205,6 +209,23 @@ void PlayerLayer::updateScoreText()
 
 void PlayerLayer::updateGoldNumberText()
 {
+	// Gold animation from player to icon top-left
+	Sprite* sprite = Sprite::createWithSpriteFrame(_spriteGold->getSpriteFrame());
+	sprite->setAnchorPoint(Point(0, 0.5));
+	Size size = _player->getSprite()->getBoundingBox().size;
+	sprite->setPosition(_player->getPositionX(), _player->getPositionY() + size.height);
+	sprite->runAction(Sequence::create(
+		EaseIn::create(MoveTo::create(0.3, _nodeGoldNum->getPosition() + _spriteGold->getPosition()), 2),
+		CallFuncN::create(CC_CALLBACK_1(PlayerLayer::goldMoveFinished, this)),
+		NULL
+		));
+	this->addChild(sprite, ZORDER_PLAYERLAYER_FLOWINGGOLD);
+}
+
+void PlayerLayer::goldMoveFinished(Node* pSender)
+{
+	pSender->removeFromParent();
+	_playerData->addGoldNumber(1);
 	_textGoldNum->setString(String::createWithFormat("%d", _playerData->getGoldNumber())->getCString());
 }
 

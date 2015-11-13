@@ -18,6 +18,7 @@ GameMediator::GameMediator(void)
 	m_iGameState = STATE_GAME_ENTER;
 	m_iGameLevel = 0;
 	m_iGameLevelMax = 0;
+	m_iGameOverReason = 0;
 	_mapGameStory.clear();
 	_mapGameText.clear();
 	_vectorGameLevelData.clear();
@@ -30,21 +31,24 @@ GameMediator::~GameMediator(void)
 	_vectorGameLevelData.clear();
 }
 
-bool GameMediator::init(){
+bool GameMediator::init()
+{
+	bool bRet = false;
 	do
 	{
 		_playerData = PlayerData::create();
-		CHECKFALSE(_playerData);
+		CC_BREAK_IF(!_playerData);
 
-		CHECKFALSE(this->loadGameConfigFile());
+		CC_BREAK_IF(!this->loadGameConfigFile());
 
-		CHECKFALSE(this->loadGameTextFile());
+		CC_BREAK_IF(!this->loadGameTextFile());
 
-		CHECKFALSE(this->loadGameStoryFile());
+		CC_BREAK_IF(!this->loadGameStoryFile());
 
+		bRet = true;
 	} while (false);
 	
-	return true;
+	return bRet;
 }
 
 string& replace_all_distinct(string& str, const string& old_value, const string& new_value)
@@ -83,216 +87,233 @@ void GameMediator::reloadAllConfigFiles()
 
 bool GameMediator::loadGameConfigFile()
 {
-	tinyxml2::XMLDocument document;
-	document.LoadFile("config/GameConfig.xml");
-	XMLElement* root = document.RootElement();
-	CHECKFALSE(root);
-
-	Size winSize = Director::getInstance()->getWinSize();
-
-	// load game level config
-	XMLElement* surface1 = root->FirstChildElement("GameLevel");
-	CHECKFALSE(surface1);
-	for (XMLElement* surface2 = surface1->FirstChildElement("Level"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Level"))
+	bool bRet = false;
+	do
 	{
-		m_iGameLevelMax++;
-		GameLevelData* data = NULL;
-		if (m_iGameLevelMax == 1)
+		tinyxml2::XMLDocument document;
+		document.LoadFile("config/GameConfig.xml");
+		XMLElement* root = document.RootElement();
+		CC_BREAK_IF(!root);
+
+		Size winSize = Director::getInstance()->getWinSize();
+
+		// load game level config
+		XMLElement* surface1 = root->FirstChildElement("GameLevel");
+		CC_BREAK_IF(!surface1);
+		for (XMLElement* surface2 = surface1->FirstChildElement("Level"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Level"))
 		{
-			data = GameLevelData::create();
-		}
-		else
-		{
-			data = GameLevelData::create(&_vectorGameLevelData[m_iGameLevelMax-2]);
-		}
-		
-		data->setLevel(surface2->IntAttribute("level"));
-		data->setLevelUpScore(surface2->IntAttribute("levelUpScore"));
-
-		// Player attribute
-		do
-		{
-			XMLElement* surface3 = surface2->FirstChildElement("Player");
-			if (!surface3)
-				break;
-
-			XMLElement* surface4 = surface3->FirstChildElement("PlayerMoveTime");
-			if (surface4)
+			m_iGameLevelMax++;
+			GameLevelData* data = NULL;
+			if (m_iGameLevelMax == 1)
 			{
-				data->setPlayerMoveSpeed(int(winSize.width / surface4->FloatAttribute("time")));
+				data = GameLevelData::create();
 			}
-		} while (false);
-
-		// Enemy down attribute
-		do
-		{
-			XMLElement* surface3 = surface2->FirstChildElement("EnemyDown");
-			if (!surface3)
-				break;
-			bool isShow = surface3->BoolAttribute("isShow");
-			data->setEnemyDownIsShow(isShow);
-			if (!isShow)
-				break;
-			data->setEnemyDownIsBindItem(surface3->BoolAttribute("isBindItem"));
-
-			XMLElement* surface4 = surface3->FirstChildElement("EnemyHeight");
-			if (surface4)
+			else
 			{
-				data->setEnemyDownMinHeight(int(surface4->FloatAttribute("minScale") * winSize.height + surface4->IntAttribute("minOffset")));
-				data->setEnemyDownMaxHeight(int(surface4->FloatAttribute("maxScale") * winSize.height + surface4->IntAttribute("maxOffset")));
+				data = GameLevelData::create(&_vectorGameLevelData[m_iGameLevelMax - 2]);
 			}
 
-			surface4 = surface3->FirstChildElement("EnemyWidth");
-			if (surface4)
-			{
-				data->setEnemyDownMinWidthScale(surface4->FloatAttribute("minScale"));
-				data->setEnemyDownMaxWidthScale(surface4->FloatAttribute("maxScale"));
-			}
+			data->setLevel(surface2->IntAttribute("level"));
+			data->setLevelUpScore(surface2->IntAttribute("levelUpScore"));
 
-			surface4 = surface3->FirstChildElement("EnemyMoveSpeed");
-			if (surface4)
+			// Player attribute
+			do
 			{
-				data->setEnemyDownMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
-				data->setEnemyDownMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
-			}
+				XMLElement* surface3 = surface2->FirstChildElement("Player");
+				if (!surface3)
+					break;
 
-			surface4 = surface3->FirstChildElement("EnemyInterval");
-			if (surface4)
-			{
-				data->setEnemyDownMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
-				data->setEnemyDownMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
-			}
-		} while (false);
-
-		// Enemy up attribute
-		do
-		{
-			XMLElement* surface3 = surface2->FirstChildElement("EnemyUp");
-			if (!surface3)
-				break;
-			bool isShow = surface3->BoolAttribute("isShow");
-			data->setEnemyUpIsShow(isShow);
-			if (!isShow)
-				break;
-			data->setEnemyUpIsSamePos(surface3->BoolAttribute("isSamePos"));
-
-			XMLElement* surface4 = surface3->FirstChildElement("EnemyHeight");
-			if (surface4)
-			{
-				data->setEnemyUpMinHeightOffset(surface4->IntAttribute("minOffset"));
-				data->setEnemyUpMaxHeightOffset(surface4->IntAttribute("maxOffset"));
-			}
-
-			surface4 = surface3->FirstChildElement("EnemyWidth");
-			if (surface4)
-			{
-				data->setEnemyUpMinWidthScale(surface4->FloatAttribute("minScale"));
-				data->setEnemyUpMaxWidthScale(surface4->FloatAttribute("maxScale"));
-			}
-
-			surface4 = surface3->FirstChildElement("EnemyMoveSpeed");
-			if (surface4)
-			{
-				data->setEnemyUpMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
-				data->setEnemyUpMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
-			}
-
-			surface4 = surface3->FirstChildElement("EnemyInterval");
-			if (surface4)
-			{
-				data->setEnemyUpMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
-				data->setEnemyUpMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
-			}
-		} while (false);
-		
-		// Item attribute
-		do
-		{
-			XMLElement* surface3 = surface2->FirstChildElement("Item");
-			if (!surface3)
-				break;
-			data->setItemIsCurve(surface3->BoolAttribute("isCurve"));
-
-			XMLElement* surface4 = surface3->FirstChildElement("ItemMoveSpeed");
-			if (surface4)
-			{
-				data->setItemMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
-				data->setItemMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
-			}
-
-			surface4 = surface3->FirstChildElement("ItemInterval");
-			if (surface4)
-			{
-				data->setItemMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
-				data->setItemMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
-			}
-
-			surface4 = surface3->FirstChildElement("ItemAddProp");
-			if (surface4)
-			{
-				data->setItemAddMapMaxProp(surface4->IntAttribute("MaxProp"));
-				map<int, int>* map = data->getItemAddMap();
-				map->clear();
-				for (XMLElement* surface5 = surface4->FirstChildElement("Item"); surface5 != NULL; surface5 = surface5->NextSiblingElement("Item"))
+				XMLElement* surface4 = surface3->FirstChildElement("PlayerMoveTime");
+				if (surface4)
 				{
-					map->insert(pair<int, int>(surface5->IntAttribute("ItemType"), surface5->IntAttribute("ItemProp")));
+					data->setPlayerMoveSpeed(int(winSize.width / surface4->FloatAttribute("time")));
 				}
-			}
-		} while (false);
+			} while (false);
 
-		_vectorGameLevelData.push_back((*data));
-	}
-	return true;
+			// Enemy down attribute
+			do
+			{
+				XMLElement* surface3 = surface2->FirstChildElement("EnemyDown");
+				if (!surface3)
+					break;
+				bool isShow = surface3->BoolAttribute("isShow");
+				data->setEnemyDownIsShow(isShow);
+				if (!isShow)
+					break;
+				data->setEnemyDownIsBindItem(surface3->BoolAttribute("isBindItem"));
+
+				XMLElement* surface4 = surface3->FirstChildElement("EnemyHeight");
+				if (surface4)
+				{
+					data->setEnemyDownMinHeight(int(surface4->FloatAttribute("minScale") * winSize.height + surface4->IntAttribute("minOffset")));
+					data->setEnemyDownMaxHeight(int(surface4->FloatAttribute("maxScale") * winSize.height + surface4->IntAttribute("maxOffset")));
+				}
+
+				surface4 = surface3->FirstChildElement("EnemyWidth");
+				if (surface4)
+				{
+					data->setEnemyDownMinWidthScale(surface4->FloatAttribute("minScale"));
+					data->setEnemyDownMaxWidthScale(surface4->FloatAttribute("maxScale"));
+				}
+
+				surface4 = surface3->FirstChildElement("EnemyMoveSpeed");
+				if (surface4)
+				{
+					data->setEnemyDownMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
+					data->setEnemyDownMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
+				}
+
+				surface4 = surface3->FirstChildElement("EnemyInterval");
+				if (surface4)
+				{
+					data->setEnemyDownMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
+					data->setEnemyDownMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
+				}
+			} while (false);
+
+			// Enemy up attribute
+			do
+			{
+				XMLElement* surface3 = surface2->FirstChildElement("EnemyUp");
+				if (!surface3)
+					break;
+				bool isShow = surface3->BoolAttribute("isShow");
+				data->setEnemyUpIsShow(isShow);
+				if (!isShow)
+					break;
+				data->setEnemyUpIsSamePos(surface3->BoolAttribute("isSamePos"));
+
+				XMLElement* surface4 = surface3->FirstChildElement("EnemyHeight");
+				if (surface4)
+				{
+					data->setEnemyUpMinHeightOffset(surface4->IntAttribute("minOffset"));
+					data->setEnemyUpMaxHeightOffset(surface4->IntAttribute("maxOffset"));
+				}
+
+				surface4 = surface3->FirstChildElement("EnemyWidth");
+				if (surface4)
+				{
+					data->setEnemyUpMinWidthScale(surface4->FloatAttribute("minScale"));
+					data->setEnemyUpMaxWidthScale(surface4->FloatAttribute("maxScale"));
+				}
+
+				surface4 = surface3->FirstChildElement("EnemyMoveSpeed");
+				if (surface4)
+				{
+					data->setEnemyUpMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
+					data->setEnemyUpMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
+				}
+
+				surface4 = surface3->FirstChildElement("EnemyInterval");
+				if (surface4)
+				{
+					data->setEnemyUpMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
+					data->setEnemyUpMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
+				}
+			} while (false);
+
+			// Item attribute
+			do
+			{
+				XMLElement* surface3 = surface2->FirstChildElement("Item");
+				if (!surface3)
+					break;
+				data->setItemIsCurve(surface3->BoolAttribute("isCurve"));
+
+				XMLElement* surface4 = surface3->FirstChildElement("ItemMoveSpeed");
+				if (surface4)
+				{
+					data->setItemMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
+					data->setItemMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
+				}
+
+				surface4 = surface3->FirstChildElement("ItemInterval");
+				if (surface4)
+				{
+					data->setItemMinInterval(int(winSize.width * surface4->FloatAttribute("minScale")));
+					data->setItemMaxInterval(int(winSize.width * surface4->FloatAttribute("maxScale")));
+				}
+
+				surface4 = surface3->FirstChildElement("ItemAddProp");
+				if (surface4)
+				{
+					data->setItemAddMapMaxProp(surface4->IntAttribute("MaxProp"));
+					map<int, int>* map = data->getItemAddMap();
+					map->clear();
+					for (XMLElement* surface5 = surface4->FirstChildElement("Item"); surface5 != NULL; surface5 = surface5->NextSiblingElement("Item"))
+					{
+						map->insert(pair<int, int>(surface5->IntAttribute("ItemType"), surface5->IntAttribute("ItemProp")));
+					}
+				}
+			} while (false);
+
+			_vectorGameLevelData.push_back((*data));
+		}
+		bRet = true;
+	} while (false);
+
+	return bRet;
 }
 
 bool GameMediator::loadGameTextFile()
 {
-	tinyxml2::XMLDocument document;
+	bool bRet = false;
+	do
+	{
+		tinyxml2::XMLDocument document;
 
 #if defined LANGUAGE_CHINESE
-	document.LoadFile("config/GameText_Chinese.xml");
+		document.LoadFile("config/GameText_Chinese.xml");
 #elif defined LANGUAGE_ENGLISH
-	document.LoadFile("config/GameText_English.xml");
+		document.LoadFile("config/GameText_English.xml");
 #endif
 
-	XMLElement* root = document.RootElement();
-	CHECKFALSE(root);
+		XMLElement* root = document.RootElement();
+		CC_BREAK_IF(!root);
 
-	for (XMLElement* surface1 = root->FirstChildElement("Text"); surface1 != NULL;
-	surface1 = surface1->NextSiblingElement("Text"))
-	{
-		_mapGameText.insert(pair<int, string>(surface1->IntAttribute("id"), replace_all_distinct(string(surface1->GetText()), "\\n", "\n")));
-	}
-	return true;
+		for (XMLElement* surface1 = root->FirstChildElement("Text"); surface1 != NULL;
+		surface1 = surface1->NextSiblingElement("Text"))
+		{
+			_mapGameText.insert(pair<int, string>(surface1->IntAttribute("id"), replace_all_distinct(string(surface1->GetText()), "\\n", "\n")));
+		}
+
+		bRet = true;
+	} while (false);
+	return bRet;
 }
 
 bool GameMediator::loadGameStoryFile()
 {
-	tinyxml2::XMLDocument document;
-	document.LoadFile("config/GameStory.xml");
-	XMLElement* root = document.RootElement();
-	CHECKFALSE(root);
-	vector<string> _vString;
-	for (XMLElement* surface1 = root->FirstChildElement("GameOver");surface1 != NULL;
-		surface1 = surface1->NextSiblingElement("GameOver"))
+	bool bRet = false;
+	do
 	{
-		// load intersect story
-		_vString.clear();
-		for (XMLElement* surface2 = surface1->FirstChildElement("Bomb");surface2 != NULL;surface2 = surface2->NextSiblingElement("Bomb"))
+		tinyxml2::XMLDocument document;
+		document.LoadFile("config/GameStory.xml");
+		XMLElement* root = document.RootElement();
+		CC_BREAK_IF(!root);
+		vector<string> _vString;
+		for (XMLElement* surface1 = root->FirstChildElement("GameOver"); surface1 != NULL;
+		surface1 = surface1->NextSiblingElement("GameOver"))
 		{
-			_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
+			// load intersect story
+			_vString.clear();
+			for (XMLElement* surface2 = surface1->FirstChildElement("Bomb"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Bomb"))
+			{
+				_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
+			}
+			_mapGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_BOMB, _vString));
+
+			// load noheart story
+			_vString.clear();
+			for (XMLElement* surface2 = surface1->FirstChildElement("Noheart"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Noheart"))
+			{
+				_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
+			}
+			_mapGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_NOHEART, _vString));
 		}
-		_mapGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_BOMB, _vString));
-		
-		// load noheart story
-		_vString.clear();
-		for (XMLElement* surface2 = surface1->FirstChildElement("Noheart"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Noheart"))
-		{
-			_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
-		}
-		_mapGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_NOHEART, _vString));
-	}
-	return true;
+		bRet = true;
+	} while (false);
+	return bRet;
 }
 
 void GameMediator::initGame()
@@ -303,7 +324,7 @@ void GameMediator::initGame()
 }
 
 // Common function
-void GameMediator::spriteToGrey(Node* pNode, float percent)
+void GameMediator::spriteToGray(Node* pNode, float percent)
 {
 	ImageView* imgView = dynamic_cast<ImageView*>(pNode);
 	Sprite* imgView2 = dynamic_cast<Sprite*>(pNode);
@@ -331,10 +352,10 @@ void GameMediator::spriteToGrey(Node* pNode, float percent)
 		{ \n\
 			// Convert to greyscale using NTSC weightings \n\
 			vec4 col = v_fragmentColor * texture2D(CC_Texture0, v_texCoord); \n\
-			float grey = dot(col.rgb, vec3(0.299, 0.587, 0.114)); \n\
-			float r = (col.r-grey)*%f + grey; \n\
-			float g = (col.g-grey)*%f + grey; \n\
-			float b = (col.b-grey)*%f + grey; \n\
+			float gray = dot(col.rgb, vec3(0.299, 0.587, 0.114)); \n\
+			float r = (col.r-gray)*%f + gray; \n\
+			float g = (col.g-gray)*%f + gray; \n\
+			float b = (col.b-gray)*%f + gray; \n\
 			gl_FragColor = vec4(r, g, b, col.a); \n\
 		}";
 	if (percent < 0)

@@ -14,7 +14,7 @@ public:
 	void menuCallback_Retry(Ref* pSender);
 	void menuCallback_MainMenu(Ref* pSender);
 
-	void showScoreAndStory(int reason);
+	void showScoreAndStory();
 
 private:
 	Text*	_textHighscore;

@@ -51,13 +51,16 @@ bool GameOverLayer::init()
 	buttonRetry->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_RETRY));
 	buttonMainMenu->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_MAINMENU));
 
+	this->showScoreAndStory();
+
     return true;
 }
 
-void GameOverLayer::showScoreAndStory(int reason)
+void GameOverLayer::showScoreAndStory()
 {
 	auto gameMediator = GameMediator::getInstance();
 	auto playerData = gameMediator->getPlayerData();
+
 	// update highest score
 	playerData->savePlayerData();
 
@@ -72,7 +75,8 @@ void GameOverLayer::showScoreAndStory(int reason)
 	_animate->gotoFrameAndPlay(0, false);
 
 	map<int, vector<string>>* map = gameMediator->getGameStory();
-	vector<string>* storyVector = &(map->at(reason));;
+
+	vector<string>* storyVector = &(map->at(gameMediator->getGameOverReason()));;
 
 	_textStory->setString((*storyVector)[random() % storyVector->size()]);
 	_scrollStory->setInnerContainerSize(Size(_scrollStory->getInnerContainerSize().width, _textStory->getContentSize().height));
@@ -81,10 +85,14 @@ void GameOverLayer::showScoreAndStory(int reason)
 
 void GameOverLayer::menuCallback_Retry(Ref* pSender)
 {
+	TextureCache::getInstance()->removeTextureForKey("GameOverImage");
+	TextureCache::getInstance()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(GameScene::create());
 }
 
 void GameOverLayer::menuCallback_MainMenu(Ref* pSender)
 {
+	TextureCache::getInstance()->removeTextureForKey("GameOverImage");
+	TextureCache::getInstance()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(MainMenuScene::create());
 }

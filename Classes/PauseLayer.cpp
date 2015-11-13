@@ -20,7 +20,7 @@ bool PauseLayer::init()
     do
     {  
         CC_BREAK_IF(!Layer::init());  
-  
+
 		// load csb
 		auto rootNode = CSLoader::createNode("PauseLayer.csb");
 		this->addChild(rootNode);
@@ -48,9 +48,7 @@ bool PauseLayer::init()
 
 void PauseLayer::menuCallback_Resume(Ref* pSender)
 {
-	dynamic_cast<ControlLayer*>(this->getParent())->gameResume();
-
-	this->removeFromParent();
+	CCDirector::sharedDirector()->popScene();
 }
 
 void PauseLayer::menuCallback_Retry(Ref* pSender)

@@ -110,14 +110,12 @@ void GameLayer::update(float dt)
 			}
 		}
 		// test item itersection
-		this->checkItemIntersect();
+		this->checkItemIntersect(player);
 		// game over if heart is zero
 		if (_playerData->getHeartNumber() <= 0)
 		{
+			_gameMediator->setGameOverReason(GAMEOVER_REASON_NOHEART);
 			_controlLayer->gameOver();
-			auto gameOverLayer = GameOverLayer::create();
-			this->addChild(gameOverLayer, ZORDER_GAMEOVER_LAYER);
-			gameOverLayer->showScoreAndStory(GAMEOVER_REASON_NOHEART);
 		}
 		// check if jump over & update score
 		do
@@ -140,16 +138,14 @@ void GameLayer::update(float dt)
 	}
 }
 
-inline void GameLayer::checkItemIntersect()
+inline void GameLayer::checkItemIntersect(Player* player)
 {
-	Player* player = _playerLayer->getPlayer();
-	int itemType = _enemyLayer->playerItemIntersect(_playerLayer->getPlayer());
-	switch (itemType)
+	int type = _enemyLayer->playerItemIntersect(_playerLayer->getPlayer());
+	switch (type)
 	{
 	case 0:
 		break;
 	case ITEMTYPE_GOLD:
-		_playerData->addGoldNumber(1);
 		_playerLayer->updateGoldNumberText();
 		break;
 	case ITEMTYPE_HEART:
@@ -168,11 +164,9 @@ inline void GameLayer::checkItemIntersect()
 	{
 		if (!player->getIsShield())
 		{
-			this->runAction(Shake::create(0.2f, 5));
+			//this->runAction(Shake::create(0.2f, 5));
+			_gameMediator->setGameOverReason(GAMEOVER_REASON_BOMB);
 			_controlLayer->gameOver();
-			auto gameOverLayer = GameOverLayer::create();
-			this->addChild(gameOverLayer, ZORDER_GAMEOVER_LAYER);
-			gameOverLayer->showScoreAndStory(GAMEOVER_REASON_BOMB);
 		}
 		break;
 	}

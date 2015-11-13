@@ -23,7 +23,8 @@ public:
 	vector<GameLevelData>* getGameLevelData() { return &_vectorGameLevelData; }
 
 	// common function
-	void spriteToGrey(Node* pNode, float percent);
+	// percent: 0 - gray, 1 - color
+	void spriteToGray(Node* pNode, float percent);
 	Widget* replaceNodeWithWidget(Node* node);
 
 private:
@@ -36,6 +37,7 @@ public:
 	CC_SYNTHESIZE(int, m_iGameState, GameState);
 	CC_SYNTHESIZE(int, m_iGameLevel, GameLevel);
 	CC_SYNTHESIZE(int, m_iGameLevelMax, GameLevelMax);
+	CC_SYNTHESIZE(int, m_iGameOverReason, GameOverReason);
 
 private:
 	vector<GameLevelData>	_vectorGameLevelData;

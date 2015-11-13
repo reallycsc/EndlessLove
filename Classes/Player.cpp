@@ -184,7 +184,7 @@ inline void Player::changePlayerColorToGrey()
 	float percent = 1.0f;
 	if (minNumber != maxNumber)
 		percent = (playerData->getHeartNumber() - minNumber) / (maxNumber - minNumber);
-	_gameMediator->spriteToGrey(_spritePlayer, percent);
+	_gameMediator->spriteToGray(_spritePlayer, percent);
 }
 
 float Player::addHeartNumber(float number) // return heart number before change

@@ -69,55 +69,66 @@ bool PlayerData::init()
 
 bool PlayerData::loadLevelDataForFloat(XMLElement* root, const char* elementName, int id)
 {
-	XMLElement* surface1 = root->FirstChildElement(elementName);
-	CHECKFALSE(surface1);
-	m_mInfoName.insert(pair<int, string>(id, elementName));
-	m_mLevels.insert(pair<int, int>(id, 1));
-	vector<FLOAT_LEVEL_INFO> vData;
-	for (XMLElement* surface2 = surface1->FirstChildElement("Level"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Level"))
+	bool bRet = false;
+	do
 	{
-		FLOAT_LEVEL_INFO data;
-		data.level = surface2->IntAttribute("level");
-		data.needGold = surface2->IntAttribute("needGold");
-		data.number = surface2->FloatAttribute("number");
-		vData.push_back(data);
-	}
-	m_mLevelInfo.insert(pair<int, vector<FLOAT_LEVEL_INFO>>(id, vData));
-	return true;
+		XMLElement* surface1 = root->FirstChildElement(elementName);
+		CC_BREAK_IF(!surface1);
+		m_mInfoName.insert(pair<int, string>(id, elementName));
+		m_mLevels.insert(pair<int, int>(id, 1));
+		vector<FLOAT_LEVEL_INFO> vData;
+		for (XMLElement* surface2 = surface1->FirstChildElement("Level"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Level"))
+		{
+			FLOAT_LEVEL_INFO data;
+			data.level = surface2->IntAttribute("level");
+			data.needGold = surface2->IntAttribute("needGold");
+			data.number = surface2->FloatAttribute("number");
+			vData.push_back(data);
+		}
+		m_mLevelInfo.insert(pair<int, vector<FLOAT_LEVEL_INFO>>(id, vData));
+
+		bRet = true;
+	} while (false);
+	return bRet;
 }
 
 bool PlayerData::loadPlayerUpgradeConfigFile()
 {
-	tinyxml2::XMLDocument document;
-	document.LoadFile("config/PlayerUpgradeConfig.xml");
-	XMLElement* root = document.RootElement();
-	CHECKFALSE(root);
-
-	// load game level config
-	XMLElement* surface1 = root->FirstChildElement("JumpType");
-	CHECKFALSE(surface1);
-	m_mInfoName.insert(pair<int, string>(ID_JUMP_TYPE, "JumpType"));
-	m_mLevels.insert(pair<int, int>(ID_JUMP_TYPE, 1));
-	for (XMLElement* surface2 = surface1->FirstChildElement("Level"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Level"))
+	bool bRet = false;
+	do
 	{
-		JUMP_TYPE data;
-		data.level = surface2->IntAttribute("level");
-		data.needGold = surface2->IntAttribute("needGold");
-		data.powerUpOnTheGround = surface2->BoolAttribute("powerUpOnTheGround");
-		data.jumpOnTheGround = surface2->BoolAttribute("jumpOnTheGround");
-		data.freeJumpTime = surface2->IntAttribute("freeJumpTime");
-		m_vJumpTypeLevelInfo.push_back(data);
-	}
+		tinyxml2::XMLDocument document;
+		document.LoadFile("config/PlayerUpgradeConfig.xml");
+		XMLElement* root = document.RootElement();
+		CC_BREAK_IF(!root);
 
-	CHECKFALSE(loadLevelDataForFloat(root, "MaxHeartNumber", ID_MAXHEART_NUMBER));
-	CHECKFALSE(loadLevelDataForFloat(root, "Strength", ID_STRENGTH));
-	CHECKFALSE(loadLevelDataForFloat(root, "PowerTime", ID_POWER_TIME));
-	CHECKFALSE(loadLevelDataForFloat(root, "GuidelineTime", ID_GUIDELINE_TIME));
-	CHECKFALSE(loadLevelDataForFloat(root, "EnlargeTime", ID_ENLARGE_TIME));
-	CHECKFALSE(loadLevelDataForFloat(root, "ShrinkTime", ID_SHRINK_TIME));
-	CHECKFALSE(loadLevelDataForFloat(root, "ShieldTime", ID_SHIELD_TIME));
+		// load game level config
+		XMLElement* surface1 = root->FirstChildElement("JumpType");
+		CC_BREAK_IF(!surface1);
+		m_mInfoName.insert(pair<int, string>(ID_JUMP_TYPE, "JumpType"));
+		m_mLevels.insert(pair<int, int>(ID_JUMP_TYPE, 1));
+		for (XMLElement* surface2 = surface1->FirstChildElement("Level"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Level"))
+		{
+			JUMP_TYPE data;
+			data.level = surface2->IntAttribute("level");
+			data.needGold = surface2->IntAttribute("needGold");
+			data.powerUpOnTheGround = surface2->BoolAttribute("powerUpOnTheGround");
+			data.jumpOnTheGround = surface2->BoolAttribute("jumpOnTheGround");
+			data.freeJumpTime = surface2->IntAttribute("freeJumpTime");
+			m_vJumpTypeLevelInfo.push_back(data);
+		}
 
-	return true;
+		CC_BREAK_IF(!loadLevelDataForFloat(root, "MaxHeartNumber", ID_MAXHEART_NUMBER));
+		CC_BREAK_IF(!loadLevelDataForFloat(root, "Strength", ID_STRENGTH));
+		CC_BREAK_IF(!loadLevelDataForFloat(root, "PowerTime", ID_POWER_TIME));
+		CC_BREAK_IF(!loadLevelDataForFloat(root, "GuidelineTime", ID_GUIDELINE_TIME));
+		CC_BREAK_IF(!loadLevelDataForFloat(root, "EnlargeTime", ID_ENLARGE_TIME));
+		CC_BREAK_IF(!loadLevelDataForFloat(root, "ShrinkTime", ID_SHRINK_TIME));
+		CC_BREAK_IF(!loadLevelDataForFloat(root, "ShieldTime", ID_SHIELD_TIME));
+
+	bRet = true;
+	} while (false);
+	return bRet;
 }
 
 void PlayerData::initPlayerData()

@@ -23,7 +23,7 @@ public:
 
 	void update(float dt);
 private:
-	inline void checkItemIntersect();
+	inline void checkItemIntersect(Player* player);
 
 private:
 	GameMediator*	_gameMediator;

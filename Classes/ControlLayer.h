@@ -16,8 +16,6 @@ public:
 
 	// game state contrl
 	void gameStart();
-	void gamePause();
-	void gameResume();
 	void gameOver();
 
 private:

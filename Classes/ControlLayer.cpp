@@ -1,5 +1,6 @@
 #include "ControlLayer.h"
-#include "PauseLayer.h"
+#include "PauseScene.h"
+#include "GameOverScene.h"
 
 ControlLayer::ControlLayer(void)
 {
@@ -54,30 +55,31 @@ void ControlLayer::gameStart()
 	_gameMediator->setGameState(STATE_GAME_RUN);
 }
 
-void ControlLayer::gamePause()
-{
-	_buttonPause->setEnabled(false);
-
-	_gameMediator->setGameState(STATE_GAME_PAUSE);
-}
-
-void ControlLayer::gameResume()
-{
-	_buttonPause->setEnabled(true);
-
-	_gameMediator->setGameState(STATE_GAME_RUN);
-}
-
 void ControlLayer::gameOver()
 {
-	_buttonPause->setEnabled(false);
+	Size winSize = Director::getInstance()->getWinSize();
+	RenderTexture* renderTexture = RenderTexture::create(winSize.width, winSize.height);
+	//遍历Game类的所有子节点信息，画入renderTexture中。
+	//这里类似截图。
+	renderTexture->begin();
+	Director::getInstance()->getRunningScene()->visit();
+	renderTexture->end();
 
-	_gameMediator->setGameState(STATE_GAME_OVER);
+	Director::getInstance()->getRenderer()->render();//在3.0此处必须写上这个，否则newImage整张图片都为黑色,或者在下一帧获取  
+	TextureCache::getInstance()->addImage(renderTexture->newImage(), "GameOverImage");
+
+	Director::getInstance()->replaceScene(GameOverScene::create());
 }
 
 void ControlLayer::menuCallback_Pause(Ref* pSender)
 {
-	this->gamePause();
-	auto layerPause = PauseLayer::create();
-	this->addChild(layerPause, ZORDER_PAUSE_LAYER);
+	Size winSize = Director::getInstance()->getWinSize();
+	RenderTexture* renderTexture = RenderTexture::create(winSize.width, winSize.height);
+	//遍历Game类的所有子节点信息，画入renderTexture中。
+	//这里类似截图。
+	renderTexture->begin();
+	Director::getInstance()->getRunningScene()->visit();
+	renderTexture->end();
+	//将游戏界面暂停，压入场景堆栈。并切换到GamePause界面
+	CCDirector::sharedDirector()->pushScene(PauseScene::createScene(renderTexture));
 }

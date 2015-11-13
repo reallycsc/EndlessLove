@@ -78,9 +78,6 @@ bool EnemyLayer::init()
 		m_nAddItemDistance = _levelData->getItemInterval();
 		m_nAccEnemyDownDistance = m_nAccEnemyUpDistance = m_nAccItemDistance = winSize.width * 0.75;
 
-		// 加入第一个敌人
-		//this->addEnemyDown(_levelData->getEnemyUpIsSamePos() && _levelData->getEnemyUpIsShow());
-
 		// 加入第一个辅助虚线道具在玩家面前
 		Item* item = Item::createItem(_spriteMap.at(ITEMTYPE_GUIDELINE)->getSpriteFrame(), ITEMTYPE_GUIDELINE, _levelData->getItemMoveSpeed());
 		item->setPosition(winSize.width * 0.25 + 150, 0);
