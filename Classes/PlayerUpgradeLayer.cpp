@@ -11,7 +11,6 @@ PlayerUpgradeLayer::PlayerUpgradeLayer(void)
 	m_mUpgradeItems.clear();
 }
 
-
 PlayerUpgradeLayer::~PlayerUpgradeLayer(void)
 {
 	m_mUpgradeItems.clear();
@@ -188,6 +187,7 @@ void PlayerUpgradeLayer::update(float dt)
 
 void PlayerUpgradeLayer::menuCallback_MainMenu(Ref* pSender)
 {
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(MainMenuScene::create());
 }
 

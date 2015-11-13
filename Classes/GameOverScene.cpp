@@ -20,7 +20,7 @@ bool GameOverScene::init()
 
 		// show game over screenshot
 		Size winSize = Director::getInstance()->getWinSize();
-		Sprite* sprite = Sprite::createWithTexture(TextureCache::getInstance()->getTextureForKey("GameOverImage"));
+		Sprite* sprite = Sprite::createWithTexture(Director::getInstance()->getTextureCache()->getTextureForKey("GameOverImage"));
 		sprite->setPosition(winSize.width / 2, winSize.height / 2); //中心位置。
 		GameMediator::getInstance()->spriteToGray(sprite, 0); //图片颜色变灰色
 		this->addChild(sprite, ZORDER_GAMEOVERSCENE_SCREENSHOT);

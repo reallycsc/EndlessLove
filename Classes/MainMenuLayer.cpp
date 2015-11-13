@@ -55,6 +55,7 @@ bool MainMenuLayer::init()
 
 void MainMenuLayer::menuCallback_Start(Ref* pSender)
 {
+	TextureCache::getInstance()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(GameScene::create()); 
 }
 
@@ -72,6 +73,7 @@ void MainMenuLayer::menuCallback_Exit(Ref* pSender)
 
 void MainMenuLayer::menuCallback_Upgrade(Ref* pSender)
 {
+	TextureCache::getInstance()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(PlayerUpgradeScene::create());
 }
 

@@ -48,17 +48,19 @@ bool PauseLayer::init()
 
 void PauseLayer::menuCallback_Resume(Ref* pSender)
 {
-	CCDirector::sharedDirector()->popScene();
+	CCDirector::getInstance()->popScene();
 }
 
 void PauseLayer::menuCallback_Retry(Ref* pSender)
 {
 	GameMediator::getInstance()->getPlayerData()->savePlayerData();
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(GameScene::create());
 }
 
 void PauseLayer::menuCallback_MainMenu(Ref* pSender)
 {
 	GameMediator::getInstance()->getPlayerData()->savePlayerData();
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(MainMenuScene::create());
 }
