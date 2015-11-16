@@ -106,7 +106,7 @@ void GameLayer::update(float dt)
 			if (_enemyLayer->playerEnemyIntersect(player))
 			{
 				this->runAction(Shake::create(0.2f, 3));
-				_playerLayer->updateHeartNumber(player->addHeartNumber(-1));
+				_playerLayer->addHeartNumber(-1);
 			}
 		}
 		// test item itersection
@@ -114,13 +114,13 @@ void GameLayer::update(float dt)
 		// game over if heart is zero
 		if (_playerData->getHeartNumber() <= 0)
 		{
-			_gameMediator->setGameOverReason(GAMEOVER_REASON_NOHEART);
-			_controlLayer->gameOver();
+			//_gameMediator->setGameOverReason(GAMEOVER_REASON_NOHEART);
+			//_controlLayer->gameOver();
 		}
 		// check if jump over & update score
 		do
 		{
-			if (!_enemyLayer->isJumpOver(player))
+			if (!_enemyLayer->isJumpOver(_playerLayer, player))
 				break;
 			_playerLayer->updateScoreText();
 			// level up when score is correct
@@ -149,7 +149,7 @@ inline void GameLayer::checkItemIntersect(Player* player)
 		_playerLayer->updateGoldNumberText();
 		break;
 	case ITEMTYPE_HEART:
-		_playerLayer->updateHeartNumber(_playerLayer->getPlayer()->addHeartNumber(1));
+		_playerLayer->addHeartNumber(1);
 		break;
 	case ITEMTYPE_GUIDELINE:
 		_playerLayer->startShowGuideLine(_playerData->getGuidelineTime());
@@ -165,32 +165,32 @@ inline void GameLayer::checkItemIntersect(Player* player)
 		if (!player->getIsShield())
 		{
 			//this->runAction(Shake::create(0.2f, 5));
-			_gameMediator->setGameOverReason(GAMEOVER_REASON_BOMB);
-			_controlLayer->gameOver();
+			//_gameMediator->setGameOverReason(GAMEOVER_REASON_BOMB);
+			//_controlLayer->gameOver();
 		}
 		break;
 	}
 	case ITEMTYPE_HEARTBROKENLEFT:
-		_playerLayer->updateHeartNumber(_playerLayer->getPlayer()->addHeartNumber(0.5));
+		_playerLayer->addHeartNumber(0.5);
 		break;
 	case ITEMTYPE_HEARTBROKENRIGHT:
-		_playerLayer->updateHeartNumber(_playerLayer->getPlayer()->addHeartNumber(0.5));
+		_playerLayer->addHeartNumber(0.5);
 		break;
 	case ITEMTYPE_HEARTPLUS:
-		_playerLayer->updateHeartNumber(_playerLayer->getPlayer()->addHeartNumber(2));
+		_playerLayer->addHeartNumber(2);
 		break;
 	case ITEMTYPE_HEARTSECRET:
 		if (!player->getIsShield())
 		{
 			this->runAction(Shake::create(0.2f, 3));
-			_playerLayer->updateHeartNumber(_playerLayer->getPlayer()->addHeartNumber(-1));
+			_playerLayer->addHeartNumber(-1);
 		}
 		break;
 	case ITEMTYPE_HEARTGREENTEA:
 		if (!player->getIsShield())
 		{
 			this->runAction(Shake::create(0.2f, 3));
-			_playerLayer->updateHeartNumber(_playerLayer->getPlayer()->addHeartNumber(-2));
+			_playerLayer->addHeartNumber(-2);
 		}
 		break;
 	case ITEMTYPE_SHIELD:

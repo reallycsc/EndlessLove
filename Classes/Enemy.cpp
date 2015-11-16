@@ -2,7 +2,7 @@
 
 Enemy::Enemy(void)
 {
-	_sprite = NULL;
+	//_sprite = NULL;
 	m_iMoveSpeed = 0;
 	m_bIsOver = false;
 	m_bIsIntersect = false;
@@ -14,31 +14,35 @@ Enemy::~Enemy(void)
 {
 }
 
-bool Enemy::init()
+Enemy* Enemy::createEnemy(SpriteFrame* frame, int moveSpeed)
+{
+	Enemy* pRet = new(std::nothrow) Enemy();
+	if (pRet && pRet->init(frame, moveSpeed))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+		return NULL;
+	}
+}
+
+bool Enemy::init(SpriteFrame* frame, int moveSpeed)
 {  
     bool bRet = false;  
     do   
     {  
-        CC_BREAK_IF(!Node::init());  
+        CC_BREAK_IF(!Sprite::init());  
+
+		this->setSpriteFrame(frame);
+		this->setAnchorPoint(Point(0.5f, 0));
+		m_iMoveSpeed = moveSpeed;
 
         bRet = true;
     } while (0);
     
     return bRet;
-}
-
-Enemy* Enemy::createEnemy(SpriteFrame* frame, int moveSpeed)
-{
-	auto enemy = Enemy::create();
-	// test
-	//auto sprite = Sprite::createWithSpriteFrame(frame);
-	//sprite->setAnchorPoint(Point(0.5f, 0));
-	//enemy->addChild(sprite);
-
-	enemy->_sprite = Sprite::createWithSpriteFrame(frame);
-	enemy->_sprite->setAnchorPoint(Point(0.5f,0));
-	enemy->setAnchorPoint(Point(0.5f, 0));
-	enemy->addChild(enemy->_sprite);
-	enemy->m_iMoveSpeed = moveSpeed;
-	return enemy;
 }

@@ -145,8 +145,8 @@ bool GameMediator::loadGameConfigFile()
 				XMLElement* surface4 = surface3->FirstChildElement("EnemyHeight");
 				if (surface4)
 				{
-					data->setEnemyDownMinHeight(int(surface4->FloatAttribute("minScale") * winSize.height + surface4->IntAttribute("minOffset")));
-					data->setEnemyDownMaxHeight(int(surface4->FloatAttribute("maxScale") * winSize.height + surface4->IntAttribute("maxOffset")));
+					data->setEnemyDownMinHeight(int(surface4->FloatAttribute("minScale") * winSize.height));
+					data->setEnemyDownMaxHeight(int(surface4->FloatAttribute("maxScale") * winSize.height));
 				}
 
 				surface4 = surface3->FirstChildElement("EnemyWidth");

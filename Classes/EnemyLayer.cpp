@@ -13,6 +13,7 @@ EnemyLayer::EnemyLayer(void)
 	_spriteMap.clear();
 
 	m_nEnemyDownMinInterval = 0;
+	m_nEnemyDownMaxInterval = 0;
 	m_nAddEnemyDownDistance = 0;
 	m_nAccEnemyDownDistance = 0;
 	m_nAddEnemyUpDistance = 0;
@@ -73,7 +74,8 @@ bool EnemyLayer::init()
 		float powerTime = _gameMediator->getPlayerData()->getPowerTime();
 		float speed = _levelData->getPlayerMoveSpeed();
 		m_nEnemyDownMinInterval = int(speed * (jumpTime + powerTime));
-		m_nAddEnemyDownDistance = MAX(_levelData->getEnemyDownInterval(), m_nEnemyDownMinInterval);
+		m_nEnemyDownMaxInterval = int(winSize.width * 0.5);
+		m_nAddEnemyDownDistance = MAX(MIN(_levelData->getEnemyDownInterval(), m_nEnemyDownMaxInterval), m_nEnemyDownMinInterval);
 		m_nAddEnemyUpDistance = _levelData->getEnemyUpInterval();
 		m_nAddItemDistance = _levelData->getItemInterval();
 		m_nAccEnemyDownDistance = m_nAccEnemyUpDistance = m_nAccItemDistance = winSize.width * 0.75;
@@ -124,7 +126,7 @@ void EnemyLayer::update(float dt)
 			{
 				this->addEnemyDown(isWithUp && isEnemyUpShow);
 				m_nAccEnemyDownDistance = 0;
-				m_nAddEnemyDownDistance = MAX(_levelData->getEnemyDownInterval(), m_nEnemyDownMinInterval);
+				m_nAddEnemyDownDistance = MAX(MIN(_levelData->getEnemyDownInterval(), m_nEnemyDownMaxInterval), m_nEnemyDownMinInterval);
 			}
 		}
 	}
@@ -136,12 +138,15 @@ void EnemyLayer::addEnemyDown(bool isWithUp)
 	// Enemy Down
 	int moveSpeed = _levelData->getEnemyDownMoveSpeed();
 	Enemy* enemyDown = Enemy::createEnemy(_spriteEnemyBar->getSpriteFrame(), moveSpeed);
-	Size enemyDownSize = enemyDown->getSprite()->getContentSize();
+	Size enemyDownSize = enemyDown->getBoundingBox().size;
 	// random height and width
 	int enemyDownHeightNew = _levelData->getEnemyDownHeight();
 	int enemyDownWidthNew = _levelData->getEnemyDownWidth(enemyDownSize.width);
-	enemyDown->getSprite()->setScaleX(enemyDownWidthNew / enemyDownSize.width);
-	enemyDown->getSprite()->setScaleY(enemyDownHeightNew / enemyDownSize.height);
+	int playerSpeed = _levelData->getPlayerMoveSpeed();
+	int playerStrength = _gameMediator->getPlayerData()->getStrength();
+	int maxHeight = playerStrength*playerStrength*0.5 / GRAVITY - enemyDownWidthNew*enemyDownWidthNew*GRAVITY*0.125 / (playerSpeed*playerSpeed);
+	enemyDown->setScaleX(enemyDownWidthNew / enemyDownSize.width);
+	enemyDown->setScaleY(MIN(enemyDownHeightNew, maxHeight) / enemyDownSize.height);
 	// set position out of screen
 	int positionX = winSize.width + enemyDownWidthNew / 2;
 	enemyDown->setPosition(positionX, 0);
@@ -171,14 +176,13 @@ void EnemyLayer::addEnemyUp(int speed)
 	// Enemy Up
 	Enemy* enemyUp = Enemy::createEnemy(_spriteEnemyBar->getSpriteFrame(), speed);
 	enemyUp->setAnchorPoint(Point(0.5f, 1));
-	enemyUp->getSprite()->setAnchorPoint(Point(0.5f, 1));
-	Size enemyUpSize = enemyUp->getSprite()->getContentSize();
+	Size enemyUpSize = enemyUp->getBoundingBox().size;
 	// random height and width
 	int enemyUpHeightNew = winSize.height / 2;
 	int enemyUpWidthNew = _levelData->getEnemyUpWidth(enemyUpSize.width);
 	if (_allEnemysDown.size() > 0)
 	{
-		Size enemyDownSize = (*_allEnemysDown.rbegin())->getSprite()->getBoundingBox().size;
+		Size enemyDownSize = (*_allEnemysDown.rbegin())->getBoundingBox().size;
 		enemyUpHeightNew = winSize.height - enemyDownSize.height - _levelData->getEnemyUpHeightOffset();
 		if (_levelData->getEnemyUpIsSamePos())
 			enemyUpWidthNew = enemyDownSize.width;
@@ -187,8 +191,8 @@ void EnemyLayer::addEnemyUp(int speed)
 	{
 		enemyUpHeightNew = MIN(winSize.height / 2 - 50, enemyUpHeightNew);
 	}
-	enemyUp->getSprite()->setScaleX(enemyUpWidthNew / enemyUpSize.width);
-	enemyUp->getSprite()->setScaleY(enemyUpHeightNew / enemyUpSize.height);
+	enemyUp->setScaleX(enemyUpWidthNew / enemyUpSize.width);
+	enemyUp->setScaleY(enemyUpHeightNew / enemyUpSize.height);
 	// set position out of screen
 	enemyUp->setPosition(winSize.width + enemyUpWidthNew / 2, winSize.height);
 	this->addChild(enemyUp, ZORDER_ENEMYLAYER_ENEMY);
@@ -225,7 +229,7 @@ void EnemyLayer::addItem()
 	int minHeight = winSize.height / 4;
 	int maxHeight = winSize.height / 2;
 	int actualHeight = CCRANDOM_0_1()*(maxHeight - minHeight) + minHeight;
-	item->setPosition(winSize.width + item->getSprite()->getContentSize().width / 2, actualHeight);
+	item->setPosition(winSize.width + item->getBoundingBox().size.width / 2, actualHeight);
 	this->addChild(item, ZORDER_ENEMYLAYER_ITEM);
 	_allItems.pushBack(item);
 }
@@ -281,11 +285,11 @@ int EnemyLayer::moveAllItems(float dt)
 bool EnemyLayer::playerEnemyIntersect(Player* player)
 {
 	bool isIntersect = false;
-	Rect rect1 = Rect(player->getPosition(), player->getSprite()->getBoundingBox().size * player->getScale());
+	Size size1 = player->getSprite()->getBoundingBox().size;
+	Rect rect1 = Rect(Point(player->getPositionX() - size1.width/2, player->getPositionY()), size1 * player->getScale());
 	for (auto obj : _allEnemysDown)
 	{
-		Rect rect2 = Rect(obj->getPosition(), obj->getSprite()->getBoundingBox().size);
-		if (rect2.intersectsRect(rect1))
+		if (rect1.intersectsRect(obj->getBoundingBox()))
 		{
 			if (obj->getIsIntersect() == false)
 			{
@@ -296,10 +300,7 @@ bool EnemyLayer::playerEnemyIntersect(Player* player)
 	}
 	for (auto obj : _allEnemysUp)
 	{
-		Point pos = obj->getPosition();
-		Size size = obj->getSprite()->getBoundingBox().size;
-		Rect rect2 = Rect(Point(pos.x, pos.y - size.height), size);
-		if (rect2.intersectsRect(rect1))
+		if (rect1.intersectsRect(obj->getBoundingBox()))
 		{
 			if (obj->getIsIntersect() == false)
 			{
@@ -315,11 +316,11 @@ bool EnemyLayer::playerEnemyIntersect(Player* player)
 
 int EnemyLayer::playerItemIntersect(Player* player)
 {
-	Rect rect1 = Rect(player->getPosition(), player->getSprite()->getBoundingBox().size * player->getScale());
+	Size size1 = player->getSprite()->getBoundingBox().size;
+	Rect rect1 = Rect(Point(player->getPositionX() - size1.width / 2, player->getPositionY()), size1 * player->getScale());
 	for (auto obj : _allItems)
 	{
-		Rect rect2 = Rect(obj->getPosition(), obj->getSprite()->getBoundingBox().size);
-		if (rect2.intersectsRect(rect1))
+		if (rect1.intersectsRect(obj->getBoundingBox()))
 		{
 			int itemType = obj->getItemType();
 			obj->removeFromParent();
@@ -330,7 +331,7 @@ int EnemyLayer::playerItemIntersect(Player* player)
 	return 0;
 }
 
-bool EnemyLayer::isJumpOver(Player* player)
+bool EnemyLayer::isJumpOver(PlayerLayer* playerLayer, Player* player)
 {
 	bool isJumpOver = false;
 	int count = 0;
@@ -341,18 +342,18 @@ bool EnemyLayer::isJumpOver(Player* player)
 		{
 			Point pos1 = obj->getPosition();
 			Point pos2 = player->getPosition();
-			Size size1 = obj->getSprite()->getBoundingBox().size;
+			Size size1 = obj->getBoundingBox().size;
 			Size size2 = player->getSprite()->getBoundingBox().size * player->getScale();
-			if (pos2.x >= pos1.x && !obj->getIsEvluate())
-			{
-				player->showEvaluation(pos2.y - size1.height);
-				obj->setIsEvluate(true);
-			}
-			else if (pos1.x+size1.width/2 < pos2.x-size2.width/2)
+			if (pos1.x+size1.width/2 < pos2.x-size2.width/2)
 			{
 				isJumpOver = true;
 				count++;
 				obj->setIsOver(true);
+				if (!obj->getIsEvluate())
+				{
+					playerLayer->showEvaluation(pos2.y - size1.height);
+					obj->setIsEvluate(true);
+				}
 			}
 		}
 	}

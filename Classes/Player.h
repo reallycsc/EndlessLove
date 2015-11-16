@@ -6,7 +6,7 @@ const int MAXPOWER = 100;
 const float MINSCALE = 0.5;
 
 class Player :
-	public Node
+	public Sprite
 {
 public:
 	Player(void);
@@ -21,15 +21,13 @@ public:
 	void scheduleJump();
 	void startJump();
 
-	float addHeartNumber(float number);
-
 	void playShieldAnimation(float duration);
 	void stopShieldAnimation(float dt);
 
-	void showEvaluation(int y);
+	void changePlayerColorToGrey();
 
 public:
-	CC_SYNTHESIZE(Sprite*, _spritePlayer, Sprite);
+	CC_SYNTHESIZE(Sprite*, m_pSprite, Sprite);
 
 	CC_SYNTHESIZE(bool, m_bIsOnTheGround, IsOnTheGround);
 	CC_SYNTHESIZE(bool, m_bIsPowerUp, IsPowerUp);
@@ -45,19 +43,11 @@ public:
 private:
 	GameMediator*	_gameMediator;
 
-	LoadingBar*	_loadingBarPlayerPower;
-	Node*	_nodeHeart;
-	Text*	_textHeartNumber;
 	Sprite*	_spriteShield;
-	Text*	_textGood;
-	Text*	_textGreat;
-	Text*	_textPerfect;
 
 	bool m_bShieldOpacityLess;
 
 	float m_fCurSpeed;
 	float m_fPreviousScaleY;
-
-	inline void changePlayerColorToGrey();
 };
 

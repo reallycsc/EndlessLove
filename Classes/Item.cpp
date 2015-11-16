@@ -2,7 +2,6 @@
 
 Item::Item(void)
 {
-	_sprite = NULL;
 	m_iItemType = 0;
 	m_iMoveSpeed = 0;
 }
@@ -12,27 +11,36 @@ Item::~Item(void)
 {
 }
 
-bool Item::init()
+Item* Item::createItem(SpriteFrame* frame, int itemType, int moveSpeed)
+{
+	Item* pRet = new(std::nothrow) Item();
+	if (pRet && pRet->init(frame, itemType, moveSpeed))
+	{
+		pRet->autorelease();
+		return pRet;
+	}
+	else
+	{
+		delete pRet;
+		pRet = NULL;
+		return NULL;
+	}
+}
+
+bool Item::init(SpriteFrame* frame, int itemType, int moveSpeed)
 {  
     bool bRet = false;  
     do   
     {  
-        CC_BREAK_IF(!Node::init());  
+        CC_BREAK_IF(!Sprite::init());  
+
+		this->setSpriteFrame(frame);
+		this->setAnchorPoint(Point(0.5f, 0));
+		m_iItemType = itemType;
+		m_iMoveSpeed = moveSpeed;
 
         bRet = true;
     } while (0);
     
     return bRet;
-}
-
-Item* Item::createItem(SpriteFrame* frame, int itemType, int moveSpeed)
-{
-	auto item = Item::create();
-	item->_sprite = Sprite::createWithSpriteFrame(frame);
-	item->_sprite->setAnchorPoint(Point(0.5f,0));
-	item->setAnchorPoint(Point(0.5f, 0));
-	item->addChild(item->_sprite);
-	item->m_iItemType = itemType;
-	item->m_iMoveSpeed = moveSpeed;
-	return item;
 }

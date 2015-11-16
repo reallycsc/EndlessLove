@@ -24,7 +24,8 @@ public:
 
 	void updateScoreText();
 	void updateGoldNumberText();
-	void updateHeartNumber(float addNumber);
+	void addHeartNumber(float number);
+	void showEvaluation(int y);
 
 	void startPlayerPowerUp();
 	void schedulePlayerJump();
@@ -43,11 +44,12 @@ private:
 	void progressToFinished(Node* pSender, Sprite* obj, int type);
 	void goldMoveFinished(Node* pSender);
 
+	void updateHeartNumber(float addNumber);
+
 public:
 	CC_SYNTHESIZE(Player*, _player, Player);
 
 private:
-
 	GameMediator*	_gameMediator;
 	PlayerData*	_playerData;
 
@@ -56,6 +58,12 @@ private:
 	Text*	_textHeartNum;
 	Sprite*	_spriteGold;
 	Node*	_nodeGoldNum;
+
+	Node*	_nodeHeart;
+	Text*	_textHeartNumber;
+	Text*	_textGood;
+	Text*	_textGreat;
+	Text*	_textPerfect;
 
 	Vector<Sprite*>	_vectorSpriteHeart;
 	Sprite* _spriteHeart;

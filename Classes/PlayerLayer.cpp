@@ -15,6 +15,12 @@ PlayerLayer::PlayerLayer(void)
 	_spriteHalfHeartLeft = NULL;
 	_spriteHalfHeartRight = NULL;
 
+	_nodeHeart = NULL;
+	_textHeartNumber = NULL;
+	_textGood = NULL;
+	_textGreat = NULL;
+	_textPerfect = NULL;
+
 	_vectorSpriteHeart.clear();
 	_mapCountDown.clear();
 	_vectorCountDown.clear();
@@ -49,6 +55,17 @@ bool PlayerLayer::init()
 		_player = Player::create();
 		_player->setPosition(winSize.width / 4, 0);
 		this->addChild(_player, ZORDER_PLAYERLAYER_PLAYER);
+
+		Node* nodePlayer = dynamic_cast<Node*>(rootNode->getChildByName("Node_Player"));
+		_nodeHeart = dynamic_cast<Node*>(nodePlayer->getChildByName("Node_Heart"));
+		_nodeHeart->setVisible(false);
+		_textHeartNumber = dynamic_cast<Text*>(_nodeHeart->getChildByName("Text_HeartNumber"));
+		_textGood = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Good"));
+		_textGood->setVisible(false);
+		_textGreat = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Great"));
+		_textGreat->setVisible(false);
+		_textPerfect = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Perfect"));
+		_textPerfect->setVisible(false);
 
 		// Add text
 		_textScore = dynamic_cast<Text*>(rootNode->getChildByName("Text_Score"));
@@ -114,21 +131,27 @@ bool PlayerLayer::init()
 		}
 
 		// set all text
+		auto mapGameText = GameMediator::getInstance()->getGameText();
+		_textGood->setString(mapGameText->at(GAMETEXT_PLAYER_GOOD));
+		_textGreat->setString(mapGameText->at(GAMETEXT_PLAYER_GREAT));
+		_textPerfect->setString(mapGameText->at(GAMETEXT_PLAYER_PERFECT));
+
 		_textScore->setString(String::createWithFormat("%s%d",
-			_gameMediator->getGameText()->at(GAMETEXT_PLAYERLAYER_SCORE).c_str(),
+			mapGameText->at(GAMETEXT_PLAYERLAYER_SCORE).c_str(),
 			_playerData->getScore())->getCString());
 		dynamic_cast<Text*>(nodeGuideLine->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
-			_gameMediator->getGameText()->at(GAMETEXT_PLAYERLAYER_GUIDELINE).c_str(),
+			mapGameText->at(GAMETEXT_PLAYERLAYER_GUIDELINE).c_str(),
 			10)->getCString());
 		dynamic_cast<Text*>(nodeEnlarge->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
-			_gameMediator->getGameText()->at(GAMETEXT_PLAYERLAYER_ENLARGE).c_str(),
+			mapGameText->at(GAMETEXT_PLAYERLAYER_ENLARGE).c_str(),
 			10)->getCString());
 		dynamic_cast<Text*>(nodeShrink->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
-			_gameMediator->getGameText()->at(GAMETEXT_PLAYERLAYER_SHRINK).c_str(),
+			mapGameText->at(GAMETEXT_PLAYERLAYER_SHRINK).c_str(),
 			10)->getCString());
 		dynamic_cast<Text*>(nodeShield->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
-			_gameMediator->getGameText()->at(GAMETEXT_PLAYERLAYER_SHIELD).c_str(),
+			mapGameText->at(GAMETEXT_PLAYERLAYER_SHIELD).c_str(),
 			10)->getCString());
+
 		this->scheduleUpdate();
 
 		bRet = true;
@@ -178,10 +201,10 @@ void PlayerLayer::startCountDown(float dt, int countDownType, int textType)
 					NULL));
 				break;
 			case COUNTDOWN_ENLARGE:
-				_player->runAction(ScaleTo::create(0.5f, 1.0f));
+				_player->runAction(ScaleTo::create(0.5f, 1));
 				break;
 			case COUNTDOWN_SHRINK:
-				_player->runAction(ScaleTo::create(0.5f, 1.0f));
+				_player->runAction(ScaleTo::create(0.5f, 1));
 				break;
 			default:
 				break;
@@ -212,7 +235,7 @@ void PlayerLayer::updateGoldNumberText()
 	// Gold animation from player to icon top-left
 	Sprite* sprite = Sprite::createWithSpriteFrame(_spriteGold->getSpriteFrame());
 	sprite->setAnchorPoint(Point(0, 0.5));
-	Size size = _player->getSprite()->getBoundingBox().size;
+	Size size = _player->getBoundingBox().size;
 	sprite->setPosition(_player->getPositionX(), _player->getPositionY() + size.height);
 	sprite->runAction(Sequence::create(
 		EaseIn::create(MoveTo::create(0.3, _nodeGoldNum->getPosition() + _spriteGold->getPosition()), 2),
@@ -273,6 +296,41 @@ void PlayerLayer::progressToFinished(Node* pSender, Sprite* obj, int type)
 	default:
 		break;
 	}
+}
+
+void PlayerLayer::addHeartNumber(float number) // return heart number before change
+{
+	// heart number increase
+	float realNumber = _gameMediator->getPlayerData()->addHeartNumber(number);
+	// change player to color
+	if (realNumber != 0)
+	{
+		_player->changePlayerColorToGrey();
+	}
+	// show flowing sprite
+	if (int(number * 10) % 10 != 0)
+	{
+		if (number >= 0)
+			_textHeartNumber->setString(String::createWithFormat("+%.1f", number)->getCString());
+		else
+			_textHeartNumber->setString(String::createWithFormat("%.1f", number)->getCString());
+	}
+	else
+	{
+		if (number >= 0)
+			_textHeartNumber->setString(String::createWithFormat("+%d", int(number))->getCString());
+		else
+			_textHeartNumber->setString(String::createWithFormat("%d", int(number))->getCString());
+	}
+	_nodeHeart->setVisible(true);
+	_nodeHeart->setOpacity(255);
+	_nodeHeart->setPosition(_player->getPositionX(), _player->getPositionY() + _player->getBoundingBox().size.height + 20);
+	_nodeHeart->runAction(Sequence::create(
+		MoveTo::create(0.5f, Point(_nodeHeart->getPositionX(), _nodeHeart->getPositionY() + 100)),
+		FadeOut::create(0.5f),
+		NULL));
+
+	this->updateHeartNumber(realNumber);
 }
 
 void PlayerLayer::updateHeartNumber(float addNumber)
@@ -414,6 +472,54 @@ void PlayerLayer::schedulePlayerJump()
 	_player->scheduleJump();
 }
 
+void PlayerLayer::showEvaluation(int y)
+{
+	if (_player->getIsIntersect())
+		return;
+	if (y < 10) // Perfect
+	{
+		_textPerfect->setScale(1);
+		_textPerfect->setVisible(true);
+		_textPerfect->setOpacity(255);
+		_textPerfect->setPosition(Point(_player->getPositionX(), _player->getPositionY() + _player->getBoundingBox().size.height + 70));
+		_textPerfect->runAction(Sequence::create(
+			Spawn::create(
+				ScaleTo::create(0.5f, 2.0f),
+				MoveTo::create(0.5f, Point(_textPerfect->getPositionX(), _textPerfect->getPositionY() + 100)),
+				NULL),
+			FadeOut::create(0.5f),
+			NULL));
+	}
+	else if (y >= 10 && y < 50) // Great
+	{
+		_textGreat->setScale(1);
+		_textGreat->setVisible(true);
+		_textGreat->setOpacity(255);
+		_textGreat->setPosition(Point(_player->getPositionX(), _player->getPositionY() + _player->getBoundingBox().size.height + 70));
+		_textGreat->runAction(Sequence::create(
+			Spawn::create(
+				ScaleTo::create(0.5f, 2.0f),
+				MoveTo::create(0.5f, Point(_textPerfect->getPositionX(), _textPerfect->getPositionY() + 100)),
+				NULL),
+			FadeOut::create(0.5f),
+			NULL));
+	}
+	else // Good
+	{
+		_textGood->setScale(1);
+		_textGood->setVisible(true);
+		_textGood->setOpacity(255);
+		_textGood->setPosition(Point(_player->getPositionX(), _player->getPositionY() + _player->getBoundingBox().size.height + 70));
+		_textGood->runAction(Sequence::create(
+			Spawn::create(
+				ScaleTo::create(0.5f, 2.0f),
+				MoveTo::create(0.5f, Point(_textPerfect->getPositionX(), _textPerfect->getPositionY() + 100)),
+				NULL),
+			FadeOut::create(0.5f),
+			NULL));
+	}
+}
+
 // item use functions
 void PlayerLayer::startShowGuideLine(float duration)
 {
@@ -441,7 +547,7 @@ void PlayerLayer::startShowGuideLine(float duration)
 
 void PlayerLayer::startPlayerEnlarge(float duration)
 {
-	_player->runAction(ScaleTo::create(0.5f, 2.0f));
+	_player->runAction(ScaleTo::create(0.5f, 2));
 	_mapCurCountDownTime[COUNTDOWN_ENLARGE] = duration;
 	_mapMaxCountDownTime[COUNTDOWN_ENLARGE] = duration;
 	auto scheduler = Director::getInstance()->getScheduler();
@@ -521,7 +627,6 @@ void PlayerLayer::startPlayerShield(float duration)
 
 	return;
 }
-
 
 void PlayerLayer::setCountDownPosition()
 {

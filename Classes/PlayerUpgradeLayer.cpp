@@ -81,7 +81,7 @@ void PlayerUpgradeLayer::setItemContent(int id, int textid, const char* format1,
 {
 	PlayerData* data = GameMediator::getInstance()->getPlayerData();
 	auto mapGameText = GameMediator::getInstance()->getGameText();
-	int level = data->getLevelFor(id);
+	unsigned int level = data->getLevelFor(id);
 	auto pvLevelInfos = data->getLevelInfoVectorFor(id);
 	auto tLevelConfig = pvLevelInfos->at(level - 1);
 	float number = tLevelConfig.number;
@@ -129,7 +129,7 @@ void PlayerUpgradeLayer::setAllItemContents()
 void PlayerUpgradeLayer::changeItemContentNumbers(int id, const char* format1, const char* format2)
 {
 	PlayerData* data = GameMediator::getInstance()->getPlayerData();
-	int level = data->getLevelFor(id);
+	unsigned int level = data->getLevelFor(id);
 	auto pvLevelInfos = data->getLevelInfoVectorFor(id);
 	auto tLevelConfig = pvLevelInfos->at(level - 1);
 	float number = tLevelConfig.number;

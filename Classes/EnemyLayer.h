@@ -2,6 +2,7 @@
 #include "CommonHeader.h"
 #include "Enemy.h"
 #include "Item.h"
+#include "PlayerLayer.h"
 #include "Player.h"
 #include "GameMediator.h"
 
@@ -25,7 +26,7 @@ public:
 
 	bool playerEnemyIntersect(Player* player);
 	int playerItemIntersect(Player* player);
-	bool isJumpOver(Player* player);
+	bool isJumpOver(PlayerLayer* playerLayer, Player* player);
 
 	void increaseGameLevel();
 private:
@@ -41,6 +42,7 @@ private:
 	GameLevelData*	_levelData;
 
 	int m_nEnemyDownMinInterval; // 敌人最小间隔
+	int m_nEnemyDownMaxInterval; // 敌人最大间隔
 
 	int m_nAddEnemyDownDistance; // 敌人间隔距离像素
 	int m_nAccEnemyDownDistance;
