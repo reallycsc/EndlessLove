@@ -35,7 +35,7 @@ bool PlayerUpgradeLayer::init()
 
 	// get gold number
 	m_pGoldNumberAll = dynamic_cast<Text*>(rootNode->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"));
-	m_pGoldNumberAll->setString(String::createWithFormat("%d", data->getGoldNumberAll())->getCString());
+	m_pGoldNumberAll->setString(StringUtils::format("%d", data->getGoldNumberAll()));
 
 	// get guideline
 	m_pSpriteGuideLine = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_GuideLine"));
@@ -90,9 +90,9 @@ void PlayerUpgradeLayer::setItemContent(int id, int textid, const char* format1,
 	{
 		float numberNext = pvLevelInfos->at(level).number;
 		item.itemInfo->setString(mapGameText->at(textid));
-		item.number->setString(String::createWithFormat(format1, number, numberNext)->getCString());
+		item.number->setString(StringUtils::format(format1, number, numberNext));
 		item.button->setTitleText(mapGameText->at(GAMETEXT_PLAYERUPGRADE_UPGRADE));
-		item.goldNum->setString(String::createWithFormat("%d", tLevelConfig.needGold)->getCString());
+		item.goldNum->setString(StringUtils::format("%d", tLevelConfig.needGold));
 		item.button->setVisible(true);
 		item.goldNum->setVisible(true);
 		item.goldImg->setVisible(true);
@@ -101,7 +101,7 @@ void PlayerUpgradeLayer::setItemContent(int id, int textid, const char* format1,
 	else
 	{
 		item.itemInfo->setString(mapGameText->at(textid));
-		item.number->setString(String::createWithFormat(format2, number)->getCString());
+		item.number->setString(StringUtils::format(format2, number));
 		item.button->setVisible(false);
 		item.goldNum->setVisible(false);
 		item.goldImg->setVisible(false);
@@ -137,8 +137,8 @@ void PlayerUpgradeLayer::changeItemContentNumbers(int id, const char* format1, c
 	if (level < pvLevelInfos->size())
 	{
 		float numberNext = pvLevelInfos->at(level).number;
-		item.number->setString(String::createWithFormat(format1, number, numberNext)->getCString());
-		item.goldNum->setString(String::createWithFormat("%d", tLevelConfig.needGold)->getCString());
+		item.number->setString(StringUtils::format(format1, number, numberNext));
+		item.goldNum->setString(StringUtils::format("%d", tLevelConfig.needGold));
 		item.button->setVisible(true);
 		item.goldNum->setVisible(true);
 		item.goldImg->setVisible(true);
@@ -146,7 +146,7 @@ void PlayerUpgradeLayer::changeItemContentNumbers(int id, const char* format1, c
 	}
 	else
 	{
-		item.number->setString(String::createWithFormat(format2, number)->getCString());
+		item.number->setString(StringUtils::format(format2, number));
 		item.button->setVisible(false);
 		item.goldNum->setVisible(false);
 		item.goldImg->setVisible(false);
@@ -209,7 +209,7 @@ void PlayerUpgradeLayer::menuCallback_Upgrade(Ref* pSender, int id)
 		data->setLevelFor(id, level);
 		data->initPlayerData();
 		this->changeAllItemContentsNumbers();
-		m_pGoldNumberAll->setString(String::createWithFormat("%d", data->getGoldNumberAll())->getCString());
+		m_pGoldNumberAll->setString(StringUtils::format("%d", data->getGoldNumberAll()));
 		//data->savePlayerData();
 	}
 	else

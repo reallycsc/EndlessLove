@@ -66,11 +66,11 @@ void GameOverLayer::showScoreAndStory()
 	playerData->savePlayerData();
 
 	//显示最高分
-	m_pTextHighscore->setString(String::createWithFormat("%s%d", 
+	m_pTextHighscore->setString(StringUtils::format("%s%d",
 		m_pMapGameText->at(GAMETEXT_MAINMENU_HIGHESTSCORE).c_str(),
 		playerData->getHighscore()
-		)->getCString());
-	m_pTextGoldNumber->setString(String::createWithFormat("X %d", playerData->getGoldNumber())->getCString());
+		));
+	m_pTextGoldNumber->setString(StringUtils::format("X %d", playerData->getGoldNumber()));
 
 	m_pAnimate->gotoFrameAndPlay(0, false);
 

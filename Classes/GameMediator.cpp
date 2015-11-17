@@ -373,7 +373,7 @@ void GameMediator::spriteToGray(Node* pNode, float percent)
 		percent = 0;
 	if (percent > 1)
 		percent = 1;
-	const GLchar* pszFragSource = String::createWithFormat(format, percent, percent, percent)->getCString();
+    const GLchar* pszFragSource = StringUtils::format(format, percent, percent, percent).c_str();
 
 	GLProgram* pProgram = new GLProgram();
 	pProgram->initWithByteArrays(ccPositionTextureColor_noMVP_vert, pszFragSource);

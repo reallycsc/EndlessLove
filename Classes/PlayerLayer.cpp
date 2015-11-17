@@ -135,21 +135,21 @@ bool PlayerLayer::init()
 		m_pTextGreat->setString(m_pMapGameText->at(GAMETEXT_PLAYER_GREAT));
 		m_pTextPerfect->setString(m_pMapGameText->at(GAMETEXT_PLAYER_PERFECT));
 
-		m_pTextScore->setString(String::createWithFormat("%s%d",
+		m_pTextScore->setString(StringUtils::format("%s%d",
 			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SCORE).c_str(),
-			m_pPlayerData->getScore())->getCString());
-		dynamic_cast<Text*>(nodeGuideLine->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
+			m_pPlayerData->getScore()));
+		dynamic_cast<Text*>(nodeGuideLine->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
 			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_GUIDELINE).c_str(),
-			10)->getCString());
-		dynamic_cast<Text*>(nodeEnlarge->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
+			10.0));
+		dynamic_cast<Text*>(nodeEnlarge->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
 			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_ENLARGE).c_str(),
-			10)->getCString());
-		dynamic_cast<Text*>(nodeShrink->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
+			10.0));
+		dynamic_cast<Text*>(nodeShrink->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
 			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SHRINK).c_str(),
-			10)->getCString());
-		dynamic_cast<Text*>(nodeShield->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f",
+			10.0));
+		dynamic_cast<Text*>(nodeShield->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
 			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SHIELD).c_str(),
-			10)->getCString());
+			10.0));
 
 		this->scheduleUpdate();
 
@@ -209,9 +209,9 @@ void PlayerLayer::startCountDown(float dt, int countDownType, int textType)
 				break;
 			}
 		}
-		dynamic_cast<Text*>(node->getChildByName("Text_CountDown"))->setString(String::createWithFormat("%s%.1f", 
+		dynamic_cast<Text*>(node->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
 			m_pMapGameText->at(textType).c_str(),
-			curTime)->getCString());
+			curTime));
 		dynamic_cast<LoadingBar*>(node->getChildByName("LoadingBar_CountDown"))->setPercent(100 * curTime / m_mMaxCountDownTime.at(countDownType));
 	}
 }
@@ -224,9 +224,9 @@ void PlayerLayer::guideLineFadeOutFinished(Node* pSender)
 // update score text function
 void PlayerLayer::updateScoreText()
 {
-	m_pTextScore->setString(String::createWithFormat("%s%d", 
+	m_pTextScore->setString(StringUtils::format("%s%d",
 		m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SCORE).c_str(),
-		m_pPlayerData->getScore())->getCString());
+		m_pPlayerData->getScore()));
 }
 
 void PlayerLayer::updateGoldNumberText()
@@ -248,7 +248,7 @@ void PlayerLayer::goldMoveFinished(Node* pSender)
 {
 	pSender->removeFromParent();
 	m_pPlayerData->addGoldNumber(1);
-	m_pTextGoldNum->setString(String::createWithFormat("%d", m_pPlayerData->getGoldNumber())->getCString());
+	m_pTextGoldNum->setString(StringUtils::format("%d", m_pPlayerData->getGoldNumber()));
 }
 
 void PlayerLayer::addHeartNumber(float number) // return heart number before change
@@ -264,16 +264,16 @@ void PlayerLayer::addHeartNumber(float number) // return heart number before cha
 	if (int(number * 10) % 10 != 0)
 	{
 		if (number >= 0)
-			m_pTextHeartNumber->setString(String::createWithFormat("+%.1f", number)->getCString());
+			m_pTextHeartNumber->setString(StringUtils::format("+%.1f", number));
 		else
-			m_pTextHeartNumber->setString(String::createWithFormat("%.1f", number)->getCString());
+			m_pTextHeartNumber->setString(StringUtils::format("%.1f", number));
 	}
 	else
 	{
 		if (number >= 0)
-			m_pTextHeartNumber->setString(String::createWithFormat("+%d", int(number))->getCString());
+			m_pTextHeartNumber->setString(StringUtils::format("+%d", int(number)));
 		else
-			m_pTextHeartNumber->setString(String::createWithFormat("%d", int(number))->getCString());
+			m_pTextHeartNumber->setString(StringUtils::format("%d", int(number)));
 	}
 	m_pNodeHeart->setVisible(true);
 	m_pNodeHeart->setOpacity(255);
