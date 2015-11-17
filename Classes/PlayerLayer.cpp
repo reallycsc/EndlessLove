@@ -46,7 +46,7 @@ bool PlayerLayer::init()
 	bool bRet = false;
 	do 
 	{
-		CC_BREAK_IF(!CCLayer::init());
+		CC_BREAK_IF(!Layer::init());
 		Size winSize = Director::getInstance()->getWinSize();
 
 		// Load csb

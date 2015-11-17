@@ -51,16 +51,6 @@ bool GameMediator::init()
 	return bRet;
 }
 
-string& replace_all_distinct(string& str, const string& old_value, const string& new_value)
-{
-	for (string::size_type pos(0); pos != string::npos; pos += new_value.length()) {
-		if ((pos = str.find(old_value, pos)) != string::npos)
-			str.replace(pos, old_value.length(), new_value);
-		else   break;
-	}
-	return   str;
-}
-
 void GameMediator::reloadAllConfigFiles()
 {
 	bool ret;
@@ -91,7 +81,8 @@ bool GameMediator::loadGameConfigFile()
 	do
 	{
 		tinyxml2::XMLDocument document;
-		document.LoadFile("config/GameConfig.xml");
+        string filename = FileUtils::getInstance()->fullPathForFilename("config/GameConfig.xml");
+		document.LoadFile(filename.c_str());
 		XMLElement* root = document.RootElement();
 		CC_BREAK_IF(!root);
 
@@ -255,26 +246,39 @@ bool GameMediator::loadGameConfigFile()
 	return bRet;
 }
 
+string& GameMediator::replace_all_distinct(string& str, string& old_value, string& new_value)
+{
+    for (string::size_type pos(0); pos != string::npos; pos += new_value.length()) {
+        if ((pos = str.find(old_value, pos)) != string::npos)
+        str.replace(pos, old_value.length(), new_value);
+        else   break;
+    }
+    return   str;
+}
+
 bool GameMediator::loadGameTextFile()
 {
 	bool bRet = false;
 	do
 	{
 		tinyxml2::XMLDocument document;
-
+        string filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
 #if defined LANGUAGE_CHINESE
-		document.LoadFile("config/GameText_Chinese.xml");
+        filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_Chinese.xml");
 #elif defined LANGUAGE_ENGLISH
-		document.LoadFile("config/GameText_English.xml");
+        //filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
 #endif
-
+        document.LoadFile(filename.c_str());
 		XMLElement* root = document.RootElement();
 		CC_BREAK_IF(!root);
 
 		for (XMLElement* surface1 = root->FirstChildElement("Text"); surface1 != NULL;
 		surface1 = surface1->NextSiblingElement("Text"))
 		{
-			m_mGameText.insert(pair<int, string>(surface1->IntAttribute("id"), replace_all_distinct(string(surface1->GetText()), "\\n", "\n")));
+            string str = string(surface1->GetText());
+            string oldStr = "\\n";
+            string newStr = "\n";
+			m_mGameText.insert(pair<int, string>(surface1->IntAttribute("id"), replace_all_distinct(str, oldStr, newStr)));
 		}
 
 		bRet = true;
@@ -288,7 +292,8 @@ bool GameMediator::loadGameStoryFile()
 	do
 	{
 		tinyxml2::XMLDocument document;
-		document.LoadFile("config/GameStory.xml");
+        string filename = FileUtils::getInstance()->fullPathForFilename("config/GameStory.xml");
+		document.LoadFile(filename.c_str());
 		XMLElement* root = document.RootElement();
 		CC_BREAK_IF(!root);
 		vector<string> _vString;
@@ -299,7 +304,10 @@ bool GameMediator::loadGameStoryFile()
 			_vString.clear();
 			for (XMLElement* surface2 = surface1->FirstChildElement("Bomb"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Bomb"))
 			{
-				_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
+                string str = string(surface2->GetText());
+                string oldStr = "\\n";
+                string newStr = "\n";
+				_vString.push_back(replace_all_distinct(str, oldStr, newStr));
 			}
 			m_mGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_BOMB, _vString));
 
@@ -307,7 +315,10 @@ bool GameMediator::loadGameStoryFile()
 			_vString.clear();
 			for (XMLElement* surface2 = surface1->FirstChildElement("Noheart"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Noheart"))
 			{
-				_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
+                string str = string(surface2->GetText());
+                string oldStr = "\\n";
+                string newStr = "\n";
+				_vString.push_back(replace_all_distinct(str, oldStr, newStr));
 			}
 			m_mGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_NOHEART, _vString));
 		}

@@ -78,7 +78,7 @@ void GameOverLayer::showScoreAndStory()
 
 	vector<string>* storyVector = &(map->at(m_pGameMediator->getGameOverReason()));;
 
-	m_pTextStory->setString((*storyVector)[random() % storyVector->size()]);
+    m_pTextStory->setString((*storyVector)[cocos2d::random() % storyVector->size()]);
 	m_pScrollStory->setInnerContainerSize(Size(m_pScrollStory->getInnerContainerSize().width, m_pTextStory->getContentSize().height));
 	m_pTextStory->setPosition(Point(10, m_pScrollStory->getInnerContainerSize().height - 10));
 }

@@ -6,18 +6,17 @@
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Sprite_Background" ActionTag="-297403730" Tag="3" IconVisible="False" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Image_Background" ActionTag="617986505" Tag="84" IconVisible="False" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" HorizontalEdge="BothEdge" VerticalEdge="BothEdge" Scale9Width="960" Scale9Height="640" ctype="ImageViewObjectData">
             <Size X="960.0000" Y="640.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="320.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="Resource/background.png" Plist="" />
-            <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_GameTitle" ActionTag="1879048267" Tag="4" IconVisible="False" LeftMargin="248.5000" RightMargin="248.5000" TopMargin="92.5000" BottomMargin="452.5000" FontSize="100" LabelText="Endless Love" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+          <AbstractNodeData Name="Text_GameTitle" ActionTag="1879048267" Tag="4" IconVisible="False" HorizontalEdge="BothEdge" LeftMargin="175.0000" RightMargin="175.0000" TopMargin="72.0000" BottomMargin="432.0000" FontSize="100" LabelText="Endless Love" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="610.0000" Y="136.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="500.0000" />

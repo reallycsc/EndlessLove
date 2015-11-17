@@ -3,7 +3,7 @@
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
-      <ObjectData Name="Scene" Tag="237" ctype="GameNodeObjectData">
+      <ObjectData Name="Scene" Visible="False" Tag="237" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
           <AbstractNodeData Name="Sprite_Background" ActionTag="-182277926" Tag="316" IconVisible="False" ctype="SpriteObjectData">

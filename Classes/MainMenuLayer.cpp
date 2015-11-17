@@ -38,7 +38,7 @@ bool MainMenuLayer::init()
 
 	// get gold number
 	dynamic_cast<Text*>(rootNode->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"))
-		->setString(String::createWithFormat("%d", data->getGoldNumberAll())->getCString());
+    ->setString(String::createWithFormat("%d", data->getGoldNumberAll())->getCString());
 
 	// set all text
 	auto mapGameText = GameMediator::getInstance()->getGameText();

@@ -29,7 +29,7 @@ bool GameLayer::init()
 	//设定随机数种子
 	struct timeval tv;
     gettimeofday(&tv, NULL);
-    long long time = ((long long)tv.tv_sec) * 1000 + tv.tv_usec / 1000;
+    unsigned int time = ((unsigned int)tv.tv_sec) * 1000 + tv.tv_usec / 1000;
 	srand(time);
 
     //建立触摸监听

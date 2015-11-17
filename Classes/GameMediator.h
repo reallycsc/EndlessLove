@@ -28,6 +28,8 @@ public:
 	Widget* replaceNodeWithWidget(Node* node);
 
 private:
+    string& replace_all_distinct(string& str, string& old_value, string& new_value);
+    
 	bool loadGameConfigFile();
 	bool loadGameTextFile();
 	bool loadGameStoryFile();

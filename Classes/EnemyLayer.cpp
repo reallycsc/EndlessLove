@@ -37,7 +37,7 @@ bool EnemyLayer::init()
 	bool bRet = false;
 	do 
 	{
-		CC_BREAK_IF(!CCLayer::init());
+		CC_BREAK_IF(!Layer::init());
 		Size winSize = Director::getInstance()->getWinSize();
 
 		// load csb
@@ -336,7 +336,6 @@ bool EnemyLayer::isJumpOver(PlayerLayer* playerLayer, Player* player)
 {
 	bool isJumpOver = false;
 	int count = 0;
-	int deltaY = 0;
 	for (auto obj : m_vAllEnemysDown)
 	{
 		if (!obj->getIsOver())

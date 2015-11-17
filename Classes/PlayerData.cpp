@@ -98,7 +98,8 @@ bool PlayerData::loadPlayerUpgradeConfigFile()
 	do
 	{
 		tinyxml2::XMLDocument document;
-		document.LoadFile("config/PlayerUpgradeConfig.xml");
+        string filename = FileUtils::getInstance()->fullPathForFilename("config/PlayerUpgradeConfig.xml");
+        document.LoadFile(filename.c_str());
 		XMLElement* root = document.RootElement();
 		CC_BREAK_IF(!root);
 

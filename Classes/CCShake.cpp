@@ -26,7 +26,7 @@ Shake* Shake::create(float duration, float strength_x, float strength_y)
 
 bool Shake::initWithDuration(float duration, float strength_x, float strength_y)
 {
-    if (CCActionInterval::initWithDuration(duration))
+    if (ActionInterval::initWithDuration(duration))
     {
         _strength_x = strength_x;
         _strength_y = strength_y;
@@ -70,7 +70,7 @@ Shake* Shake::reverse() const
 
 void Shake::startWithTarget(Node *target)
 {
-    CCActionInterval::startWithTarget(target);
+    ActionInterval::startWithTarget(target);
     
     // save the initial position
     _initial_x = target->getPosition().x;
@@ -82,5 +82,5 @@ void Shake::stop(void)
     // Action is done, reset clip position
     _target->setPosition(Vec2( _initial_x, _initial_y ) );
     
-    CCActionInterval::stop();
+    ActionInterval::stop();
 }

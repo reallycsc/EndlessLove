@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <GameConfig>
 	<!-- 	
 	1 ITEMTYPE_GOLD,
@@ -20,7 +20,7 @@
 				<PlayerMoveTime time="3"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
 			</Player>
 			<EnemyDown isShow="true" isBindItem="true">
-				<EnemyHeight minScale="1" maxScale="1"/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
+				<EnemyHeight minScale=“0.1” maxScale=“0.3”/> <!-- relevent with winSize.height, like maxHeight = winSize.height*maxScale+maxOffset -->
 				<EnemyWidth minScale="0.2" maxScale="1"/> <!-- relevent with enemySize.width, like maxWidth = enemySize.width*maxScale -->
 				<EnemyMoveSpeed minScale="0" maxScale="0"/> <!-- relevent with playerMoveSpeed, like maxMoveSpeed = playerMoveSpeed * (1 + maxScale) -->
 				<EnemyInterval minScale="0.1" maxScale="0.1"/> <!-- relevent with winSize.width, like minInterval = winSize.width * minScale -->
