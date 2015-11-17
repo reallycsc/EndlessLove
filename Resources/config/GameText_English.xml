@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <GameText xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Text id="1">Endless Love</Text>
-	<Text id="2">HighScore:</Text>
+	<Text id="2">Highscore:</Text>
 	<Text id="3">Start</Text>
 	<Text id="4">Exit</Text>
 	<Text id="5">Touch anywhere for start</Text>
@@ -20,7 +20,7 @@
 	<Text id="18">Good</Text>
 	<Text id="19">Great</Text>
 	<Text id="20">Perfect</Text>
-	<Text id="21">Player Upgrade</Text>
+	<Text id="21">Upgrade</Text>
 	<Text id="22">Upgrade</Text>
 	<Text id="23">Jump Type:</Text>
 	<Text id="24">Max Heart Number: </Text>

@@ -38,12 +38,13 @@ public:
 	CC_SYNTHESIZE(bool, m_bIsShield, IsShield);
 	CC_SYNTHESIZE(bool, m_bIsIntersect, IsIntersect);
 
-	CC_SYNTHESIZE(int, m_iGroundLevel, GroundLevel);
+	CC_SYNTHESIZE(int, m_nGroundLevel, GroundLevel);
 
 private:
-	GameMediator*	_gameMediator;
+	GameMediator*	m_pGameMediator;
+	PlayerData*	_m_pPlayerData;
 
-	Sprite*	_spriteShield;
+	Sprite*	m_pSpriteShield;
 
 	bool m_bShieldOpacityLess;
 

@@ -28,8 +28,8 @@ bool MainMenuLayer::init()
 	// get button
 	auto buttonStart = dynamic_cast<Button*>(rootNode->getChildByName("Button_StartGame"));
 	buttonStart->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Start, this));
-	auto buttonExit = dynamic_cast<Button*>(rootNode->getChildByName("Button_ExitGame"));
-	buttonExit->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Exit, this));
+	//auto buttonExit = dynamic_cast<Button*>(rootNode->getChildByName("Button_ExitGame"));
+	//buttonExit->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Exit, this));
 	auto buttonUpgrade = dynamic_cast<Button*>(rootNode->getChildByName("Button_Upgrade"));
 	buttonUpgrade->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Upgrade, this));
 
@@ -43,7 +43,7 @@ bool MainMenuLayer::init()
 	// set all text
 	auto mapGameText = GameMediator::getInstance()->getGameText();
 	buttonStart->setTitleText(mapGameText->at(GAMETEXT_MAINMENU_STARTGAME));
-	buttonExit->setTitleText(mapGameText->at(GAMETEXT_MAINMENU_EXITGAME));
+	//buttonExit->setTitleText(mapGameText->at(GAMETEXT_MAINMENU_EXITGAME));
 	buttonUpgrade->setTitleText(mapGameText->at(GAMETEXT_MAINMENU_PLAYERUPGRADE));
 	dynamic_cast<Text*>(rootNode->getChildByName("Text_GameTitle"))->setString(mapGameText->at(GAMETEXT_MAINMENU_TITLE));
 	dynamic_cast<Text*>(rootNode->getChildByName("Text_HighestScore"))->setString(String::createWithFormat("%s%d", 
@@ -55,7 +55,7 @@ bool MainMenuLayer::init()
 
 void MainMenuLayer::menuCallback_Start(Ref* pSender)
 {
-	TextureCache::getInstance()->removeUnusedTextures();
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(GameScene::create()); 
 }
 
@@ -73,7 +73,7 @@ void MainMenuLayer::menuCallback_Exit(Ref* pSender)
 
 void MainMenuLayer::menuCallback_Upgrade(Ref* pSender)
 {
-	TextureCache::getInstance()->removeUnusedTextures();
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(PlayerUpgradeScene::create());
 }
 

@@ -4,9 +4,9 @@
 
 ControlLayer::ControlLayer(void)
 {
-	_gameMediator = GameMediator::getInstance();
-	_buttonPause = NULL;
-	_textTouchForStart = NULL;
+	m_pGameMediator = GameMediator::getInstance();
+	m_pButtonPause = NULL;
+	m_pTextTouchForStart = NULL;
 }
 
 
@@ -29,17 +29,17 @@ bool ControlLayer::init()
 		this->addChild(rootNode);
 
 		// get button
-		_buttonPause = dynamic_cast<Button*>(rootNode->getChildByName("Button_Pause"));
-		_buttonPause->addClickEventListener(CC_CALLBACK_1(ControlLayer::menuCallback_Pause, this));
-		_buttonPause->setEnabled(false);
+		m_pButtonPause = dynamic_cast<Button*>(rootNode->getChildByName("Button_Pause"));
+		m_pButtonPause->addClickEventListener(CC_CALLBACK_1(ControlLayer::menuCallback_Pause, this));
+		m_pButtonPause->setEnabled(false);
 
 		// get text
-		_textTouchForStart = dynamic_cast<Text*>(rootNode->getChildByName("Text_TouchForStart"));
+		m_pTextTouchForStart = dynamic_cast<Text*>(rootNode->getChildByName("Text_TouchForStart"));
 
 		// set all text
-		auto mapGameText = _gameMediator->getGameText();
-		_textTouchForStart->setString(mapGameText->at(GAMETEXT_CONTROLLAYER_TOUCHFORSTART));
-		_buttonPause->setTitleText(mapGameText->at(GAMETEXT_CONTROLLAYER_PAUSEGAME));
+		auto mapGameText = m_pGameMediator->getGameText();
+		m_pTextTouchForStart->setString(mapGameText->at(GAMETEXT_CONTROLLAYER_TOUCHFORSTART));
+		m_pButtonPause->setTitleText(mapGameText->at(GAMETEXT_CONTROLLAYER_PAUSEGAME));
 
         bRet = true;
     } while (0);  
@@ -49,10 +49,10 @@ bool ControlLayer::init()
 
 void ControlLayer::gameStart()
 {
-	_buttonPause->setEnabled(true);
-	_textTouchForStart->setVisible(false);
+	m_pButtonPause->setEnabled(true);
+	m_pTextTouchForStart->setVisible(false);
 
-	_gameMediator->setGameState(STATE_GAME_RUN);
+	m_pGameMediator->setGameState(STATE_GAME_RUN);
 }
 
 void ControlLayer::gameOver()
@@ -66,7 +66,7 @@ void ControlLayer::gameOver()
 	renderTexture->end();
 
 	Director::getInstance()->getRenderer()->render();//在3.0此处必须写上这个，否则newImage整张图片都为黑色,或者在下一帧获取  
-	TextureCache::getInstance()->addImage(renderTexture->newImage(), "GameOverImage");
+	Director::getInstance()->getTextureCache()->addImage(renderTexture->newImage(), "GameOverImage");
 
 	Director::getInstance()->replaceScene(GameOverScene::create());
 }
@@ -81,5 +81,5 @@ void ControlLayer::menuCallback_Pause(Ref* pSender)
 	Director::getInstance()->getRunningScene()->visit();
 	renderTexture->end();
 	//将游戏界面暂停，压入场景堆栈。并切换到GamePause界面
-	CCDirector::sharedDirector()->pushScene(PauseScene::createScene(renderTexture));
+	Director::getInstance()->pushScene(PauseScene::createScene(renderTexture));
 }

@@ -2,8 +2,7 @@
 
 Enemy::Enemy(void)
 {
-	//_sprite = NULL;
-	m_iMoveSpeed = 0;
+	m_nMoveSpeed = 0;
 	m_bIsOver = false;
 	m_bIsIntersect = false;
 	m_bIsEvluate = false;
@@ -39,7 +38,7 @@ bool Enemy::init(SpriteFrame* frame, int moveSpeed)
 
 		this->setSpriteFrame(frame);
 		this->setAnchorPoint(Point(0.5f, 0));
-		m_iMoveSpeed = moveSpeed;
+		m_nMoveSpeed = moveSpeed;
 
         bRet = true;
     } while (0);

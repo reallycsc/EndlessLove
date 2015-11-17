@@ -15,20 +15,20 @@ GameMediator* GameMediator::getInstance()
 
 GameMediator::GameMediator(void)
 {
-	m_iGameState = STATE_GAME_ENTER;
-	m_iGameLevel = 0;
-	m_iGameLevelMax = 0;
-	m_iGameOverReason = 0;
-	_mapGameStory.clear();
-	_mapGameText.clear();
-	_vectorGameLevelData.clear();
+	m_nGameState = STATE_GAME_ENTER;
+	m_nGameLevel = 0;
+	m_nGameLevelMax = 0;
+	m_nGameOverReason = 0;
+	m_mGameStory.clear();
+	m_mGameText.clear();
+	m_vGameLevelData.clear();
 }
 
 GameMediator::~GameMediator(void)
 {
-	_mapGameStory.clear();
-	_mapGameText.clear();
-	_vectorGameLevelData.clear();
+	m_mGameStory.clear();
+	m_mGameText.clear();
+	m_vGameLevelData.clear();
 }
 
 bool GameMediator::init()
@@ -36,8 +36,8 @@ bool GameMediator::init()
 	bool bRet = false;
 	do
 	{
-		_playerData = PlayerData::create();
-		CC_BREAK_IF(!_playerData);
+		m_pPlayerData = PlayerData::create();
+		CC_BREAK_IF(!m_pPlayerData);
 
 		CC_BREAK_IF(!this->loadGameConfigFile());
 
@@ -65,24 +65,24 @@ void GameMediator::reloadAllConfigFiles()
 {
 	bool ret;
 
-	m_iGameLevelMax = 0;
+	m_nGameLevelMax = 0;
 
-	_vectorGameLevelData.clear();
+	m_vGameLevelData.clear();
 	ret = this->loadGameConfigFile();
 	if (!ret)
 		return;
 
-	_mapGameText.clear();
+	m_mGameText.clear();
 	ret = this->loadGameTextFile();
 	if (!ret)
 		return;
 
-	_mapGameStory.clear();
+	m_mGameStory.clear();
 	ret = this->loadGameStoryFile();
 	if (!ret)
 		return;
 
-	_playerData->loadPlayerData();
+	m_pPlayerData->loadPlayerData();
 }
 
 bool GameMediator::loadGameConfigFile()
@@ -102,15 +102,15 @@ bool GameMediator::loadGameConfigFile()
 		CC_BREAK_IF(!surface1);
 		for (XMLElement* surface2 = surface1->FirstChildElement("Level"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Level"))
 		{
-			m_iGameLevelMax++;
+			m_nGameLevelMax++;
 			GameLevelData* data = NULL;
-			if (m_iGameLevelMax == 1)
+			if (m_nGameLevelMax == 1)
 			{
 				data = GameLevelData::create();
 			}
 			else
 			{
-				data = GameLevelData::create(&_vectorGameLevelData[m_iGameLevelMax - 2]);
+				data = GameLevelData::create(&m_vGameLevelData[m_nGameLevelMax - 2]);
 			}
 
 			data->setLevel(surface2->IntAttribute("level"));
@@ -247,7 +247,7 @@ bool GameMediator::loadGameConfigFile()
 				}
 			} while (false);
 
-			_vectorGameLevelData.push_back((*data));
+			m_vGameLevelData.push_back((*data));
 		}
 		bRet = true;
 	} while (false);
@@ -274,7 +274,7 @@ bool GameMediator::loadGameTextFile()
 		for (XMLElement* surface1 = root->FirstChildElement("Text"); surface1 != NULL;
 		surface1 = surface1->NextSiblingElement("Text"))
 		{
-			_mapGameText.insert(pair<int, string>(surface1->IntAttribute("id"), replace_all_distinct(string(surface1->GetText()), "\\n", "\n")));
+			m_mGameText.insert(pair<int, string>(surface1->IntAttribute("id"), replace_all_distinct(string(surface1->GetText()), "\\n", "\n")));
 		}
 
 		bRet = true;
@@ -301,7 +301,7 @@ bool GameMediator::loadGameStoryFile()
 			{
 				_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
 			}
-			_mapGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_BOMB, _vString));
+			m_mGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_BOMB, _vString));
 
 			// load noheart story
 			_vString.clear();
@@ -309,7 +309,7 @@ bool GameMediator::loadGameStoryFile()
 			{
 				_vString.push_back(replace_all_distinct(string(surface2->GetText()), "\\n", "\n"));
 			}
-			_mapGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_NOHEART, _vString));
+			m_mGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_NOHEART, _vString));
 		}
 		bRet = true;
 	} while (false);
@@ -318,9 +318,9 @@ bool GameMediator::loadGameStoryFile()
 
 void GameMediator::initGame()
 {
-	m_iGameState = STATE_GAME_ENTER;
-	m_iGameLevel = 0;
-	_playerData->initPlayerData();
+	m_nGameState = STATE_GAME_ENTER;
+	m_nGameLevel = 0;
+	m_pPlayerData->initPlayerData();
 }
 
 // Common function

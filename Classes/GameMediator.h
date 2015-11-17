@@ -18,9 +18,9 @@ public:
 	void reloadAllConfigFiles();
 
 	// getter function
-	map<int, string>* getGameText() { return &_mapGameText; }
-	map<int, vector<string>>* getGameStory() { return &_mapGameStory; }
-	vector<GameLevelData>* getGameLevelData() { return &_vectorGameLevelData; }
+	map<int, string>* getGameText() { return &m_mGameText; }
+	map<int, vector<string>>* getGameStory() { return &m_mGameStory; }
+	vector<GameLevelData>* getGameLevelData() { return &m_vGameLevelData; }
 
 	// common function
 	// percent: 0 - gray, 1 - color
@@ -33,16 +33,16 @@ private:
 	bool loadGameStoryFile();
 
 public:
-	CC_SYNTHESIZE(PlayerData*, _playerData, PlayerData);
-	CC_SYNTHESIZE(int, m_iGameState, GameState);
-	CC_SYNTHESIZE(int, m_iGameLevel, GameLevel);
-	CC_SYNTHESIZE(int, m_iGameLevelMax, GameLevelMax);
-	CC_SYNTHESIZE(int, m_iGameOverReason, GameOverReason);
+	CC_SYNTHESIZE(PlayerData*, m_pPlayerData, PlayerData);
+	CC_SYNTHESIZE(int, m_nGameState, GameState);
+	CC_SYNTHESIZE(int, m_nGameLevel, GameLevel);
+	CC_SYNTHESIZE(int, m_nGameLevelMax, GameLevelMax);
+	CC_SYNTHESIZE(int, m_nGameOverReason, GameOverReason);
 
 private:
-	vector<GameLevelData>	_vectorGameLevelData;
-	map<int, string>	_mapGameText;
-	map<int, vector<string>>	_mapGameStory;
+	vector<GameLevelData>	m_vGameLevelData;
+	map<int, string>	m_mGameText;
+	map<int, vector<string>>	m_mGameStory;
 	
 };
 

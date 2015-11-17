@@ -19,9 +19,9 @@ public:
 	void gameOver();
 
 private:
-	GameMediator*	_gameMediator;
+	GameMediator*	m_pGameMediator;
 
-	Button* _buttonPause;
-	Text*	_textTouchForStart;
+	Button*	m_pButtonPause;
+	Text*	m_pTextTouchForStart;
 };
 

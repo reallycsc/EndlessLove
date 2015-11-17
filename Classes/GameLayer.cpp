@@ -3,11 +3,11 @@
 
 GameLayer::GameLayer(void)
 {
-	_gameMediator = GameMediator::getInstance();
-	_playerData = _gameMediator->getPlayerData();
-	_controlLayer = NULL;
-	_enemyLayer = NULL;
-	_playerLayer = NULL;
+	m_pGameMediator = GameMediator::getInstance();
+	m_pPlayerData = m_pGameMediator->getPlayerData();
+	m_pControlLayer = NULL;
+	m_pEnemyLayer = NULL;
+	m_pPlayerLayer = NULL;
 }
 
 
@@ -44,7 +44,7 @@ bool GameLayer::init()
     // 3. add your codes below...
 
 	// Set default game data
-	_gameMediator->initGame();
+	m_pGameMediator->initGame();
 
 	// add scene
 	// load csb
@@ -52,16 +52,16 @@ bool GameLayer::init()
 	this->addChild(rootNode);
 
 	//加入player
-	_playerLayer = PlayerLayer::create();
-	this->addChild(_playerLayer, ZORDER_PLAYER_LAYER);
+	m_pPlayerLayer = PlayerLayer::create();
+	this->addChild(m_pPlayerLayer, ZORDER_PLAYER_LAYER);
 
 	//加入enemy
-	_enemyLayer = EnemyLayer::create();
-	this->addChild(_enemyLayer, ZORDER_ENEMY_LAYER);
+	m_pEnemyLayer = EnemyLayer::create();
+	this->addChild(m_pEnemyLayer, ZORDER_ENEMY_LAYER);
 
 	//加入controllayer
-	_controlLayer = ControlLayer::create();
-	this->addChild(_controlLayer, ZORDER_CONTROL_LAYER);
+	m_pControlLayer = ControlLayer::create();
+	this->addChild(m_pControlLayer, ZORDER_CONTROL_LAYER);
 
 	this->scheduleUpdate();
 
@@ -70,10 +70,10 @@ bool GameLayer::init()
 
 bool GameLayer::onTouchBegan(Touch *touch, Event *event) 
 {
-	if (_gameMediator->getGameState() == STATE_GAME_RUN)
+	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
 	{
 		//Point point = touch->getLocation();  //获取触摸坐标
-		_playerLayer->startPlayerPowerUp();
+		m_pPlayerLayer->startPlayerPowerUp();
 	}
 	return true;
 } 
@@ -85,34 +85,34 @@ void GameLayer::onTouchMoved(Touch *touch, Event *event)
 
 void GameLayer::onTouchEnded(Touch *touch, Event *event) 
 {
-	if (_gameMediator->getGameState() == STATE_GAME_ENTER)
+	if (m_pGameMediator->getGameState() == STATE_GAME_ENTER)
 	{
-		_controlLayer->gameStart();
+		m_pControlLayer->gameStart();
 	}
-	else if(_gameMediator->getGameState() == STATE_GAME_RUN)
+	else if(m_pGameMediator->getGameState() == STATE_GAME_RUN)
 	{
-		_playerLayer->schedulePlayerJump();
+		m_pPlayerLayer->schedulePlayerJump();
 	}
 }
 
 void GameLayer::update(float dt)
 {
-	if(_gameMediator->getGameState() == STATE_GAME_RUN)
+	if(m_pGameMediator->getGameState() == STATE_GAME_RUN)
 	{
-		Player* player = _playerLayer->getPlayer();
+		Player* player = m_pPlayerLayer->getPlayer();
 		// intersect reduce heart (when without shield)
 		if (!player->getIsShield())
 		{
-			if (_enemyLayer->playerEnemyIntersect(player))
+			if (m_pEnemyLayer->playerEnemyIntersect(player))
 			{
 				this->runAction(Shake::create(0.2f, 3));
-				_playerLayer->addHeartNumber(-1);
+				m_pPlayerLayer->addHeartNumber(-1);
 			}
 		}
 		// test item itersection
 		this->checkItemIntersect(player);
 		// game over if heart is zero
-		if (_playerData->getHeartNumber() <= 0)
+		if (m_pPlayerData->getHeartNumber() <= 0)
 		{
 			//_gameMediator->setGameOverReason(GAMEOVER_REASON_NOHEART);
 			//_controlLayer->gameOver();
@@ -120,45 +120,45 @@ void GameLayer::update(float dt)
 		// check if jump over & update score
 		do
 		{
-			if (!_enemyLayer->isJumpOver(_playerLayer, player))
+			if (!m_pEnemyLayer->isJumpOver(m_pPlayerLayer, player))
 				break;
-			_playerLayer->updateScoreText();
+			m_pPlayerLayer->updateScoreText();
 			// level up when score is correct
-			int level = _gameMediator->getGameLevel();
-			if (level == _gameMediator->getGameLevelData()->size())
+			int level = m_pGameMediator->getGameLevel();
+			if (level == m_pGameMediator->getGameLevelData()->size())
 				break;
-			GameLevelData* levelData = &(*_gameMediator->getGameLevelData())[level - 1];
+			GameLevelData* levelData = &(*m_pGameMediator->getGameLevelData())[level - 1];
 			int levelUpScore = levelData->getLevelUpScore();
 			if (levelUpScore <= 0)
 				break;
-			if ((_playerData->getScore() % levelUpScore) != 0)
+			if ((m_pPlayerData->getScore() % levelUpScore) != 0)
 				break;
-			_enemyLayer->increaseGameLevel();
+			m_pEnemyLayer->increaseGameLevel();
 		} while (false);
 	}
 }
 
 inline void GameLayer::checkItemIntersect(Player* player)
 {
-	int type = _enemyLayer->playerItemIntersect(_playerLayer->getPlayer());
+	int type = m_pEnemyLayer->playerItemIntersect(m_pPlayerLayer->getPlayer());
 	switch (type)
 	{
 	case 0:
 		break;
 	case ITEMTYPE_GOLD:
-		_playerLayer->updateGoldNumberText();
+		m_pPlayerLayer->updateGoldNumberText();
 		break;
 	case ITEMTYPE_HEART:
-		_playerLayer->addHeartNumber(1);
+		m_pPlayerLayer->addHeartNumber(1);
 		break;
 	case ITEMTYPE_GUIDELINE:
-		_playerLayer->startShowGuideLine(_playerData->getGuidelineTime());
+		m_pPlayerLayer->startShowGuideLine(m_pPlayerData->getGuidelineTime());
 		break;
 	case ITEMTYPE_ENLARGE:
-		_playerLayer->startPlayerEnlarge(_playerData->getEnlargeTime());
+		m_pPlayerLayer->startPlayerEnlarge(m_pPlayerData->getEnlargeTime());
 		break;
 	case ITEMTYPE_SHRINK:
-		_playerLayer->startPlayerShrink(_playerData->getShrinkTime());
+		m_pPlayerLayer->startPlayerShrink(m_pPlayerData->getShrinkTime());
 		break;
 	case ITEMTYPE_BOMB:
 	{
@@ -171,30 +171,30 @@ inline void GameLayer::checkItemIntersect(Player* player)
 		break;
 	}
 	case ITEMTYPE_HEARTBROKENLEFT:
-		_playerLayer->addHeartNumber(0.5);
+		m_pPlayerLayer->addHeartNumber(0.5);
 		break;
 	case ITEMTYPE_HEARTBROKENRIGHT:
-		_playerLayer->addHeartNumber(0.5);
+		m_pPlayerLayer->addHeartNumber(0.5);
 		break;
 	case ITEMTYPE_HEARTPLUS:
-		_playerLayer->addHeartNumber(2);
+		m_pPlayerLayer->addHeartNumber(2);
 		break;
 	case ITEMTYPE_HEARTSECRET:
 		if (!player->getIsShield())
 		{
 			this->runAction(Shake::create(0.2f, 3));
-			_playerLayer->addHeartNumber(-1);
+			m_pPlayerLayer->addHeartNumber(-1);
 		}
 		break;
 	case ITEMTYPE_HEARTGREENTEA:
 		if (!player->getIsShield())
 		{
 			this->runAction(Shake::create(0.2f, 3));
-			_playerLayer->addHeartNumber(-2);
+			m_pPlayerLayer->addHeartNumber(-2);
 		}
 		break;
 	case ITEMTYPE_SHIELD:
-		_playerLayer->startPlayerShield(_playerData->getShieldTime());
+		m_pPlayerLayer->startPlayerShield(m_pPlayerData->getShieldTime());
 		break;
 	default:
 		break;

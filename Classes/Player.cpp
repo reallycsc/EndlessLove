@@ -2,14 +2,15 @@
 
 Player::Player(void)
 {
-	_gameMediator = GameMediator::getInstance();
+	m_pGameMediator = GameMediator::getInstance();
+	_m_pPlayerData = m_pGameMediator->getPlayerData();
 	m_pSprite = NULL;
-	_spriteShield = NULL;
+	m_pSpriteShield = NULL;
 
 	m_fCurPower = 0;
 	m_fCurSpeed = 0;
 	m_fPreviousScaleY = 1.0f;
-	m_iGroundLevel = 0;
+	m_nGroundLevel = 0;
 
 	m_bIsOnTheGround = true;
 	m_bIsPowerUp = false;
@@ -38,8 +39,8 @@ bool Player::init()
 		m_pSprite = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_Player"));
 
 		// get shield
-		_spriteShield = dynamic_cast<Sprite*>(m_pSprite->getChildByName("Sprite_Shield"));
-		_spriteShield->setVisible(false);
+		m_pSpriteShield = dynamic_cast<Sprite*>(m_pSprite->getChildByName("Sprite_Shield"));
+		m_pSpriteShield->setVisible(false);
 
 		// change player sprite grey
 		this->changePlayerColorToGrey();
@@ -54,7 +55,7 @@ bool Player::init()
 
 void Player::update(float dt)
 {
-	if (_gameMediator->getGameState() == STATE_GAME_RUN)
+	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
 	{
 		if (!m_bIsOnTheGround) // in the air
 		{
@@ -63,9 +64,9 @@ void Player::update(float dt)
 			Point posNew = Point(posNow.x, posNow.y + m_fCurSpeed * dt);
 			this->setPosition(posNew);
 			m_fCurSpeed -= GRAVITY*dt;
-			if (posNew.y <= m_iGroundLevel)
+			if (posNew.y <= m_nGroundLevel)
 			{
-				this->setPosition(posNew.x, m_iGroundLevel);
+				this->setPosition(posNew.x, m_nGroundLevel);
 				m_bIsOnTheGround = true;
 			}
 		}
@@ -79,7 +80,7 @@ void Player::update(float dt)
 		// check if need power up
 		if (m_bIsPowerUp && m_fCurPower < MAXPOWER)
 		{
-			m_fCurPower += MAXPOWER * dt / _gameMediator->getPlayerData()->getPowerTime();
+			m_fCurPower += MAXPOWER * dt / _m_pPlayerData->getPowerTime();
 			if (m_fCurPower > MAXPOWER)
 			{
 				m_fCurPower = MAXPOWER;
@@ -89,10 +90,10 @@ void Player::update(float dt)
 			m_fPreviousScaleY = curScaleY;
 		}
 		// check if need to play shield animation
-		if (_spriteShield->isVisible())
+		if (m_pSpriteShield->isVisible())
 		{
 			// max = 255, min = 255 * 0.75 = 191
-			auto old = _spriteShield->getOpacity();
+			auto old = m_pSpriteShield->getOpacity();
 			if (m_bShieldOpacityLess)
 				old--;
 			else
@@ -107,7 +108,7 @@ void Player::update(float dt)
 				m_bShieldOpacityLess = false;
 				old = 191;
 			}
-			_spriteShield->setOpacity(old);
+			m_pSpriteShield->setOpacity(old);
 		}
 	}
 }
@@ -139,25 +140,24 @@ void Player::startJump()
 	m_pSprite->setScaleY(m_pSprite->getScaleY() / m_fPreviousScaleY);
 	m_fPreviousScaleY = 1.0f;
 	// speed
-	m_fCurSpeed = _gameMediator->getPlayerData()->getStrength() * m_fCurPower/MAXPOWER;
+	m_fCurSpeed = _m_pPlayerData->getStrength() * m_fCurPower/MAXPOWER;
 	m_fCurPower = 0;
 }
 
 void Player::changePlayerColorToGrey()
 {
-	PlayerData* playerData = _gameMediator->getPlayerData();
 	float minNumber = 1;
-	float maxNumber = playerData->getMaxHeartNumber();
+	float maxNumber = _m_pPlayerData->getMaxHeartNumber();
 	float percent = 1.0f;
 	if (minNumber != maxNumber)
-		percent = (playerData->getHeartNumber() - minNumber) / (maxNumber - minNumber);
-	_gameMediator->spriteToGray(this, percent);
+		percent = (_m_pPlayerData->getHeartNumber() - minNumber) / (maxNumber - minNumber);
+	m_pGameMediator->spriteToGray(this, percent);
 }
 
 void Player::playShieldAnimation(float duration)
 {
 	m_bIsShield = true;
-	_spriteShield->setVisible(true);
+	m_pSpriteShield->setVisible(true);
 	this->unschedule(schedule_selector(Player::stopShieldAnimation));
 	this->scheduleOnce(schedule_selector(Player::stopShieldAnimation), duration);
 }
@@ -165,5 +165,5 @@ void Player::playShieldAnimation(float duration)
 void Player::stopShieldAnimation(float dt)
 {
 	m_bIsShield = false;
-	_spriteShield->setVisible(false);
+	m_pSpriteShield->setVisible(false);
 }

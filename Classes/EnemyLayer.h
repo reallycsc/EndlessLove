@@ -30,16 +30,17 @@ public:
 
 	void increaseGameLevel();
 private:
-	GameMediator*	_gameMediator;
-	Text*	_textLevelUp;
-	Sprite*	_spriteEnemyBar;
+	GameMediator*	m_pGameMediator;
+	PlayerData*	m_pPlayerData;
+	Text*	m_pTextLevelUp;
+	Sprite*	m_pSpriteEnemyBar;
 
-	Vector<Enemy*> _allEnemysDown;
-	Vector<Enemy*> _allEnemysUp;
-	Vector<Item*> _allItems;
-	Map<int, Sprite*> _spriteMap;
+	Vector<Enemy*> m_vAllEnemysDown;
+	Vector<Enemy*> m_vAllEnemysUp;
+	Vector<Item*> m_vAllItems;
+	Map<int, Sprite*> m_mSpriteMap;
 
-	GameLevelData*	_levelData;
+	GameLevelData*	m_pLevelData;
 
 	int m_nEnemyDownMinInterval; // 敌人最小间隔
 	int m_nEnemyDownMaxInterval; // 敌人最大间隔

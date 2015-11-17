@@ -279,18 +279,6 @@
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_HeartNumber" ActionTag="-1881328881" Tag="174" IconVisible="False" LeftMargin="452.5000" RightMargin="452.5000" TopMargin="55.0000" BottomMargin="535.0000" FontSize="36" LabelText="X 0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="55.0000" Y="50.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="560.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.8750" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
-            <OutlineColor A="255" R="0" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
           <AbstractNodeData Name="Sprite_HeartGrey" ActionTag="-1055608885" Tag="45" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="-60.0000" RightMargin="962.0000" TopMargin="640.0000" BottomMargin="-55.0000" ctype="SpriteObjectData">
             <Size X="58.0000" Y="55.0000" />
             <AnchorPoint ScaleY="1.0000" />

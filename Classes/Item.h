@@ -13,6 +13,6 @@ public:
 	virtual bool init(SpriteFrame* frame, int itemType, int moveSpeed);
 
 public:
-	CC_SYNTHESIZE(int, m_iItemType, ItemType);
-	CC_SYNTHESIZE(int, m_iMoveSpeed, MoveSpeed);
+	CC_SYNTHESIZE(int, m_nItemType, ItemType);
+	CC_SYNTHESIZE(int, m_nMoveSpeed, MoveSpeed);
 };

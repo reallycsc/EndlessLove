@@ -26,10 +26,10 @@ private:
 	inline void checkItemIntersect(Player* player);
 
 private:
-	GameMediator*	_gameMediator;
-	PlayerData*		_playerData;
-	ControlLayer*	_controlLayer;
-	EnemyLayer*		_enemyLayer;
-	PlayerLayer*	_playerLayer;
+	GameMediator*	m_pGameMediator;
+	PlayerData*		m_pPlayerData;
+	ControlLayer*	m_pControlLayer;
+	EnemyLayer*		m_pEnemyLayer;
+	PlayerLayer*	m_pPlayerLayer;
 };
 

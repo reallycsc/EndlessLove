@@ -2,8 +2,8 @@
 
 Item::Item(void)
 {
-	m_iItemType = 0;
-	m_iMoveSpeed = 0;
+	m_nItemType = 0;
+	m_nMoveSpeed = 0;
 }
 
 
@@ -36,8 +36,8 @@ bool Item::init(SpriteFrame* frame, int itemType, int moveSpeed)
 
 		this->setSpriteFrame(frame);
 		this->setAnchorPoint(Point(0.5f, 0));
-		m_iItemType = itemType;
-		m_iMoveSpeed = moveSpeed;
+		m_nItemType = itemType;
+		m_nMoveSpeed = moveSpeed;
 
         bRet = true;
     } while (0);

@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonHeader.h"
+#include "GameMediator.h"
 
 class GameOverLayer :
 	public Layer
@@ -17,13 +18,16 @@ public:
 	void showScoreAndStory();
 
 private:
-	Text*	_textHighscore;
-	Text*	_textGoldNumber;
-	ScrollView* _scrollStory;
-	Text* _textStory;
+	GameMediator*	m_pGameMediator;
+	map<int, string>*	m_pMapGameText;
 
-	ActionTimeline* _animate;
+	Text*	m_pTextHighscore;
+	Text*	m_pTextGoldNumber;
+	ScrollView* m_pScrollStory;
+	Text*	m_pTextStory;
 
-	int m_iHighestScore;
+	ActionTimeline* m_pAnimate;
+
+	int m_nHighscore;
 };
 

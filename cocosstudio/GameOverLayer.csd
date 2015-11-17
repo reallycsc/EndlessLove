@@ -31,16 +31,18 @@
       <ObjectData Name="Layer" Tag="154" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Sprite_GameOverBackground" ActionTag="1318817397" Alpha="127" Tag="155" IconVisible="False" LeftMargin="105.0000" RightMargin="105.0000" TopMargin="80.0000" BottomMargin="80.0000" ctype="SpriteObjectData">
-            <Size X="750.0000" Y="480.0000" />
+          <AbstractNodeData Name="Panel_GameOver" ActionTag="1417019952" Tag="172" IconVisible="False" LeftMargin="130.0000" RightMargin="130.0000" TopMargin="95.0000" BottomMargin="95.0000" TouchEnable="True" BackColorAlpha="191" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+            <Size X="700.0000" Y="450.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="320.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
+            <CColor A="255" R="0" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="Resource/menuBackground.png" Plist="" />
-            <BlendFunc Src="770" Dst="771" />
+            <PreSize X="0.7292" Y="0.7031" />
+            <SingleColor A="255" R="0" G="0" B="0" />
+            <FirstColor A="255" R="150" G="200" B="255" />
+            <EndColor A="255" R="255" G="255" B="255" />
+            <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
           <AbstractNodeData Name="Text_GameOver" ActionTag="857765707" Tag="156" IconVisible="False" LeftMargin="285.5000" RightMargin="285.5000" TopMargin="90.5000" BottomMargin="450.5000" FontSize="72" LabelText="Game Over" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
             <Size X="389.0000" Y="99.0000" />

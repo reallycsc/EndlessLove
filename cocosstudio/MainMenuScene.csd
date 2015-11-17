@@ -139,26 +139,6 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ProjectNode_Player" ActionTag="474588644" Tag="152" IconVisible="True" LeftMargin="240.0000" RightMargin="720.0000" TopMargin="390.0000" BottomMargin="250.0000" InnerActionSpeed="1.0000" ctype="ProjectNodeObjectData">
-            <Size X="0.0000" Y="0.0000" />
-            <AnchorPoint />
-            <Position X="240.0000" Y="250.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.2500" Y="0.3906" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <FileData Type="Normal" Path="PlayerNode.csd" Plist="" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="LoadingBar_2" ActionTag="59477947" Tag="156" IconVisible="False" LeftMargin="386.1849" RightMargin="373.8151" TopMargin="390.2979" BottomMargin="235.7021" ctype="LoadingBarObjectData">
-            <Size X="200.0000" Y="14.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="486.1849" Y="242.7021" />
-            <Scale ScaleX="3.0627" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5064" Y="0.3792" />
-            <PreSize X="0.0000" Y="0.0000" />
-            <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
-          </AbstractNodeData>
         </Children>
       </ObjectData>
     </Content>

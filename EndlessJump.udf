@@ -25,5 +25,19 @@
         <EnableHTML5Advanced Value="False" />
       </Value>
     </Item>
+    <Item Key="TabsParamsKey">
+      <Value ctype="TabsInfo">
+        <OpenedDocuments>
+          <FilePathData Path="PlayerUpgradeScene.csd" />
+          <FilePathData Path="MainMenuScene.csd" />
+          <FilePathData Path="PlayerLayer.csd" />
+          <FilePathData Path="PlayerNode.csd" />
+          <FilePathData Path="EnemyLayer.csd" />
+          <FilePathData Path="PauseLayer.csd" />
+          <FilePathData Path="GameOverLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="PauseLayer.csd" />
+      </Value>
+    </Item>
   </Properties>
 </UserData>

@@ -1,16 +1,18 @@
 #include "GameOverLayer.h"
 #include "GameScene.h"
 #include "MainMenuScene.h"
-#include "GameMediator.h"
 
 GameOverLayer::GameOverLayer(void)
 {
-	_textHighscore = NULL;
-	_textGoldNumber = NULL;
-	_scrollStory = NULL;
-	_textStory = NULL;
-	_animate = NULL;
-	m_iHighestScore = 0;
+	m_pGameMediator = GameMediator::getInstance();
+	m_pMapGameText = m_pGameMediator->getGameText();
+
+	m_pTextHighscore = NULL;
+	m_pTextGoldNumber = NULL;
+	m_pScrollStory = NULL;
+	m_pTextStory = NULL;
+	m_pAnimate = NULL;
+	m_nHighscore = 0;
 }
 
 
@@ -27,8 +29,8 @@ bool GameOverLayer::init()
 
 	// load csb
 	auto rootNode = CSLoader::createNode("GameOverLayer.csb");
-	_animate = CSLoader::createTimeline("GameOverLayer.csb");
-	rootNode->runAction(_animate);
+	m_pAnimate = CSLoader::createTimeline("GameOverLayer.csb");
+	rootNode->runAction(m_pAnimate);
 	this->addChild(rootNode);
 
 	// get botton
@@ -38,18 +40,17 @@ bool GameOverLayer::init()
 	buttonMainMenu->addClickEventListener(CC_CALLBACK_1(GameOverLayer::menuCallback_MainMenu, this));
 
 	// get score text
-	_textHighscore = dynamic_cast<Text*>(rootNode->getChildByName("Node_EnlargeAnimation")->getChildByName("Text_Highscore"));
-	_textGoldNumber = dynamic_cast<Text*>(rootNode->getChildByName("Node_EnlargeAnimation")->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"));
+	m_pTextHighscore = dynamic_cast<Text*>(rootNode->getChildByName("Node_EnlargeAnimation")->getChildByName("Text_Highscore"));
+	m_pTextGoldNumber = dynamic_cast<Text*>(rootNode->getChildByName("Node_EnlargeAnimation")->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"));
 
 	// get story text
-	_scrollStory = dynamic_cast<ScrollView*>(rootNode->getChildByName("ScrollView_EndingStory"));
-	_textStory = dynamic_cast<Text*>(_scrollStory->getChildByName("Text_EndingStory"));
+	m_pScrollStory = dynamic_cast<ScrollView*>(rootNode->getChildByName("ScrollView_EndingStory"));
+	m_pTextStory = dynamic_cast<Text*>(m_pScrollStory->getChildByName("Text_EndingStory"));
 
 	// set all text
-	auto mapGameText = GameMediator::getInstance()->getGameText();
-	dynamic_cast<Text*>(rootNode->getChildByName("Text_GameOver"))->setString(mapGameText->at(GAMETEXT_GAMEOVERLAYER_TITLE));
-	buttonRetry->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_RETRY));
-	buttonMainMenu->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_MAINMENU));
+	dynamic_cast<Text*>(rootNode->getChildByName("Text_GameOver"))->setString(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_TITLE));
+	buttonRetry->setTitleText(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_RETRY));
+	buttonMainMenu->setTitleText(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_MAINMENU));
 
 	this->showScoreAndStory();
 
@@ -58,41 +59,40 @@ bool GameOverLayer::init()
 
 void GameOverLayer::showScoreAndStory()
 {
-	auto gameMediator = GameMediator::getInstance();
-	auto playerData = gameMediator->getPlayerData();
+	
+	auto playerData = m_pGameMediator->getPlayerData();
 
 	// update highest score
 	playerData->savePlayerData();
 
 	//显示最高分
-	auto mapGameText = gameMediator->getGameText();
-	_textHighscore->setString(String::createWithFormat("%s%d", 
-		mapGameText->at(GAMETEXT_MAINMENU_HIGHESTSCORE).c_str(), 
+	m_pTextHighscore->setString(String::createWithFormat("%s%d", 
+		m_pMapGameText->at(GAMETEXT_MAINMENU_HIGHESTSCORE).c_str(),
 		playerData->getHighscore()
 		)->getCString());
-	_textGoldNumber->setString(String::createWithFormat("X %d", playerData->getGoldNumber())->getCString());
+	m_pTextGoldNumber->setString(String::createWithFormat("X %d", playerData->getGoldNumber())->getCString());
 
-	_animate->gotoFrameAndPlay(0, false);
+	m_pAnimate->gotoFrameAndPlay(0, false);
 
-	map<int, vector<string>>* map = gameMediator->getGameStory();
+	map<int, vector<string>>* map = m_pGameMediator->getGameStory();
 
-	vector<string>* storyVector = &(map->at(gameMediator->getGameOverReason()));;
+	vector<string>* storyVector = &(map->at(m_pGameMediator->getGameOverReason()));;
 
-	_textStory->setString((*storyVector)[random() % storyVector->size()]);
-	_scrollStory->setInnerContainerSize(Size(_scrollStory->getInnerContainerSize().width, _textStory->getContentSize().height));
-	_textStory->setPosition(Point(10, _scrollStory->getInnerContainerSize().height - 10));
+	m_pTextStory->setString((*storyVector)[random() % storyVector->size()]);
+	m_pScrollStory->setInnerContainerSize(Size(m_pScrollStory->getInnerContainerSize().width, m_pTextStory->getContentSize().height));
+	m_pTextStory->setPosition(Point(10, m_pScrollStory->getInnerContainerSize().height - 10));
 }
 
 void GameOverLayer::menuCallback_Retry(Ref* pSender)
 {
-	TextureCache::getInstance()->removeTextureForKey("GameOverImage");
-	TextureCache::getInstance()->removeUnusedTextures();
+	Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(GameScene::create());
 }
 
 void GameOverLayer::menuCallback_MainMenu(Ref* pSender)
 {
-	TextureCache::getInstance()->removeTextureForKey("GameOverImage");
-	TextureCache::getInstance()->removeUnusedTextures();
+	Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
+	Director::getInstance()->getTextureCache()->removeUnusedTextures();
 	Director::getInstance()->replaceScene(MainMenuScene::create());
 }

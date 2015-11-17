@@ -2,45 +2,45 @@
 
 GameLevelData::GameLevelData(void)
 {
-	m_iLevel = 0;
-	m_iLevelUpScore = 0;
+	m_nLevel = 0;
+	m_nLevelUpScore = 0;
 
-	m_iPlayerMoveSpeed = 0;
+	m_nPlayerMoveSpeed = 0;
 
 	m_bEnemyDownIsShow = false;
 	m_bEnemyDownIsBindItem = false;
-	m_iEnemyDownMinHeight = 0;
-	m_iEnemyDownMaxHeight = 0;
-	m_iEnemyDownMinWidthScale = 0;
-	m_iEnemyDownMaxWidthScale = 0;
-	m_iEnemyDownMinMoveSpeed = 0;
-	m_iEnemyDownMaxMoveSpeed = 0;
-	m_iEnemyDownMinInterval = 0;
-	m_iEnemyDownMaxInterval = 0;
+	m_nEnemyDownMinHeight = 0;
+	m_nEnemyDownMaxHeight = 0;
+	m_fEnemyDownMinWidthScale = 0;
+	m_fEnemyDownMaxWidthScale = 0;
+	m_nEnemyDownMinMoveSpeed = 0;
+	m_nEnemyDownMaxMoveSpeed = 0;
+	m_nEnemyDownMinInterval = 0;
+	m_nEnemyDownMaxInterval = 0;
 
 	m_bEnemyUpIsShow = false;
 	m_bEnemyUpIsSamePos = false;
-	m_iEnemyUpMinHeightOffset = 0;
-	m_iEnemyUpMaxHeightOffset = 0;
-	m_iEnemyUpMinWidthScale = 0;
-	m_iEnemyUpMaxWidthScale = 0;
-	m_iEnemyUpMinMoveSpeed = 0;
-	m_iEnemyUpMaxMoveSpeed = 0;
-	m_iEnemyUpMinInterval = 0;
-	m_iEnemyUpMaxInterval = 0;
+	m_nEnemyUpMinHeightOffset = 0;
+	m_nEnemyUpMaxHeightOffset = 0;
+	m_fEnemyUpMinWidthScale = 0;
+	m_fEnemyUpMaxWidthScale = 0;
+	m_nEnemyUpMinMoveSpeed = 0;
+	m_nEnemyUpMaxMoveSpeed = 0;
+	m_nEnemyUpMinInterval = 0;
+	m_nEnemyUpMaxInterval = 0;
 
 	m_bItemIsCurve = false;
-	m_iItemMinMoveSpeed = 0;
-	m_iItemMaxMoveSpeed = 0;
-	m_iItemMinInterval = 0;
-	m_iItemMaxInterval = 0;
+	m_nItemMinMoveSpeed = 0;
+	m_nItemMaxMoveSpeed = 0;
+	m_nItemMinInterval = 0;
+	m_nItemMaxInterval = 0;
 
-	m_iItemAddMapMaxProp = 0;
+	m_nItemAddMapMaxProp = 0;
 }
 
 GameLevelData::~GameLevelData(void)
 {
-	_itemAddMap.clear();
+	m_mItemAddMap.clear();
 }
 
 GameLevelData* GameLevelData::create()
@@ -88,44 +88,44 @@ bool GameLevelData::init(GameLevelData* gamedata)
 	bool bRet = false;
 	do
 	{
-		m_iLevel = gamedata->getLevel();
-		m_iLevelUpScore = gamedata->getLevelUpScore();
+		m_nLevel = gamedata->getLevel();
+		m_nLevelUpScore = gamedata->getLevelUpScore();
 
-		m_iPlayerMoveSpeed = gamedata->getPlayerMoveSpeed();
+		m_nPlayerMoveSpeed = gamedata->getPlayerMoveSpeed();
 
 		m_bEnemyDownIsShow = gamedata->getEnemyDownIsShow();
 		m_bEnemyDownIsBindItem = gamedata->getEnemyDownIsBindItem();
-		m_iEnemyDownMinHeight = gamedata->getEnemyDownMinHeight();
-		m_iEnemyDownMaxHeight = gamedata->getEnemyDownMaxHeight();
-		m_iEnemyDownMinWidthScale = gamedata->getEnemyDownMinWidthScale();
-		m_iEnemyDownMaxWidthScale = gamedata->getEnemyDownMaxWidthScale();
-		m_iEnemyDownMinMoveSpeed = gamedata->getEnemyDownMinMoveSpeed();
-		m_iEnemyDownMaxMoveSpeed = gamedata->getEnemyDownMaxMoveSpeed();
-		m_iEnemyDownMinInterval = gamedata->getEnemyDownMinInterval();
-		m_iEnemyDownMaxInterval = gamedata->getEnemyDownMaxInterval();
+		m_nEnemyDownMinHeight = gamedata->getEnemyDownMinHeight();
+		m_nEnemyDownMaxHeight = gamedata->getEnemyDownMaxHeight();
+		m_fEnemyDownMinWidthScale = gamedata->getEnemyDownMinWidthScale();
+		m_fEnemyDownMaxWidthScale = gamedata->getEnemyDownMaxWidthScale();
+		m_nEnemyDownMinMoveSpeed = gamedata->getEnemyDownMinMoveSpeed();
+		m_nEnemyDownMaxMoveSpeed = gamedata->getEnemyDownMaxMoveSpeed();
+		m_nEnemyDownMinInterval = gamedata->getEnemyDownMinInterval();
+		m_nEnemyDownMaxInterval = gamedata->getEnemyDownMaxInterval();
 
 		m_bEnemyUpIsShow = gamedata->getEnemyUpIsShow();
 		m_bEnemyUpIsSamePos = gamedata->getEnemyUpIsSamePos();
-		m_iEnemyUpMinHeightOffset = gamedata->getEnemyUpMinHeightOffset();
-		m_iEnemyUpMaxHeightOffset = gamedata->getEnemyUpMaxHeightOffset();
-		m_iEnemyUpMinWidthScale = gamedata->getEnemyUpMinWidthScale();
-		m_iEnemyUpMaxWidthScale = gamedata->getEnemyUpMaxWidthScale();
-		m_iEnemyUpMinMoveSpeed = gamedata->getEnemyUpMinMoveSpeed();
-		m_iEnemyUpMaxMoveSpeed = gamedata->getEnemyUpMaxMoveSpeed();
-		m_iEnemyUpMinInterval = gamedata->getEnemyUpMinInterval();
-		m_iEnemyUpMaxInterval = gamedata->getEnemyUpMaxInterval();
+		m_nEnemyUpMinHeightOffset = gamedata->getEnemyUpMinHeightOffset();
+		m_nEnemyUpMaxHeightOffset = gamedata->getEnemyUpMaxHeightOffset();
+		m_fEnemyUpMinWidthScale = gamedata->getEnemyUpMinWidthScale();
+		m_fEnemyUpMaxWidthScale = gamedata->getEnemyUpMaxWidthScale();
+		m_nEnemyUpMinMoveSpeed = gamedata->getEnemyUpMinMoveSpeed();
+		m_nEnemyUpMaxMoveSpeed = gamedata->getEnemyUpMaxMoveSpeed();
+		m_nEnemyUpMinInterval = gamedata->getEnemyUpMinInterval();
+		m_nEnemyUpMaxInterval = gamedata->getEnemyUpMaxInterval();
 
 		m_bItemIsCurve = gamedata->getItemIsCurve();
-		m_iItemMinMoveSpeed = gamedata->getItemMinMoveSpeed();
-		m_iItemMaxMoveSpeed = gamedata->getItemMaxMoveSpeed();
-		m_iItemMinInterval = gamedata->getItemMinInterval();
-		m_iItemMaxInterval = gamedata->getItemMaxInterval();
+		m_nItemMinMoveSpeed = gamedata->getItemMinMoveSpeed();
+		m_nItemMaxMoveSpeed = gamedata->getItemMaxMoveSpeed();
+		m_nItemMinInterval = gamedata->getItemMinInterval();
+		m_nItemMaxInterval = gamedata->getItemMaxInterval();
 
-		m_iItemAddMapMaxProp = gamedata->getItemAddMapMaxProp();
+		m_nItemAddMapMaxProp = gamedata->getItemAddMapMaxProp();
 
 		for (map<int, int>::const_iterator iter = gamedata->getItemAddMap()->begin(); iter != gamedata->getItemAddMap()->end(); iter++)
 		{
-			_itemAddMap.insert(pair<int, int>(iter->first, iter->second));
+			m_mItemAddMap.insert(pair<int, int>(iter->first, iter->second));
 		}
 
 		bRet = true;

@@ -9,63 +9,64 @@ public:
 
 	static GameLevelData* create();
 	static GameLevelData* create(GameLevelData* gamedata);
+
 	bool init();
 	bool init(GameLevelData* gamedata);
 
 	// random getters
-	int getEnemyDownHeight() { return random(m_iEnemyDownMinHeight, m_iEnemyDownMaxHeight); }
-	int getEnemyDownWidth(int enemyWidth) { return random(enemyWidth * m_iEnemyDownMinWidthScale, enemyWidth * m_iEnemyDownMaxWidthScale); }
-	int getEnemyDownMoveSpeed() { return random(m_iEnemyDownMinMoveSpeed, m_iEnemyDownMaxMoveSpeed); }
-	int getEnemyDownInterval() { return random(m_iEnemyDownMinInterval, m_iEnemyDownMaxInterval); }
+	int getEnemyDownHeight() { return random(m_nEnemyDownMinHeight, m_nEnemyDownMaxHeight); }
+	int getEnemyDownWidth(int enemyWidth) { return random(enemyWidth * m_fEnemyDownMinWidthScale, enemyWidth * m_fEnemyDownMaxWidthScale); }
+	int getEnemyDownMoveSpeed() { return random(m_nEnemyDownMinMoveSpeed, m_nEnemyDownMaxMoveSpeed); }
+	int getEnemyDownInterval() { return random(m_nEnemyDownMinInterval, m_nEnemyDownMaxInterval); }
 
-	int getEnemyUpHeightOffset() { return random(m_iEnemyUpMinHeightOffset, m_iEnemyUpMaxHeightOffset); }
-	int getEnemyUpWidth(int enemyWidth) { return random(enemyWidth * m_iEnemyUpMinWidthScale, enemyWidth * m_iEnemyUpMaxWidthScale); }
-	int getEnemyUpMoveSpeed() { return random(m_iEnemyUpMinMoveSpeed, m_iEnemyUpMaxMoveSpeed); }
-	int getEnemyUpInterval() { return random(m_iEnemyUpMinInterval, m_iEnemyUpMaxInterval); }
+	int getEnemyUpHeightOffset() { return random(m_nEnemyUpMinHeightOffset, m_nEnemyUpMaxHeightOffset); }
+	int getEnemyUpWidth(int enemyWidth) { return random(enemyWidth * m_fEnemyUpMinWidthScale, enemyWidth * m_fEnemyUpMaxWidthScale); }
+	int getEnemyUpMoveSpeed() { return random(m_nEnemyUpMinMoveSpeed, m_nEnemyUpMaxMoveSpeed); }
+	int getEnemyUpInterval() { return random(m_nEnemyUpMinInterval, m_nEnemyUpMaxInterval); }
 
-	int getItemMoveSpeed() { return random(m_iItemMinMoveSpeed, m_iItemMaxMoveSpeed); }
-	int getItemInterval() { return random(m_iItemMinInterval, m_iItemMaxInterval); }
+	int getItemMoveSpeed() { return random(m_nItemMinMoveSpeed, m_nItemMaxMoveSpeed); }
+	int getItemInterval() { return random(m_nItemMinInterval, m_nItemMaxInterval); }
 
 	// getter
-	map<int, int>* getItemAddMap() { return &_itemAddMap; }
+	map<int, int>* getItemAddMap() { return &m_mItemAddMap; }
 
 public:
-	CC_SYNTHESIZE(int, m_iLevel, Level);
-	CC_SYNTHESIZE(int, m_iLevelUpScore, LevelUpScore);
+	CC_SYNTHESIZE(int, m_nLevel, Level);
+	CC_SYNTHESIZE(int, m_nLevelUpScore, LevelUpScore);
 
-	CC_SYNTHESIZE(int, m_iPlayerMoveSpeed, PlayerMoveSpeed);
+	CC_SYNTHESIZE(int, m_nPlayerMoveSpeed, PlayerMoveSpeed);
 
 	CC_SYNTHESIZE(bool, m_bEnemyDownIsShow, EnemyDownIsShow);
 	CC_SYNTHESIZE(bool, m_bEnemyDownIsBindItem, EnemyDownIsBindItem);
-	CC_SYNTHESIZE(int, m_iEnemyDownMinHeight, EnemyDownMinHeight);
-	CC_SYNTHESIZE(int, m_iEnemyDownMaxHeight, EnemyDownMaxHeight);
-	CC_SYNTHESIZE(float, m_iEnemyDownMinWidthScale, EnemyDownMinWidthScale);
-	CC_SYNTHESIZE(float, m_iEnemyDownMaxWidthScale, EnemyDownMaxWidthScale);
-	CC_SYNTHESIZE(int, m_iEnemyDownMinMoveSpeed, EnemyDownMinMoveSpeed);
-	CC_SYNTHESIZE(int, m_iEnemyDownMaxMoveSpeed, EnemyDownMaxMoveSpeed);
-	CC_SYNTHESIZE(int, m_iEnemyDownMinInterval, EnemyDownMinInterval);
-	CC_SYNTHESIZE(int, m_iEnemyDownMaxInterval, EnemyDownMaxInterval);
+	CC_SYNTHESIZE(int, m_nEnemyDownMinHeight, EnemyDownMinHeight);
+	CC_SYNTHESIZE(int, m_nEnemyDownMaxHeight, EnemyDownMaxHeight);
+	CC_SYNTHESIZE(float, m_fEnemyDownMinWidthScale, EnemyDownMinWidthScale);
+	CC_SYNTHESIZE(float, m_fEnemyDownMaxWidthScale, EnemyDownMaxWidthScale);
+	CC_SYNTHESIZE(int, m_nEnemyDownMinMoveSpeed, EnemyDownMinMoveSpeed);
+	CC_SYNTHESIZE(int, m_nEnemyDownMaxMoveSpeed, EnemyDownMaxMoveSpeed);
+	CC_SYNTHESIZE(int, m_nEnemyDownMinInterval, EnemyDownMinInterval);
+	CC_SYNTHESIZE(int, m_nEnemyDownMaxInterval, EnemyDownMaxInterval);
 
 	CC_SYNTHESIZE(bool, m_bEnemyUpIsShow, EnemyUpIsShow);
 	CC_SYNTHESIZE(bool, m_bEnemyUpIsSamePos, EnemyUpIsSamePos);
-	CC_SYNTHESIZE(int, m_iEnemyUpMinHeightOffset, EnemyUpMinHeightOffset);
-	CC_SYNTHESIZE(int, m_iEnemyUpMaxHeightOffset, EnemyUpMaxHeightOffset);
-	CC_SYNTHESIZE(float, m_iEnemyUpMinWidthScale, EnemyUpMinWidthScale);
-	CC_SYNTHESIZE(float, m_iEnemyUpMaxWidthScale, EnemyUpMaxWidthScale);
-	CC_SYNTHESIZE(int, m_iEnemyUpMinMoveSpeed, EnemyUpMinMoveSpeed);
-	CC_SYNTHESIZE(int, m_iEnemyUpMaxMoveSpeed, EnemyUpMaxMoveSpeed);
-	CC_SYNTHESIZE(int, m_iEnemyUpMinInterval, EnemyUpMinInterval);
-	CC_SYNTHESIZE(int, m_iEnemyUpMaxInterval, EnemyUpMaxInterval);
+	CC_SYNTHESIZE(int, m_nEnemyUpMinHeightOffset, EnemyUpMinHeightOffset);
+	CC_SYNTHESIZE(int, m_nEnemyUpMaxHeightOffset, EnemyUpMaxHeightOffset);
+	CC_SYNTHESIZE(float, m_fEnemyUpMinWidthScale, EnemyUpMinWidthScale);
+	CC_SYNTHESIZE(float, m_fEnemyUpMaxWidthScale, EnemyUpMaxWidthScale);
+	CC_SYNTHESIZE(int, m_nEnemyUpMinMoveSpeed, EnemyUpMinMoveSpeed);
+	CC_SYNTHESIZE(int, m_nEnemyUpMaxMoveSpeed, EnemyUpMaxMoveSpeed);
+	CC_SYNTHESIZE(int, m_nEnemyUpMinInterval, EnemyUpMinInterval);
+	CC_SYNTHESIZE(int, m_nEnemyUpMaxInterval, EnemyUpMaxInterval);
 
 	CC_SYNTHESIZE(bool, m_bItemIsCurve, ItemIsCurve);
-	CC_SYNTHESIZE(int, m_iItemMinMoveSpeed, ItemMinMoveSpeed);
-	CC_SYNTHESIZE(int, m_iItemMaxMoveSpeed, ItemMaxMoveSpeed);
-	CC_SYNTHESIZE(int, m_iItemMinInterval, ItemMinInterval);
-	CC_SYNTHESIZE(int, m_iItemMaxInterval, ItemMaxInterval);
+	CC_SYNTHESIZE(int, m_nItemMinMoveSpeed, ItemMinMoveSpeed);
+	CC_SYNTHESIZE(int, m_nItemMaxMoveSpeed, ItemMaxMoveSpeed);
+	CC_SYNTHESIZE(int, m_nItemMinInterval, ItemMinInterval);
+	CC_SYNTHESIZE(int, m_nItemMaxInterval, ItemMaxInterval);
 
-	CC_SYNTHESIZE(int, m_iItemAddMapMaxProp, ItemAddMapMaxProp);
+	CC_SYNTHESIZE(int, m_nItemAddMapMaxProp, ItemAddMapMaxProp);
 
 private:
-	map<int, int> _itemAddMap;
+	map<int, int> m_mItemAddMap;
 };
 

@@ -40,41 +40,39 @@ private:
 	void setCountDownPosition();
 
 	void heartFadeOutFinished(Node* pSender);
-	inline void createProgressAction(Sprite* obj, float duration, int type);
-	void progressToFinished(Node* pSender, Sprite* obj, int type);
 	void goldMoveFinished(Node* pSender);
 
 	void updateHeartNumber(float addNumber);
 
 public:
-	CC_SYNTHESIZE(Player*, _player, Player);
+	CC_SYNTHESIZE(Player*, m_pPlayer, Player);
 
 private:
-	GameMediator*	_gameMediator;
-	PlayerData*	_playerData;
+	GameMediator*	m_pGameMediator;
+	map<int, string>*	m_pMapGameText;
+	PlayerData*	m_pPlayerData;
 
-	Text*	_textScore;
-	Text*	_textGoldNum;
-	Text*	_textHeartNum;
-	Sprite*	_spriteGold;
-	Node*	_nodeGoldNum;
+	Text*	m_pTextScore;
+	Node*	m_pNodeGoldNum;
+	Text*	m_pTextGoldNum;
+	Sprite*	m_pSpriteGold;
 
-	Node*	_nodeHeart;
-	Text*	_textHeartNumber;
-	Text*	_textGood;
-	Text*	_textGreat;
-	Text*	_textPerfect;
+	Sprite* m_pSpriteHeart;
+	Vector<Sprite*>	m_vSpriteHearts;
+	Sprite*	m_pSpriteHalfHeartLeft;
+	Sprite*	m_pSpriteHalfHeartRight;
 
-	Vector<Sprite*>	_vectorSpriteHeart;
-	Sprite* _spriteHeart;
-	Sprite*	_spriteHalfHeartLeft;
-	Sprite*	_spriteHalfHeartRight;
+	Sprite* m_pSpriteGuideLine;
 
-	Sprite* _spriteGuideLine;
-	Map<int, Node*> _mapCountDown;
-	Vector<Node*>	_vectorCountDown;
+	Map<int, Node*> m_mCountDown;
+	Vector<Node*>	m_vCountDown;
+	map<int, float> m_mCurCountDownTime;
+	map<int, float> m_mMaxCountDownTime;
 
-	map<int, float> _mapCurCountDownTime;
-	map<int, float> _mapMaxCountDownTime;
+	Node*	m_pNodeHeart;
+	Text*	m_pTextHeartNumber;
+	Text*	m_pTextGood;
+	Text*	m_pTextGreat;
+	Text*	m_pTextPerfect;
 };
 

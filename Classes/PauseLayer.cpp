@@ -48,7 +48,7 @@ bool PauseLayer::init()
 
 void PauseLayer::menuCallback_Resume(Ref* pSender)
 {
-	CCDirector::getInstance()->popScene();
+	Director::getInstance()->popScene();
 }
 
 void PauseLayer::menuCallback_Retry(Ref* pSender)
