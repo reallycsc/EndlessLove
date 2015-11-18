@@ -1,7 +1,7 @@
 #include "PlayerUpgradeLayer.h"
 #include "MainMenuScene.h"
 #include "NormalNoticeLayer.h"
-
+#include "GameKitHelper.h"
 
 PlayerUpgradeLayer::PlayerUpgradeLayer(void)
 {
@@ -22,7 +22,7 @@ bool PlayerUpgradeLayer::init()
     {
         return false;
     }
-	Size winSize = Director::getInstance()->getWinSize();
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
 	PlayerData* data = GameMediator::getInstance()->getPlayerData();
 
 	// add scene
@@ -191,6 +191,16 @@ void PlayerUpgradeLayer::menuCallback_MainMenu(Ref* pSender)
 	Director::getInstance()->replaceScene(MainMenuScene::create());
 }
 
+inline void checkAndUnlockAchievement()
+{
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    if ([helper isAchievementUnlocked:@"Achievements_first_upgrade"])
+    {
+        return;
+    }
+    [helper reportAchievement:@"Achievements_first_upgrade" percentComplete:100];
+}
+
 void PlayerUpgradeLayer::menuCallback_Upgrade_JumpType(Ref* pSender)
 {
 
@@ -210,7 +220,9 @@ void PlayerUpgradeLayer::menuCallback_Upgrade(Ref* pSender, int id)
 		data->initPlayerData();
 		this->changeAllItemContentsNumbers();
 		m_pGoldNumberAll->setString(StringUtils::format("%d", data->getGoldNumberAll()));
-		//data->savePlayerData();
+		data->savePlayerData();
+        // Game center achievement
+        checkAndUnlockAchievement();
 	}
 	else
 	{

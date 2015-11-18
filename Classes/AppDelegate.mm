@@ -1,6 +1,8 @@
 #include "AppDelegate.h"
 #include "MainMenuScene.h"
 
+#include "GameKitHelper.h"
+
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
@@ -42,7 +44,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // turn on display FPS
     //director->setDisplayStats(true);
     
-    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::EXACT_FIT);
+    director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
     
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);
@@ -53,7 +55,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = MainMenuScene::create();
-
+    
+    // Game Center login
+    [[GameKitHelper sharedHelper] authenticateLocalUser];
+    
     // run
     director->runWithScene(scene);
 

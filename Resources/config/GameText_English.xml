@@ -32,4 +32,5 @@
 	<Text id="30">Item Duration (Shield):</Text>
 	<Text id="31">Notification</Text>
 	<Text id="32">Not enough gold, can't upgrade.</Text>
+    <Text id="33">GameCenter login error。</Text>
 </GameText>

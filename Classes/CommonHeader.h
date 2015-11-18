@@ -13,13 +13,16 @@ using namespace tinyxml2;
 const int GRAVITY = 2940;
 
 #define MAXDWORD 0xffffffff
+//#define LANGUAGE_CHINESE
+#define LANGUAGE_ENGLISH
+#define DEBUG
 
-enum {
+enum GameState {
 	STATE_GAME_ENTER = 0,
 	STATE_GAME_RUN,
 };
 
-enum {
+enum ItemType {
 	ITEMTYPE_MIN = 0,
 
 	ITEMTYPE_GOLD = 1,
@@ -38,7 +41,7 @@ enum {
 	ITEMTYPE_MAX,
 };
 
-enum {
+enum CountdownType {
 	COUNTDOWN_MIN = 0, 
 
 	COUNTDOWN_GUIDELINE = 1,
@@ -49,11 +52,16 @@ enum {
 	COUNTDOWN_MAX,
 };
 
-enum {
+enum GameoverReason {
 	GAMEOVER_REASON_BOMB = 0,
 	GAMEOVER_REASON_NOHEART,
 };
 
+// Custom event code
+const string EVENT_GAMECENTER_SCORERETRIVED = "event_gamecenter_scoreretrived";
+const string EVENT_PLARERDATA_SCOREUPDATED = "event_playerdata_scoreupdated";
+
+// global zorder & layer zorder
 const int ZORDER_GAME_LAYER = 0;
 const int ZORDER_ENEMY_LAYER = 1;
 const int ZORDER_PLAYER_LAYER = 2;
@@ -78,10 +86,7 @@ const int ZORDER_PAUSESCENE_PAUSELAYER = 2;
 const int ZORDER_GAMEOVERSCENE_SCREENSHOT = 1;
 const int ZORDER_GAMEOVERSCENE_GAMEOVERLAYER = 2;
 
-//#define LANGUAGE_CHINESE
-#define LANGUAGE_ENGLISH
-
-enum {
+enum GametextId {
 	GAMETEXT_MAINMENU_TITLE = 1,
 	GAMETEXT_MAINMENU_HIGHESTSCORE,
 	GAMETEXT_MAINMENU_STARTGAME,
@@ -123,4 +128,5 @@ enum {
 
 	GAMETEXT_NORMALNOTICELAYER_NOTIFICATION,
 	GAMETEXT_NORMALNOTICELAYER_NOTENOUGHGOLD,
+    GAMETEXT_NORMALNOTICELAYER_NOGAMECENTER,
 };

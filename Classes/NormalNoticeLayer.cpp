@@ -54,9 +54,9 @@ bool NormalNoticeLayer::init(const string &title, const string &info)
 
 	// run animation
 	m_pLayout->setPosition(Point(winSize.width/2, winSize.height+ m_pLayout->getContentSize().height));
-	m_pLayout->runAction(MoveTo::create(0.3, Point(winSize.width/2, winSize.height/2)));
+	m_pLayout->runAction(MoveTo::create(0.1, Point(winSize.width/2, winSize.height/2)));
 
-	//½¨Á¢´¥Ãþ¼àÌý²¢ÍÌÊÉ
+	// swallow all touches
 	auto touchListener = EventListenerTouchOneByOne::create();
 	touchListener->setSwallowTouches(true);
 	touchListener->onTouchBegan = [](Touch *, Event *){return true;};

@@ -97,7 +97,7 @@ public:
 	CC_SYNTHESIZE(float, m_fShieldTime, ShieldTime);
 
 	CC_SYNTHESIZE(int, m_nScore, Score);
-	CC_SYNTHESIZE(int, m_nHighscore, Highscore);
+	CC_SYNTHESIZE(long long, m_nHighscore, Highscore);
 
 	CC_SYNTHESIZE(int, m_nGoldNumber, GoldNumber);
 	CC_SYNTHESIZE(int, m_nGoldNumberAll, GoldNumberAll);

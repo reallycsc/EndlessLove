@@ -51,15 +51,15 @@ bool GameLayer::init()
 	auto rootNode = CSLoader::createNode("BackgroundLayer.csb");
 	this->addChild(rootNode);
 
-	//加入player
+	// add player
 	m_pPlayerLayer = PlayerLayer::create();
 	this->addChild(m_pPlayerLayer, ZORDER_PLAYER_LAYER);
 
-	//加入enemy
+	// add enemy
 	m_pEnemyLayer = EnemyLayer::create();
 	this->addChild(m_pEnemyLayer, ZORDER_ENEMY_LAYER);
 
-	//加入controllayer
+	// add controllayer
 	m_pControlLayer = ControlLayer::create();
 	this->addChild(m_pControlLayer, ZORDER_CONTROL_LAYER);
 

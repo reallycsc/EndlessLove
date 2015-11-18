@@ -66,11 +66,11 @@ bool EnemyLayer::init()
 		auto mapGameText = m_pGameMediator->getGameText();
 		m_pTextLevelUp->setString(mapGameText->at(GAMETEXT_ENEMYLAYER_LEVELUP));
 
-		// 读取初始游戏难度
+		// set default game level to level 1
 		m_pLevelData = &(*m_pGameMediator->getGameLevelData())[0];
 		m_pGameMediator->setGameLevel(m_pLevelData->getLevel());
 
-		// 累积移动距离初始化
+		// calculate min & max interval for enemy down
 		float jumpTime = sqrt((float)(2 * m_pLevelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
 		float powerTime = m_pPlayerData->getPowerTime();
 		float speed = m_pLevelData->getPlayerMoveSpeed();
@@ -81,7 +81,7 @@ bool EnemyLayer::init()
 		m_nAddItemDistance = m_pLevelData->getItemInterval();
 		m_nAccEnemyDownDistance = m_nAccEnemyUpDistance = m_nAccItemDistance = winSize.width * 0.75;
 
-		// 加入第一个辅助虚线道具在玩家面前
+		// Add first guide line item
 		Item* item = Item::createItem(m_mSpriteMap.at(ITEMTYPE_GUIDELINE)->getSpriteFrame(), ITEMTYPE_GUIDELINE, m_pLevelData->getItemMoveSpeed());
 		item->setPosition(winSize.width * 0.25 + 150, 0);
 		this->addChild(item, ZORDER_ENEMYLAYER_ITEM);

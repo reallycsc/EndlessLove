@@ -1,4 +1,5 @@
 #include "PlayerData.h"
+#include "GameKitHelper.h"
 
 PlayerData::PlayerData(void)
 {
@@ -49,18 +50,30 @@ bool PlayerData::init()
     bool bRet = false;  
     do   
     {  
-		Size winSize = Director::getInstance()->getWinSize();
+        cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
 		// load player upgrade config file
 		this->loadPlayerUpgradeConfigFile();
 		this->loadPlayerData();
 
-		//初始化属性
+		// set default
 		m_fDefaultHeartNumber = 1;
 		m_nMinStrength = sqrt(winSize.height * GRAVITY);
 
 		this->initPlayerData();
-
+        
+        // add custom event lisenter
+        EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
+        auto listener = EventListenerCustom::create(EVENT_GAMECENTER_SCORERETRIVED, [=](EventCustom* event){
+            char* buf = static_cast<char*>(event->getUserData());
+            long long score;
+            sscanf(buf, "%lld", &score);
+            m_nHighscore = score;
+            this->savePlayerData();
+            dispatcher->dispatchCustomEvent(EVENT_PLARERDATA_SCOREUPDATED);
+        });
+        dispatcher->addEventListenerWithFixedPriority(listener, 1);
+        
         bRet = true;
     } while (0);
     
@@ -149,28 +162,39 @@ void PlayerData::initPlayerData()
 
 void PlayerData::saveDefaultData(UserDefault* user)
 {
-	user->setBoolForKey("isHaveSaveFileXml", true);//写入bool判断位  
-	user->setIntegerForKey("Highscore", 0);//写入初始分数0
-	user->setIntegerForKey("GoldNumber", 0);//写入初始金币数0
+	user->setBoolForKey("isHaveSaveFileXml", true);
+	user->setIntegerForKey("Highscore", 0);
+	user->setIntegerForKey("GoldNumber", 0);
 	for (int i = ID_MIN + 1; i < ID_MAX; i++)
 	{
 		string str = m_mInfoName.at(i) + "Level";
 		user->setIntegerForKey(str.c_str(), 1);
 	}
-	user->flush();//设置完一定要调用flush，才能从缓冲写入io
+	user->flush();
 }
 
 bool PlayerData::loadPlayerData()
 {
+    // get data from game center
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    if (helper.isAuthenticated == YES)
+    {
+        [[GameKitHelper sharedHelper] retirieveLocalPlayerScore:@"Highscore"];
+    }
+    
+    // get local data
 	UserDefault* user = UserDefault::getInstance();
-	if (!user->getBoolForKey("isHaveSaveFileXml"))//通过设置的bool型标志位判断，如果不存在  
+	if (!user->getBoolForKey("isHaveSaveFileXml"))
 	{
 		saveDefaultData(user);
 		return false;
 	}
 	else
 	{
-		m_nHighscore = user->getIntegerForKey("Highscore", 0);
+        if (helper.isAuthenticated == NO)
+        {
+            m_nHighscore = user->getIntegerForKey("Highscore", 0);
+        }
 		m_nGoldNumberAll = user->getIntegerForKey("GoldNumber", 0);
 		for (int i = ID_MIN + 1; i < ID_MAX; i++)
 		{
@@ -184,15 +208,23 @@ bool PlayerData::loadPlayerData()
 
 bool PlayerData::savePlayerData()
 {
+    // save data to game center
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    if (helper.isAuthenticated == YES)
+    {
+        [helper reportScore:m_nHighscore forLeaderboard:@"Highscore"];
+    }
+    
+    // save to local data
 	UserDefault* user = UserDefault::getInstance();
-	if (!user->getBoolForKey("isHaveSaveFileXml"))//通过设置的bool型标志位判断，如果不存在  
+	if (!user->getBoolForKey("isHaveSaveFileXml"))
 	{
 		saveDefaultData(user);
 		return false;
 	}
 	else
 	{
-		user->setIntegerForKey("Highscore", m_nHighscore);
+		user->setIntegerForKey("Highscore", (int)m_nHighscore);
 		user->setIntegerForKey("GoldNumber", m_nGoldNumberAll);
 		for (int i = ID_MIN + 1; i < ID_MAX; i++)
 		{

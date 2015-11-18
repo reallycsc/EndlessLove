@@ -32,4 +32,5 @@
 	<Text id="30">效果持续时间（无敌护盾）：</Text>
 	<Text id="31">通  知</Text>
 	<Text id="32">金币数量不足，无法升级。</Text>
+    <Text id="33">GameCenter登录失败。</Text>
 </GameText>
