@@ -1,5 +1,5 @@
-<GameProjectFile>
-  <PropertyGroup Type="Layer" Name="ControlLayer" ID="95e9b956-29e7-40c4-bdf8-4c12912ff814" Version="2.3.2.3" />
+<GameFile>
+  <PropertyGroup Name="ControlLayer" Type="Layer" ID="95e9b956-29e7-40c4-bdf8-4c12912ff814" Version="2.3.3.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -38,4 +38,4 @@
       </ObjectData>
     </Content>
   </Content>
-</GameProjectFile>
+</GameFile>

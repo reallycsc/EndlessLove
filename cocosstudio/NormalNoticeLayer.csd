@@ -1,5 +1,5 @@
-<GameProjectFile>
-  <PropertyGroup Type="Layer" Name="NormalNotice" ID="94c9dcdf-4962-435b-a2e9-6852c338e3c7" Version="2.3.2.3" />
+<GameFile>
+  <PropertyGroup Name="NormalNoticeLayer" Type="Layer" ID="94c9dcdf-4962-435b-a2e9-6852c338e3c7" Version="2.3.3.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -65,4 +65,4 @@
       </ObjectData>
     </Content>
   </Content>
-</GameProjectFile>
+</GameFile>

@@ -1,5 +1,5 @@
-<GameProjectFile>
-  <PropertyGroup Type="Layer" Name="PauseLayer" ID="fb59b90e-26c6-4295-89c0-a501bede8ecb" Version="2.3.2.3" />
+<GameFile>
+  <PropertyGroup Name="PauseLayer" Type="Layer" ID="fb59b90e-26c6-4295-89c0-a501bede8ecb" Version="2.3.3.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -83,4 +83,4 @@
       </ObjectData>
     </Content>
   </Content>
-</GameProjectFile>
+</GameFile>

@@ -1,5 +1,5 @@
-<GameProjectFile>
-  <PropertyGroup Type="Layer" Name="EnemyLayer" ID="3484a057-f5a9-48d9-920f-85570645d517" Version="2.3.2.3" />
+<GameFile>
+  <PropertyGroup Name="EnemyLayer" Type="Layer" ID="3484a057-f5a9-48d9-920f-85570645d517" Version="2.3.3.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -165,4 +165,4 @@
       </ObjectData>
     </Content>
   </Content>
-</GameProjectFile>
+</GameFile>

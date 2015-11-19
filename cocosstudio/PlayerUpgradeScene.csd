@@ -1,5 +1,5 @@
-<GameProjectFile>
-  <PropertyGroup Type="Scene" Name="PlayerUpgradeScene" ID="037393e8-19b9-4b7e-83a2-fbf8bda2343b" Version="2.3.2.3" />
+<GameFile>
+  <PropertyGroup Name="PlayerUpgradeScene" Type="Scene" ID="037393e8-19b9-4b7e-83a2-fbf8bda2343b" Version="2.3.3.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -790,4 +790,4 @@
       </ObjectData>
     </Content>
   </Content>
-</GameProjectFile>
+</GameFile>

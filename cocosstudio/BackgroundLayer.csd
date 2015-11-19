@@ -1,5 +1,5 @@
-<GameProjectFile>
-  <PropertyGroup Type="Layer" Name="BackgroundLayer" ID="21f37e94-810f-4fa5-8057-ee881028c124" Version="2.3.2.3" />
+<GameFile>
+  <PropertyGroup Name="BackgroundLayer" Type="Layer" ID="21f37e94-810f-4fa5-8057-ee881028c124" Version="2.3.3.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -21,4 +21,4 @@
       </ObjectData>
     </Content>
   </Content>
-</GameProjectFile>
+</GameFile>

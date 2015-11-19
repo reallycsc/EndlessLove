@@ -1,5 +1,5 @@
-<GameProjectFile>
-  <PropertyGroup Type="Layer" Name="PlayerLayer" ID="8048b8b5-3fa4-4973-9a41-691d0c5f7562" Version="2.3.2.3" />
+<GameFile>
+  <PropertyGroup Name="PlayerLayer" Type="Layer" ID="8048b8b5-3fa4-4973-9a41-691d0c5f7562" Version="2.3.3.0" />
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="0" Speed="1.0000" />
@@ -337,7 +337,7 @@
           <AbstractNodeData Name="Node_Player" ActionTag="982365389" Tag="126" IconVisible="True" RightMargin="960.0000" TopMargin="640.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="ProjectNode_Player" ActionTag="338785364" VisibleForFrame="False" Tag="127" IconVisible="True" InnerActionSpeed="1.0000" ctype="ProjectNodeObjectData">
+              <AbstractNodeData Name="ProjectNode_Player" ActionTag="338785364" VisibleForFrame="False" Tag="127" IconVisible="True" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <AnchorPoint />
                 <Position />
@@ -429,4 +429,4 @@
       </ObjectData>
     </Content>
   </Content>
-</GameProjectFile>
+</GameFile>
