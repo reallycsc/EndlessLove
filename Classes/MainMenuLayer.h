@@ -21,6 +21,7 @@ private:
     void menuCallback_Achievement(Ref* pSender);
 
 	void menuCallback_Reload(Ref* pSender);
+    void menuCallback_Purchase(Ref* pSender);
     
 private:
     GameMediator*   m_pGameMediator;

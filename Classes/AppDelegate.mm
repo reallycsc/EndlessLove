@@ -2,6 +2,7 @@
 #include "MainMenuScene.h"
 
 #include "GameKitHelper.h"
+#include "IAPShare.h"
 
 USING_NS_CC;
 
@@ -58,6 +59,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     // Game Center login
     [[GameKitHelper sharedHelper] authenticateLocalUser];
+    
+    // init IAPHelper
+    NSSet *productIdentifiers = [NSSet setWithObjects:
+                                 @"EndlessLove.TestItem",
+                                 @"EndlessLove.TestItem2",
+                                 nil];
+    [[IAPShare sharedHelper].iap initWithProductIdentifiers:productIdentifiers];
     
     // run
     director->runWithScene(scene);

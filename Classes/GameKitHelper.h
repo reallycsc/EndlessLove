@@ -25,28 +25,28 @@
 
 // Always access class through this singleton
 // Call it once on application start to authenticate local player
-+(id) sharedHelper;
++ (id)sharedHelper;
 
 // is available
--(BOOL)isGameCenterAvailable;
+- (BOOL)isGameCenterAvailable;
 
 // Authentication
--(void)authenticateLocalUser;
+- (void)authenticateLocalUser;
 
 // Leaderboards
--(void) retirieveLocalPlayerScore:(NSString*)leaderboardId;
--(void) reportScore:(long long)aScore forLeaderboard:(NSString*)leaderboardId;
--(void) showLeaderboard:(NSString*)leaderboardId;
+- (void)retirieveLocalPlayerScore:(NSString*)leaderboardId;
+- (void)reportScore:(long long)aScore forLeaderboard:(NSString*)leaderboardId;
+- (void)showLeaderboard:(NSString*)leaderboardId;
 
 // Achievements
--(BOOL) isAchievementUnlocked:(NSString*)achievementId;
--(double) getAchievementPercent:(NSString*)achievementId;
--(void) reportAchievement:(NSString*)achievementId percentComplete:(double)percent;
--(void) showAchievements;
--(void) resetAchievements;
+- (BOOL)isAchievementUnlocked:(NSString*)achievementId;
+- (double)getAchievementPercent:(NSString*)achievementId;
+- (void)reportAchievement:(NSString*)achievementId percentComplete:(double)percent;
+- (void)showAchievements;
+- (void)resetAchievements;
 
 // Notifications
--(void) showNotification:(NSString*)title message:(NSString*)message identifier:(NSString*)achievementId;
+- (void)showNotification:(NSString*)title message:(NSString*)message identifier:(NSString*)achievementId;
 
 @property (nonatomic, assign, readonly) BOOL gameCenterAvailable;
 @property (nonatomic, assign, getter = isAuthenticated) BOOL authenticated;

@@ -2,7 +2,7 @@
 #include "GameScene.h"
 #include "PlayerUpgradeScene.h"
 #include "GameKitHelper.h"
-
+#include "IAPShare.h"
 
 MainMenuLayer::MainMenuLayer(void)
 {
@@ -41,8 +41,11 @@ bool MainMenuLayer::init()
 
 	auto buttonReload = dynamic_cast<Button*>(rootNode->getChildByName("Button_Reload"));
 	buttonReload->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Reload, this));
+    auto buttonPurchase = dynamic_cast<Button*>(rootNode->getChildByName("Button_TestPurchase"));
+    buttonPurchase->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Purchase, this));
 #ifndef DEBUG
     buttonReload->setVisible(false);
+    buttonPurchase->setVisible(false);
 #endif
     
 	// get gold number
@@ -113,4 +116,13 @@ void MainMenuLayer::menuCallback_Achievement(Ref* pSender)
 void MainMenuLayer::menuCallback_Reload(Ref* pSender)
 {
 	GameMediator::getInstance()->reloadAllConfigFiles();
+}
+
+void MainMenuLayer::menuCallback_Purchase(Ref* pSender)
+{
+    IAPHelper* helper = [IAPShare sharedHelper].iap;
+    if (![helper isPurchasedProductsIdentifier:@"EndlessLove.TestItem"])
+    {
+        //statements
+    }
 }

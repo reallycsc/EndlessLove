@@ -194,11 +194,10 @@ void PlayerUpgradeLayer::menuCallback_MainMenu(Ref* pSender)
 inline void checkAndUnlockAchievement()
 {
     GameKitHelper* helper = [GameKitHelper sharedHelper];
-    if ([helper isAchievementUnlocked:@"Achievements_first_upgrade"])
+    if (![helper isAchievementUnlocked:@"Achievements_first_upgrade"])
     {
-        return;
+        [helper reportAchievement:@"Achievements_first_upgrade" percentComplete:100];
     }
-    [helper reportAchievement:@"Achievements_first_upgrade" percentComplete:100];
 }
 
 void PlayerUpgradeLayer::menuCallback_Upgrade_JumpType(Ref* pSender)
