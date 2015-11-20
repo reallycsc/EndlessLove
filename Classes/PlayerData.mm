@@ -1,5 +1,8 @@
 #include "PlayerData.h"
-#include "GameKitHelper.h"
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#import "GameKitHelper.h"
+#endif
 
 PlayerData::PlayerData(void)
 {
@@ -62,6 +65,7 @@ bool PlayerData::init()
 
 		this->initPlayerData();
         
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         // add custom event lisenter
         EventDispatcher* dispatcher = Director::getInstance()->getEventDispatcher();
         auto listener = EventListenerCustom::create(EVENT_GAMECENTER_SCORERETRIVED, [=](EventCustom* event){
@@ -73,6 +77,7 @@ bool PlayerData::init()
             dispatcher->dispatchCustomEvent(EVENT_PLARERDATA_SCOREUPDATED);
         });
         dispatcher->addEventListenerWithFixedPriority(listener, 1);
+#endif
         
         bRet = true;
     } while (0);
@@ -175,12 +180,14 @@ void PlayerData::saveDefaultData(UserDefault* user)
 
 bool PlayerData::loadPlayerData()
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     // get data from game center
     GameKitHelper* helper = [GameKitHelper sharedHelper];
     if (helper.isAuthenticated == YES)
     {
         [[GameKitHelper sharedHelper] retirieveLocalPlayerScore:@"Highscore"];
     }
+#endif
     
     // get local data
 	UserDefault* user = UserDefault::getInstance();
@@ -208,12 +215,14 @@ bool PlayerData::loadPlayerData()
 
 bool PlayerData::savePlayerData()
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     // save data to game center
     GameKitHelper* helper = [GameKitHelper sharedHelper];
     if (helper.isAuthenticated == YES)
     {
         [helper reportScore:m_nHighscore forLeaderboard:@"Highscore"];
     }
+#endif
     
     // save to local data
 	UserDefault* user = UserDefault::getInstance();

@@ -15,7 +15,7 @@
 #include "CommonHeader.h"
 
 #ifndef GAMEKITHELPER_LOGGING
-#define GAMEKITHELPER_LOGGING 1
+#define GAMEKITHELPER_LOGGING 0
 #endif
 
 // Set SECRET_KEY for proper encryption

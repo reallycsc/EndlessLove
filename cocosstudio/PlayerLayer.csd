@@ -13,7 +13,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="1.0938" Y="-0.0781" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.9979" Y="0.0031" />
             <FileData Type="Normal" Path="Resource/guideLine.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -40,24 +40,24 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Sprite_Item" ActionTag="1406621869" Tag="112" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="5.0000" RightMargin="-57.0000" TopMargin="-9.0000" BottomMargin="-9.0000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Sprite_Item" ActionTag="1406621869" Tag="112" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="5.0000" RightMargin="-57.0000" TopMargin="-26.0000" BottomMargin="-26.0000" ctype="SpriteObjectData">
                 <Size X="52.0000" Y="52.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="5.0000" />
                 <Scale ScaleX="0.5000" ScaleY="0.5000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition Y="0.5000" />
+                <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="Resource/guideItem.png" Plist="" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_CountDown" ActionTag="-132117225" Tag="85" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="7.0000" TopMargin="18.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Guide Line: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="168.0000" Y="31.0000" />
+              <AbstractNodeData Name="Text_CountDown" ActionTag="-132117225" Tag="85" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-206.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Guide Line: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="171.0000" Y="31.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="35.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.1667" />
+                <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="165" G="42" B="42" />
@@ -94,8 +94,8 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_CountDown" ActionTag="-1081316754" Tag="115" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-169.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Enlarge: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="134.0000" Y="31.0000" />
+              <AbstractNodeData Name="Text_CountDown" ActionTag="-1081316754" Tag="115" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-172.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Enlarge: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="137.0000" Y="31.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="35.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -148,8 +148,8 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_CountDown" ActionTag="861580132" Tag="118" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-159.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Shrink: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="124.0000" Y="31.0000" />
+              <AbstractNodeData Name="Text_CountDown" ActionTag="861580132" Tag="118" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-162.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Shrink: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="127.0000" Y="31.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="35.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -202,8 +202,8 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <ImageFileData Type="Default" Path="Default/LoadingBarFile.png" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_CountDown" ActionTag="1334281053" Tag="85" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-186.0000" TopMargin="-19.5000" BottomMargin="-19.5000" FontSize="22" LabelText="Shield: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="121.0000" Y="31.0000" />
+              <AbstractNodeData Name="Text_CountDown" ActionTag="1334281053" Tag="85" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-159.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Shield: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="124.0000" Y="31.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="35.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
@@ -236,24 +236,24 @@
           <AbstractNodeData Name="Node_GoldNumber" ActionTag="1025794162" Tag="28" IconVisible="True" VerticalEdge="TopEdge" RightMargin="960.0000" TopMargin="110.0000" BottomMargin="530.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="Sprite_GoldCoin" ActionTag="-1661813811" Tag="29" IconVisible="False" LeftMargin="10.0000" RightMargin="898.0000" TopMargin="614.0000" BottomMargin="-26.0000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Sprite_GoldCoin" ActionTag="-1661813811" Tag="29" IconVisible="False" LeftMargin="10.0000" RightMargin="-62.0000" TopMargin="-26.0000" BottomMargin="-26.0000" ctype="SpriteObjectData">
                 <Size X="52.0000" Y="52.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="10.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0104" />
-                <PreSize X="0.0542" Y="0.0812" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="Resource/goldCoin.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_GoldNumber" ActionTag="1494759146" Tag="30" IconVisible="False" LeftMargin="70.0000" RightMargin="835.0000" TopMargin="615.0000" BottomMargin="-25.0000" FontSize="36" LabelText="0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="21.0000" Y="50.0000" />
+              <AbstractNodeData Name="Text_GoldNumber" ActionTag="1494759146" Tag="30" IconVisible="False" LeftMargin="70.0000" RightMargin="-94.0000" TopMargin="-25.0000" BottomMargin="-25.0000" FontSize="36" LabelText="0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="24.0000" Y="50.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="70.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.0729" />
+                <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
@@ -267,14 +267,14 @@
             <PrePosition Y="0.8281" />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Score" ActionTag="-102351201" Tag="34" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="412.0000" RightMargin="412.0000" TopMargin="10.0000" BottomMargin="580.0000" FontSize="36" LabelText="Score: 0&#xA;" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="136.0000" Y="50.0000" />
+          <AbstractNodeData Name="Text_Score" ActionTag="-102351201" Tag="34" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="410.5000" RightMargin="410.5000" TopMargin="10.0000" BottomMargin="580.0000" FontSize="36" LabelText="Score: 0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="139.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
             <Position X="480.0000" Y="630.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.9844" />
-            <PreSize X="0.1104" Y="0.0609" />
+            <PreSize X="0.1448" Y="0.0781" />
             <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -286,7 +286,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0625" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0604" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/heart_grey.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -297,7 +297,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.2500" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0333" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/heart_left_grey.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -308,7 +308,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.1250" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0604" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -319,7 +319,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.1854" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0333" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart_Broken_Left.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -330,7 +330,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.1635" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0385" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart_Broken_Right.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -361,14 +361,14 @@
                     <FileData Type="Normal" Path="Resource/Heart.png" Plist="" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_HeartNumber" ActionTag="139768774" Tag="122" IconVisible="False" RightMargin="-23.0000" TopMargin="-16.0000" BottomMargin="-16.0000" FontSize="26" LabelText="-1" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="23.0000" Y="32.0000" />
+                  <AbstractNodeData Name="Text_HeartNumber" ActionTag="139768774" Tag="122" IconVisible="False" RightMargin="-22.0000" TopMargin="-16.0000" BottomMargin="-16.0000" FontSize="26" LabelText="-1" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="22.0000" Y="32.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
-                    <PreSize X="0.0542" Y="0.0359" />
+                    <PreSize X="0.0000" Y="0.0000" />
                     <FontResource Type="Normal" Path="Font/arial.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
@@ -381,38 +381,38 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Good" ActionTag="296069100" Tag="123" IconVisible="False" LeftMargin="-42.0000" RightMargin="-42.0000" TopMargin="-143.0000" BottomMargin="97.0000" FontSize="32" LabelText="Good" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="84.0000" Y="46.0000" />
+              <AbstractNodeData Name="Text_Good" ActionTag="296069100" Tag="123" IconVisible="False" LeftMargin="-43.0000" RightMargin="-43.0000" TopMargin="-143.0000" BottomMargin="97.0000" FontSize="32" LabelText="Good" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="86.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position Y="120.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
-                <PreSize X="0.4823" Y="0.1484" />
+                <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="30" G="144" B="255" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Great" ActionTag="-1405362863" Tag="124" IconVisible="False" LeftMargin="-43.0000" RightMargin="-43.0000" TopMargin="-193.0000" BottomMargin="147.0000" FontSize="32" LabelText="Great" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="86.0000" Y="46.0000" />
+              <AbstractNodeData Name="Text_Great" ActionTag="-1405362863" Tag="124" IconVisible="False" LeftMargin="-44.0000" RightMargin="-44.0000" TopMargin="-193.0000" BottomMargin="147.0000" FontSize="32" LabelText="Great" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="88.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position Y="170.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
-                <PreSize X="0.4823" Y="0.1484" />
+                <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="128" G="0" B="128" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Perfect" ActionTag="1583817938" Tag="125" IconVisible="False" LeftMargin="-54.5000" RightMargin="-54.5000" TopMargin="-243.0000" BottomMargin="197.0000" FontSize="32" LabelText="Perfect" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="109.0000" Y="46.0000" />
+              <AbstractNodeData Name="Text_Perfect" ActionTag="1583817938" Tag="125" IconVisible="False" LeftMargin="-55.5000" RightMargin="-55.5000" TopMargin="-243.0000" BottomMargin="197.0000" FontSize="32" LabelText="Perfect" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="111.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position Y="220.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
-                <PreSize X="0.4823" Y="0.1484" />
+                <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="255" G="165" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />

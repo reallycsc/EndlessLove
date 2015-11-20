@@ -22,14 +22,14 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_TouchForStart" ActionTag="984991724" Tag="43" IconVisible="False" LeftMargin="266.0000" RightMargin="266.0000" TopMargin="315.5000" BottomMargin="272.5000" FontSize="36" LabelText="Touch anywhere for start" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="428.0000" Y="52.0000" />
+          <AbstractNodeData Name="Text_TouchForStart" ActionTag="984991724" Tag="43" IconVisible="False" LeftMargin="265.0000" RightMargin="265.0000" TopMargin="315.5000" BottomMargin="272.5000" FontSize="36" LabelText="Touch anywhere for start" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="430.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="298.5000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.4664" />
-            <PreSize X="0.4458" Y="0.0812" />
+            <PreSize X="0.4479" Y="0.0812" />
             <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

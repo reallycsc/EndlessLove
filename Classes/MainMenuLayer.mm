@@ -1,8 +1,11 @@
 #include "MainMenuLayer.h"
 #include "GameScene.h"
 #include "PlayerUpgradeScene.h"
-#include "GameKitHelper.h"
-#include "IAPShare.h"
+#include "purchaseLayer.h"
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#import "GameKitHelper.h"
+#endif
 
 MainMenuLayer::MainMenuLayer(void)
 {
@@ -65,6 +68,7 @@ bool MainMenuLayer::init()
                                                     mapGameText->at(GAMETEXT_MAINMENU_HIGHESTSCORE).c_str(),
                                                     m_pPlayerData->getHighscore()));
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     // add custom event lisenter
     auto listener = EventListenerCustom::create(EVENT_PLARERDATA_SCOREUPDATED, [=](EventCustom* event){
         m_pTextHighscore->setString(StringUtils::format("%s%lld",
@@ -72,7 +76,8 @@ bool MainMenuLayer::init()
                                                         m_pPlayerData->getHighscore()));
     });
     _eventDispatcher->addEventListenerWithFixedPriority(listener, 1);
-
+#endif
+    
     return true;
 }
 
@@ -102,14 +107,18 @@ void MainMenuLayer::menuCallback_Upgrade(Ref* pSender)
 
 void MainMenuLayer::menuCallback_Leaderboard(Ref* pSender)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     GameKitHelper* helper = [GameKitHelper sharedHelper];
     [helper showLeaderboard : @"Highscore"];
+#endif
 }
 
 void MainMenuLayer::menuCallback_Achievement(Ref* pSender)
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     GameKitHelper* helper = [GameKitHelper sharedHelper];
     [helper showAchievements];
+#endif
 }
 
 // DEBUG only
@@ -120,9 +129,6 @@ void MainMenuLayer::menuCallback_Reload(Ref* pSender)
 
 void MainMenuLayer::menuCallback_Purchase(Ref* pSender)
 {
-    IAPHelper* helper = [IAPShare sharedHelper].iap;
-    if (![helper isPurchasedProductsIdentifier:@"EndlessLove.TestItem"])
-    {
-        //statements
-    }
+    PurchaseLayer* layer = PurchaseLayer::create();
+    this->addChild(layer, ZORDER_PURCHASE_LAYER);
 }

@@ -13,7 +13,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0823" Y="1.0000" />
             <FileData Type="Normal" Path="Resource/bar.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -24,7 +24,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0542" Y="0.0812" />
             <FileData Type="Normal" Path="Resource/goldCoin.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -35,7 +35,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="0.0938" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0542" Y="0.0812" />
             <FileData Type="Normal" Path="Resource/guideItem.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -46,7 +46,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="0.1875" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0604" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -57,18 +57,18 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="0.2813" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0531" Y="0.0812" />
             <FileData Type="Normal" Path="Resource/enlargeItem1.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Item_Shink" ActionTag="-101851337" Tag="107" IconVisible="False" LeftMargin="-75.5000" RightMargin="984.5000" TopMargin="374.5000" BottomMargin="214.5000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Item_Shink" ActionTag="-101851337" Tag="107" IconVisible="False" LeftMargin="-75.5000" RightMargin="984.5000" TopMargin="374.0000" BottomMargin="214.0000" ctype="SpriteObjectData">
             <Size X="51.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-50.0000" Y="240.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="0.3750" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0531" Y="0.0812" />
             <FileData Type="Normal" Path="Resource/shrinkItem1.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -79,7 +79,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="0.4688" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0740" Y="0.1125" />
             <FileData Type="Normal" Path="Resource/bomb.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -90,7 +90,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.1250" Y="0.1875" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0604" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart_plus.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -101,7 +101,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.1979" Y="0.1875" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0385" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart_Broken_Right.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -112,7 +112,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.2708" Y="0.1875" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0333" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart_Broken_Left.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -123,7 +123,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.3438" Y="0.1875" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0604" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart_Secret.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -134,7 +134,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.4167" Y="0.1875" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0604" Y="0.0859" />
             <FileData Type="Normal" Path="Resource/Heart_GreenTea.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -145,18 +145,18 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.0938" />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="0.0552" Y="0.1000" />
             <FileData Type="Normal" Path="Resource/shield.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_LevelUp" ActionTag="291493571" Tag="255" IconVisible="False" LeftMargin="406.0000" RightMargin="406.0000" TopMargin="294.0000" BottomMargin="294.0000" FontSize="36" LabelText="Level Up&#xA;" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="148.0000" Y="52.0000" />
+          <AbstractNodeData Name="Text_LevelUp" ActionTag="291493571" Tag="255" IconVisible="False" LeftMargin="404.0000" RightMargin="404.0000" TopMargin="294.0000" BottomMargin="294.0000" FontSize="36" LabelText="Level Up" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="152.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="320.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="0.1542" Y="0.0812" />
+            <PreSize X="0.1583" Y="0.0812" />
             <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />

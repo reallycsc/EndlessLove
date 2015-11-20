@@ -16,7 +16,7 @@
                 <Scale ScaleX="0.4000" ScaleY="0.8000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="1.0313" Y="0.5102" />
-                <PreSize X="0.0000" Y="0.0000" />
+                <PreSize X="1.6563" Y="1.3061" />
                 <FileData Type="Normal" Path="Resource/shield.png" Plist="" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>

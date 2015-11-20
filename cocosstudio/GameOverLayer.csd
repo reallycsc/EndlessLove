@@ -31,7 +31,7 @@
       <ObjectData Name="Layer" Tag="154" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_GameOver" ActionTag="1417019952" Tag="172" IconVisible="False" LeftMargin="130.0000" RightMargin="130.0000" TopMargin="95.0000" BottomMargin="95.0000" TouchEnable="True" BackColorAlpha="191" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_GameOver" ActionTag="1417019952" Tag="172" IconVisible="False" LeftMargin="130.0000" RightMargin="130.0000" TopMargin="95.0000" BottomMargin="95.0000" TouchEnable="True" BackColorAlpha="191" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="700.0000" Y="450.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="320.0000" />
@@ -44,14 +44,14 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_GameOver" ActionTag="857765707" Tag="156" IconVisible="False" LeftMargin="285.5000" RightMargin="285.5000" TopMargin="90.5000" BottomMargin="450.5000" FontSize="72" LabelText="Game Over" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="389.0000" Y="99.0000" />
+          <AbstractNodeData Name="Text_GameOver" ActionTag="857765707" Tag="156" IconVisible="False" LeftMargin="283.0000" RightMargin="283.0000" TopMargin="90.5000" BottomMargin="450.5000" FontSize="72" LabelText="Game Over" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="394.0000" Y="99.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="500.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="0" B="0" />
             <PrePosition X="0.5000" Y="0.7813" />
-            <PreSize X="0.4052" Y="0.1547" />
+            <PreSize X="0.4104" Y="0.1547" />
             <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
@@ -59,14 +59,14 @@
           <AbstractNodeData Name="Node_EnlargeAnimation" ActionTag="515721989" Tag="49" IconVisible="True" LeftMargin="480.0000" RightMargin="480.0000" TopMargin="250.0000" BottomMargin="390.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="Text_Highscore" ActionTag="1479945890" Tag="176" IconVisible="False" LeftMargin="-107.5000" RightMargin="-107.5000" TopMargin="-62.0000" BottomMargin="10.0000" FontSize="36" LabelText="Highscore: 0&#xA;" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="215.0000" Y="52.0000" />
+              <AbstractNodeData Name="Text_Highscore" ActionTag="1479945890" Tag="176" IconVisible="False" LeftMargin="-109.5000" RightMargin="-109.5000" TopMargin="-62.0000" BottomMargin="10.0000" FontSize="36" LabelText="Highscore: 0" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="219.0000" Y="52.0000" />
                 <AnchorPoint ScaleX="0.5000" />
                 <Position Y="10.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
-                <PreSize X="0.2917" Y="0.0812" />
+                <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
@@ -81,14 +81,14 @@
                     <Scale ScaleX="0.6000" ScaleY="0.6000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
-                    <PreSize X="0.0542" Y="0.0812" />
+                    <PreSize X="0.0000" Y="0.0000" />
                     <FileData Type="Normal" Path="Resource/goldCoin.png" Plist="" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_GoldNumber" ActionTag="242661703" Tag="48" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0000" RightMargin="-47.0000" TopMargin="-19.5000" BottomMargin="-19.5000" FontSize="28" LabelText="X 0&#xA;" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="42.0000" Y="39.0000" />
+                  <AbstractNodeData Name="Text_GoldNumber" ActionTag="242661703" Tag="48" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0000" RightMargin="-50.0000" TopMargin="-19.5000" BottomMargin="-58.5000" FontSize="28" LabelText="X 0&#xA;" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="45.0000" Y="78.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="5.0000" />
+                    <Position X="5.0000" Y="-19.5000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -145,17 +145,17 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ScrollView_EndingStory" ActionTag="344688501" Tag="48" IconVisible="False" LeftMargin="179.9999" RightMargin="180.0001" TopMargin="310.0000" BottomMargin="190.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="127" ComboBoxIndex="2" ColorAngle="90.0000" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+          <AbstractNodeData Name="ScrollView_EndingStory" ActionTag="344688501" Tag="48" IconVisible="False" LeftMargin="179.9999" RightMargin="180.0001" TopMargin="310.0000" BottomMargin="190.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="127" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
             <Size X="600.0000" Y="140.0000" />
             <Children>
-              <AbstractNodeData Name="Text_EndingStory" ActionTag="-1713780221" Tag="20" IconVisible="False" LeftMargin="11.0000" RightMargin="496.0000" TopMargin="10.0000" BottomMargin="264.0000" FontSize="20" LabelText="Text Label" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="93.0000" Y="26.0000" />
+              <AbstractNodeData Name="Text_EndingStory" ActionTag="-1713780221" Tag="20" IconVisible="False" LeftMargin="11.0000" RightMargin="494.0000" TopMargin="10.0000" BottomMargin="264.0000" FontSize="20" LabelText="Text Label" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="95.0000" Y="26.0000" />
                 <AnchorPoint ScaleY="1.0000" />
                 <Position X="11.0000" Y="290.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.0183" Y="0.9667" />
-                <PreSize X="0.1550" Y="0.0867" />
+                <PreSize X="0.1583" Y="0.0867" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="0" G="0" B="0" />

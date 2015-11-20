@@ -63,7 +63,7 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
-            <PreSize X="0.0000" Y="0.0000" />
+            <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="GameOverLayer.csd" Plist="" />
           </AbstractNodeData>
         </Children>

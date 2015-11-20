@@ -60,6 +60,7 @@ enum GameoverReason {
 // Custom event code
 const string EVENT_GAMECENTER_SCORERETRIVED = "event_gamecenter_scoreretrived";
 const string EVENT_PLARERDATA_SCOREUPDATED = "event_playerdata_scoreupdated";
+const string EVENT_IAPSHARE_PURCHASESUCCESS = "event_IAPShare_purchasesuccess";
 
 // global zorder & layer zorder
 const int ZORDER_GAME_LAYER = 0;
@@ -68,7 +69,8 @@ const int ZORDER_PLAYER_LAYER = 2;
 const int ZORDER_CONTROL_LAYER = 3;
 const int ZORDER_GAMEOVER_LAYER = 4;
 const int ZORDER_TEXT_LAYER = 5;
-const int ZORDER_NOTICE_LAYER = 6;
+const int ZORDER_PURCHASE_LAYER = 6;
+const int ZORDER_NOTICE_LAYER = 7;
 
 const int ZORDER_ENEMYLAYER_ENEMY = 1;
 const int ZORDER_ENEMYLAYER_ITEM = 2;

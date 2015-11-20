@@ -42,6 +42,7 @@
         <Project Name="PlayerUpgradeScene.csd" Type="Scene" />
         <Project Name="NormalNoticeLayer.csd" Type="Layer" />
         <Project Name="PurchaseLayer.csd" Type="Layer" />
+        <Project Name="PurchaseItemNode.csd" Type="Node" />
       </RootFolder>
     </Group>
   </SolutionFolder>

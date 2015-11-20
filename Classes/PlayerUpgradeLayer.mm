@@ -1,7 +1,10 @@
 #include "PlayerUpgradeLayer.h"
 #include "MainMenuScene.h"
 #include "NormalNoticeLayer.h"
-#include "GameKitHelper.h"
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#import "GameKitHelper.h"
+#endif
 
 PlayerUpgradeLayer::PlayerUpgradeLayer(void)
 {
@@ -193,11 +196,13 @@ void PlayerUpgradeLayer::menuCallback_MainMenu(Ref* pSender)
 
 inline void checkAndUnlockAchievement()
 {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     GameKitHelper* helper = [GameKitHelper sharedHelper];
     if (![helper isAchievementUnlocked:@"Achievements_first_upgrade"])
     {
         [helper reportAchievement:@"Achievements_first_upgrade" percentComplete:100];
     }
+#endif
 }
 
 void PlayerUpgradeLayer::menuCallback_Upgrade_JumpType(Ref* pSender)

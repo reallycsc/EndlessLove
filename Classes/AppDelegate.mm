@@ -1,8 +1,11 @@
 #include "AppDelegate.h"
 #include "MainMenuScene.h"
 
-#include "GameKitHelper.h"
-#include "IAPShare.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#import "GameKitHelper.h"
+#import "IAPShare.h"
+#endif
+
 
 USING_NS_CC;
 
@@ -56,16 +59,21 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     // create a scene. it's an autorelease object
     auto scene = MainMenuScene::create();
-    
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     // Game Center login
     [[GameKitHelper sharedHelper] authenticateLocalUser];
     
     // init IAPHelper
-    NSSet *productIdentifiers = [NSSet setWithObjects:
-                                 @"EndlessLove.TestItem",
-                                 @"EndlessLove.TestItem2",
-                                 nil];
-    [[IAPShare sharedHelper].iap initWithProductIdentifiers:productIdentifiers];
+    if(![IAPShare sharedHelper].iap) {
+        NSSet *productIdentifiers = [NSSet setWithObjects:
+                                     @"EndlessLove.TestItem",
+                                     @"EndlessLove.TestItem2",
+                                     nil];
+        [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:productIdentifiers];
+        
+    }
+#endif
     
     // run
     director->runWithScene(scene);
