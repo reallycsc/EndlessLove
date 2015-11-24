@@ -4,10 +4,26 @@
 #import "GameKitHelper.h"
 #endif
 
+static PlayerData _sharedContext;
+
+PlayerData* PlayerData::getInstance()
+{
+	static bool s_bFirstUse = true;
+	if (s_bFirstUse)
+	{
+		_sharedContext.init();
+		s_bFirstUse = false;
+	}
+	return &_sharedContext;
+}
+
 PlayerData::PlayerData(void)
 {
 	m_fHeartNumber = 0.0f;
 	m_fMaxHeartNumber = 0.0f;
+	m_bPowerUpOnTheGround = true;
+	m_bJumpOnTheGround = true;
+	m_nFreeJumpTime = 0;
 	m_nStrength = 0;
 	m_fPowerTime = 0.0f;
 
@@ -31,21 +47,6 @@ PlayerData::~PlayerData(void)
 	m_mInfoName.clear();
 	m_vJumpTypeLevelInfo.clear();
 	m_mLevelInfo.clear();
-}
-
-PlayerData* PlayerData::create()
-{
-	PlayerData* pRet = new(std::nothrow) PlayerData();
-	if (pRet && pRet->init())
-	{
-		return pRet;
-	}
-	else
-	{
-		delete pRet;
-		pRet = NULL;
-		return NULL;
-	}
 }
 
 bool PlayerData::init()
@@ -134,6 +135,11 @@ bool PlayerData::loadPlayerUpgradeConfigFile()
 			data.powerUpOnTheGround = surface2->BoolAttribute("powerUpOnTheGround");
 			data.jumpOnTheGround = surface2->BoolAttribute("jumpOnTheGround");
 			data.freeJumpTime = surface2->IntAttribute("freeJumpTime");
+#if defined LANGUAGE_CHINESE
+			data.description = surface2->Attribute("description_cn");
+#elif defined LANGUAGE_ENGLISH
+			data.description = surface2->Attribute("description_en");
+#endif
 			m_vJumpTypeLevelInfo.push_back(data);
 		}
 
@@ -154,8 +160,13 @@ void PlayerData::initPlayerData()
 {
 	m_fMaxHeartNumber = m_mLevelInfo.at(ID_MAXHEART_NUMBER).at(m_mLevels.at(ID_MAXHEART_NUMBER) - 1).number;
 	m_fHeartNumber = m_fDefaultHeartNumber;
+	JUMP_TYPE* jumpType = &m_vJumpTypeLevelInfo.at(m_mLevels.at(ID_JUMP_TYPE) - 1);
+	m_bPowerUpOnTheGround = jumpType->powerUpOnTheGround;
+	m_bJumpOnTheGround = jumpType->jumpOnTheGround;
+	m_nFreeJumpTime = jumpType->freeJumpTime;
 	m_nStrength = m_nMinStrength * (m_mLevelInfo.at(ID_STRENGTH).at(m_mLevels.at(ID_STRENGTH) - 1).number + 99) * 0.01;
 	m_fPowerTime = m_mLevelInfo.at(ID_POWER_TIME).at(m_mLevels.at(ID_POWER_TIME) - 1).number;
+
 	m_fGuidelineTime = m_mLevelInfo.at(ID_GUIDELINE_TIME).at(m_mLevels.at(ID_GUIDELINE_TIME) - 1).number;
 	m_fEnlargeTime = m_mLevelInfo.at(ID_ENLARGE_TIME).at(m_mLevels.at(ID_ENLARGE_TIME) - 1).number;
 	m_fShrinkTime = m_mLevelInfo.at(ID_SHRINK_TIME).at(m_mLevels.at(ID_SHRINK_TIME) - 1).number;
@@ -163,6 +174,11 @@ void PlayerData::initPlayerData()
 
 	m_nScore = 0;
 	m_nGoldNumber = 0;
+}
+
+void PlayerData::initPlayerHeartNumber()
+{
+	m_fHeartNumber = m_fDefaultHeartNumber;
 }
 
 void PlayerData::saveDefaultData(UserDefault* user)
@@ -198,10 +214,14 @@ bool PlayerData::loadPlayerData()
 	}
 	else
 	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         if (helper.isAuthenticated == NO)
         {
+#endif
             m_nHighscore = user->getIntegerForKey("Highscore", 0);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         }
+#endif
 		m_nGoldNumberAll = user->getIntegerForKey("GoldNumber", 0);
 		for (int i = ID_MIN + 1; i < ID_MAX; i++)
 		{

@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonHeader.h"
+#include "BackLayer.h"
 #include "ControlLayer.h"
 #include "PlayerLayer.h"
 #include "EnemyLayer.h"
@@ -23,11 +24,13 @@ public:
 
 	void update(float dt);
 private:
-	inline void checkItemIntersect(Player* player);
+	void checkItemIntersect(Player* player);
 
 private:
 	GameMediator*	m_pGameMediator;
 	PlayerData*		m_pPlayerData;
+
+	BackLayer*		m_pBackLayer;
 	ControlLayer*	m_pControlLayer;
 	EnemyLayer*		m_pEnemyLayer;
 	PlayerLayer*	m_pPlayerLayer;

@@ -6,7 +6,7 @@
       <ObjectData Name="Node" Tag="8" ctype="GameNodeObjectData">
         <Size X="0.0000" Y="0.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_PurchaseItem" ActionTag="-1240056933" Tag="9" IconVisible="False" LeftMargin="-190.0000" RightMargin="-190.0000" TopMargin="-60.0000" BottomMargin="-60.0000" TouchEnable="True" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_PurchaseItem" ActionTag="-1240056933" Tag="9" IconVisible="False" LeftMargin="-190.0000" RightMargin="-190.0000" TopMargin="-60.0000" BottomMargin="-60.0000" TouchEnable="True" BackColorAlpha="191" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="380.0000" Y="120.0000" />
             <Children>
               <AbstractNodeData Name="Text_ItemName" ActionTag="939594137" Tag="87" IconVisible="False" LeftMargin="10.0000" RightMargin="220.0000" TopMargin="10.0000" BottomMargin="73.0000" FontSize="28" LabelText="Item Name" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -14,14 +14,14 @@
                 <AnchorPoint ScaleY="1.0000" />
                 <Position X="10.0000" Y="110.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="0" G="193" B="255" />
+                <CColor A="255" R="255" G="165" B="0" />
                 <PrePosition X="0.0263" Y="0.9167" />
                 <PreSize X="0.3947" Y="0.3083" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="26" G="26" B="26" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ScrollView_Desc" ActionTag="-2009710409" Tag="169" IconVisible="False" RightMargin="140.0000" TopMargin="60.0000" BottomMargin="10.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+              <AbstractNodeData Name="ScrollView_Desc" ActionTag="-2009710409" Tag="169" IconVisible="False" RightMargin="140.0000" TopMargin="60.0000" BottomMargin="10.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                 <Size X="240.0000" Y="50.0000" />
                 <Children>
                   <AbstractNodeData Name="Text_Desc" ActionTag="1590546272" Tag="168" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="10.0000" RightMargin="7.0000" BottomMargin="21.0000" FontSize="22" LabelText="Focus on the ground" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
@@ -54,7 +54,7 @@
                 <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
                 <Position X="361.0000" Y="60.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="173" G="216" B="230" />
+                <CColor A="255" R="255" G="165" B="0" />
                 <PrePosition X="0.9500" Y="0.5000" />
                 <PreSize X="0.2632" Y="0.4167" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
@@ -72,7 +72,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
-            <SingleColor A="255" R="150" G="200" B="255" />
+            <SingleColor A="255" R="45" G="37" B="19" />
             <FirstColor A="255" R="150" G="200" B="255" />
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />

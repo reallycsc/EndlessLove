@@ -19,16 +19,16 @@ public:
 	CREATE_FUNC(PlayerLayer);
 	virtual bool init();
 
+	virtual bool onTouchBegan(Touch* touch, Event* event);
+	virtual void onTouchMoved(Touch* touch, Event* event);
+	virtual void onTouchEnded(Touch* touch, Event* event);
+
 	void update(float dt);
-	void startCountDown(float dt, int countDownType, int textType);
 
 	void updateScoreText();
 	void updateGoldNumberText();
 	void addHeartNumber(float number);
 	void showEvaluation(int y);
-
-	void startPlayerPowerUp();
-	void schedulePlayerJump();
 
 	void startShowGuideLine(float duration);
 	void startPlayerEnlarge(float duration);
@@ -36,6 +36,8 @@ public:
 	void startPlayerShield(float duration);
 
 private:
+	void startCountDown(float dt, int countDownType, int textType);
+
 	void guideLineFadeOutFinished(Node* pSender);
 	void setCountDownPosition();
 
@@ -74,5 +76,7 @@ private:
 	Text*	m_pTextGood;
 	Text*	m_pTextGreat;
 	Text*	m_pTextPerfect;
+
+	float m_fCurHeartNumber;
 };
 

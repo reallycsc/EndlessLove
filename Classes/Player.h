@@ -6,7 +6,7 @@ const int MAXPOWER = 100;
 const float MINSCALE = 0.5;
 
 class Player :
-	public Sprite
+	public Node
 {
 public:
 	Player(void);
@@ -26,29 +26,36 @@ public:
 
 	void changePlayerColorToGrey();
 
+private:
+	void blink();
+	void playShieldAnimation();
+
 public:
 	CC_SYNTHESIZE(Sprite*, m_pSprite, Sprite);
 
 	CC_SYNTHESIZE(bool, m_bIsOnTheGround, IsOnTheGround);
+	CC_SYNTHESIZE(bool, m_bIsNeedToPowerUp, IsNeedToPowerUp);
 	CC_SYNTHESIZE(bool, m_bIsPowerUp, IsPowerUp);
 	CC_SYNTHESIZE(bool, m_bIsNeedToJump, IsNeedToJump);
 
 	CC_SYNTHESIZE(float, m_fCurPower, CurPower);
+	CC_SYNTHESIZE(float, m_fCurSpeed, CurSpeed);
 
 	CC_SYNTHESIZE(bool, m_bIsShield, IsShield);
 	CC_SYNTHESIZE(bool, m_bIsIntersect, IsIntersect);
 
-	CC_SYNTHESIZE(int, m_nGroundLevel, GroundLevel);
+	CC_SYNTHESIZE(int, m_nBottomPosY, BottomPosY);
+	CC_SYNTHESIZE(int, m_nTopPosY, TopPosY);
 
 private:
 	GameMediator*	m_pGameMediator;
-	PlayerData*	_m_pPlayerData;
+	PlayerData*	m_pPlayerData;
 
 	Sprite*	m_pSpriteShield;
+	ActionTimeline* m_pAnimate;
 
 	bool m_bShieldOpacityLess;
 
-	float m_fCurSpeed;
-	float m_fPreviousScaleY;
+	int m_nFreeJumpNum;
 };
 

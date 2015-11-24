@@ -19,6 +19,12 @@ GameMediator::GameMediator(void)
 	m_nGameLevel = 0;
 	m_nGameLevelMax = 0;
 	m_nGameOverReason = 0;
+
+	m_bAd = true;
+	m_bGuidelineForever = false;
+
+	m_nReviveNumber = 0;
+
 	m_mGameStory.clear();
 	m_mGameText.clear();
 	m_vGameLevelData.clear();
@@ -36,7 +42,7 @@ bool GameMediator::init()
 	bool bRet = false;
 	do
 	{
-		m_pPlayerData = PlayerData::create();
+		m_pPlayerData = PlayerData::getInstance();
 		CC_BREAK_IF(!m_pPlayerData);
 
 		CC_BREAK_IF(!this->loadGameConfigFile());
@@ -72,6 +78,7 @@ void GameMediator::reloadAllConfigFiles()
 	if (!ret)
 		return;
 
+	m_pPlayerData->loadPlayerUpgradeConfigFile();
 	m_pPlayerData->loadPlayerData();
 }
 
@@ -105,6 +112,7 @@ bool GameMediator::loadGameConfigFile()
 			}
 
 			data->setLevel(surface2->IntAttribute("level"));
+			data->setStage(surface2->IntAttribute("stage"));
 			data->setLevelUpScore(surface2->IntAttribute("levelUpScore"));
 
 			// Player attribute
@@ -139,21 +147,12 @@ bool GameMediator::loadGameConfigFile()
 					data->setEnemyDownMinHeight(int(surface4->FloatAttribute("minScale") * winSize.height));
 					data->setEnemyDownMaxHeight(int(surface4->FloatAttribute("maxScale") * winSize.height));
 				}
-
 				surface4 = surface3->FirstChildElement("EnemyWidth");
 				if (surface4)
 				{
 					data->setEnemyDownMinWidthScale(surface4->FloatAttribute("minScale"));
 					data->setEnemyDownMaxWidthScale(surface4->FloatAttribute("maxScale"));
 				}
-
-				surface4 = surface3->FirstChildElement("EnemyMoveSpeed");
-				if (surface4)
-				{
-					data->setEnemyDownMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
-					data->setEnemyDownMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
-				}
-
 				surface4 = surface3->FirstChildElement("EnemyInterval");
 				if (surface4)
 				{
@@ -180,21 +179,12 @@ bool GameMediator::loadGameConfigFile()
 					data->setEnemyUpMinHeightOffset(surface4->IntAttribute("minOffset"));
 					data->setEnemyUpMaxHeightOffset(surface4->IntAttribute("maxOffset"));
 				}
-
 				surface4 = surface3->FirstChildElement("EnemyWidth");
 				if (surface4)
 				{
 					data->setEnemyUpMinWidthScale(surface4->FloatAttribute("minScale"));
 					data->setEnemyUpMaxWidthScale(surface4->FloatAttribute("maxScale"));
 				}
-
-				surface4 = surface3->FirstChildElement("EnemyMoveSpeed");
-				if (surface4)
-				{
-					data->setEnemyUpMinMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("minScale")));
-					data->setEnemyUpMaxMoveSpeed(int(data->getPlayerMoveSpeed() * surface4->FloatAttribute("maxScale")));
-				}
-
 				surface4 = surface3->FirstChildElement("EnemyInterval");
 				if (surface4)
 				{
@@ -209,7 +199,6 @@ bool GameMediator::loadGameConfigFile()
 				XMLElement* surface3 = surface2->FirstChildElement("Item");
 				if (!surface3)
 					break;
-				data->setItemIsCurve(surface3->BoolAttribute("isCurve"));
 
 				XMLElement* surface4 = surface3->FirstChildElement("ItemMoveSpeed");
 				if (surface4)
@@ -330,7 +319,8 @@ bool GameMediator::loadGameStoryFile()
 void GameMediator::initGame()
 {
 	m_nGameState = STATE_GAME_ENTER;
-	m_nGameLevel = 0;
+	m_nGameLevel = 1;
+	m_nReviveNumber = 0;
 	m_pPlayerData->initPlayerData();
 }
 
@@ -353,7 +343,7 @@ void GameMediator::spriteToGray(Node* pNode, float percent)
 		return;
 	}
 	
-	const char* format = 
+	const char* programStr = 
 		"#ifdef GL_ES \n\
 			precision mediump float; \n\
 		#endif \n\
@@ -373,7 +363,8 @@ void GameMediator::spriteToGray(Node* pNode, float percent)
 		percent = 0;
 	if (percent > 1)
 		percent = 1;
-    const GLchar* pszFragSource = StringUtils::format(format, percent, percent, percent).c_str();
+	string buf = StringUtils::format(programStr, percent, percent, percent);
+    const GLchar* pszFragSource = buf.c_str();
 
 	GLProgram* pProgram = new GLProgram();
 	pProgram->initWithByteArrays(ccPositionTextureColor_noMVP_vert, pszFragSource);

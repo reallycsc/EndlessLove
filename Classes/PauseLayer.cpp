@@ -6,6 +6,7 @@
 
 PauseLayer::PauseLayer(void)
 {
+	m_pLayout = NULL;
 }
 
 
@@ -21,24 +22,31 @@ bool PauseLayer::init()
     {  
         CC_BREAK_IF(!Layer::init());  
 
+		Size winSize = Director::getInstance()->getWinSize();
+
 		// load csb
 		auto rootNode = CSLoader::createNode("PauseLayer.csb");
 		this->addChild(rootNode);
 
 		// get button
-		auto buttonResume = dynamic_cast<Button*>(rootNode->getChildByName("Button_Resume"));
+		m_pLayout = dynamic_cast<Layout*>(rootNode->getChildByName("Panel_GamePaused"));
+		auto buttonResume = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_Resume"));
 		buttonResume->addClickEventListener(CC_CALLBACK_1(PauseLayer::menuCallback_Resume, this));
-		auto buttonRetry = dynamic_cast<Button*>(rootNode->getChildByName("Button_Retry"));
+		auto buttonRetry = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_Retry"));
 		buttonRetry->addClickEventListener(CC_CALLBACK_1(PauseLayer::menuCallback_Retry, this));
-		auto buttonMainMenu = dynamic_cast<Button*>(rootNode->getChildByName("Button_MainMenu"));
+		auto buttonMainMenu = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_MainMenu"));
 		buttonMainMenu->addClickEventListener(CC_CALLBACK_1(PauseLayer::menuCallback_MainMenu, this));
 
 		// set all text
 		auto mapGameText = GameMediator::getInstance()->getGameText();
-		dynamic_cast<Text*>(rootNode->getChildByName("Text_Paused"))->setString(mapGameText->at(GAMETEXT_PAUSELAYER_TITLE));
+		dynamic_cast<Text*>(m_pLayout->getChildByName("Text_Paused"))->setString(mapGameText->at(GAMETEXT_PAUSELAYER_TITLE));
 		buttonResume->setTitleText(mapGameText->at(GAMETEXT_PAUSELAYER_RESUME));
 		buttonRetry->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_RETRY));
 		buttonMainMenu->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_MAINMENU));
+
+		// run animation
+		m_pLayout->setPosition(Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
+		m_pLayout->runAction(MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height / 2)));
 
         bRet = true;
     } while (0);  
@@ -48,19 +56,42 @@ bool PauseLayer::init()
 
 void PauseLayer::menuCallback_Resume(Ref* pSender)
 {
-	Director::getInstance()->popScene();
+	Size winSize = Director::getInstance()->getWinSize();
+	m_pLayout->runAction(Sequence::create(
+		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		CallFuncN::create([=](Ref* pSender)->void
+	{
+		Director::getInstance()->popScene(); 
+	}),
+		NULL));
 }
 
 void PauseLayer::menuCallback_Retry(Ref* pSender)
 {
-	GameMediator::getInstance()->getPlayerData()->savePlayerData();
-	Director::getInstance()->getTextureCache()->removeUnusedTextures();
-	Director::getInstance()->replaceScene(GameScene::create());
+	Size winSize = Director::getInstance()->getWinSize();
+	m_pLayout->runAction(Sequence::create(
+		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		CallFuncN::create([=](Ref* pSender)->void
+	{
+		GameMediator::getInstance()->getPlayerData()->savePlayerData();
+		Director::getInstance()->getTextureCache()->removeUnusedTextures();
+		Director::getInstance()->popScene();
+		Director::getInstance()->replaceScene(GameScene::create());
+	}),
+		NULL));
 }
 
 void PauseLayer::menuCallback_MainMenu(Ref* pSender)
 {
-	GameMediator::getInstance()->getPlayerData()->savePlayerData();
-	Director::getInstance()->getTextureCache()->removeUnusedTextures();
-	Director::getInstance()->replaceScene(MainMenuScene::create());
+	Size winSize = Director::getInstance()->getWinSize();
+	m_pLayout->runAction(Sequence::create(
+		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		CallFuncN::create([=](Ref* pSender)->void
+	{
+		GameMediator::getInstance()->getPlayerData()->savePlayerData();
+		Director::getInstance()->getTextureCache()->removeUnusedTextures();
+		Director::getInstance()->popScene();
+		Director::getInstance()->replaceScene(MainMenuScene::create());
+	}),
+		NULL));
 }

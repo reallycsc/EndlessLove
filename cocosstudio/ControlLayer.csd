@@ -6,19 +6,19 @@
       <ObjectData Name="Layer" Tag="35" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Button_Pause" ActionTag="-1743798952" Tag="38" IconVisible="False" LeftMargin="850.0000" RightMargin="10.0000" TopMargin="10.0000" BottomMargin="590.0000" TouchEnable="True" FontSize="24" ButtonText="Pause" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="16" Scale9Height="14" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
-            <Size X="100.0000" Y="40.0000" />
+          <AbstractNodeData Name="Button_Pause" ActionTag="-1743798952" Tag="38" IconVisible="False" LeftMargin="800.0000" RightMargin="10.0000" TopMargin="10.0000" BottomMargin="580.0000" TouchEnable="True" FontSize="24" ButtonText="Pause" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="120" Scale9Height="28" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+            <Size X="150.0000" Y="50.0000" />
             <AnchorPoint ScaleX="1.0000" ScaleY="1.0000" />
             <Position X="950.0000" Y="630.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="173" G="216" B="230" />
+            <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.9896" Y="0.9844" />
-            <PreSize X="0.1042" Y="0.0625" />
+            <PreSize X="0.1563" Y="0.0781" />
             <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-            <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
-            <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
+            <DisabledFileData Type="Normal" Path="Resource/UI/button_disable.png" Plist="" />
+            <PressedFileData Type="Normal" Path="Resource/UI/button_down.png" Plist="" />
+            <NormalFileData Type="Normal" Path="Resource/UI/button_up.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

@@ -6,26 +6,59 @@
         <Project Name="MainMenuScene.csd" Type="Scene" />
         <Project Name="GameScene.csd" Type="Scene" />
         <Folder Name="Resource">
-          <Image Name="background.png" />
-          <Image Name="goldCoin.png" />
           <Image Name="bar.png" />
-          <Image Name="guideItem.png" />
           <Image Name="guideLine.png" />
-          <Image Name="Hero_right.png" />
-          <Image Name="Heart.png" />
-          <Image Name="enlargeItem.png" />
-          <Image Name="shrinkItem.png" />
-          <Image Name="bomb.png" />
-          <Image Name="Heart_Broken_Left.png" />
-          <Image Name="Heart_Broken_Right.png" />
-          <Image Name="Heart_plus.png" />
-          <Image Name="Heart_GreenTea.png" />
-          <Image Name="Heart_Secret.png" />
-          <Image Name="heart_grey.png" />
-          <Image Name="shield.png" />
-          <Image Name="shrinkItem1.png" />
-          <Image Name="enlargeItem1.png" />
-          <Image Name="heart_left_grey.png" />
+          <Image Name="Player_EyeClose.png" />
+          <Image Name="Player_EyeOpen.png" />
+          <Folder Name="UI">
+            <Image Name="button_disable.png" />
+            <Image Name="button_down.png" />
+            <Image Name="button_up.png" />
+            <Image Name="heart_grey.png" />
+            <Image Name="heart_left_grey.png" />
+            <Image Name="button_orange_down.png" />
+            <Image Name="button_orange_up.png" />
+            <Image Name="button_purchase_noAd_disable.png" />
+            <Image Name="button_purchase_noAd_down.png" />
+            <Image Name="button_purchase_noAd_up.png" />
+          </Folder>
+          <Folder Name="Item">
+            <Image Name="bomb.png" />
+            <Image Name="enlargeItem.png" />
+            <Image Name="enlargeItem1.png" />
+            <Image Name="goldCoin.png" />
+            <Image Name="guideItem.png" />
+            <Image Name="Heart_GreenTea.png" />
+            <Image Name="Heart_plus.png" />
+            <Image Name="Heart_Secret.png" />
+            <Image Name="shield.png" />
+            <Image Name="shrinkItem.png" />
+            <Image Name="shrinkItem1.png" />
+            <Image Name="Heart.png" />
+            <Image Name="Heart_Broken_Left.png" />
+            <Image Name="Heart_Broken_Right.png" />
+          </Folder>
+          <Folder Name="Background">
+            <Image Name="background.png" />
+            <Image Name="babyBottle_1.png" />
+            <Image Name="babyBottle_2.png" />
+            <Image Name="Pinao.png" />
+            <Image Name="guitar.png" />
+            <Image Name="mircophone.png" />
+            <Image Name="saxphone.png" />
+            <Image Name="violin.png" />
+            <Image Name="books_1.png" />
+            <Image Name="books_2.png" />
+            <Image Name="car.png" />
+            <Image Name="gift.png" />
+            <Image Name="graduate.png" />
+            <Image Name="paint.png" />
+            <Image Name="wallet.png" />
+            <Image Name="crutch.png" />
+            <Image Name="syringe.png" />
+            <Image Name="wheelchair.png" />
+          </Folder>
+          <Image Name="playAd.png" />
         </Folder>
         <Folder Name="Font">
           <TTF Name="arial.ttf" />
@@ -43,6 +76,8 @@
         <Project Name="NormalNoticeLayer.csd" Type="Layer" />
         <Project Name="PurchaseLayer.csd" Type="Layer" />
         <Project Name="PurchaseItemNode.csd" Type="Node" />
+        <Project Name="PlayerUpgradeItemNode.csd" Type="Node" />
+        <Image Name="button_down.png" />
       </RootFolder>
     </Group>
   </SolutionFolder>

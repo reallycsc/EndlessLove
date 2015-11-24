@@ -5,6 +5,7 @@ GameLayer::GameLayer(void)
 {
 	m_pGameMediator = GameMediator::getInstance();
 	m_pPlayerData = m_pGameMediator->getPlayerData();
+	m_pBackLayer = NULL;
 	m_pControlLayer = NULL;
 	m_pEnemyLayer = NULL;
 	m_pPlayerLayer = NULL;
@@ -34,7 +35,7 @@ bool GameLayer::init()
 
     //建立触摸监听
 	auto touchListener = EventListenerTouchOneByOne::create(); 
-	touchListener->setSwallowTouches(true); 
+	//touchListener->setSwallowTouches(false); 
 	touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this); 
 	touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this); 
 	touchListener->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this); 
@@ -46,22 +47,21 @@ bool GameLayer::init()
 	// Set default game data
 	m_pGameMediator->initGame();
 
-	// add scene
-	// load csb
-	auto rootNode = CSLoader::createNode("BackgroundLayer.csb");
-	this->addChild(rootNode);
-
-	// add player
-	m_pPlayerLayer = PlayerLayer::create();
-	this->addChild(m_pPlayerLayer, ZORDER_PLAYER_LAYER);
+	// add backlayer
+	m_pBackLayer = BackLayer::create();
+	this->addChild(m_pBackLayer, ZORDER_GAMELAYER_BACKLAYER);
 
 	// add enemy
 	m_pEnemyLayer = EnemyLayer::create();
-	this->addChild(m_pEnemyLayer, ZORDER_ENEMY_LAYER);
+	this->addChild(m_pEnemyLayer, ZORDER_GAMELAYER_ENEMYLAYER);
+
+	// add player
+	m_pPlayerLayer = PlayerLayer::create();
+	this->addChild(m_pPlayerLayer, ZORDER_GAMELAYER_PLAYERLAYER);
 
 	// add controllayer
 	m_pControlLayer = ControlLayer::create();
-	this->addChild(m_pControlLayer, ZORDER_CONTROL_LAYER);
+	this->addChild(m_pControlLayer, ZORDER_GAMELAYER_CONTROLLAYER);
 
 	this->scheduleUpdate();
 
@@ -70,17 +70,11 @@ bool GameLayer::init()
 
 bool GameLayer::onTouchBegan(Touch *touch, Event *event) 
 {
-	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
-	{
-		//Point point = touch->getLocation();  //获取触摸坐标
-		m_pPlayerLayer->startPlayerPowerUp();
-	}
 	return true;
 } 
 
 void GameLayer::onTouchMoved(Touch *touch, Event *event) 
 { 
-	//Point point = touch->getLocation();  //获取触摸坐标
 } 
 
 void GameLayer::onTouchEnded(Touch *touch, Event *event) 
@@ -88,10 +82,8 @@ void GameLayer::onTouchEnded(Touch *touch, Event *event)
 	if (m_pGameMediator->getGameState() == STATE_GAME_ENTER)
 	{
 		m_pControlLayer->gameStart();
-	}
-	else if(m_pGameMediator->getGameState() == STATE_GAME_RUN)
-	{
-		m_pPlayerLayer->schedulePlayerJump();
+		GameLevelData* levelData = &(*m_pGameMediator->getGameLevelData())[m_pGameMediator->getGameLevel() - 1];
+		m_pBackLayer->moveBackSprite(levelData->getStage());
 	}
 }
 
@@ -111,12 +103,14 @@ void GameLayer::update(float dt)
 		}
 		// test item itersection
 		this->checkItemIntersect(player);
+#if DEBUGFLAG == 0
 		// game over if heart is zero
 		if (m_pPlayerData->getHeartNumber() <= 0)
 		{
-			//_gameMediator->setGameOverReason(GAMEOVER_REASON_NOHEART);
-			//_controlLayer->gameOver();
+			m_pGameMediator->setGameOverReason(GAMEOVER_REASON_NOHEART);
+			m_pControlLayer->gameOver();
 		}
+#endif
 		// check if jump over & update score
 		do
 		{
@@ -125,20 +119,21 @@ void GameLayer::update(float dt)
 			m_pPlayerLayer->updateScoreText();
 			// level up when score is correct
 			int level = m_pGameMediator->getGameLevel();
-			if (level == m_pGameMediator->getGameLevelData()->size())
+			if (level == m_pGameMediator->getGameLevelData()->size()) // last level fo infinity
 				break;
 			GameLevelData* levelData = &(*m_pGameMediator->getGameLevelData())[level - 1];
 			int levelUpScore = levelData->getLevelUpScore();
-			if (levelUpScore <= 0)
+			if (levelUpScore <= 0) // < 0 for infinity # for DEBUG & incase config bug
 				break;
 			if ((m_pPlayerData->getScore() % levelUpScore) != 0)
 				break;
 			m_pEnemyLayer->increaseGameLevel();
+			m_pBackLayer->moveBackSprite(levelData->getStage());
 		} while (false);
 	}
 }
 
-inline void GameLayer::checkItemIntersect(Player* player)
+void GameLayer::checkItemIntersect(Player* player)
 {
 	int type = m_pEnemyLayer->playerItemIntersect(m_pPlayerLayer->getPlayer());
 	switch (type)
@@ -162,12 +157,14 @@ inline void GameLayer::checkItemIntersect(Player* player)
 		break;
 	case ITEMTYPE_BOMB:
 	{
+#if DEBUGFLAG == 0
 		if (!player->getIsShield())
 		{
-			//this->runAction(Shake::create(0.2f, 5));
-			//_gameMediator->setGameOverReason(GAMEOVER_REASON_BOMB);
-			//_controlLayer->gameOver();
+			this->runAction(Shake::create(0.2f, 5));
+			m_pGameMediator->setGameOverReason(GAMEOVER_REASON_BOMB);
+			m_pControlLayer->gameOver();
 		}
+#endif
 		break;
 	}
 	case ITEMTYPE_HEARTBROKENLEFT:

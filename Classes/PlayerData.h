@@ -8,6 +8,7 @@ typedef struct tagJUMP_TYPE
 	bool powerUpOnTheGround;
 	bool jumpOnTheGround;
 	int freeJumpTime;
+	string description;
 }JUMP_TYPE;
 
 typedef struct tagFLOAT_LEVEL_INFO
@@ -39,10 +40,16 @@ public:
 	PlayerData(void);
 	~PlayerData(void);
 
-	static PlayerData* create();
+	// singlar
+	static PlayerData* getInstance();
+
 	bool init();
 
 	void initPlayerData();
+
+	void initPlayerHeartNumber();
+
+	void doublePlayerGoldNumber() { m_nGoldNumber += m_nGoldNumber; }
 
 	float addHeartNumber(float number) { // return real change number
 		float before = m_fHeartNumber;
@@ -75,22 +82,27 @@ public:
 	bool loadPlayerData();
 	bool savePlayerData();
 
+	bool loadPlayerUpgradeConfigFile();
+
 	// getter & setter function
 	vector<JUMP_TYPE>* getJumpTypeLevelInfoVector() { return &m_vJumpTypeLevelInfo; }
-	vector<FLOAT_LEVEL_INFO>* getLevelInfoVectorFor(int id) { return &m_mLevelInfo.at(id); }
+	vector<FLOAT_LEVEL_INFO>* getLevelInfoVectorFor(int id) { return &m_mLevelInfo.at(id);}
 	int getLevelFor(int id) { return m_mLevels.at(id); }
 	void setLevelFor(int id, int level) { m_mLevels.at(id) = level; }
 
 private:
-	bool loadPlayerUpgradeConfigFile();
 	bool loadLevelDataForFloat(XMLElement* root, const char* elementName, int id);
 	void saveDefaultData(UserDefault* user);
 
 public:
 	CC_SYNTHESIZE(float, m_fHeartNumber, HeartNumber);
 	CC_SYNTHESIZE(float, m_fMaxHeartNumber, MaxHeartNumber);
+	CC_SYNTHESIZE(bool, m_bPowerUpOnTheGround, IsPowerUpOnTheGround);
+	CC_SYNTHESIZE(bool, m_bJumpOnTheGround, IsJumpOnTheGround);
+	CC_SYNTHESIZE(int, m_nFreeJumpTime, FreeJumpTime);
 	CC_SYNTHESIZE(int, m_nStrength, Strength);
 	CC_SYNTHESIZE(float, m_fPowerTime, PowerTime);
+
 	CC_SYNTHESIZE(float, m_fGuidelineTime, GuidelineTime);
 	CC_SYNTHESIZE(float, m_fEnlargeTime, EnlargeTime);
 	CC_SYNTHESIZE(float, m_fShrinkTime, ShrinkTime);
@@ -98,7 +110,6 @@ public:
 
 	CC_SYNTHESIZE(int, m_nScore, Score);
 	CC_SYNTHESIZE(long long, m_nHighscore, Highscore);
-
 	CC_SYNTHESIZE(int, m_nGoldNumber, GoldNumber);
 	CC_SYNTHESIZE(int, m_nGoldNumberAll, GoldNumberAll);
 

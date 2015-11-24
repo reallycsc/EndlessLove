@@ -29,6 +29,8 @@ PlayerLayer::PlayerLayer(void)
 	m_pTextGood = NULL;
 	m_pTextGreat = NULL;
 	m_pTextPerfect = NULL;
+
+	m_fCurHeartNumber = 0.0f;
 }
 
 
@@ -49,9 +51,16 @@ bool PlayerLayer::init()
 		CC_BREAK_IF(!Layer::init());
 		Size winSize = Director::getInstance()->getWinSize();
 
+		//建立触摸监听
+		auto touchListener = EventListenerTouchOneByOne::create();
+		touchListener->onTouchBegan = CC_CALLBACK_2(PlayerLayer::onTouchBegan, this);
+		touchListener->onTouchMoved = CC_CALLBACK_2(PlayerLayer::onTouchMoved, this);
+		touchListener->onTouchEnded = CC_CALLBACK_2(PlayerLayer::onTouchEnded, this);
+		_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
+
 		// Load csb
 		auto rootNode = CSLoader::createNode("PlayerLayer.csb");
-		this->addChild(rootNode);
+		this->addChild(rootNode, ZORDER_PLAYERLAYER_MAINLAYER);
 
 		// Add Player
 		m_pPlayer = Player::create();
@@ -103,7 +112,8 @@ bool PlayerLayer::init()
 			this->addChild(sprite, ZORDER_PLAYERLAYER_HEARTGREY);
 		}
 
-		for (int i = 0; i < m_pPlayerData->getHeartNumber(); i++)
+		m_fCurHeartNumber = m_pPlayerData->getHeartNumber();
+		for (int i = 0; i < m_fCurHeartNumber; i++)
 		{
 			Sprite* sprite = Sprite::createWithSpriteFrame(m_pSpriteHeart->getSpriteFrame());
 			sprite->setAnchorPoint(m_pSpriteHeart->getAnchorPoint());
@@ -111,10 +121,19 @@ bool PlayerLayer::init()
 			m_vSpriteHearts.pushBack(sprite);
 			this->addChild(sprite, ZORDER_PLAYERLAYER_HEART);
 		}
+		
 
 		// 加入辅助虚线
 		m_pSpriteGuideLine = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_GuideLine"));
-		m_pSpriteGuideLine->setVisible(false);
+		if (m_pGameMediator->getIsGuidelineForever())
+		{
+			m_pSpriteGuideLine->setPosition(winSize.width / 2, 0);
+		}
+		else
+		{
+			m_pSpriteGuideLine->setVisible(false);
+		}
+
 
 		// 加入倒计时指示
 		Node* nodeGuideLine = dynamic_cast<Node*>(rootNode->getChildByName("Node_GuideLineCountDown"));
@@ -135,9 +154,7 @@ bool PlayerLayer::init()
 		m_pTextGreat->setString(m_pMapGameText->at(GAMETEXT_PLAYER_GREAT));
 		m_pTextPerfect->setString(m_pMapGameText->at(GAMETEXT_PLAYER_PERFECT));
 
-		m_pTextScore->setString(StringUtils::format("%s%d",
-			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SCORE).c_str(),
-			m_pPlayerData->getScore()));
+		m_pTextScore->setString(StringUtils::format("%d", m_pPlayerData->getScore()));
 		dynamic_cast<Text*>(nodeGuideLine->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
 			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_GUIDELINE).c_str(),
 			10.0));
@@ -158,12 +175,42 @@ bool PlayerLayer::init()
 	return bRet;
 }
 
+bool PlayerLayer::onTouchBegan(Touch *touch, Event *event)
+{
+	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	{
+		//Point point = touch->getLocation();  //获取触摸坐标
+		m_pPlayer->setIsNeedToPowerUp(true);
+	}
+	return true;
+}
+
+void PlayerLayer::onTouchMoved(Touch *touch, Event *event)
+{
+	//Point point = touch->getLocation();  //获取触摸坐标
+}
+
+void PlayerLayer::onTouchEnded(Touch *touch, Event *event)
+{
+	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	{
+		if (m_pPlayer->getIsPowerUp())
+		{
+			m_pPlayer->scheduleJump();
+		}
+		else
+		{
+			m_pPlayer->setIsNeedToPowerUp(false);
+		}
+	}
+}
+
 // schedule functions
 void PlayerLayer::update(float dt)
 {
 	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
 	{
-		// 蓄力中调整辅助虚线的位置
+		// change guideline position Y duration player power up
 		if (m_pSpriteGuideLine->isVisible() == true)
 		{
 			if (m_pPlayer->getIsPowerUp() == true)
@@ -173,7 +220,10 @@ void PlayerLayer::update(float dt)
 				m_pSpriteGuideLine->setPositionY(positionY);
 			}
 		}
+		// update heart number
+		this->updateHeartNumber(m_pPlayerData->getHeartNumber() - m_fCurHeartNumber);
 	}
+
 }
 
 void PlayerLayer::startCountDown(float dt, int countDownType, int textType)
@@ -224,20 +274,18 @@ void PlayerLayer::guideLineFadeOutFinished(Node* pSender)
 // update score text function
 void PlayerLayer::updateScoreText()
 {
-	m_pTextScore->setString(StringUtils::format("%s%d",
-		m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SCORE).c_str(),
-		m_pPlayerData->getScore()));
+	m_pTextScore->setString(StringUtils::format("%d", m_pPlayerData->getScore()));
 }
 
 void PlayerLayer::updateGoldNumberText()
 {
 	// Gold animation from player to icon top-left
 	Sprite* sprite = Sprite::createWithSpriteFrame(m_pSpriteGold->getSpriteFrame());
-	sprite->setAnchorPoint(Point(0, 0.5));
+	sprite->setAnchorPoint(Point(0, 0.5f));
 	Size size = m_pPlayer->getBoundingBox().size;
 	sprite->setPosition(m_pPlayer->getPositionX(), m_pPlayer->getPositionY() + size.height);
 	sprite->runAction(Sequence::create(
-		EaseIn::create(MoveTo::create(0.3, m_pNodeGoldNum->getPosition() + m_pSpriteGold->getPosition()), 2),
+		EaseIn::create(MoveTo::create(0.3f, m_pNodeGoldNum->getPosition() + m_pSpriteGold->getPosition()), 2),
 		CallFuncN::create(CC_CALLBACK_1(PlayerLayer::goldMoveFinished, this)),
 		NULL
 		));
@@ -282,20 +330,20 @@ void PlayerLayer::addHeartNumber(float number) // return heart number before cha
 		MoveTo::create(0.5f, Point(m_pNodeHeart->getPositionX(), m_pNodeHeart->getPositionY() + 100)),
 		FadeOut::create(0.5f),
 		NULL));
-
-	this->updateHeartNumber(realNumber);
 }
 
 void PlayerLayer::updateHeartNumber(float addNumber)
 {
 	if (addNumber == 0)
 		return;
+
+	
 	Size winSize = Director::getInstance()->getWinSize();
 	int posY = winSize.height - 10;
 
-	float heartNumber = m_pPlayerData->getHeartNumber();
-	int iterger = floor(heartNumber);
-	float heartNumberBefore = heartNumber - addNumber;
+	m_fCurHeartNumber = m_pPlayerData->getHeartNumber();
+	int iterger = floor(m_fCurHeartNumber);
+	float heartNumberBefore = m_fCurHeartNumber - addNumber;
 	int decimalBefore = int(heartNumberBefore * 10) % 10;
 
 	if (addNumber >= 0)
@@ -383,7 +431,7 @@ void PlayerLayer::updateHeartNumber(float addNumber)
 			this->addChild(sprite, ZORDER_PLAYERLAYER_HEARTPROGRESS);
 			m_pSpriteHalfHeartRight->setVisible(false);
 
-			m_pSpriteHalfHeartRight->setVisible(true);
+			m_pSpriteHalfHeartLeft->setVisible(true);
 			m_pSpriteHalfHeartLeft->setPosition(10 + iterger * 60, posY);
 		}
 	}
@@ -395,22 +443,6 @@ void PlayerLayer::heartFadeOutFinished(Node* pSender)
 }
 
 // player functions
-void PlayerLayer::startPlayerPowerUp()
-{
-	m_pPlayer->startPowerUp();
-	if (m_pSpriteGuideLine->isVisible() == true)
-	{
-		// 显示辅助虚线
-		Size winSize = Director::getInstance()->getWinSize();
-		m_pSpriteGuideLine->setPosition(winSize.width / 2, 0);
-	}
-}
-
-void PlayerLayer::schedulePlayerJump()
-{
-	m_pPlayer->scheduleJump();
-}
-
 void PlayerLayer::showEvaluation(int y)
 {
 	if (m_pPlayer->getIsIntersect())
@@ -462,6 +494,8 @@ void PlayerLayer::showEvaluation(int y)
 // item use functions
 void PlayerLayer::startShowGuideLine(float duration)
 {
+	if (m_pGameMediator->getIsGuidelineForever())
+		return;
 	Size winSize = Director::getInstance()->getWinSize();
 	m_pSpriteGuideLine->setPosition(winSize.width / 2, 0);
 	m_pSpriteGuideLine->stopAllActions();
@@ -478,10 +512,9 @@ void PlayerLayer::startShowGuideLine(float duration)
 		this->setCountDownPosition();
 	}
 	
-	auto scheduler = Director::getInstance()->getScheduler();
-	scheduler->unschedule("guideLineCountDown", this);
-	scheduler->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_GUIDELINE, GAMETEXT_PLAYERLAYER_GUIDELINE), 
-		this, 0.1f, int(duration * 10), 0, false, "guideLineCountDown");
+	this->unschedule("guideLineCountDown");
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_GUIDELINE, GAMETEXT_PLAYERLAYER_GUIDELINE),
+		0.1f, int(duration * 10), 0, "guideLineCountDown");
 }
 
 void PlayerLayer::startPlayerEnlarge(float duration)
@@ -489,7 +522,6 @@ void PlayerLayer::startPlayerEnlarge(float duration)
 	m_pPlayer->runAction(ScaleTo::create(0.5f, 2));
 	m_mCurCountDownTime[COUNTDOWN_ENLARGE] = duration;
 	m_mMaxCountDownTime[COUNTDOWN_ENLARGE] = duration;
-	auto scheduler = Director::getInstance()->getScheduler();
 	// find shrink count down and delete it
 	Node* nodeShrink = m_mCountDown.at(COUNTDOWN_SHRINK);
 	m_mCurCountDownTime[COUNTDOWN_SHRINK] = 0;
@@ -497,7 +529,7 @@ void PlayerLayer::startPlayerEnlarge(float duration)
 	auto iter = m_vCountDown.find(nodeShrink);
 	if (iter != m_vCountDown.end())
 	{
-		scheduler->unschedule("shrinkCountDown", this);
+		this->unschedule("shrinkCountDown");
 		nodeShrink->setVisible(false);
 		m_vCountDown.erase(iter);
 	}
@@ -510,9 +542,9 @@ void PlayerLayer::startPlayerEnlarge(float duration)
 		this->setCountDownPosition();
 	}
 
-	scheduler->unschedule("enlargeCountDown", this);
-	scheduler->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_ENLARGE, GAMETEXT_PLAYERLAYER_ENLARGE),
-		this, 0.1f, int(duration * 10), 0, false, "enlargeCountDown");
+	this->unschedule("enlargeCountDown");
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_ENLARGE, GAMETEXT_PLAYERLAYER_ENLARGE),
+		0.1f, int(duration * 10), 0, "enlargeCountDown");
 }
 
 void PlayerLayer::startPlayerShrink(float duration)
@@ -520,7 +552,6 @@ void PlayerLayer::startPlayerShrink(float duration)
 	m_pPlayer->runAction(ScaleTo::create(0.5f, 0.5f));
 	m_mCurCountDownTime[COUNTDOWN_SHRINK] = duration;
 	m_mMaxCountDownTime[COUNTDOWN_SHRINK] = duration;
-	auto scheduler = Director::getInstance()->getScheduler();
 	// find shrink count down and delete it
 	Node* nodeEnlarge = m_mCountDown.at(COUNTDOWN_ENLARGE);
 	m_mCurCountDownTime[COUNTDOWN_ENLARGE] = 0;
@@ -528,7 +559,7 @@ void PlayerLayer::startPlayerShrink(float duration)
 	auto iter = m_vCountDown.find(nodeEnlarge);
 	if (iter != m_vCountDown.end())
 	{
-		scheduler->unschedule("enlargeCountDown", this);
+		this->unschedule("enlargeCountDown");
 		nodeEnlarge->setVisible(false);
 		m_vCountDown.erase(iter);
 	}
@@ -541,9 +572,10 @@ void PlayerLayer::startPlayerShrink(float duration)
 		this->setCountDownPosition();
 	}
 
-	scheduler->unschedule("shrinkCountDown", this);
-	scheduler->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHRINK, GAMETEXT_PLAYERLAYER_SHRINK),
-		this, 0.1f, int(duration * 10), 0, false, "shrinkCountDown");
+	
+	this->unschedule("shrinkCountDown");
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHRINK, GAMETEXT_PLAYERLAYER_SHRINK),
+		0.1f, int(duration * 10), 0, "shrinkCountDown");
 }
 
 void PlayerLayer::startPlayerShield(float duration)
@@ -551,7 +583,6 @@ void PlayerLayer::startPlayerShield(float duration)
 	m_pPlayer->playShieldAnimation(duration);
 	m_mCurCountDownTime[COUNTDOWN_SHIELD] = duration;
 	m_mMaxCountDownTime[COUNTDOWN_SHIELD] = duration;
-	auto scheduler = Director::getInstance()->getScheduler();
 	Node* node = m_mCountDown.at(COUNTDOWN_SHIELD);
 	if (m_vCountDown.find(node) == m_vCountDown.end())
 	{
@@ -560,9 +591,9 @@ void PlayerLayer::startPlayerShield(float duration)
 		this->setCountDownPosition();
 	}
 
-	scheduler->unschedule("shieldCountDown", this);
-	scheduler->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHIELD, GAMETEXT_PLAYERLAYER_SHIELD),
-		this, 0.1f, int(duration * 10), 0, false, "shieldCountDown");
+	this->unschedule("shieldCountDown");
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHIELD, GAMETEXT_PLAYERLAYER_SHIELD),
+		0.1f, int(duration * 10), 0, "shieldCountDown");
 
 	return;
 }

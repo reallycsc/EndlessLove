@@ -1,5 +1,6 @@
 #pragma once
 #include "CommonHeader.h"
+#include "GameMediator.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #import "IAPShare.h"
@@ -30,6 +31,7 @@ private:
     void waitingTimeOut(float dt);
     
 private:
+	map<int, string>*	m_pmGameText;
     Layout*	m_pLayout;
     ListView*   m_pListView;
 };

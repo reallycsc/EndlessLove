@@ -54,7 +54,7 @@ bool NormalNoticeLayer::init(const string &title, const string &info)
 
 	// run animation
 	m_pLayout->setPosition(Point(winSize.width/2, winSize.height+ m_pLayout->getContentSize().height));
-	m_pLayout->runAction(MoveTo::create(0.1, Point(winSize.width/2, winSize.height/2)));
+	m_pLayout->runAction(MoveTo::create(0.2f, Point(winSize.width/2, winSize.height/2)));
 
 	// swallow all touches
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -69,7 +69,7 @@ void NormalNoticeLayer::menuCallback_OK(Ref* pSender)
 {
 	Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-		MoveTo::create(0.3, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create(CC_CALLBACK_1(NormalNoticeLayer::moveToFinished, this)),
 		NULL));
 }

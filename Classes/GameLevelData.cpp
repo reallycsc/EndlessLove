@@ -3,6 +3,7 @@
 GameLevelData::GameLevelData(void)
 {
 	m_nLevel = 0;
+	m_nStage = 0;
 	m_nLevelUpScore = 0;
 
 	m_nPlayerMoveSpeed = 0;
@@ -13,8 +14,6 @@ GameLevelData::GameLevelData(void)
 	m_nEnemyDownMaxHeight = 0;
 	m_fEnemyDownMinWidthScale = 0;
 	m_fEnemyDownMaxWidthScale = 0;
-	m_nEnemyDownMinMoveSpeed = 0;
-	m_nEnemyDownMaxMoveSpeed = 0;
 	m_nEnemyDownMinInterval = 0;
 	m_nEnemyDownMaxInterval = 0;
 
@@ -24,12 +23,9 @@ GameLevelData::GameLevelData(void)
 	m_nEnemyUpMaxHeightOffset = 0;
 	m_fEnemyUpMinWidthScale = 0;
 	m_fEnemyUpMaxWidthScale = 0;
-	m_nEnemyUpMinMoveSpeed = 0;
-	m_nEnemyUpMaxMoveSpeed = 0;
 	m_nEnemyUpMinInterval = 0;
 	m_nEnemyUpMaxInterval = 0;
 
-	m_bItemIsCurve = false;
 	m_nItemMinMoveSpeed = 0;
 	m_nItemMaxMoveSpeed = 0;
 	m_nItemMinInterval = 0;
@@ -89,6 +85,7 @@ bool GameLevelData::init(GameLevelData* gamedata)
 	do
 	{
 		m_nLevel = gamedata->getLevel();
+		m_nStage = gamedata->getStage();
 		m_nLevelUpScore = gamedata->getLevelUpScore();
 
 		m_nPlayerMoveSpeed = gamedata->getPlayerMoveSpeed();
@@ -99,8 +96,6 @@ bool GameLevelData::init(GameLevelData* gamedata)
 		m_nEnemyDownMaxHeight = gamedata->getEnemyDownMaxHeight();
 		m_fEnemyDownMinWidthScale = gamedata->getEnemyDownMinWidthScale();
 		m_fEnemyDownMaxWidthScale = gamedata->getEnemyDownMaxWidthScale();
-		m_nEnemyDownMinMoveSpeed = gamedata->getEnemyDownMinMoveSpeed();
-		m_nEnemyDownMaxMoveSpeed = gamedata->getEnemyDownMaxMoveSpeed();
 		m_nEnemyDownMinInterval = gamedata->getEnemyDownMinInterval();
 		m_nEnemyDownMaxInterval = gamedata->getEnemyDownMaxInterval();
 
@@ -110,12 +105,9 @@ bool GameLevelData::init(GameLevelData* gamedata)
 		m_nEnemyUpMaxHeightOffset = gamedata->getEnemyUpMaxHeightOffset();
 		m_fEnemyUpMinWidthScale = gamedata->getEnemyUpMinWidthScale();
 		m_fEnemyUpMaxWidthScale = gamedata->getEnemyUpMaxWidthScale();
-		m_nEnemyUpMinMoveSpeed = gamedata->getEnemyUpMinMoveSpeed();
-		m_nEnemyUpMaxMoveSpeed = gamedata->getEnemyUpMaxMoveSpeed();
 		m_nEnemyUpMinInterval = gamedata->getEnemyUpMinInterval();
 		m_nEnemyUpMaxInterval = gamedata->getEnemyUpMaxInterval();
 
-		m_bItemIsCurve = gamedata->getItemIsCurve();
 		m_nItemMinMoveSpeed = gamedata->getItemMinMoveSpeed();
 		m_nItemMaxMoveSpeed = gamedata->getItemMaxMoveSpeed();
 		m_nItemMinInterval = gamedata->getItemMinInterval();

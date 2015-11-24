@@ -42,7 +42,7 @@ bool EnemyLayer::init()
 
 		// load csb
 		auto rootNode = CSLoader::createNode("EnemyLayer.csb");
-		this->addChild(rootNode);
+		this->addChild(rootNode, ZORDER_ENEMYLAYER_MAINLAYER);
 
 		m_pSpriteEnemyBar = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_EnemyBar"));
 		
@@ -72,10 +72,8 @@ bool EnemyLayer::init()
 
 		// calculate min & max interval for enemy down
 		float jumpTime = sqrt((float)(2 * m_pLevelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
-		float powerTime = m_pPlayerData->getPowerTime();
-		float speed = m_pLevelData->getPlayerMoveSpeed();
-		m_nEnemyDownMinInterval = int(speed * (jumpTime + powerTime));
-		m_nEnemyDownMaxInterval = int(winSize.width * 0.5);
+		m_nEnemyDownMinInterval = int(m_pLevelData->getPlayerMoveSpeed() * (jumpTime + m_pPlayerData->getPowerTime()));
+		m_nEnemyDownMaxInterval = int(winSize.width * 0.75);
 		m_nAddEnemyDownDistance = MAX(MIN(m_pLevelData->getEnemyDownInterval(), m_nEnemyDownMaxInterval), m_nEnemyDownMinInterval);
 		m_nAddEnemyUpDistance = m_pLevelData->getEnemyUpInterval();
 		m_nAddItemDistance = m_pLevelData->getItemInterval();
@@ -114,7 +112,7 @@ void EnemyLayer::update(float dt)
 		{
 			if (m_nAccEnemyUpDistance > m_nAddEnemyUpDistance)
 			{
-				this->addEnemyUp(m_pLevelData->getEnemyUpMoveSpeed());
+				this->addEnemyUp(0);
 				m_nAccEnemyUpDistance = 0;
 				m_nAddEnemyUpDistance = m_pLevelData->getEnemyUpInterval();
 			}
@@ -127,7 +125,12 @@ void EnemyLayer::update(float dt)
 			{
 				this->addEnemyDown(isWithUp && isEnemyUpShow);
 				m_nAccEnemyDownDistance = 0;
-				m_nAddEnemyDownDistance = MAX(MIN(m_pLevelData->getEnemyDownInterval(), m_nEnemyDownMaxInterval), m_nEnemyDownMinInterval);
+				int enemyInterval = m_pLevelData->getEnemyDownInterval();
+				m_nAddEnemyDownDistance = MAX(MIN(enemyInterval, m_nEnemyDownMaxInterval), m_nEnemyDownMinInterval);
+				if (m_nAddEnemyDownDistance <= 200)
+				{
+					int i = 0;
+				}
 			}
 		}
 	}
@@ -137,8 +140,7 @@ void EnemyLayer::addEnemyDown(bool isWithUp)
 {
 	Size winSize = Director::getInstance()->getWinSize(); 
 	// Enemy Down
-	int moveSpeed = m_pLevelData->getEnemyDownMoveSpeed();
-	Enemy* enemyDown = Enemy::createEnemy(m_pSpriteEnemyBar->getSpriteFrame(), moveSpeed);
+	Enemy* enemyDown = Enemy::createEnemy(m_pSpriteEnemyBar->getSpriteFrame(), 0);
 	Size enemyDownSize = enemyDown->getBoundingBox().size;
 	// random height and width
 	int enemyDownHeightNew = m_pLevelData->getEnemyDownHeight();
@@ -153,22 +155,24 @@ void EnemyLayer::addEnemyDown(bool isWithUp)
 	enemyDown->setPosition(positionX, 0);
 	this->addChild(enemyDown, ZORDER_ENEMYLAYER_ENEMY);
 	m_vAllEnemysDown.pushBack(enemyDown);
-
 	// Add Gold
 	if (m_pLevelData->getEnemyDownIsBindItem())
 	{
-		Item* item = Item::createItem(m_mSpriteMap.at(ITEMTYPE_GOLD)->getSpriteFrame(), ITEMTYPE_GOLD, moveSpeed);
+		Item* item = Item::createItem(m_mSpriteMap.at(ITEMTYPE_GOLD)->getSpriteFrame(), ITEMTYPE_GOLD, 0);
 		int itemHeight = enemyDownHeightNew + 24;
 		item->setPosition(positionX, itemHeight);
 		this->addChild(item, ZORDER_ENEMYLAYER_ITEM);
 		m_vAllItems.pushBack(item);
 	}
-
 	// with enemy up
 	if (isWithUp)
 	{
-		this->addEnemyUp(moveSpeed);
+		this->addEnemyUp(0);
 	}
+
+	//  re-calculate min interval
+	float jumpTime = sqrt((float)(2 * enemyDownHeightNew) / (float)GRAVITY) * 2;
+	m_nEnemyDownMinInterval = int(m_pLevelData->getPlayerMoveSpeed() * (jumpTime + m_pPlayerData->getPowerTime()));
 }
 
 void EnemyLayer::addEnemyUp(int speed)
@@ -379,9 +383,7 @@ void EnemyLayer::increaseGameLevel()
 
 	// change the min Interval
 	float jumpTime = sqrt((float)(2 * m_pLevelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
-	float powerTime = m_pPlayerData->getPowerTime();
-	float speed = m_pLevelData->getPlayerMoveSpeed();
-	m_nEnemyDownMinInterval = int(speed * (jumpTime + powerTime));
+	m_nEnemyDownMinInterval = int(m_pLevelData->getPlayerMoveSpeed() * (jumpTime + m_pPlayerData->getPowerTime()));
 
 	// flow the text
 	m_pTextLevelUp->setVisible(true);

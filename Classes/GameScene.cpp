@@ -1,5 +1,5 @@
 #include "GameScene.h"
-#include "GameLayer.h"  
+#include "GameLayer.h"
 
 GameScene::GameScene(void)
 {
@@ -17,8 +17,8 @@ bool GameScene::init()
     {  
         CC_BREAK_IF(!Scene::init());
 
-		GameLayer* pGameLayer = GameLayer::create();
-		this->addChild(pGameLayer);
+		GameLayer* gameLayer = GameLayer::create();
+		this->addChild(gameLayer);
 
         bRet = true;
     } while (0);

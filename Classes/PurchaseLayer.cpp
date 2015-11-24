@@ -1,5 +1,4 @@
 #include "PurchaseLayer.h"
-#include "GameMediator.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #import "Reachability.h"
@@ -8,6 +7,9 @@
 
 PurchaseLayer::PurchaseLayer(void)
 {
+	m_pmGameText = GameMediator::getInstance()->getGameText();
+	m_pLayout = NULL;
+	m_pListView = NULL;
 }
 
 
@@ -38,10 +40,11 @@ bool PurchaseLayer::init()
         buttonClose->addClickEventListener(CC_CALLBACK_1(PurchaseLayer::menuCallback_Close, this));
         
 		// set all text
+		buttonClose->setTitleText(m_pmGameText->at(GAMETEXT_COMMON_CLOSE));
 
         // run animation
         m_pLayout->setPosition(cocos2d::Point(winSize.width/2, winSize.height+ m_pLayout->getContentSize().height));
-        m_pLayout->runAction(MoveTo::create(0.1, cocos2d::Point(winSize.width/2, winSize.height/2)));
+        m_pLayout->runAction(MoveTo::create(0.2f, cocos2d::Point(winSize.width/2, winSize.height/2)));
         
         // swallow all touches
         auto touchListener = EventListenerTouchOneByOne::create();
@@ -66,7 +69,7 @@ bool PurchaseLayer::init()
                         this->showListItems();
                     }
                 }];
-                [ProgressHUD show:@"Downloading information, please wait..." Interaction:FALSE];
+                [ProgressHUD show: m_pmGameText->at(GAMETEXT_PROGRESSHUD_DOWNLOADINFO) Interaction:FALSE];
                 this->scheduleOnce(schedule_selector(PurchaseLayer::waitingTimeOut), 10.0f);
             }
             else {
@@ -122,9 +125,8 @@ void PurchaseLayer::showListItems()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* product)
 {
-
     IAPHelper* helper = [IAPShare sharedHelper].iap;
-    [ProgressHUD show:@"Buying from Apple.inc, please wait..." Interaction:FALSE];
+    [ProgressHUD show: m_pmGameText->at(GAMETEXT_PROGRESSHUD_BUYING) Interaction:FALSE];
     [helper buyProduct:product
           onCompletion:^(SKPaymentTransaction* trans) {
               [ProgressHUD dismiss];
@@ -132,7 +134,7 @@ void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* pr
                   NSLog(@"Fail %@",[trans.error localizedDescription]);
               }
               else if(trans.transactionState == SKPaymentTransactionStatePurchased) {
-                  [ProgressHUD show:@"Checking receipt from Apple.inc, please wait..." Interaction:FALSE];
+                  [ProgressHUD show: m_pmGameText->at(GAMETEXT_PROGRESSHUD_CHECKINGRECEPIT) Interaction:FALSE];
                   [helper checkReceipt:trans.transactionReceipt
                        AndSharedSecret:@"your sharesecret"
                           onCompletion:^(NSString *response, NSError *error) {
@@ -146,17 +148,17 @@ void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* pr
                                       NSLog(@"Pruchases %@",helper.purchasedProducts);
                                   }
                                   else {
-                                      [ProgressHUD showError:@"Receipt status is wrong."];
+                                      [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTSTATUSERROR)];
                                       NSLog(@"Fail in response status is 0");
                                   }
                               }
                               else {
-                                  [ProgressHUD showError:@"No response from Apple.inc."];
+                                  [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_NORESPONSE)];
                               }
                           }];
               }
               else if(trans.transactionState == SKPaymentTransactionStateFailed) {
-                  [ProgressHUD showError:@"Checking receipt failed."];
+                  [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTCHECKERROR)];
                   NSLog(@"Fail in SKPaymentTransactionStateFailed");
               }
           }];//end of buy product
@@ -167,7 +169,7 @@ void PurchaseLayer::menuCallback_Close(Ref* pSender)
 {
     cocos2d::Size winSize = Director::getInstance()->getWinSize();
     m_pLayout->runAction(Sequence::create(
-                                          MoveTo::create(0.3, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
                                           CallFuncN::create(CC_CALLBACK_1(PurchaseLayer::moveToFinished, this)),
                                           NULL));
 }
@@ -180,6 +182,6 @@ void PurchaseLayer::moveToFinished(Ref* pSender)
 void PurchaseLayer::waitingTimeOut(float dt)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    [ProgressHUD showError:@"Response time out, please try again."];
+    [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_RESPONSETIMEOUT)];
 #endif
 }

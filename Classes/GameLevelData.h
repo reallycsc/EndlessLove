@@ -16,12 +16,10 @@ public:
 	// random getters
 	int getEnemyDownHeight() { return random(m_nEnemyDownMinHeight, m_nEnemyDownMaxHeight); }
 	int getEnemyDownWidth(int enemyWidth) { return random(enemyWidth * m_fEnemyDownMinWidthScale, enemyWidth * m_fEnemyDownMaxWidthScale); }
-	int getEnemyDownMoveSpeed() { return random(m_nEnemyDownMinMoveSpeed, m_nEnemyDownMaxMoveSpeed); }
 	int getEnemyDownInterval() { return random(m_nEnemyDownMinInterval, m_nEnemyDownMaxInterval); }
 
 	int getEnemyUpHeightOffset() { return random(m_nEnemyUpMinHeightOffset, m_nEnemyUpMaxHeightOffset); }
 	int getEnemyUpWidth(int enemyWidth) { return random(enemyWidth * m_fEnemyUpMinWidthScale, enemyWidth * m_fEnemyUpMaxWidthScale); }
-	int getEnemyUpMoveSpeed() { return random(m_nEnemyUpMinMoveSpeed, m_nEnemyUpMaxMoveSpeed); }
 	int getEnemyUpInterval() { return random(m_nEnemyUpMinInterval, m_nEnemyUpMaxInterval); }
 
 	int getItemMoveSpeed() { return random(m_nItemMinMoveSpeed, m_nItemMaxMoveSpeed); }
@@ -32,6 +30,7 @@ public:
 
 public:
 	CC_SYNTHESIZE(int, m_nLevel, Level);
+	CC_SYNTHESIZE(int, m_nStage, Stage);
 	CC_SYNTHESIZE(int, m_nLevelUpScore, LevelUpScore);
 
 	CC_SYNTHESIZE(int, m_nPlayerMoveSpeed, PlayerMoveSpeed);
@@ -42,8 +41,6 @@ public:
 	CC_SYNTHESIZE(int, m_nEnemyDownMaxHeight, EnemyDownMaxHeight);
 	CC_SYNTHESIZE(float, m_fEnemyDownMinWidthScale, EnemyDownMinWidthScale);
 	CC_SYNTHESIZE(float, m_fEnemyDownMaxWidthScale, EnemyDownMaxWidthScale);
-	CC_SYNTHESIZE(int, m_nEnemyDownMinMoveSpeed, EnemyDownMinMoveSpeed);
-	CC_SYNTHESIZE(int, m_nEnemyDownMaxMoveSpeed, EnemyDownMaxMoveSpeed);
 	CC_SYNTHESIZE(int, m_nEnemyDownMinInterval, EnemyDownMinInterval);
 	CC_SYNTHESIZE(int, m_nEnemyDownMaxInterval, EnemyDownMaxInterval);
 
@@ -53,12 +50,9 @@ public:
 	CC_SYNTHESIZE(int, m_nEnemyUpMaxHeightOffset, EnemyUpMaxHeightOffset);
 	CC_SYNTHESIZE(float, m_fEnemyUpMinWidthScale, EnemyUpMinWidthScale);
 	CC_SYNTHESIZE(float, m_fEnemyUpMaxWidthScale, EnemyUpMaxWidthScale);
-	CC_SYNTHESIZE(int, m_nEnemyUpMinMoveSpeed, EnemyUpMinMoveSpeed);
-	CC_SYNTHESIZE(int, m_nEnemyUpMaxMoveSpeed, EnemyUpMaxMoveSpeed);
 	CC_SYNTHESIZE(int, m_nEnemyUpMinInterval, EnemyUpMinInterval);
 	CC_SYNTHESIZE(int, m_nEnemyUpMaxInterval, EnemyUpMaxInterval);
 
-	CC_SYNTHESIZE(bool, m_bItemIsCurve, ItemIsCurve);
 	CC_SYNTHESIZE(int, m_nItemMinMoveSpeed, ItemMinMoveSpeed);
 	CC_SYNTHESIZE(int, m_nItemMaxMoveSpeed, ItemMaxMoveSpeed);
 	CC_SYNTHESIZE(int, m_nItemMinInterval, ItemMinInterval);

@@ -1,27 +1,26 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <PlayerUpgradeConfig>
 	<JumpType>
-		<Level level="1" needGold="1" powerUpOnTheGround="true" jumpOnTheGround="true" freeJumpTime="0"/>
-		<Level level="2" needGold="2" powerUpOnTheGround="false" jumpOnTheGround="true" freeJumpTime="0"/>
-		<Level level="3" needGold="3" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="1"/>
-		<Level level="4" needGold="4" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="2"/>
-		<Level level="5" needGold="5" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="3"/>
-		<Level level="6" needGold="6" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="4"/>
-		<Level level="7" needGold="7" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="5"/>
-		<Level level="8" needGold="8" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="6"/>
-		<Level level="9" needGold="9" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="7"/>
-		<Level level="10" needGold="10" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="8"/>
+		<Level level="1" needGold="1" powerUpOnTheGround="true" jumpOnTheGround="true" freeJumpTime="0" description_en="Focus on the ground" description_cn="只能在地面蓄力"/>
+		<Level level="2" needGold="2" powerUpOnTheGround="false" jumpOnTheGround="true" freeJumpTime="0" description_en="Focus anywhere jump on th ground" description_cn="可随时蓄力，只能在地面起跳"/>
+		<Level level="3" needGold="3" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="1" description_en="Focus and jump anywhere - 2 stage jump" description_cn="可随时蓄力，可2段跳"/>
+		<Level level="4" needGold="4" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="2" description_en="Focus and jump anywhere - 3 stage jump" description_cn="可随时蓄力，可3段跳"/>
+		<Level level="5" needGold="5" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="3" description_en="Focus and jump anywhere - 4 stage jump" description_cn="可随时蓄力，可4段跳"/>
+		<Level level="6" needGold="6" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="4" description_en="Focus and jump anywhere - 5 stage jump" description_cn="可随时蓄力，可5段跳"/>
+		<Level level="7" needGold="7" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="5" description_en="Focus and jump anywhere - 6 stage jump" description_cn="可随时蓄力，可6段跳"/>
+		<Level level="8" needGold="8" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="6" description_en="Focus and jump anywhere - 7 stage jump" description_cn="可随时蓄力，可7段跳"/>
+		<Level level="9" needGold="9" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="7" description_en="Focus and jump anywhere - 8 stage jump" description_cn="可随时蓄力，可8段跳"/>
+		<Level level="10" needGold="10" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="8" description_en="Focus and jump anywhere - 9 stage jump" description_cn="可随时蓄力，可9段跳"/>
 	</JumpType>
 	<MaxHeartNumber>
-		<Level level="1" needGold="1" number="1"/>
-		<Level level="2" needGold="2" number="1.5"/>
-		<Level level="3" needGold="3" number="2"/>
-		<Level level="4" needGold="4" number="2.5"/>
-		<Level level="5" needGold="5" number="3"/>
-		<Level level="6" needGold="6" number="3.5"/>
-		<Level level="7" needGold="7" number="4"/>
-		<Level level="8" needGold="8" number="4.5"/>
-		<Level level="9" needGold="9" number="5"/>
+		<Level level="1" needGold="1" number="1.5"/>
+		<Level level="2" needGold="2" number="2"/>
+		<Level level="3" needGold="3" number="2.5"/>
+		<Level level="4" needGold="4" number="3"/>
+		<Level level="5" needGold="5" number="3.5"/>
+		<Level level="6" needGold="6" number="4"/>
+		<Level level="7" needGold="7" number="4.5"/>
+		<Level level="8" needGold="8" number="5"/>
 	</MaxHeartNumber>
 	<Strength> <!-- strength = minStrength*number + 99 -->
 		<Level level="1" needGold="1" number="1"/>

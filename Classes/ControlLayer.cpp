@@ -59,27 +59,30 @@ void ControlLayer::gameOver()
 {
 	Size winSize = Director::getInstance()->getWinSize();
 	RenderTexture* renderTexture = RenderTexture::create(winSize.width, winSize.height);
-	//遍历Game类的所有子节点信息，画入renderTexture中。
-	//这里类似截图。
+	// Go through all child of Game class and draw in renderTexture
+	// It's like screenshot
 	renderTexture->begin();
 	Director::getInstance()->getRunningScene()->visit();
 	renderTexture->end();
 
-	Director::getInstance()->getRenderer()->render();//在3.0此处必须写上这个，否则newImage整张图片都为黑色,或者在下一帧获取  
+	Director::getInstance()->getRenderer()->render();// Must add this for version 3.0 or image goes black  
 	Director::getInstance()->getTextureCache()->addImage(renderTexture->newImage(), "GameOverImage");
 
-	Director::getInstance()->replaceScene(GameOverScene::create());
+	// pause the game, push to scene stack and change to new scene
+	// Don't forget to pop it
+	Director::getInstance()->pushScene(GameOverScene::create());
 }
 
 void ControlLayer::menuCallback_Pause(Ref* pSender)
 {
 	Size winSize = Director::getInstance()->getWinSize();
 	RenderTexture* renderTexture = RenderTexture::create(winSize.width, winSize.height);
-	//遍历Game类的所有子节点信息，画入renderTexture中。
-	//这里类似截图。
+	// Go through all child of Game class and draw in renderTexture
+	// It's like screenshot
 	renderTexture->begin();
 	Director::getInstance()->getRunningScene()->visit();
 	renderTexture->end();
-	//将游戏界面暂停，压入场景堆栈。并切换到GamePause界面
+	// pause the game, push to scene stack and change to new scene
+	// Don't forget to pop it
 	Director::getInstance()->pushScene(PauseScene::createScene(renderTexture));
 }

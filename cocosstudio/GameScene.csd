@@ -56,7 +56,7 @@
             <PreSize X="0.0000" Y="0.0000" />
             <FileData Type="Normal" Path="PlayerNode.csd" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="ProjectNode_GameOverLayer" ActionTag="1891707278" Tag="91" IconVisible="True" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+          <AbstractNodeData Name="ProjectNode_GameOverLayer" Visible="False" ActionTag="1891707278" Tag="91" IconVisible="True" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
             <Size X="960.0000" Y="640.0000" />
             <AnchorPoint />
             <Position />
@@ -65,6 +65,16 @@
             <PrePosition />
             <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="GameOverLayer.csd" Plist="" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="FileNode_PauseLayer" ActionTag="616097436" Tag="105" IconVisible="True" StretchWidthEnable="False" StretchHeightEnable="False" InnerActionSpeed="1.0000" CustomSizeEnabled="False" ctype="ProjectNodeObjectData">
+            <Size X="960.0000" Y="640.0000" />
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="1.0000" Y="1.0000" />
+            <FileData Type="Normal" Path="PauseLayer.csd" Plist="" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

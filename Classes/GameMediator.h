@@ -11,11 +11,12 @@ public:
 	bool init();
 	// singlar
     static GameMediator* getInstance();
-    static GameMediator* sharedMediator(){ return GameMediator::getInstance(); }
 
 	void initGame();
 
 	void reloadAllConfigFiles();
+
+	void increaseReviveNumber() { m_nReviveNumber++; }
 
 	// getter function
 	map<int, string>* getGameText() { return &m_mGameText; }
@@ -40,6 +41,13 @@ public:
 	CC_SYNTHESIZE(int, m_nGameLevel, GameLevel);
 	CC_SYNTHESIZE(int, m_nGameLevelMax, GameLevelMax);
 	CC_SYNTHESIZE(int, m_nGameOverReason, GameOverReason);
+
+	// Purchase point
+	CC_SYNTHESIZE(bool, m_bAd, IsAd);
+	CC_SYNTHESIZE(bool, m_bGuidelineForever, IsGuidelineForever);
+
+	// Ad point
+	CC_SYNTHESIZE(int, m_nReviveNumber, ReviveNumber);
 
 private:
 	vector<GameLevelData>	m_vGameLevelData;
