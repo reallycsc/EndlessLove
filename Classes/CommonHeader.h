@@ -14,8 +14,8 @@ const int GRAVITY = 2940;
 
 #define MAXDWORD 0xffffffff
 // Flags 
-#define LANGUAGE_CHINESE
-//#define LANGUAGE_ENGLISH
+//#define LANGUAGE_CHINESE
+#define LANGUAGE_ENGLISH
 #define DEBUGFLAG 0
 
 enum GameState {
