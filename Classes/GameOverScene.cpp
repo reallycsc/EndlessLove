@@ -22,7 +22,7 @@ bool GameOverScene::init()
 		Size winSize = Director::getInstance()->getWinSize();
 		Sprite* sprite = Sprite::createWithTexture(Director::getInstance()->getTextureCache()->getTextureForKey("GameOverImage"));
 		sprite->setPosition(winSize.width / 2, winSize.height / 2);
-		GameMediator::getInstance()->spriteToGray(sprite, 0); // change image to gray
+		GameMediator::spriteToGray(sprite, 0); // change image to gray
 		this->addChild(sprite);
 
 		auto gameOverLayer = GameOverLayer::create();

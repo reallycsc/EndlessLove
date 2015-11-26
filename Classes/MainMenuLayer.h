@@ -21,10 +21,12 @@ private:
     void menuCallback_Achievement(Ref* pSender);
 	void menuCallback_PurchaseNoAd(Ref* pSender);
 
+    void realBuy(Ref* pSender);
 	void waitingTimeOut(float dt);
 
 	void menuCallback_Reload(Ref* pSender);
     void menuCallback_Purchase(Ref* pSender);
+    void menuCallback_Reset(Ref* pSender);
     
 private:
     GameMediator*   m_pGameMediator;

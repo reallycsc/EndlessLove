@@ -96,6 +96,12 @@
             [self loadAllAchievements];
             // get score from game center & notify player data to update
             [self retirieveLocalPlayerScore:@"Highscore"];
+            [self retirieveLocalPlayerScore:@"GoldNumber"];
+            [self retirieveLocalPlayerScore:@"GoldNumberAll"];
+            [self retirieveLocalPlayerScore:@"ReviveNumber"];
+            [self retirieveLocalPlayerScore:@"DoubleNumber"];
+            // notify mainmenu to reset purchase status
+            Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_GAMECENTER_AUTHENTICATED);
         }
 
         if (error) {
@@ -131,11 +137,10 @@
             if (scores) {
                 if (GAMEKITHELPER_LOGGING) NSLog(@"GameKitHelper: Retrive score from leaderboard successfully.");
                 // notify gamemeidator to reload the score
-                EventCustom event(EVENT_GAMECENTER_SCORERETRIVED);
+                string eventId = EVENT_GAMECENTER_SCORERETRIVED + [leaderboardId UTF8String];
                 char* buf = new char[21];
                 sprintf(buf, "%lld", leaderboard.localPlayerScore.value);
-                Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_GAMECENTER_SCORERETRIVED,
-                                                                                   buf);
+                Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(eventId, buf);
             }
         }];
     }
@@ -160,6 +165,9 @@
 
 - (void)showLeaderboard:(NSString*)leaderboardId {
     if (!gameCenterAvailable) return;
+    if (!self.authenticated) {
+        [self authenticateLocalUser];
+    }
     GKLeaderboardViewController *viewController = [[GKLeaderboardViewController alloc] init];
     viewController.leaderboardDelegate = self;
     if (leaderboardId) {
@@ -170,6 +178,21 @@
 }
 
 #pragma mark - Achievements
+- (void)checkAndUnlockAchievement:(NSString*)achievementId {
+    if (![self isAchievementUnlocked:achievementId])
+    {
+        [self reportAchievement:achievementId percentComplete:100];
+    }
+}
+
+- (void)unlockAchievementPercent:(NSString*)achievementId percentComplete:(double)percent {
+    if (percent > 100.0f) return;
+    if ([self getAchievementPercent:achievementId] < percent)
+    {
+        [self reportAchievement:achievementId percentComplete:percent];
+    }
+}
+
 - (BOOL)isAchievementUnlocked:(NSString*)achievementId {
     if (!gameCenterAvailable) return FALSE;
     
@@ -202,11 +225,14 @@
 
     if (percent > 100.0f) percent = 100.0f;
     
-    GKAchievement* achievement = [self getAchievementForID:achievementId];
+    GKAchievement* achievementLocal = [self getAchievementForID:achievementId];
+    if (achievementLocal) {
+        achievementLocal.percentComplete = percent;
+    }
+    GKAchievement* achievement = [[GKAchievement alloc] initWithIdentifier:achievementId];
     if (achievement) {
         achievement.percentComplete = percent;
         achievement.showsCompletionBanner = YES;
-        
         [achievement reportAchievementWithCompletionHandler:^(NSError *error) {
             if (!error) {
                 if (GAMEKITHELPER_LOGGING) NSLog(@"GameKitHelper: Achievement (%@) with %f%% progress reported", achievement.identifier, achievement.percentComplete);
@@ -221,7 +247,9 @@
 
 - (void)showAchievements {
     if (!gameCenterAvailable) return;
-    
+    if (!self.authenticated) {
+        [self authenticateLocalUser];
+    }
     GKAchievementViewController *viewController = [[GKAchievementViewController alloc] init];
     if (viewController) {
         viewController.achievementDelegate = self;
@@ -243,7 +271,7 @@
 }
 
 - (void)loadAllAchievements {
-    if (self.achievementDictionary) {
+    if (self.achievementDictionary == nil) {
         self.achievementDictionary = [[NSMutableDictionary alloc] init];
     }
     [GKAchievement loadAchievementsWithCompletionHandler:^(NSArray<GKAchievement *> * _Nullable achievements, NSError * _Nullable error) {

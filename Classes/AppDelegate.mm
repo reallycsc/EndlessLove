@@ -2,8 +2,8 @@
 #include "MainMenuScene.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "GameKitHelper.h"
-#import "IAPShare.h"
+#import "IOSHelper/GameKitHelper.h"
+#import "IOSHelper/IAPShare.h"
 #endif
 
 
@@ -67,8 +67,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     // init IAPHelper
     if(![IAPShare sharedHelper].iap) {
         NSSet *productIdentifiers = [NSSet setWithObjects:
-                                     @"EndlessLove.TestItem",
-                                     @"EndlessLove.TestItem2",
+                                     @"com.reallycsc.endlesslove.adremove",
                                      nil];
         [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:productIdentifiers];
         

@@ -118,6 +118,7 @@ void BackLayer::flyBackSprite(float dt, Vector<Sprite*>* vSprites, float duratio
 	sprite->setPosition(winWidth + deltaX, posY);
 	
 	float divide3 = duration / 3;
+    sprite->setVisible(true);
 	sprite->setOpacity(0);
 	sprite->runAction(Sequence::create(
 		FadeTo::create(divide3, 127),

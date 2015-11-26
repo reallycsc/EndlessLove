@@ -3,7 +3,7 @@
 #include "GameMediator.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IAPShare.h"
+#import "IOSHelper/IAPShare.h"
 #endif
 
 

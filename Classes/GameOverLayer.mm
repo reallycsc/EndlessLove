@@ -1,7 +1,11 @@
 #include "GameOverLayer.h"
 #include "GameScene.h"
 #include "MainMenuScene.h"
-#include "CSCClass\TextNumChange.h"
+#include "CSCClass/TextNumChange.h"
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#import "IOSHelper/GameKitHelper.h"
+#endif
 
 GameOverLayer::GameOverLayer(void)
 {
@@ -34,7 +38,7 @@ bool GameOverLayer::init()
         return false;
     }
 
-	Size winSize = Director::getInstance()->getWinSize();
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
 	// load csb
 	auto rootNode = CSLoader::createNode("GameOverLayer.csb");
@@ -58,6 +62,12 @@ bool GameOverLayer::init()
 		m_pButtonRevive->setVisible(false);
 		m_pButtonDoubleCoin->setPositionX(m_pLayout->getContentSize().width / 2);
 	}
+    // if purchased noAd, noAd icon
+    if(!m_pGameMediator->getIsAd())
+    {
+        dynamic_cast<Sprite*>(m_pButtonRevive->getChildByName("Sprite_playAd"))->setVisible(false);
+        dynamic_cast<Sprite*>(m_pButtonDoubleCoin->getChildByName("Sprite_playAd"))->setVisible(false);
+    }
 
 	// get score text
 	m_pTextHighscore = dynamic_cast<Text*>(m_pLayout->getChildByName("Node_EnlargeAnimation")->getChildByName("Text_Highscore"));
@@ -74,8 +84,8 @@ bool GameOverLayer::init()
 	m_pButtonRevive->setTitleText(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_REVIVE));
 
 	// run animation
-	m_pLayout->setPosition(Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
-	m_pLayout->runAction(MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height / 2)));
+    m_pLayout->setPosition(cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
+    m_pLayout->runAction(MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height / 2)));
 
 	this->showScoreAndStory();
 
@@ -86,9 +96,9 @@ void GameOverLayer::showScoreAndStory()
 {
 	auto playerData = m_pGameMediator->getPlayerData();
 
-	// update highest score
-	playerData->savePlayerData();
-
+	// update highscore
+    playerData->finishGameAddScore();
+    
 	m_pTextHighscore->setString(StringUtils::format("%s%lld",
 		m_pMapGameText->at(GAMETEXT_MAINMENU_HIGHESTSCORE).c_str(),
 		playerData->getHighscore()
@@ -104,18 +114,22 @@ void GameOverLayer::showScoreAndStory()
 
     //m_pTextStory->setString((*storyVector)[cocos2d::random() % storyVector->size()]);
 	//m_pScrollStory->setInnerContainerSize(Size(m_pScrollStory->getInnerContainerSize().width, m_pTextStory->getContentSize().height));
-	//m_pTextStory->setPosition(Point(10, m_pScrollStory->getInnerContainerSize().height - 10));
+	//m_pTextStory->setPosition(cocos2d::Point(10, m_pScrollStory->getInnerContainerSize().height - 10));
 }
 
 void GameOverLayer::menuCallback_Retry(Ref* pSender)
 {
-	Size winSize = Director::getInstance()->getWinSize();
+    // update gold
+    m_pGameMediator->getPlayerData()->finishGameAddGoldNumber();
+    
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-		CallFuncN::create([=](Ref* pSender)->void
-	{
-		Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
+                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+                                          CallFuncN::create([=](Ref* pSender)->void
+    {
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
 		Director::getInstance()->getTextureCache()->removeUnusedTextures();
+        Director::getInstance()->popScene();
 		Director::getInstance()->replaceScene(GameScene::create());
 	}),
 		NULL));
@@ -123,33 +137,53 @@ void GameOverLayer::menuCallback_Retry(Ref* pSender)
 
 void GameOverLayer::menuCallback_MainMenu(Ref* pSender)
 {
-	Size winSize = Director::getInstance()->getWinSize();
+    // update gold
+    m_pGameMediator->getPlayerData()->finishGameAddGoldNumber();
+    
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-		CallFuncN::create([=](Ref* pSender)->void
+                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+                                          CallFuncN::create([=](Ref* pSender)->void
 	{
 		Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
 		Director::getInstance()->getTextureCache()->removeUnusedTextures();
-		Director::getInstance()->replaceScene(MainMenuScene::create());
+        Director::getInstance()->popScene();
+        Director::getInstance()->replaceScene(TransitionSlideInL::create(0.5f, MainMenuScene::create()));
 	}),
 		NULL));
 }
 
 void GameOverLayer::menuCallback_Revive(Ref* pSender)
 {
-	Size winSize = Director::getInstance()->getWinSize();
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
+    // Show some Ad
+    
+    // then revive
+    m_pGameMediator->getPlayerData()->initPlayerHeartNumber();
+    m_pGameMediator->increaseReviveNumber();
+    // update GameCenter Achievement
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    long long reviveNum = m_pGameMediator->getPlayerData()->getReviveNumber();
+    [helper checkAndUnlockAchievement:@"com.reallycsc.endlesslove.revive1"];
+    if (reviveNum > 1) {
+        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.revive10" percentComplete:(reviveNum*10)];
+    }
+    if (reviveNum > 10) {
+        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.revive50" percentComplete:(reviveNum*2)];
+    }
+    if (reviveNum > 50) {
+        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.revive100" percentComplete:(reviveNum)];
+    }
+#endif
+    // close the ui & resume
 	m_pLayout->runAction(Sequence::create(
-		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-		CallFuncN::create([=](Ref* pSender)->void
+                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+                                          CallFuncN::create([=](Ref* pSender)->void
 	{
-		// Show some Ad
-
-		// then revive
-		m_pGameMediator->getPlayerData()->initPlayerHeartNumber();
-		m_pGameMediator->increaseReviveNumber();
-		Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-		Director::getInstance()->getTextureCache()->removeUnusedTextures();
-		Director::getInstance()->popScene();
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
+        Director::getInstance()->getTextureCache()->removeUnusedTextures();
+        Director::getInstance()->popScene();
 	}),
 		NULL));
 }
@@ -172,16 +206,36 @@ void GameOverLayer::menuCallback_DoubleGold(Ref* pSender)
 	m_pButtonRevive->setEnabled(false);
 	m_pButtonDoubleCoin->setEnabled(false);
 
+    // update GameCenter Achievement
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    long long doubleNum = playerData->getDoubleNumber();
+    [helper checkAndUnlockAchievement:@"com.reallycsc.endlesslove.double1"];
+    if (doubleNum > 1) {
+        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.double10" percentComplete:(doubleNum*10)];
+    }
+    if (doubleNum > 10) {
+        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.double50" percentComplete:(doubleNum*2)];
+    }
+    if (doubleNum > 50) {
+        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.double100" percentComplete:(doubleNum)];
+    }
+#endif
+    
+    // update gold
+    playerData->finishGameAddGoldNumber();
+    
 	// close the ui & goto mainmenu
-	Size winSize = Director::getInstance()->getWinSize();
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-		DelayTime::create(duration + 0.5f),
-		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-		CallFuncN::create([=](Ref* pSender)->void
+                                          DelayTime::create(duration + 0.5f),
+                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+                                          CallFuncN::create([=](Ref* pSender)->void
 	{
 		Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
 		Director::getInstance()->getTextureCache()->removeUnusedTextures();
-		Director::getInstance()->replaceScene(MainMenuScene::create());
+        Director::getInstance()->popScene();
+        Director::getInstance()->replaceScene(TransitionSlideInL::create(0.5f, MainMenuScene::create()));
 	}),
 		NULL));
 }

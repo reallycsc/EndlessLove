@@ -93,7 +93,7 @@ bool GameMediator::loadGameConfigFile()
 		XMLElement* root = document.RootElement();
 		CC_BREAK_IF(!root);
 
-		Size winSize = Director::getInstance()->getWinSize();
+        Size winSize = Director::getInstance()->getWinSize();
 
 		// load game level config
 		XMLElement* surface1 = root->FirstChildElement("GameLevel");
@@ -255,7 +255,7 @@ bool GameMediator::loadGameTextFile()
 #if defined LANGUAGE_CHINESE
         filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_Chinese.xml");
 #elif defined LANGUAGE_ENGLISH
-        //filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
+        filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
 #endif
         document.LoadFile(filename.c_str());
 		XMLElement* root = document.RootElement();
@@ -379,36 +379,4 @@ void GameMediator::spriteToGray(Node* pNode, float percent)
 	CHECK_GL_ERROR_DEBUG();
 	sp->getGLProgram()->updateUniforms();
 	CHECK_GL_ERROR_DEBUG();
-}
-
-Widget* GameMediator::replaceNodeWithWidget(Node* node)
-{
-	Widget* widget = Widget::create();
-	widget->setAnchorPoint(node->getAnchorPoint());
-	widget->setName(node->getName());
-	widget->setPosition(node->getPosition());
-	widget->setContentSize(node->getContentSize());
-	widget->setScaleX(node->getScaleX());
-	widget->setScaleY(node->getScaleY());
-	widget->setRotation(node->getRotationSkewX());
-
-	// 将Node的孩子挂到widget上
-	auto children = node->getChildren();
-	for (int i = 0; i < children.size(); i++)
-	{
-		auto child = children.at(i);
-		child->retain();
-		node->removeChild(child);
-		widget->addChild(child, child->getLocalZOrder());
-		child->release();
-	}
-
-	// 从父节点摘除
-	auto parent = node->getParent();
-	if (parent)
-	{
-		parent->addChild(widget, node->getLocalZOrder());
-		parent->removeChild(node);
-	}
-	return widget;
 }

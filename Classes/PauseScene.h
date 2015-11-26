@@ -8,9 +8,9 @@ public:
 	PauseScene(void);
 	~PauseScene(void);
 
-	static PauseScene* createScene(RenderTexture* sqr);
+	CREATE_FUNC(PauseScene);
 
-	virtual bool init(RenderTexture* sqr);
+	virtual bool init();
 
 };
 

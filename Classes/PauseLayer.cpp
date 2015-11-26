@@ -61,6 +61,8 @@ void PauseLayer::menuCallback_Resume(Ref* pSender)
 		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
+        Director::getInstance()->getTextureCache()->removeUnusedTextures();
 		Director::getInstance()->popScene(); 
 	}),
 		NULL));
@@ -69,11 +71,15 @@ void PauseLayer::menuCallback_Resume(Ref* pSender)
 void PauseLayer::menuCallback_Retry(Ref* pSender)
 {
 	Size winSize = Director::getInstance()->getWinSize();
+    PlayerData* data = GameMediator::getInstance()->getPlayerData();
+    data->finishGameAddGoldNumber();
+    data->finishGameAddScore();
+    
 	m_pLayout->runAction(Sequence::create(
 		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
-		GameMediator::getInstance()->getPlayerData()->savePlayerData();
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
 		Director::getInstance()->getTextureCache()->removeUnusedTextures();
 		Director::getInstance()->popScene();
 		Director::getInstance()->replaceScene(GameScene::create());
@@ -84,14 +90,19 @@ void PauseLayer::menuCallback_Retry(Ref* pSender)
 void PauseLayer::menuCallback_MainMenu(Ref* pSender)
 {
 	Size winSize = Director::getInstance()->getWinSize();
+    // update gold
+    PlayerData* data = GameMediator::getInstance()->getPlayerData();
+    data->finishGameAddGoldNumber();
+    data->finishGameAddScore();
+
 	m_pLayout->runAction(Sequence::create(
 		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
-		GameMediator::getInstance()->getPlayerData()->savePlayerData();
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
 		Director::getInstance()->getTextureCache()->removeUnusedTextures();
 		Director::getInstance()->popScene();
-		Director::getInstance()->replaceScene(MainMenuScene::create());
+        Director::getInstance()->replaceScene(TransitionSlideInL::create(0.5f, MainMenuScene::create()));
 	}),
 		NULL));
 }

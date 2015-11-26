@@ -78,6 +78,7 @@
         <Project Name="PurchaseItemNode.csd" Type="Node" />
         <Project Name="PlayerUpgradeItemNode.csd" Type="Node" />
         <Image Name="button_down.png" />
+        <Project Name="LoadingScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

@@ -194,7 +194,7 @@ void Player::changePlayerColorToGrey()
 	float percent = 1.0f;
 	if (minNumber != maxNumber)
 		percent = (m_pPlayerData->getHeartNumber() - minNumber) / (maxNumber - minNumber);
-	m_pGameMediator->spriteToGray(m_pSprite, percent);
+	GameMediator::spriteToGray(m_pSprite, percent);
 }
 
 void Player::playShieldAnimation(float duration)
