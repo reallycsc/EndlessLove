@@ -1,11 +1,5 @@
 #include "AppDelegate.h"
-#include "MainMenuScene.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/GameKitHelper.h"
-#import "IOSHelper/IAPShare.h"
-#endif
-
+#include "LoadingScene.h"
 
 USING_NS_CC;
 
@@ -58,21 +52,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
 	FileUtils::getInstance()->addSearchPath("res");
 
     // create a scene. it's an autorelease object
-    auto scene = MainMenuScene::create();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // Game Center login
-    [[GameKitHelper sharedHelper] authenticateLocalUser];
-    
-    // init IAPHelper
-    if(![IAPShare sharedHelper].iap) {
-        NSSet *productIdentifiers = [NSSet setWithObjects:
-                                     @"com.reallycsc.endlesslove.adremove",
-                                     nil];
-        [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:productIdentifiers];
-        
-    }
-#endif
+    auto scene = LoadingScene::create();
     
     // run
     director->runWithScene(scene);

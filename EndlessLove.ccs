@@ -59,6 +59,7 @@
             <Image Name="wheelchair.png" />
           </Folder>
           <Image Name="playAd.png" />
+          <Image Name="Loading.png" />
         </Folder>
         <Folder Name="Font">
           <TTF Name="arial.ttf" />
