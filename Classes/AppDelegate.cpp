@@ -1,7 +1,9 @@
 #include "AppDelegate.h"
 #include "LoadingScene.h"
+#include "PluginVungle/PluginVungle.h"
 
 USING_NS_CC;
+
 
 AppDelegate::AppDelegate() {
 
@@ -35,19 +37,21 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLViewImpl::create("Endless Love");
-		glview->setFrameSize(960,640);
+		//glview->setFrameSize(960,640);
         director->setOpenGLView(glview);
     }
 
     // turn on display FPS
     //director->setDisplayStats(true);
     
+    // Set the design resolution
     director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
     
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
 
-    register_all_packages();
+    // init Vungle
+    sdkbox::PluginVungle::init();
 
 	FileUtils::getInstance()->addSearchPath("res");
 

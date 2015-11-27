@@ -1,0 +1,32 @@
+{
+    "android": {
+        "Vungle": {
+            "id": "56580b6ad4adae687400002e",
+            "ads": {
+                "double": {
+                    "sound": false,
+                    "backbutton": false,
+                    "incentivized": true
+                },
+                "revive": {
+                    "sound": false,
+                    "backbutton": false,
+                    "incentivized": true
+                }
+            }
+        }
+    },
+    "ios": {
+        "Vungle": {
+            "id": "56580b6ad4adae687400002e",
+            "ads": {
+                "double": {
+                    "incentivized": true
+                },
+                "revive": {
+                    "incentivized": true
+                }
+            }
+        }
+    }
+}

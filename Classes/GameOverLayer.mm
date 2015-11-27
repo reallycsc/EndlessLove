@@ -2,6 +2,7 @@
 #include "GameScene.h"
 #include "MainMenuScene.h"
 #include "CSCClass/TextNumChange.h"
+#include "NormalNoticeLayer.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #import "IOSHelper/GameKitHelper.h"
@@ -22,6 +23,8 @@ GameOverLayer::GameOverLayer(void)
 	m_pButtonMainMenu = NULL;
 	m_pButtonRevive = NULL;
 	m_pButtonDoubleCoin = NULL;
+    m_pSpriteRevivePlay = NULL;
+    m_pSpriteDoublePlay = NULL;
 
 	m_nHighscore = 0;
 }
@@ -40,6 +43,8 @@ bool GameOverLayer::init()
 
     cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
+    sdkbox::PluginVungle::setListener(this);
+    
 	// load csb
 	auto rootNode = CSLoader::createNode("GameOverLayer.csb");
 	m_pAnimate = CSLoader::createTimeline("GameOverLayer.csb");
@@ -53,9 +58,12 @@ bool GameOverLayer::init()
 	m_pButtonMainMenu = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_MainMenu"));
 	m_pButtonMainMenu->addClickEventListener(CC_CALLBACK_1(GameOverLayer::menuCallback_MainMenu, this));
 	m_pButtonRevive = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_Revive"));
+    m_pSpriteRevivePlay = dynamic_cast<Sprite*>(m_pButtonRevive->getChildByName("Sprite_playAd"));
 	m_pButtonRevive->addClickEventListener(CC_CALLBACK_1(GameOverLayer::menuCallback_Revive, this));
 	m_pButtonDoubleCoin = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_DoubleCoin"));
+    m_pSpriteDoublePlay = dynamic_cast<Sprite*>(m_pButtonDoubleCoin->getChildByName("Sprite_playAd"));
 	m_pButtonDoubleCoin->addClickEventListener(CC_CALLBACK_1(GameOverLayer::menuCallback_DoubleGold, this));
+    
 	// if revive number get to max, disable the button
 	if (m_pGameMediator->getReviveNumber() > 0)
 	{
@@ -65,8 +73,14 @@ bool GameOverLayer::init()
     // if purchased noAd, noAd icon
     if(!m_pGameMediator->getIsAd())
     {
-        dynamic_cast<Sprite*>(m_pButtonRevive->getChildByName("Sprite_playAd"))->setVisible(false);
-        dynamic_cast<Sprite*>(m_pButtonDoubleCoin->getChildByName("Sprite_playAd"))->setVisible(false);
+        m_pSpriteRevivePlay->setVisible(false);
+        m_pSpriteDoublePlay->setVisible(false);
+    }
+    else if (!sdkbox::PluginVungle::isCacheAvailable())
+    {
+        // if vungle not ready
+        GameMediator::spriteToGray(m_pSpriteRevivePlay, 0);
+        GameMediator::spriteToGray(m_pSpriteDoublePlay, 0);
     }
 
 	// get score text
@@ -117,6 +131,54 @@ void GameOverLayer::showScoreAndStory()
 	//m_pTextStory->setPosition(cocos2d::Point(10, m_pScrollStory->getInnerContainerSize().height - 10));
 }
 
+void GameOverLayer::onVungleCacheAvailable()
+{
+    if (this)
+    {
+        CCLOG("Video loaded");
+        GameMediator::spriteToGray(m_pSpriteRevivePlay, 1);
+        GameMediator::spriteToGray(m_pSpriteDoublePlay, 1);
+    }
+}
+
+void GameOverLayer::onVungleStarted()
+{
+    CCLOG("Video started");
+}
+
+void GameOverLayer::onVungleFinished()
+{
+    CCLOG("Video finished");
+}
+
+void GameOverLayer::onVungleAdViewed(bool isComplete)
+{
+    CCLOG("Video viewed");
+    if (isComplete) {
+        CCLOG("Complete");
+    }
+    else {
+        CCLOG("Not Complete");
+    }
+}
+
+void GameOverLayer::onVungleAdReward(const std::string& name)
+{
+    if (name.compare("revive") == 0) {
+        Director::getInstance()->getScheduler()->performFunctionInCocosThread([=](){
+            CCLOG("%s", name.c_str());
+            this->realRevive();
+        });
+    }
+    else if (name.compare("double") == 0) {
+        Director::getInstance()->getScheduler()->performFunctionInCocosThread([=](){
+            CCLOG("%s", name.c_str());
+            this->realDouble();
+        });
+    }
+
+}
+
 void GameOverLayer::menuCallback_Retry(Ref* pSender)
 {
     // update gold
@@ -155,10 +217,31 @@ void GameOverLayer::menuCallback_MainMenu(Ref* pSender)
 
 void GameOverLayer::menuCallback_Revive(Ref* pSender)
 {
+    if (m_pGameMediator->getIsAd()) {
+        // Show some Ad
+        if (sdkbox::PluginVungle::isCacheAvailable())
+        {
+            sdkbox::PluginVungle::show("revive");
+        }
+        else
+        {
+            // tell player video is not ready
+            auto mapGameText = m_pGameMediator->getGameText();
+            this->addChild(NormalNoticeLayer::create(
+                                                     mapGameText->at(GAMETEXT_NORMALNOTICELAYER_NOTIFICATION),
+                                                     "Vungle is not ready."),
+                           ZORDER_UPGRADELAYER_NOTICELAYER);
+        }
+        
+    }
+    else {
+        this->realRevive();
+    }
+}
+
+void GameOverLayer::realRevive()
+{
     cocos2d::Size winSize = Director::getInstance()->getWinSize();
-    // Show some Ad
-    
-    // then revive
     m_pGameMediator->getPlayerData()->initPlayerHeartNumber();
     m_pGameMediator->increaseReviveNumber();
     // update GameCenter Achievement
@@ -190,8 +273,29 @@ void GameOverLayer::menuCallback_Revive(Ref* pSender)
 
 void GameOverLayer::menuCallback_DoubleGold(Ref* pSender)
 {
-	// Show some Ad
+    if (m_pGameMediator->getIsAd()) {
+        // Show some Ad
+        if (sdkbox::PluginVungle::isCacheAvailable())
+        {
+            sdkbox::PluginVungle::show("double");
+        }
+        else
+        {
+            // tell player video is not ready
+            auto mapGameText = m_pGameMediator->getGameText();
+            this->addChild(NormalNoticeLayer::create(
+                                                     mapGameText->at(GAMETEXT_NORMALNOTICELAYER_NOTIFICATION),
+                                                     "Vungle is not ready."),
+                           ZORDER_UPGRADELAYER_NOTICELAYER);
+        }
+    }
+    else {
+        this->realDouble();
+    }
+}
 
+void GameOverLayer::realDouble()
+{
 	// then double the gold
 	auto playerData = m_pGameMediator->getPlayerData();
 	int m_nFromGoldNumber = playerData->getGoldNumber();

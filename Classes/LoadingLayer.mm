@@ -36,7 +36,6 @@ bool LoadingLayer::init()
                                      @"com.reallycsc.endlesslove.adremove",
                                      nil];
         [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:productIdentifiers];
-        
     }
 #endif
     
