@@ -91,13 +91,13 @@
 }
 
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response {
-    NSLog(@"Loaded list of products...");
+    NSLog(@"IAPHepler - Loaded list of products...");
     
     self.products = response.products;
     self.request = nil;
 
     for(SKProduct* skProduct in self.products) {
-        NSLog(@"Found product: %@ %@ %@ %0.2f",skProduct.productIdentifier,skProduct.localizedTitle,skProduct.localizedDescription,skProduct.price.floatValue);
+        NSLog(@"IAPHepler - Found product: %@ %@ %@ %0.2f",skProduct.productIdentifier,skProduct.localizedTitle,skProduct.localizedDescription,skProduct.price.floatValue);
     }
 
     if(_requestProductsBlock) {
@@ -112,7 +112,7 @@
 
 {
     
-    NSLog(@"Failed to load list of products.");
+    NSLog(@"IAPHepler - Failed to load list of products.");
     
     self.request = nil;
     
@@ -202,7 +202,7 @@
     
     if (transaction.error.code != SKErrorPaymentCancelled)
     {
-        NSLog(@"Transaction error: %@ %ld", transaction.error.localizedDescription,(long)transaction.error.code);
+        NSLog(@"IAPHepler - Transaction error: %@ %ld", transaction.error.localizedDescription,(long)transaction.error.code);
     }
 
     if ([SKPaymentQueue defaultQueue]) {
@@ -216,8 +216,6 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions
 {
-    
-    
     for (SKPaymentTransaction *transaction in transactions)
     {
         switch (transaction.transactionState)
@@ -232,6 +230,22 @@
                 [self restoreTransaction:transaction];
             default:
                 break;
+        }
+    }
+}
+
+- (void)buyProductWithID:(NSString *)productID onCompletion:(IAPbuyProductCompleteResponseBlock)completion {
+    self.buyProductCompleteBlock = completion;
+    
+    self.restoreCompletedBlock = nil;
+    
+    for(SKProduct* skProduct in self.products) {
+        if ([skProduct.productIdentifier compare:productID] == NSOrderedSame) {
+            SKPayment *payment = [SKPayment paymentWithProduct:skProduct];
+            
+            if ([SKPaymentQueue defaultQueue]) {
+                [[SKPaymentQueue defaultQueue] addPayment:payment];
+            }
         }
     }
 }
@@ -259,7 +273,7 @@
         [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
     }
     else {
-        NSLog(@"Cannot get the default Queue");
+        NSLog(@"IAPHepler - Cannot get the default Queue");
     }
     
     
@@ -267,7 +281,7 @@
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
     
-    NSLog(@"Transaction error: %@ %ld", error.localizedDescription,(long)error.code);
+    NSLog(@"IAPHepler - Transaction error: %@ %ld", error.localizedDescription,(long)error.code);
     if(_restoreCompletedBlock) {
         _restoreCompletedBlock(queue,error);
     }
@@ -360,7 +374,7 @@
 }
 
 -(void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    NSLog(@"Cannot transmit receipt data. %@",[error localizedDescription]);
+    NSLog(@"IAPHepler - Cannot transmit receipt data. %@",[error localizedDescription]);
     
     if(_checkReceiptCompleteBlock) {
         _checkReceiptCompleteBlock(nil,error);

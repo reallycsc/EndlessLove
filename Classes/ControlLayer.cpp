@@ -82,7 +82,11 @@ void ControlLayer::menuCallback_Pause(Ref* pSender)
 	renderTexture->begin();
 	Director::getInstance()->getRunningScene()->visit();
 	renderTexture->end();
+    
+    Director::getInstance()->getRenderer()->render();// Must add this for version 3.0 or image goes black
+    Director::getInstance()->getTextureCache()->addImage(renderTexture->newImage(), "GameOverImage");
+    
 	// pause the game, push to scene stack and change to new scene
 	// Don't forget to pop it
-	Director::getInstance()->pushScene(PauseScene::createScene(renderTexture));
+	Director::getInstance()->pushScene(PauseScene::create());
 }

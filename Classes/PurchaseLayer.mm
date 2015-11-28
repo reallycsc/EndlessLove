@@ -1,8 +1,8 @@
 #include "PurchaseLayer.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "Reachability.h"
-#import "ProgressHUD.h"
+#import "IOSHelper/Reachability.h"
+#import "IOSHelper/ProgressHUD.h"
 #endif
 
 PurchaseLayer::PurchaseLayer(void)
@@ -69,7 +69,9 @@ bool PurchaseLayer::init()
                         this->showListItems();
                     }
                 }];
-                [ProgressHUD show: m_pmGameText->at(GAMETEXT_PROGRESSHUD_DOWNLOADINFO) Interaction:FALSE];
+                [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_DOWNLOADINFO).c_str()
+                                                      encoding:NSUTF8StringEncoding]
+                      Interaction:FALSE];
                 this->scheduleOnce(schedule_selector(PurchaseLayer::waitingTimeOut), 10.0f);
             }
             else {
@@ -126,7 +128,9 @@ void PurchaseLayer::showListItems()
 void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* product)
 {
     IAPHelper* helper = [IAPShare sharedHelper].iap;
-    [ProgressHUD show: m_pmGameText->at(GAMETEXT_PROGRESSHUD_BUYING) Interaction:FALSE];
+    [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_BUYING).c_str()
+                                          encoding:NSUTF8StringEncoding]
+          Interaction:FALSE];
     [helper buyProduct:product
           onCompletion:^(SKPaymentTransaction* trans) {
               [ProgressHUD dismiss];
@@ -134,7 +138,9 @@ void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* pr
                   NSLog(@"Fail %@",[trans.error localizedDescription]);
               }
               else if(trans.transactionState == SKPaymentTransactionStatePurchased) {
-                  [ProgressHUD show: m_pmGameText->at(GAMETEXT_PROGRESSHUD_CHECKINGRECEPIT) Interaction:FALSE];
+                  [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_CHECKINGRECEPIT).c_str()
+                                                        encoding:NSUTF8StringEncoding]
+                        Interaction:FALSE];
                   [helper checkReceipt:trans.transactionReceipt
                        AndSharedSecret:@"your sharesecret"
                           onCompletion:^(NSString *response, NSError *error) {
@@ -148,17 +154,20 @@ void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* pr
                                       NSLog(@"Pruchases %@",helper.purchasedProducts);
                                   }
                                   else {
-                                      [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTSTATUSERROR)];
+                                      [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTSTATUSERROR).c_str()
+                                                                                encoding:NSUTF8StringEncoding]];
                                       NSLog(@"Fail in response status is 0");
                                   }
                               }
                               else {
-                                  [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_NORESPONSE)];
+                                  [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_NORESPONSE).c_str()
+                                                                            encoding:NSUTF8StringEncoding]];
                               }
                           }];
               }
               else if(trans.transactionState == SKPaymentTransactionStateFailed) {
-                  [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTCHECKERROR)];
+                  [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTCHECKERROR).c_str()
+                                                            encoding:NSUTF8StringEncoding]];
                   NSLog(@"Fail in SKPaymentTransactionStateFailed");
               }
           }];//end of buy product
@@ -182,6 +191,7 @@ void PurchaseLayer::moveToFinished(Ref* pSender)
 void PurchaseLayer::waitingTimeOut(float dt)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    [ProgressHUD showError: m_pmGameText->at(GAMETEXT_PROGRESSHUD_RESPONSETIMEOUT)];
+    [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_RESPONSETIMEOUT).c_str()
+                                              encoding:NSUTF8StringEncoding]];
 #endif
 }

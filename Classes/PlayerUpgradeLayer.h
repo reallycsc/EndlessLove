@@ -33,6 +33,7 @@ private:
 	void loadUpgradeItem(int id);
 	void setItemContent(int id, int textid, const char* format1, const char* format2, bool isSetText = true);
 	void setAllItemContents(bool isSetText = true);
+    void unlockAchievement(int id, int level, unsigned long maxLevel);
 
 private:
 	PlayerData*	m_pPlayerData;

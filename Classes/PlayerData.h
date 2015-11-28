@@ -49,7 +49,10 @@ public:
 
 	void initPlayerHeartNumber();
 
-	void doublePlayerGoldNumber() { m_nGoldNumber += m_nGoldNumber; }
+	void doublePlayerGoldNumber() {
+        this->addGoldNumber(m_nGoldNumber);
+        this->addDoubleNumber();
+    }
 
 	float addHeartNumber(float number) { // return real change number
 		float before = m_fHeartNumber;
@@ -57,17 +60,8 @@ public:
 		m_fHeartNumber = MAX(0, MIN(m_fHeartNumber, m_fMaxHeartNumber));
 		return m_fHeartNumber - before;
 	}
-	int addGoldNumber(int number) {
-		m_nGoldNumber += number; 
-		m_nGoldNumberAll += number;
-		return m_nGoldNumber;
-	}
-	int addScore(int number) {
-		m_nScore += number;
-		if (m_nScore > m_nHighscore)
-			m_nHighscore = m_nScore;
-		return m_nScore;
-	}
+    void addGoldNumber(int number) { m_nGoldNumber += number; }
+    void addScore(int number) { m_nScore += number; }
 	bool subGoldNumber(int number) {
 		if (m_nGoldNumberAll < number) 
 			return false;
@@ -77,10 +71,15 @@ public:
 			return true;
 		}
 	}
+    void addReviveNumber() { m_nReviveNumber++; }
+    void addDoubleNumber() { m_nDoubleNumber++; }
+    
+    void finishGameAddGoldNumber();
+    void finishGameAddScore();
 
 	// data load & save
 	bool loadPlayerData();
-	bool savePlayerData();
+	bool saveAllPlayerData(bool isGameCenter = true);
 
 	bool loadPlayerUpgradeConfigFile();
 
@@ -88,11 +87,16 @@ public:
 	vector<JUMP_TYPE>* getJumpTypeLevelInfoVector() { return &m_vJumpTypeLevelInfo; }
 	vector<FLOAT_LEVEL_INFO>* getLevelInfoVectorFor(int id) { return &m_mLevelInfo.at(id);}
 	int getLevelFor(int id) { return m_mLevels.at(id); }
-	void setLevelFor(int id, int level) { m_mLevels.at(id) = level; }
+    void setLevelFor(int id, int level);
 
 private:
 	bool loadLevelDataForFloat(XMLElement* root, const char* elementName, int id);
 	void saveDefaultData(UserDefault* user);
+    
+    void addCustomEventLisenter(const string suffix, long long* pScore);
+    
+    bool saveIntPlayerDara(const char* dataName, int data, bool isGameCenter = true);
+    bool saveLevelPlayerData(int id);
 
 public:
 	CC_SYNTHESIZE(float, m_fHeartNumber, HeartNumber);
@@ -111,7 +115,11 @@ public:
 	CC_SYNTHESIZE(int, m_nScore, Score);
 	CC_SYNTHESIZE(long long, m_nHighscore, Highscore);
 	CC_SYNTHESIZE(int, m_nGoldNumber, GoldNumber);
-	CC_SYNTHESIZE(int, m_nGoldNumberAll, GoldNumberAll);
+	CC_SYNTHESIZE(long long, m_nGoldNumberAll, GoldNumberAll);
+    
+    CC_SYNTHESIZE(long long, m_nGoldNumberAcc, GoldNumberAcc);
+    CC_SYNTHESIZE(long long, m_nReviveNumber, ReviveNumber);
+    CC_SYNTHESIZE(long long, m_nDoubleNumber, DoubleNumber);
 
 private:
 	int	m_nMinStrength;

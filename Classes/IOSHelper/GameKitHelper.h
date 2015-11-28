@@ -15,7 +15,7 @@
 #include "CommonHeader.h"
 
 #ifndef GAMEKITHELPER_LOGGING
-#define GAMEKITHELPER_LOGGING 0
+#define GAMEKITHELPER_LOGGING 1
 #endif
 
 // Set SECRET_KEY for proper encryption
@@ -39,6 +39,8 @@
 - (void)showLeaderboard:(NSString*)leaderboardId;
 
 // Achievements
+- (void)checkAndUnlockAchievement:(NSString*)achievementId;
+- (void)unlockAchievementPercent:(NSString*)achievementId percentComplete:(double)percent;
 - (BOOL)isAchievementUnlocked:(NSString*)achievementId;
 - (double)getAchievementPercent:(NSString*)achievementId;
 - (void)reportAchievement:(NSString*)achievementId percentComplete:(double)percent;

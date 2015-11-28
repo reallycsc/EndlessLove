@@ -1,14 +1,14 @@
 #pragma once
 #include "CommonHeader.h"
 
-class PauseScene :
+class LoadingScene :
 	public Scene
 {
 public:
-	PauseScene(void);
-	~PauseScene(void);
+	LoadingScene(void);
+	~LoadingScene(void);
 
-	CREATE_FUNC(PauseScene);
+	CREATE_FUNC(LoadingScene);
 
 	virtual bool init();
 

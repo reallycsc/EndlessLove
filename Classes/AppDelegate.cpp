@@ -1,13 +1,9 @@
 #include "AppDelegate.h"
-#include "MainMenuScene.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "GameKitHelper.h"
-#import "IAPShare.h"
-#endif
-
+#include "LoadingScene.h"
+#include "PluginVungle/PluginVungle.h"
 
 USING_NS_CC;
+
 
 AppDelegate::AppDelegate() {
 
@@ -41,39 +37,26 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
         glview = GLViewImpl::create("Endless Love");
-		glview->setFrameSize(960,640);
+		//glview->setFrameSize(960,640);
         director->setOpenGLView(glview);
     }
 
     // turn on display FPS
     //director->setDisplayStats(true);
     
+    // Set the design resolution
     director->getOpenGLView()->setDesignResolutionSize(960, 640, ResolutionPolicy::SHOW_ALL);
     
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
 
-    register_all_packages();
+    // init Vungle
+    sdkbox::PluginVungle::init();
 
 	FileUtils::getInstance()->addSearchPath("res");
 
     // create a scene. it's an autorelease object
-    auto scene = MainMenuScene::create();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // Game Center login
-    [[GameKitHelper sharedHelper] authenticateLocalUser];
-    
-    // init IAPHelper
-    if(![IAPShare sharedHelper].iap) {
-        NSSet *productIdentifiers = [NSSet setWithObjects:
-                                     @"EndlessLove.TestItem",
-                                     @"EndlessLove.TestItem2",
-                                     nil];
-        [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:productIdentifiers];
-        
-    }
-#endif
+    auto scene = LoadingScene::create();
     
     // run
     director->runWithScene(scene);

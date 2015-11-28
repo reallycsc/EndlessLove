@@ -72,9 +72,9 @@ enum GameStage {
 };
 
 // Custom event code
+const string EVENT_GAMECENTER_AUTHENTICATED = "event_gamecenter_authenticated";
 const string EVENT_GAMECENTER_SCORERETRIVED = "event_gamecenter_scoreretrived";
 const string EVENT_PLARERDATA_SCOREUPDATED = "event_playerdata_scoreupdated";
-const string EVENT_IAPSHARE_PURCHASESUCCESS = "event_IAPShare_purchasesuccess";
 
 // global zorder & layer zorder
 const int ZORDER_MAINMENULAYER_MAINLAYER = 0;

@@ -16,7 +16,10 @@ public:
 
 	void reloadAllConfigFiles();
 
-	void increaseReviveNumber() { m_nReviveNumber++; }
+	void increaseReviveNumber() {
+        m_nReviveNumber++;
+        m_pPlayerData->addReviveNumber();
+    }
 
 	// getter function
 	map<int, string>* getGameText() { return &m_mGameText; }
@@ -25,9 +28,8 @@ public:
 
 	// common function
 	// percent: 0 - gray, 1 - color
-	void spriteToGray(Node* pNode, float percent);
-	Widget* replaceNodeWithWidget(Node* node);
-
+	static void spriteToGray(Node* pNode, float percent);
+    
 private:
     string& replace_all_distinct(string& str, string& old_value, string& new_value);
     

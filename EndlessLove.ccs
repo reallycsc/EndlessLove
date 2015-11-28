@@ -59,6 +59,7 @@
             <Image Name="wheelchair.png" />
           </Folder>
           <Image Name="playAd.png" />
+          <Image Name="Loading.png" />
         </Folder>
         <Folder Name="Font">
           <TTF Name="arial.ttf" />
@@ -78,6 +79,7 @@
         <Project Name="PurchaseItemNode.csd" Type="Node" />
         <Project Name="PlayerUpgradeItemNode.csd" Type="Node" />
         <Image Name="button_down.png" />
+        <Project Name="LoadingScene.csd" Type="Scene" />
       </RootFolder>
     </Group>
   </SolutionFolder>

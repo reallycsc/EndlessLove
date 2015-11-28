@@ -347,7 +347,7 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="PlayerNode.csd" Plist="" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Node_Heart" ActionTag="-561847720" Tag="120" IconVisible="True" TopMargin="-70.0000" BottomMargin="70.0000" ctype="SingleNodeObjectData">
+              <AbstractNodeData Name="Node_Heart" ActionTag="-561847720" Tag="120" IconVisible="True" TopMargin="70.0000" BottomMargin="-70.0000" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
                   <AbstractNodeData Name="Sprite_Heart" ActionTag="-1005586582" Tag="121" IconVisible="False" LeftMargin="-58.0000" TopMargin="-27.5000" BottomMargin="-27.5000" ctype="SpriteObjectData">
@@ -375,16 +375,16 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint />
-                <Position Y="70.0000" />
+                <Position Y="-70.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Good" ActionTag="296069100" Tag="123" IconVisible="False" LeftMargin="-43.0000" RightMargin="-43.0000" TopMargin="-143.0000" BottomMargin="97.0000" FontSize="32" LabelText="Good" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_Good" ActionTag="296069100" Tag="123" IconVisible="False" LeftMargin="-43.0000" RightMargin="-43.0000" TopMargin="97.0000" BottomMargin="-143.0000" FontSize="32" LabelText="Good" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="86.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="120.0000" />
+                <Position Y="-120.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
@@ -393,10 +393,10 @@
                 <OutlineColor A="255" R="30" G="144" B="255" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Great" ActionTag="-1405362863" Tag="124" IconVisible="False" LeftMargin="-44.0000" RightMargin="-44.0000" TopMargin="-193.0000" BottomMargin="147.0000" FontSize="32" LabelText="Great" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_Great" ActionTag="-1405362863" Tag="124" IconVisible="False" LeftMargin="-44.0000" RightMargin="-44.0000" TopMargin="147.0000" BottomMargin="-193.0000" FontSize="32" LabelText="Great" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="88.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="170.0000" />
+                <Position Y="-170.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
@@ -405,10 +405,10 @@
                 <OutlineColor A="255" R="128" G="0" B="128" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Perfect" ActionTag="1583817938" Tag="125" IconVisible="False" LeftMargin="-55.5000" RightMargin="-55.5000" TopMargin="-243.0000" BottomMargin="197.0000" FontSize="32" LabelText="Perfect" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+              <AbstractNodeData Name="Text_Perfect" ActionTag="1583817938" Tag="125" IconVisible="False" LeftMargin="-55.5000" RightMargin="-55.5000" TopMargin="197.0000" BottomMargin="-243.0000" FontSize="32" LabelText="Perfect" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
                 <Size X="111.0000" Y="46.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="220.0000" />
+                <Position Y="-220.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />

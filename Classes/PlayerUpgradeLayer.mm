@@ -3,7 +3,7 @@
 #include "NormalNoticeLayer.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "GameKitHelper.h"
+#import "IOSHelper/GameKitHelper.h"
 #endif
 
 PlayerUpgradeLayer::PlayerUpgradeLayer(void)
@@ -92,9 +92,9 @@ void PlayerUpgradeLayer::loadUpgradeItem(int id)
 
 	Layout* layoutDesc = dynamic_cast<Layout*>(layout->getChildByName("Panel_Desc"));
 	item.description = dynamic_cast<Text*>(layoutDesc->getChildByName("Text_Desc"));
-	item.description->setTextAreaSize(Size(layoutDesc->getContentSize().width, 0));
+    item.description->setTextAreaSize(cocos2d::Size(layoutDesc->getContentSize().width, 0));
 	layoutDesc->setContentSize(item.description->getVirtualRendererSize());
-	item.description->setPosition(Point(0, layoutDesc->getContentSize().height));
+    item.description->setPosition(cocos2d::Point(0, layoutDesc->getContentSize().height));
 
 	item.button = dynamic_cast<Button*>(layout->getChildByName("Button_Item"));
 	item.button->addClickEventListener(CC_CALLBACK_1(PlayerUpgradeLayer::menuCallback_Upgrade, this, id));
@@ -223,18 +223,7 @@ void PlayerUpgradeLayer::update(float dt)
 void PlayerUpgradeLayer::menuCallback_MainMenu(Ref* pSender)
 {
 	Director::getInstance()->getTextureCache()->removeUnusedTextures();
-	Director::getInstance()->replaceScene(MainMenuScene::create());
-}
-
-inline void checkAndUnlockAchievement()
-{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    if (![helper isAchievementUnlocked:@"Achievements_first_upgrade"])
-    {
-        [helper reportAchievement:@"Achievements_first_upgrade" percentComplete:100];
-    }
-#endif
+    Director::getInstance()->replaceScene(TransitionSlideInR::create(0.5f, MainMenuScene::create()));
 }
 
 void PlayerUpgradeLayer::menuCallback_Upgrade(Ref* pSender, int id)
@@ -243,15 +232,18 @@ void PlayerUpgradeLayer::menuCallback_Upgrade(Ref* pSender, int id)
 
 	int needGold = 0;
 	int level = 0;
+    unsigned long maxLevel = 0;
 	if (id == ID_JUMP_TYPE)
 	{
 		auto levelConfigVector = m_pPlayerData->getJumpTypeLevelInfoVector();
+        maxLevel = levelConfigVector->size();
 		level = m_pPlayerData->getLevelFor(id);
 		needGold = levelConfigVector->at(level - 1).needGold;
 	}
 	else
 	{
 		auto levelConfigVector = m_pPlayerData->getLevelInfoVectorFor(id);
+        maxLevel = levelConfigVector->size();
 		level = m_pPlayerData->getLevelFor(id);
 		needGold = levelConfigVector->at(level - 1).needGold;
 	}
@@ -262,11 +254,10 @@ void PlayerUpgradeLayer::menuCallback_Upgrade(Ref* pSender, int id)
 		m_pPlayerData->setLevelFor(id, level);
 		m_pPlayerData->initPlayerData();
 		this->setAllItemContents(false);
-		m_pGoldNumberAll->setString(StringUtils::format("%d", m_pPlayerData->getGoldNumberAll()));
-		m_pPlayerData->savePlayerData();
+		m_pGoldNumberAll->setString(StringUtils::format("%lld", m_pPlayerData->getGoldNumberAll()));
 		// Game center achievement
-		checkAndUnlockAchievement();
-	}
+        this->unlockAchievement(id, level, maxLevel);
+    }
 	else
 	{
 		// tell play gold is not enough
@@ -275,4 +266,48 @@ void PlayerUpgradeLayer::menuCallback_Upgrade(Ref* pSender, int id)
 			mapGameText->at(GAMETEXT_NORMALNOTICELAYER_NOTENOUGHGOLD)),
 			ZORDER_UPGRADELAYER_NOTICELAYER);
 	}
+}
+
+void PlayerUpgradeLayer::unlockAchievement(int id, int level, unsigned long maxLevel)
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    // delete the level 1
+    level = level - 1;
+    maxLevel = maxLevel - 1;
+    int percent = (level * 100) / maxLevel;
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    [helper checkAndUnlockAchievement:@"com.reallycsc.endlesslove.firstupgrade"];
+    switch (id) {
+        case ID_JUMP_TYPE:
+            if (level <= 2)
+            {
+                [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.twostagejump" percentComplete:((level * 100) / 2 )];
+            }
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxjumptype" percentComplete:percent];
+            break;
+        case ID_MAXHEART_NUMBER:
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxheartnumber" percentComplete:percent];
+            break;
+        case ID_STRENGTH:
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxjumpstrength" percentComplete:percent];
+            break;
+        case ID_POWER_TIME:
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxfocusduration" percentComplete:percent];
+            break;
+        case ID_GUIDELINE_TIME:
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxguideline" percentComplete:percent];
+            break;
+        case ID_ENLARGE_TIME:
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxenlarge" percentComplete:percent];
+            break;
+        case ID_SHRINK_TIME:
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxshrink" percentComplete:percent];
+            break;
+        case ID_SHIELD_TIME:
+            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxshield" percentComplete:percent];
+            break;
+        default:
+            break;
+    }
+#endif
 }

@@ -1,9 +1,10 @@
 #pragma once
 #include "CommonHeader.h"
 #include "GameMediator.h"
+#include "PluginVungle/PluginVungle.h"
 
 class GameOverLayer :
-	public Layer
+	public Layer, sdkbox::VungleListener
 {
 public:
 	GameOverLayer(void);
@@ -20,6 +21,15 @@ private:
 
 	void showScoreAndStory();
 
+    void onVungleCacheAvailable();
+    void onVungleStarted();
+    void onVungleFinished();
+    void onVungleAdViewed(bool isComplete);
+    void onVungleAdReward(const std::string& name);
+    
+    void realRevive();
+    void realDouble();
+    
 private:
 	GameMediator*	m_pGameMediator;
 	map<int, string>*	m_pMapGameText;
@@ -34,9 +44,13 @@ private:
 	Button*	m_pButtonMainMenu;
 	Button*	m_pButtonRevive;
 	Button*	m_pButtonDoubleCoin;
+    Sprite* m_pSpriteRevivePlay;
+    Sprite* m_pSpriteDoublePlay;
 
 	ActionTimeline* m_pAnimate;
 
 	int m_nHighscore;
+    
+    
 };
 
