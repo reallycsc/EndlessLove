@@ -1,10 +1,14 @@
 #pragma once
 #include "CommonHeader.h"
 #include "GameMediator.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #include "PluginVungle/PluginVungle.h"
+#endif
 
-class GameOverLayer :
-	public Layer, sdkbox::VungleListener
+class GameOverLayer : public Layer
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	, sdkbox::VungleListener
+#endif
 {
 public:
 	GameOverLayer(void);
@@ -19,7 +23,7 @@ private:
 	void menuCallback_Revive(Ref* pSender);
 	void menuCallback_DoubleGold(Ref* pSender);
 
-	void showScoreAndStory();
+	void showScore();
 
     void onVungleCacheAvailable();
     void onVungleStarted();
@@ -32,13 +36,12 @@ private:
     
 private:
 	GameMediator*	m_pGameMediator;
-	map<int, string>*	m_pMapGameText;
+	PlayerData*		m_pPlayerData;
+	map<string, string>*	m_pMapGameText;
 
 	Layout*	m_pLayout;
 	Text*	m_pTextHighscore;
 	Text*	m_pTextGoldNumber;
-	ScrollView* m_pScrollStory;
-	Text*	m_pTextStory;
 
 	Button*	m_pButtonRetry; 
 	Button*	m_pButtonMainMenu;
@@ -50,7 +53,5 @@ private:
 	ActionTimeline* m_pAnimate;
 
 	int m_nHighscore;
-    
-    
 };
 

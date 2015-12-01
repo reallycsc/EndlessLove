@@ -12,16 +12,7 @@ public:
 	CREATE_FUNC(ControlLayer);
 	virtual bool init();
 
-	void menuCallback_Pause(Ref* pSender);
-
-	// game state contrl
-	void gameStart();
-	void gameOver();
-
 private:
-	GameMediator*	m_pGameMediator;
-
-	Button*	m_pButtonPause;
-	Text*	m_pTextTouchForStart;
+	void menuCallback_Pause(Ref* pSender);
 };
 

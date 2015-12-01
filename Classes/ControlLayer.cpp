@@ -1,12 +1,8 @@
 #include "ControlLayer.h"
 #include "PauseScene.h"
-#include "GameOverScene.h"
 
 ControlLayer::ControlLayer(void)
 {
-	m_pGameMediator = GameMediator::getInstance();
-	m_pButtonPause = NULL;
-	m_pTextTouchForStart = NULL;
 }
 
 
@@ -26,39 +22,27 @@ bool ControlLayer::init()
 	
 		// load csb
 		auto rootNode = CSLoader::createNode("ControlLayer.csb");
+		auto animate = CSLoader::createTimeline("ControlLayer.csb");
+		rootNode->runAction(animate);
+		animate->pause();
 		this->addChild(rootNode);
 
 		// get button
-		m_pButtonPause = dynamic_cast<Button*>(rootNode->getChildByName("Button_Pause"));
-		m_pButtonPause->addClickEventListener(CC_CALLBACK_1(ControlLayer::menuCallback_Pause, this));
-		m_pButtonPause->setEnabled(false);
+		auto buttonPause = dynamic_cast<Button*>(rootNode->getChildByName("Button_Pause"));
+		buttonPause->addClickEventListener(CC_CALLBACK_1(ControlLayer::menuCallback_Pause, this));
 
-		// get text
-		m_pTextTouchForStart = dynamic_cast<Text*>(rootNode->getChildByName("Text_TouchForStart"));
-
-		// set all text
-		auto mapGameText = m_pGameMediator->getGameText();
-		m_pTextTouchForStart->setString(mapGameText->at(GAMETEXT_CONTROLLAYER_TOUCHFORSTART));
-		m_pButtonPause->setTitleText(mapGameText->at(GAMETEXT_CONTROLLAYER_PAUSEGAME));
+		animate->play("Scene_Start", false);
 
         bRet = true;
     } while (0);  
   
     return bRet;  
-}  
-
-void ControlLayer::gameStart()
-{
-	m_pButtonPause->setEnabled(true);
-	m_pTextTouchForStart->setVisible(false);
-
-	m_pGameMediator->setGameState(STATE_GAME_RUN);
 }
 
-void ControlLayer::gameOver()
+void ControlLayer::menuCallback_Pause(Ref* pSender)
 {
-	Size winSize = Director::getInstance()->getWinSize();
-	RenderTexture* renderTexture = RenderTexture::create(winSize.width, winSize.height);
+	Size visibleSize = Director::getInstance()->getWinSize();
+	RenderTexture* renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height, Texture2D::PixelFormat::RGBA8888, GL_DEPTH24_STENCIL8);
 	// Go through all child of Game class and draw in renderTexture
 	// It's like screenshot
 	renderTexture->begin();
@@ -66,26 +50,8 @@ void ControlLayer::gameOver()
 	renderTexture->end();
 
 	Director::getInstance()->getRenderer()->render();// Must add this for version 3.0 or image goes black  
-	Director::getInstance()->getTextureCache()->addImage(renderTexture->newImage(), "GameOverImage");
+	Director::getInstance()->getTextureCache()->addImage(renderTexture->newImage(), "GamePauseImage");
 
-	// pause the game, push to scene stack and change to new scene
-	// Don't forget to pop it
-	Director::getInstance()->pushScene(GameOverScene::create());
-}
-
-void ControlLayer::menuCallback_Pause(Ref* pSender)
-{
-	Size winSize = Director::getInstance()->getWinSize();
-	RenderTexture* renderTexture = RenderTexture::create(winSize.width, winSize.height);
-	// Go through all child of Game class and draw in renderTexture
-	// It's like screenshot
-	renderTexture->begin();
-	Director::getInstance()->getRunningScene()->visit();
-	renderTexture->end();
-    
-    Director::getInstance()->getRenderer()->render();// Must add this for version 3.0 or image goes black
-    Director::getInstance()->getTextureCache()->addImage(renderTexture->newImage(), "GameOverImage");
-    
 	// pause the game, push to scene stack and change to new scene
 	// Don't forget to pop it
 	Director::getInstance()->pushScene(PauseScene::create());

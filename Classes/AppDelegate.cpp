@@ -1,6 +1,5 @@
 #include "AppDelegate.h"
 #include "LoadingScene.h"
-#include "PluginVungle/PluginVungle.h"
 
 USING_NS_CC;
 
@@ -41,6 +40,9 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
+	// enable OpenGL depth test, or renderTexture will have green background
+	glEnable(GL_DEPTH_TEST);
+
     // turn on display FPS
     //director->setDisplayStats(true);
     
@@ -49,9 +51,6 @@ bool AppDelegate::applicationDidFinishLaunching() {
     
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0f / 60);
-
-    // init Vungle
-    sdkbox::PluginVungle::init();
 
 	FileUtils::getInstance()->addSearchPath("res");
 

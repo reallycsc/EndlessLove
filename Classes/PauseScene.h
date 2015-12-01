@@ -11,6 +11,5 @@ public:
 	CREATE_FUNC(PauseScene);
 
 	virtual bool init();
-
 };
 

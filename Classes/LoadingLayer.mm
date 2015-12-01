@@ -4,10 +4,12 @@
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #import "IOSHelper/GameKitHelper.h"
 #import "IOSHelper/IAPShare.h"
+#include "PluginVungle/PluginVungle.h"
 #endif
 
 LoadingLayer::LoadingLayer(void)
 {
+	GameMediator::getInstance();
 }
 
 
@@ -22,10 +24,6 @@ bool LoadingLayer::init()
         return false;
     }
 
-    cocos2d::Size winSize = Director::getInstance()->getWinSize();
-    
-    GameMediator::getInstance();
-
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     // Game Center login
     [[GameKitHelper sharedHelper] authenticateLocalUser];
@@ -37,23 +35,34 @@ bool LoadingLayer::init()
                                      nil];
         [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:productIdentifiers];
     }
+
+	// init Vungle
+	sdkbox::PluginVungle::init();
 #endif
-    
+
 	// load csb
 	auto rootNode = CSLoader::createNode("LoadingScene.csb");
-	
-    rootNode->setOpacity(0);
-    rootNode->runAction(Sequence::create(FadeIn::create(1.0f),
-                                         DelayTime::create(0.5f),
-                                         CallFunc::create(CC_CALLBACK_0(LoadingLayer::changeScene, this)),
-                                         NULL));
-    
+	auto animate = CSLoader::createTimeline("LoadingScene.csb");
+	animate->setFrameEventCallFunc(CC_CALLBACK_1(LoadingLayer::onFrameEvent, this));
+	rootNode->runAction(animate);
+	animate->pause();
     this->addChild(rootNode);
-    
+
+	animate->play("Scene_Start", false);
+
     return true;
 }
 
-void LoadingLayer::changeScene()
+void LoadingLayer::onFrameEvent(Frame* frame)
 {
-    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, MainMenuScene::create()));
+	EventFrame* event = dynamic_cast<EventFrame*>(frame);
+	if (!event)
+		return;
+
+	string str = event->getEvent();
+
+	if (str == "sceneEnd")
+	{
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, MainMenuScene::create()));
+	}
 }

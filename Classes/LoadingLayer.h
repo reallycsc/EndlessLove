@@ -13,6 +13,6 @@ public:
 	virtual bool init();
     
 private:
-    void changeScene();
+	void LoadingLayer::onFrameEvent(Frame* frame);
 };
 

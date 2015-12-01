@@ -26,12 +26,10 @@ private:
     void menuCallback_Buy(Ref* pSender, Button* button, SKProduct* product);
 #endif
     
-    void moveToFinished(Ref* pSender);
-    
     void waitingTimeOut(float dt);
     
 private:
-	map<int, string>*	m_pmGameText;
+	map<string, string>*	m_pmGameText;
     Layout*	m_pLayout;
     ListView*   m_pListView;
 };

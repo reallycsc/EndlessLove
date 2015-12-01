@@ -6,6 +6,10 @@
 #include "Player.h"
 #include "GameMediator.h"
 
+const int ZORDER_ENEMYLAYER_MAINLAYER = 0;
+const int ZORDER_ENEMYLAYER_ENEMY = 1;
+const int ZORDER_ENEMYLAYER_ITEM = 2;
+
 class EnemyLayer :
 	public Layer
 {

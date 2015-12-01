@@ -15,24 +15,22 @@ GameMediator* GameMediator::getInstance()
 
 GameMediator::GameMediator(void)
 {
-	m_nGameState = STATE_GAME_ENTER;
-	m_nGameLevel = 0;
+	m_languageType = LanguageType::ENGLISH;
+	m_nGameState = GAMESTATE_ENTER;
+	m_nGameLevel = 1;
 	m_nGameLevelMax = 0;
-	m_nGameOverReason = 0;
 
 	m_bAd = true;
 	m_bGuidelineForever = false;
 
 	m_nReviveNumber = 0;
 
-	m_mGameStory.clear();
 	m_mGameText.clear();
 	m_vGameLevelData.clear();
 }
 
 GameMediator::~GameMediator(void)
 {
-	m_mGameStory.clear();
 	m_mGameText.clear();
 	m_vGameLevelData.clear();
 }
@@ -42,14 +40,14 @@ bool GameMediator::init()
 	bool bRet = false;
 	do
 	{
+		m_languageType = Application::getInstance()->getCurrentLanguage();
+
 		m_pPlayerData = PlayerData::getInstance();
 		CC_BREAK_IF(!m_pPlayerData);
 
 		CC_BREAK_IF(!this->loadGameConfigFile());
 
 		CC_BREAK_IF(!this->loadGameTextFile());
-
-		CC_BREAK_IF(!this->loadGameStoryFile());
 
 		bRet = true;
 	} while (false);
@@ -73,13 +71,22 @@ void GameMediator::reloadAllConfigFiles()
 	if (!ret)
 		return;
 
-	m_mGameStory.clear();
-	ret = this->loadGameStoryFile();
-	if (!ret)
-		return;
-
 	m_pPlayerData->loadPlayerUpgradeConfigFile();
 	m_pPlayerData->loadPlayerData();
+}
+
+void GameMediator::changeLanguageTo(LanguageType &type)
+{
+	if (m_languageType == type)
+	{
+		return;
+	}
+	m_languageType = type;
+
+	m_mGameText.clear();
+	this->loadGameTextFile();
+
+	m_pPlayerData->changeLanguageTo(type);
 }
 
 bool GameMediator::loadGameConfigFile()
@@ -251,12 +258,20 @@ bool GameMediator::loadGameTextFile()
 	do
 	{
 		tinyxml2::XMLDocument document;
-        string filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
-#if defined LANGUAGE_CHINESE
-        filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_Chinese.xml");
-#elif defined LANGUAGE_ENGLISH
-        filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
-#endif
+		string filename;
+		switch (m_languageType)
+		{
+		case LanguageType::CHINESE:
+			filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_Chinese.xml");
+			break;
+		case LanguageType::ENGLISH:
+			filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
+			break;
+		default:
+			filename = FileUtils::getInstance()->fullPathForFilename("config/GameText_English.xml");
+			break;
+		}
+
         document.LoadFile(filename.c_str());
 		XMLElement* root = document.RootElement();
 		CC_BREAK_IF(!root);
@@ -267,50 +282,9 @@ bool GameMediator::loadGameTextFile()
             string str = string(surface1->GetText());
             string oldStr = "\\n";
             string newStr = "\n";
-			m_mGameText.insert(pair<int, string>(surface1->IntAttribute("id"), replace_all_distinct(str, oldStr, newStr)));
+			m_mGameText.insert(pair<string, string>(surface1->Attribute("id"), replace_all_distinct(str, oldStr, newStr)));
 		}
 
-		bRet = true;
-	} while (false);
-	return bRet;
-}
-
-bool GameMediator::loadGameStoryFile()
-{
-	bool bRet = false;
-	do
-	{
-		tinyxml2::XMLDocument document;
-        string filename = FileUtils::getInstance()->fullPathForFilename("config/GameStory.xml");
-		document.LoadFile(filename.c_str());
-		XMLElement* root = document.RootElement();
-		CC_BREAK_IF(!root);
-		vector<string> _vString;
-		for (XMLElement* surface1 = root->FirstChildElement("GameOver"); surface1 != NULL;
-		surface1 = surface1->NextSiblingElement("GameOver"))
-		{
-			// load intersect story
-			_vString.clear();
-			for (XMLElement* surface2 = surface1->FirstChildElement("Bomb"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Bomb"))
-			{
-                string str = string(surface2->GetText());
-                string oldStr = "\\n";
-                string newStr = "\n";
-				_vString.push_back(replace_all_distinct(str, oldStr, newStr));
-			}
-			m_mGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_BOMB, _vString));
-
-			// load noheart story
-			_vString.clear();
-			for (XMLElement* surface2 = surface1->FirstChildElement("Noheart"); surface2 != NULL; surface2 = surface2->NextSiblingElement("Noheart"))
-			{
-                string str = string(surface2->GetText());
-                string oldStr = "\\n";
-                string newStr = "\n";
-				_vString.push_back(replace_all_distinct(str, oldStr, newStr));
-			}
-			m_mGameStory.insert(pair<int, vector<string>>(GAMEOVER_REASON_NOHEART, _vString));
-		}
 		bRet = true;
 	} while (false);
 	return bRet;
@@ -318,7 +292,7 @@ bool GameMediator::loadGameStoryFile()
 
 void GameMediator::initGame()
 {
-	m_nGameState = STATE_GAME_ENTER;
+	m_nGameState = GAMESTATE_ENTER;
 	m_nGameLevel = 1;
 	m_nReviveNumber = 0;
 	m_pPlayerData->initPlayerData();
@@ -379,4 +353,15 @@ void GameMediator::spriteToGray(Node* pNode, float percent)
 	CHECK_GL_ERROR_DEBUG();
 	sp->getGLProgram()->updateUniforms();
 	CHECK_GL_ERROR_DEBUG();
+}
+
+void GameMediator::setLineWrap(ScrollView* scrollView, Text* text)
+{
+	text->ignoreContentAdaptWithSize(false);
+	Size textSize = text->getContentSize();
+	int textWidthNew = scrollView->getInnerContainerSize().width;
+	text->setTextAreaSize(Size(textWidthNew, textSize.height * ((int)textSize.width / (int)textWidthNew + 1)));
+	scrollView->setInnerContainerSize(text->getVirtualRendererSize());
+	text->setAnchorPoint(Point(0, 1));
+	text->setPosition(Point(0, scrollView->getInnerContainerSize().height));
 }

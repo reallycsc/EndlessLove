@@ -1,4 +1,5 @@
 #include "NormalNoticeLayer.h"
+#include "GameMediator.h"
 
 NormalNoticeLayer::NormalNoticeLayer(void)
 {
@@ -46,11 +47,14 @@ bool NormalNoticeLayer::init(const string &title, const string &info)
 
 	// get text
 	auto textTitle = dynamic_cast<Text*>(m_pLayout->getChildByName("Text_Title"));
-	auto textInfo = dynamic_cast<Text*>(m_pLayout->getChildByName("Text_info"));
+	auto scrollView = dynamic_cast<ScrollView*>(m_pLayout->getChildByName("ScrollView_info"));
+	auto textInfo = dynamic_cast<Text*>(scrollView->getChildByName("Text_info"));
 
 	// set all text
 	textTitle->setString(title);
 	textInfo->setString(info);
+	GameMediator::setLineWrap(scrollView, textInfo);
+	buttonOK->setTitleText(GameMediator::getInstance()->getGameText()->at("ID_NOTICE_OK"));
 
 	// run animation
 	m_pLayout->setPosition(Point(winSize.width/2, winSize.height+ m_pLayout->getContentSize().height));

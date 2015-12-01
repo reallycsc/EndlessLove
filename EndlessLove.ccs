@@ -4,12 +4,9 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Project Name="MainMenuScene.csd" Type="Scene" />
-        <Project Name="GameScene.csd" Type="Scene" />
         <Folder Name="Resource">
           <Image Name="bar.png" />
           <Image Name="guideLine.png" />
-          <Image Name="Player_EyeClose.png" />
-          <Image Name="Player_EyeOpen.png" />
           <Folder Name="UI">
             <Image Name="button_disable.png" />
             <Image Name="button_down.png" />
@@ -21,11 +18,25 @@
             <Image Name="button_purchase_noAd_disable.png" />
             <Image Name="button_purchase_noAd_down.png" />
             <Image Name="button_purchase_noAd_up.png" />
+            <Image Name="button_GameCenter_down.png" />
+            <Image Name="button_GameCenter_up.png" />
+            <Image Name="button_Achievement_down.png" />
+            <Image Name="button_Achievement_up.png" />
+            <Image Name="button_disable_long.png" />
+            <Image Name="button_down_long.png" />
+            <Image Name="button_Setting_down.png" />
+            <Image Name="button_Setting_up.png" />
+            <Image Name="button_up_long.png" />
+            <Image Name="button_Leaderboard_down.png" />
+            <Image Name="button_Leaderboard_up.png" />
+            <Image Name="button_Upgrade_down.png" />
+            <Image Name="button_Upgrade_up.png" />
+            <Image Name="button_Pause_down.png.png" />
+            <Image Name="button_Pause_up.png" />
           </Folder>
           <Folder Name="Item">
             <Image Name="bomb.png" />
             <Image Name="enlargeItem.png" />
-            <Image Name="enlargeItem1.png" />
             <Image Name="goldCoin.png" />
             <Image Name="guideItem.png" />
             <Image Name="Heart_GreenTea.png" />
@@ -33,13 +44,11 @@
             <Image Name="Heart_Secret.png" />
             <Image Name="shield.png" />
             <Image Name="shrinkItem.png" />
-            <Image Name="shrinkItem1.png" />
             <Image Name="Heart.png" />
             <Image Name="Heart_Broken_Left.png" />
             <Image Name="Heart_Broken_Right.png" />
           </Folder>
           <Folder Name="Background">
-            <Image Name="background.png" />
             <Image Name="babyBottle_1.png" />
             <Image Name="babyBottle_2.png" />
             <Image Name="Pinao.png" />
@@ -58,12 +67,80 @@
             <Image Name="syringe.png" />
             <Image Name="wheelchair.png" />
           </Folder>
-          <Image Name="playAd.png" />
           <Image Name="Loading.png" />
+          <Image Name="Player_EyeClose_big.png" />
+          <Image Name="Player_EyeClose_small.png" />
+          <Image Name="Player_EyeOpen_big.png" />
+          <Image Name="Player_EyeOpen_smal.png" />
+          <Folder Name="Animation">
+            <Folder Name="Cardiogram">
+              <Image Name="cardiogram01.png" />
+              <Image Name="cardiogram02.png" />
+              <Image Name="cardiogram03.png" />
+              <Image Name="cardiogram04.png" />
+              <Image Name="cardiogram05.png" />
+              <Image Name="cardiogram06.png" />
+              <Image Name="cardiogram07.png" />
+              <Image Name="cardiogram08.png" />
+              <Image Name="cardiogram09.png" />
+              <Image Name="cardiogram10.png" />
+              <Image Name="cardiogram11.png" />
+              <Image Name="cardiogram12.png" />
+              <Image Name="cardiogram13.png" />
+              <Image Name="cardiogram14.png" />
+              <Image Name="cardiogram15.png" />
+              <Image Name="cardiogram16.png" />
+              <Image Name="cardiogram17.png" />
+              <Image Name="cardiogram18.png" />
+              <Image Name="cardiogram19.png" />
+              <Image Name="cardiogram20.png" />
+              <Image Name="cardiogram21.png" />
+              <Image Name="cardiogram22.png" />
+              <Image Name="cardiogram23.png" />
+              <Image Name="cardiogram24.png" />
+              <Image Name="cardiogram25.png" />
+              <Image Name="cardiogram26.png" />
+              <Image Name="cardiogram27.png" />
+              <Image Name="cardiogram28.png" />
+              <Image Name="cardiogram29.png" />
+              <Image Name="cardiogram30.png" />
+              <Image Name="cardiogram31.png" />
+              <Image Name="cardiogram32.png" />
+              <Image Name="cardiogram33.png" />
+              <Image Name="cardiogram34.png" />
+              <Image Name="cardiogram35.png" />
+              <Image Name="cardiogram36.png" />
+              <Image Name="cardiogram37.png" />
+              <Image Name="cardiogram38.png" />
+              <Image Name="cardiogram39.png" />
+              <Image Name="cardiogram40.png" />
+              <Image Name="cardiogram41.png" />
+              <Image Name="cardiogram42.png" />
+              <Image Name="cardiogram43.png" />
+              <Image Name="cardiogram44.png" />
+              <Image Name="cardiogram45.png" />
+              <Image Name="cardiogram46.png" />
+              <Image Name="cardiogram47.png" />
+              <Image Name="cardiogram48.png" />
+              <Image Name="cardiogram49.png" />
+              <Image Name="cardiogram50.png" />
+              <Image Name="cardiogram51.png" />
+              <Image Name="cardiogram52.png" />
+              <Image Name="cardiogram53.png" />
+              <Image Name="cardiogram54.png" />
+              <Image Name="cardiogram55.png" />
+              <Image Name="cardiogram56.png" />
+              <Image Name="cardiogram57.png" />
+              <Image Name="cardiogram58.png" />
+              <Image Name="cardiogram59.png" />
+              <Image Name="cardiogram60.png" />
+            </Folder>
+          </Folder>
+          <Image Name="playAdCloud.png" />
+          <Image Name="American_Flag.png" />
+          <Image Name="Chinese_Flag.png" />
         </Folder>
         <Folder Name="Font">
-          <TTF Name="arial.ttf" />
-          <TTF Name="Marker Felt.ttf" />
           <TTF Name="msyh.ttc" />
         </Folder>
         <Project Name="ControlLayer.csd" Type="Layer" />
@@ -78,8 +155,9 @@
         <Project Name="PurchaseLayer.csd" Type="Layer" />
         <Project Name="PurchaseItemNode.csd" Type="Node" />
         <Project Name="PlayerUpgradeItemNode.csd" Type="Node" />
-        <Image Name="button_down.png" />
         <Project Name="LoadingScene.csd" Type="Scene" />
+        <Project Name="MainMenuPlayer.csd" Type="Node" />
+        <Project Name="SettingLayer.csd" Type="Layer" />
       </RootFolder>
     </Group>
   </SolutionFolder>

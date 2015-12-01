@@ -19,6 +19,7 @@ PlayerData* PlayerData::getInstance()
 
 PlayerData::PlayerData(void)
 {
+	m_languageType = LanguageType::ENGLISH;
 	m_fHeartNumber = 0.0f;
 	m_fMaxHeartNumber = 0.0f;
 	m_bPowerUpOnTheGround = true;
@@ -58,6 +59,8 @@ bool PlayerData::init()
     bool bRet = false;  
     do   
     {  
+		m_languageType = Application::getInstance()->getCurrentLanguage();
+
         cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
 		// load player upgrade config file
@@ -83,6 +86,19 @@ bool PlayerData::init()
     } while (0);
     
     return bRet;
+}
+
+void PlayerData::changeLanguageTo(LanguageType &type)
+{
+	if (m_languageType == type)
+	{
+		return;
+	}
+	m_languageType = type;
+
+	m_vJumpTypeLevelInfo.clear();
+	m_mLevelInfo.clear();
+	this->loadPlayerUpgradeConfigFile();
 }
 
 inline void PlayerData::addCustomEventLisenter(const string suffix, long long* pScore)
@@ -148,11 +164,18 @@ bool PlayerData::loadPlayerUpgradeConfigFile()
 			data.powerUpOnTheGround = surface2->BoolAttribute("powerUpOnTheGround");
 			data.jumpOnTheGround = surface2->BoolAttribute("jumpOnTheGround");
 			data.freeJumpTime = surface2->IntAttribute("freeJumpTime");
-#if defined LANGUAGE_CHINESE
-			data.description = surface2->Attribute("description_cn");
-#elif defined LANGUAGE_ENGLISH
-			data.description = surface2->Attribute("description_en");
-#endif
+			switch (m_languageType)
+			{
+			case kLanguageChinese:
+				data.description = surface2->Attribute("description_cn");
+				break;
+			case kLanguageEnglish:
+				data.description = surface2->Attribute("description_en");
+				break;
+			default:
+				data.description = surface2->Attribute("description_en");
+				break;
+		}
 			m_vJumpTypeLevelInfo.push_back(data);
 		}
 

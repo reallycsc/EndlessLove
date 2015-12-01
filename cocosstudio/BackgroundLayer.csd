@@ -6,15 +6,107 @@
       <ObjectData Name="Layer" Tag="119" ctype="GameLayerObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Image_Background" ActionTag="-1151989523" Tag="174" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" Scale9Width="960" Scale9Height="640" ctype="ImageViewObjectData">
-            <Size X="960.0000" Y="640.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="480.0000" Y="320.0000" />
+          <AbstractNodeData Name="Node_BackImage" ActionTag="-662074645" Tag="57" IconVisible="True" RightMargin="960.0000" TopMargin="640.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <Children>
+              <AbstractNodeData Name="Panel_MainMenu" Visible="False" ActionTag="-1730332097" Tag="56" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="960.0000" Y="640.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <SingleColor A="255" R="229" G="229" B="229" />
+                <FirstColor A="255" R="229" G="229" B="229" />
+                <EndColor A="255" R="229" G="229" B="229" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_GameScene_Birth" ActionTag="1756734250" Tag="59" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="960.0000" Y="640.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="191" G="191" B="191" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_GameScene_Childhood" Visible="False" ActionTag="36264385" Tag="98" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="960.0000" Y="640.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="144" G="238" B="144" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_GameScene_Teenage" Visible="False" ActionTag="-511730608" Tag="99" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="960.0000" Y="640.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="255" G="192" B="203" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_GameScene_Youth" Visible="False" ActionTag="-423226917" Tag="100" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="960.0000" Y="640.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="173" G="216" B="230" />
+                <EndColor A="255" R="230" G="230" B="250" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_GameScene_Midage" Visible="False" ActionTag="278647174" Tag="101" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="960.0000" Y="640.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="139" G="105" B="20" />
+                <EndColor A="255" R="191" G="191" B="191" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_GameScene_Elder" Visible="False" ActionTag="884201746" Tag="102" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+                <Size X="960.0000" Y="640.0000" />
+                <AnchorPoint />
+                <Position />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="75" G="53" B="0" />
+                <EndColor A="255" R="77" G="77" B="77" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.5000" Y="0.5000" />
-            <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="Normal" Path="Resource/Background/background.png" Plist="" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
           <AbstractNodeData Name="Node_Birth" ActionTag="-1121886137" Tag="2944" IconVisible="True" RightMargin="960.0000" TopMargin="640.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />

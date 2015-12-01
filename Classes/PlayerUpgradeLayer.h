@@ -3,12 +3,16 @@
 #include "GameMediator.h"
 #include "Player.h"
 
+const int ZORDER_UPGRADELAYER_MAINLAYER = 0;
+const int ZORDER_UPGRADELAYER_NOTICELAYER = 1;
+
 typedef struct tagUPGRADE_ITEM
 {
 	Text*	name;
+	ScrollView* scrollView;
 	Text*	description;
 	Button* button;
-	ImageView*	goldImg;
+	Sprite*	goldImg;
 	Text*	goldNum;
 	Text*	textMax;
 }UPGRADE_ITEM;
@@ -31,7 +35,7 @@ public:
 
 private:
 	void loadUpgradeItem(int id);
-	void setItemContent(int id, int textid, const char* format1, const char* format2, bool isSetText = true);
+	void setItemContent(int id, const char* textid, const char* format1, const char* format2, bool isSetText = true);
 	void setAllItemContents(bool isSetText = true);
     void unlockAchievement(int id, int level, unsigned long maxLevel);
 

@@ -20,7 +20,7 @@ bool PauseScene::init()
 
         // show game over screenshot
         Size winSize = Director::getInstance()->getWinSize();
-        Sprite* sprite = Sprite::createWithTexture(Director::getInstance()->getTextureCache()->getTextureForKey("GameOverImage"));
+		Sprite* sprite = Sprite::createWithTexture(Director::getInstance()->getTextureCache()->getTextureForKey("GamePauseImage"));
         sprite->setPosition(winSize.width / 2, winSize.height / 2);
         this->addChild(sprite);
 

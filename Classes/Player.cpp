@@ -2,8 +2,7 @@
 
 Player::Player(void)
 {
-	m_pGameMediator = GameMediator::getInstance();
-	m_pPlayerData = m_pGameMediator->getPlayerData();
+	m_pPlayerData = GameMediator::getInstance()->getPlayerData();
 	m_pSprite = NULL;
 	m_pSpriteShield = NULL;
 	m_pAnimate = NULL;
@@ -39,6 +38,7 @@ bool Player::init()
 		auto rootNode = CSLoader::createNode("PlayerNode.csb");
 		m_pAnimate = CSLoader::createTimeline("PlayerNode.csb");
 		rootNode->runAction(m_pAnimate);
+		m_pAnimate->pause();
 		this->addChild(rootNode);
 
 		// get sprite
@@ -57,6 +57,7 @@ bool Player::init()
 			DelayTime::create(random(1.0f, 5.0f)),
 			CallFunc::create(CC_CALLBACK_0(Player::blink, this))
 			));
+		m_pAnimate->play("Shield_Fade", true);
 
 		this->scheduleUpdate();
 
@@ -68,53 +69,45 @@ bool Player::init()
 
 void Player::update(float dt)
 {
-	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	// change player's position & speed in the air
+	if (!m_bIsOnTheGround)
 	{
-		// change player's position & speed in the air
-		if (!m_bIsOnTheGround)
+		Point posNow = this->getPosition();
+		int posNewY = posNow.y + m_fCurSpeed * dt;
+		if (posNewY <= m_nBottomPosY)
 		{
-			Point posNow = this->getPosition();
-			int posNewY = posNow.y + m_fCurSpeed * dt;
-			if (posNewY <= m_nBottomPosY)
-			{
-				posNewY = m_nBottomPosY;
-				m_bIsOnTheGround = true;
-				m_nFreeJumpNum = 0;
-			}
-			this->setPosition(posNow.x, MIN(posNewY, m_nTopPosY));
-			m_fCurSpeed -= GRAVITY*dt;
+			posNewY = m_nBottomPosY;
+			m_bIsOnTheGround = true;
+			m_nFreeJumpNum = 0;
 		}
-		// check if need to jump
-		do
-		{
-			if (!m_bIsNeedToJump)
-				break;
-			if (m_pPlayerData->getIsJumpOnTheGround() && !m_bIsOnTheGround)
-				break;
-			this->startJump();
-		} while(false);
-		// check if need to power up
-		do
-		{
-			if (!m_bIsNeedToPowerUp)
-				break;
-			if (m_bIsNeedToJump) // only power up when jump is over
-				break;
-			if (m_pPlayerData->getIsPowerUpOnTheGround() && !m_bIsOnTheGround)
-				break;
-			this->startPowerUp();
-		} while (false);
-		// change curPower when power up
-		if (m_bIsPowerUp && m_fCurPower < MAXPOWER)
-		{
-			m_fCurPower += MAXPOWER * dt / m_pPlayerData->getPowerTime();
-			m_fCurPower = min(m_fCurPower, (float)MAXPOWER);
-		}
-		// check if need to play shield animation
-		if (m_pSpriteShield->isVisible())
-		{
-			this->playShieldAnimation();
-		}
+		this->setPosition(posNow.x, MIN(posNewY, m_nTopPosY));
+		m_fCurSpeed -= GRAVITY*dt;
+	}
+	// check if need to jump
+	do
+	{
+		if (!m_bIsNeedToJump)
+			break;
+		if (m_pPlayerData->getIsJumpOnTheGround() && !m_bIsOnTheGround)
+			break;
+		this->startJump();
+	} while (false);
+	// check if need to power up
+	do
+	{
+		if (!m_bIsNeedToPowerUp)
+			break;
+		if (m_bIsNeedToJump) // only power up when jump is over
+			break;
+		if (m_pPlayerData->getIsPowerUpOnTheGround() && !m_bIsOnTheGround)
+			break;
+		this->startPowerUp();
+	} while (false);
+	// change curPower when power up
+	if (m_bIsPowerUp && m_fCurPower < MAXPOWER)
+	{
+		m_fCurPower += MAXPOWER * dt / m_pPlayerData->getPowerTime();
+		m_fCurPower = min(m_fCurPower, (float)MAXPOWER);
 	}
 }
 
@@ -125,28 +118,7 @@ void Player::blink()
 		CallFunc::create(CC_CALLBACK_0(Player::blink, this))
 		));
 	if (m_pSprite->getScaleX() == m_pSprite->getScaleY())
-		m_pAnimate->play("blink", false);
-}
-
-void Player::playShieldAnimation()
-{
-	// max = 255, min = 255 * 0.75 = 191
-	auto old = m_pSpriteShield->getOpacity();
-	if (m_bShieldOpacityLess)
-		old--;
-	else
-		old++;
-	if (old >= 255)
-	{
-		m_bShieldOpacityLess = true;
-		old = 255;
-	}
-	if (old <= 191)
-	{
-		m_bShieldOpacityLess = false;
-		old = 191;
-	}
-	m_pSpriteShield->setOpacity(old);
+		m_pAnimate->play("Player_Blink", false);
 }
 
 void Player::startPowerUp()
@@ -199,7 +171,7 @@ void Player::changePlayerColorToGrey()
 
 void Player::playShieldAnimation(float duration)
 {
-	m_bIsShield = true;
+	
 	m_pSpriteShield->setVisible(true);
 	this->unschedule(schedule_selector(Player::stopShieldAnimation));
 	this->scheduleOnce(schedule_selector(Player::stopShieldAnimation), duration);
@@ -207,6 +179,5 @@ void Player::playShieldAnimation(float duration)
 
 void Player::stopShieldAnimation(float dt)
 {
-	m_bIsShield = false;
 	m_pSpriteShield->setVisible(false);
 }

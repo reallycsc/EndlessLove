@@ -12,6 +12,8 @@ public:
 
 	CREATE_FUNC(BackLayer);
 
+	void setBackImageFor(int id);
+	void changeBackImageFromTo(int fromId, int toId);
 	void moveBackSprite(int stage);
 	void moveRandomBackSprite();
 
@@ -20,7 +22,10 @@ private:
 	void flyRandomBackSprite(float dt, float duration);
 
 private:
+	Map<int, Layout*>	m_mBackImages;
 	map<int, Vector<Sprite*>>	m_mBackSprites;
+
+	Sprite*	m_pSpriteFly;
 
 	int m_nCurStage;
 };

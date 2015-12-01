@@ -21,16 +21,16 @@
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="26" G="26" B="26" />
               </AbstractNodeData>
-              <AbstractNodeData Name="ScrollView_Desc" ActionTag="-2009710409" Tag="169" IconVisible="False" RightMargin="140.0000" TopMargin="60.0000" BottomMargin="10.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
+              <AbstractNodeData Name="ScrollView_Desc" ActionTag="-2009710409" Tag="169" IconVisible="False" LeftMargin="10.0000" RightMargin="130.0000" TopMargin="60.0000" BottomMargin="10.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                 <Size X="240.0000" Y="50.0000" />
                 <Children>
-                  <AbstractNodeData Name="Text_Desc" ActionTag="1590546272" Tag="168" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="10.0000" RightMargin="7.0000" BottomMargin="21.0000" FontSize="22" LabelText="Focus on the ground" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                  <AbstractNodeData Name="Text_Desc" ActionTag="1590546272" Tag="168" IconVisible="False" PositionPercentYEnabled="True" RightMargin="17.0000" BottomMargin="21.0000" FontSize="22" LabelText="Focus on the ground" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
                     <Size X="223.0000" Y="29.0000" />
                     <AnchorPoint ScaleY="1.0000" />
-                    <Position X="10.0000" Y="50.0000" />
+                    <Position Y="50.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition X="0.0417" Y="1.0000" />
+                    <PrePosition Y="1.0000" />
                     <PreSize X="0.9292" Y="0.5800" />
                     <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
@@ -38,10 +38,10 @@
                   </AbstractNodeData>
                 </Children>
                 <AnchorPoint ScaleY="1.0000" />
-                <Position Y="60.0000" />
+                <Position X="10.0000" Y="60.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition Y="0.5000" />
+                <PrePosition X="0.0263" Y="0.5000" />
                 <PreSize X="0.6316" Y="0.4167" />
                 <SingleColor A="255" R="255" G="150" B="100" />
                 <FirstColor A="255" R="255" G="150" B="100" />

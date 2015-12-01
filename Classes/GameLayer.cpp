@@ -1,5 +1,5 @@
 #include "GameLayer.h"
-#include "GameOverLayer.h"
+#include "GameOverScene.h"
 
 GameLayer::GameLayer(void)
 {
@@ -9,6 +9,8 @@ GameLayer::GameLayer(void)
 	m_pControlLayer = NULL;
 	m_pEnemyLayer = NULL;
 	m_pPlayerLayer = NULL;
+
+	m_nAllLevelScore = 0;
 }
 
 
@@ -33,27 +35,29 @@ bool GameLayer::init()
     unsigned int time = ((unsigned int)tv.tv_sec) * 1000 + tv.tv_usec / 1000;
 	srand(time);
 
-    //½¨Á¢´¥Ãþ¼àÌý
-	auto touchListener = EventListenerTouchOneByOne::create(); 
-	//touchListener->setSwallowTouches(false); 
-	touchListener->onTouchBegan = CC_CALLBACK_2(GameLayer::onTouchBegan, this); 
-	touchListener->onTouchMoved = CC_CALLBACK_2(GameLayer::onTouchMoved, this); 
-	touchListener->onTouchEnded = CC_CALLBACK_2(GameLayer::onTouchEnded, this); 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this); 
-
     /////////////////////////////
     // 3. add your codes below...
 
 	// Set default game data
 	m_pGameMediator->initGame();
 
+	auto levelData = &(*m_pGameMediator->getGameLevelData())[0];
+	m_nAllLevelScore = levelData->getLevelUpScore();
+	float duration = winSize.width * 0.5 / levelData->getPlayerMoveSpeed();
+
 	// add backlayer
 	m_pBackLayer = BackLayer::create();
+	m_pBackLayer->setBackImageFor(BACKIMAGE_GAMESCENE_BIRTH);
 	this->addChild(m_pBackLayer, ZORDER_GAMELAYER_BACKLAYER);
 
 	// add enemy
 	m_pEnemyLayer = EnemyLayer::create();
 	this->addChild(m_pEnemyLayer, ZORDER_GAMELAYER_ENEMYLAYER);
+	m_pEnemyLayer->setPositionX(winSize.width * 0.5);
+	m_pEnemyLayer->runAction(Sequence::createWithTwoActions(
+		MoveTo::create(duration, Point(0, 0)),
+		CallFunc::create(CC_CALLBACK_0(GameLayer::actionCallback_GameStart, this))
+		));
 
 	// add player
 	m_pPlayerLayer = PlayerLayer::create();
@@ -68,28 +72,22 @@ bool GameLayer::init()
     return true;
 }
 
-bool GameLayer::onTouchBegan(Touch *touch, Event *event) 
+void GameLayer::onEnter()
 {
-	return true;
-} 
+	m_pPlayerLayer->getPlayer()->changePlayerColorToGrey();
+	Layer::onEnter(); 
+}
 
-void GameLayer::onTouchMoved(Touch *touch, Event *event) 
-{ 
-} 
-
-void GameLayer::onTouchEnded(Touch *touch, Event *event) 
+void GameLayer::actionCallback_GameStart()
 {
-	if (m_pGameMediator->getGameState() == STATE_GAME_ENTER)
-	{
-		m_pControlLayer->gameStart();
-		GameLevelData* levelData = &(*m_pGameMediator->getGameLevelData())[m_pGameMediator->getGameLevel() - 1];
-		m_pBackLayer->moveBackSprite(levelData->getStage());
-	}
+	m_pGameMediator->setGameState(GAMESTATE_RUN);
+	GameLevelData* levelData = &(*m_pGameMediator->getGameLevelData())[m_pGameMediator->getGameLevel() - 1];
+	m_pBackLayer->moveBackSprite(levelData->getStage());
 }
 
 void GameLayer::update(float dt)
 {
-	if(m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	if(m_pGameMediator->getGameState() == GAMESTATE_RUN)
 	{
 		Player* player = m_pPlayerLayer->getPlayer();
 		// intersect reduce heart (when without shield)
@@ -107,8 +105,7 @@ void GameLayer::update(float dt)
 		// game over if heart is zero
 		if (m_pPlayerData->getHeartNumber() <= 0)
 		{
-			m_pGameMediator->setGameOverReason(GAMEOVER_REASON_NOHEART);
-			m_pControlLayer->gameOver();
+			this->gameOver();
 		}
 #endif
 		// check if jump over & update score
@@ -125,10 +122,17 @@ void GameLayer::update(float dt)
 			int levelUpScore = levelData->getLevelUpScore();
 			if (levelUpScore <= 0) // < 0 for infinity # for DEBUG & incase config bug
 				break;
-			if ((m_pPlayerData->getScore() % levelUpScore) != 0)
+			if (m_pPlayerData->getScore() < m_nAllLevelScore)
 				break;
+			m_nAllLevelScore += levelUpScore;
+			int preStage = levelData->getStage();
 			m_pEnemyLayer->increaseGameLevel();
-			m_pBackLayer->moveBackSprite(levelData->getStage());
+			int curStage = (*m_pGameMediator->getGameLevelData())[level].getStage();
+			if (preStage != curStage)
+			{
+				m_pBackLayer->moveBackSprite(curStage);
+				m_pBackLayer->changeBackImageFromTo(preStage, curStage);
+			}
 		} while (false);
 	}
 }
@@ -160,9 +164,7 @@ void GameLayer::checkItemIntersect(Player* player)
 #if DEBUGFLAG == 0
 		if (!player->getIsShield())
 		{
-			this->runAction(Shake::create(0.2f, 5));
-			m_pGameMediator->setGameOverReason(GAMEOVER_REASON_BOMB);
-			m_pControlLayer->gameOver();
+			this->gameOver();
 		}
 #endif
 		break;
@@ -196,4 +198,22 @@ void GameLayer::checkItemIntersect(Player* player)
 	default:
 		break;
 	}
+}
+
+void GameLayer::gameOver()
+{
+	Size visibleSize = Director::getInstance()->getWinSize();
+	RenderTexture* renderTexture = RenderTexture::create(visibleSize.width, visibleSize.height, Texture2D::PixelFormat::RGBA8888, GL_DEPTH24_STENCIL8);
+	// Go through all child of Game class and draw in renderTexture
+	// It's like screenshot
+	renderTexture->begin();
+	Director::getInstance()->getRunningScene()->visit();
+	renderTexture->end();
+
+	Director::getInstance()->getRenderer()->render();// Must add this for version 3.0 or image goes black  
+	Director::getInstance()->getTextureCache()->addImage(renderTexture->newImage(), "GameOverImage");
+
+	// pause the game, push to scene stack and change to new scene
+	// Don't forget to pop it
+	Director::getInstance()->pushScene(GameOverScene::create());
 }

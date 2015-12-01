@@ -11,13 +11,12 @@
 GameOverLayer::GameOverLayer(void)
 {
 	m_pGameMediator = GameMediator::getInstance();
+	m_pPlayerData = m_pGameMediator->getPlayerData();
 	m_pMapGameText = m_pGameMediator->getGameText();
 
 	m_pLayout = NULL;
 	m_pTextHighscore = NULL;
 	m_pTextGoldNumber = NULL;
-	m_pScrollStory = NULL;
-	m_pTextStory = NULL;
 	m_pAnimate = NULL;
 	m_pButtonRetry = NULL;
 	m_pButtonMainMenu = NULL;
@@ -43,8 +42,10 @@ bool GameOverLayer::init()
 
     cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     sdkbox::PluginVungle::setListener(this);
-    
+#endif
+
 	// load csb
 	auto rootNode = CSLoader::createNode("GameOverLayer.csb");
 	m_pAnimate = CSLoader::createTimeline("GameOverLayer.csb");
@@ -64,11 +65,17 @@ bool GameOverLayer::init()
     m_pSpriteDoublePlay = dynamic_cast<Sprite*>(m_pButtonDoubleCoin->getChildByName("Sprite_playAd"));
 	m_pButtonDoubleCoin->addClickEventListener(CC_CALLBACK_1(GameOverLayer::menuCallback_DoubleGold, this));
     
-	// if revive number get to max, disable the button
+	// if revive number get to max, disable the revive button
 	if (m_pGameMediator->getReviveNumber() > 0)
 	{
 		m_pButtonRevive->setVisible(false);
 		m_pButtonDoubleCoin->setPositionX(m_pLayout->getContentSize().width / 2);
+	}
+	// if gold == 0, disable the double button
+	if (m_pPlayerData->getGoldNumber() == 0)
+	{
+		m_pButtonDoubleCoin->setVisible(false);
+		m_pButtonRevive->setPositionX(m_pLayout->getContentSize().width / 2);
 	}
     // if purchased noAd, noAd icon
     if(!m_pGameMediator->getIsAd())
@@ -76,37 +83,38 @@ bool GameOverLayer::init()
         m_pSpriteRevivePlay->setVisible(false);
         m_pSpriteDoublePlay->setVisible(false);
     }
-    else if (!sdkbox::PluginVungle::isCacheAvailable())
-    {
-        // if vungle not ready
-        GameMediator::spriteToGray(m_pSpriteRevivePlay, 0);
-        GameMediator::spriteToGray(m_pSpriteDoublePlay, 0);
-    }
+	else
+	{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		if (!sdkbox::PluginVungle::isCacheAvailable())
+		{
+			// if vungle not ready
+			GameMediator::spriteToGray(m_pSpriteRevivePlay, 0);
+			GameMediator::spriteToGray(m_pSpriteDoublePlay, 0);
+		}
+#endif
+	}
 
 	// get score text
 	m_pTextHighscore = dynamic_cast<Text*>(m_pLayout->getChildByName("Node_EnlargeAnimation")->getChildByName("Text_Highscore"));
 	m_pTextGoldNumber = dynamic_cast<Text*>(m_pLayout->getChildByName("Node_EnlargeAnimation")->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"));
 
-	// get story text
-	//m_pScrollStory = dynamic_cast<ScrollView*>(m_pLayout->getChildByName("ScrollView_EndingStory"));
-	//m_pTextStory = dynamic_cast<Text*>(m_pScrollStory->getChildByName("Text_EndingStory"));
-
 	// set all text
-	dynamic_cast<Text*>(m_pLayout->getChildByName("Text_GameOver"))->setString(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_TITLE));
-	m_pButtonRetry->setTitleText(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_RETRY));
-	m_pButtonMainMenu->setTitleText(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_MAINMENU));
-	m_pButtonRevive->setTitleText(m_pMapGameText->at(GAMETEXT_GAMEOVERLAYER_REVIVE));
+	dynamic_cast<Text*>(m_pLayout->getChildByName("Text_GameOver"))->setString(m_pMapGameText->at("ID_GAMEOVER_TITLE"));
+	m_pButtonRetry->setTitleText(m_pMapGameText->at("ID_GAME_RETRY"));
+	m_pButtonMainMenu->setTitleText(m_pMapGameText->at("ID_GAME_MAINMENU"));
+	m_pButtonRevive->setTitleText(m_pMapGameText->at("ID_GAMEOVER_REVIVE"));
 
 	// run animation
     m_pLayout->setPosition(cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
     m_pLayout->runAction(MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height / 2)));
 
-	this->showScoreAndStory();
+	this->showScore();
 
     return true;
 }
 
-void GameOverLayer::showScoreAndStory()
+void GameOverLayer::showScore()
 {
 	auto playerData = m_pGameMediator->getPlayerData();
 
@@ -114,21 +122,12 @@ void GameOverLayer::showScoreAndStory()
     playerData->finishGameAddScore();
     
 	m_pTextHighscore->setString(StringUtils::format("%s%lld",
-		m_pMapGameText->at(GAMETEXT_MAINMENU_HIGHESTSCORE).c_str(),
+		m_pMapGameText->at("ID_COMMON_HIGHSCORE").c_str(),
 		playerData->getHighscore()
 		));
 	m_pTextGoldNumber->setString(StringUtils::format("%d", playerData->getGoldNumber()));
 
 	m_pAnimate->gotoFrameAndPlay(0, false);
-
-	// show story
-	//map<int, vector<string>>* map = m_pGameMediator->getGameStory();
-
-	//vector<string>* storyVector = &(map->at(m_pGameMediator->getGameOverReason()));;
-
-    //m_pTextStory->setString((*storyVector)[cocos2d::random() % storyVector->size()]);
-	//m_pScrollStory->setInnerContainerSize(Size(m_pScrollStory->getInnerContainerSize().width, m_pTextStory->getContentSize().height));
-	//m_pTextStory->setPosition(cocos2d::Point(10, m_pScrollStory->getInnerContainerSize().height - 10));
 }
 
 void GameOverLayer::onVungleCacheAvailable()
@@ -190,9 +189,8 @@ void GameOverLayer::menuCallback_Retry(Ref* pSender)
                                           CallFuncN::create([=](Ref* pSender)->void
     {
         Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-		Director::getInstance()->getTextureCache()->removeUnusedTextures();
         Director::getInstance()->popScene();
-		Director::getInstance()->replaceScene(GameScene::create());
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::create()));
 	}),
 		NULL));
 }
@@ -208,9 +206,8 @@ void GameOverLayer::menuCallback_MainMenu(Ref* pSender)
                                           CallFuncN::create([=](Ref* pSender)->void
 	{
 		Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-		Director::getInstance()->getTextureCache()->removeUnusedTextures();
         Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(TransitionSlideInL::create(0.5f, MainMenuScene::create()));
+        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, MainMenuScene::create()));
 	}),
 		NULL));
 }
@@ -218,6 +215,7 @@ void GameOverLayer::menuCallback_MainMenu(Ref* pSender)
 void GameOverLayer::menuCallback_Revive(Ref* pSender)
 {
     if (m_pGameMediator->getIsAd()) {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         // Show some Ad
         if (sdkbox::PluginVungle::isCacheAvailable())
         {
@@ -227,12 +225,12 @@ void GameOverLayer::menuCallback_Revive(Ref* pSender)
         {
             // tell player video is not ready
             auto mapGameText = m_pGameMediator->getGameText();
-            this->addChild(NormalNoticeLayer::create(
-                                                     mapGameText->at(GAMETEXT_NORMALNOTICELAYER_NOTIFICATION),
-                                                     "Vungle is not ready."),
-                           ZORDER_UPGRADELAYER_NOTICELAYER);
+            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")),
+				ZORDER_UPGRADELAYER_NOTICELAYER);
         }
-        
+#else
+		this->realRevive();
+#endif
     }
     else {
         this->realRevive();
@@ -265,7 +263,6 @@ void GameOverLayer::realRevive()
                                           CallFuncN::create([=](Ref* pSender)->void
 	{
         Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-        Director::getInstance()->getTextureCache()->removeUnusedTextures();
         Director::getInstance()->popScene();
 	}),
 		NULL));
@@ -274,6 +271,7 @@ void GameOverLayer::realRevive()
 void GameOverLayer::menuCallback_DoubleGold(Ref* pSender)
 {
     if (m_pGameMediator->getIsAd()) {
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         // Show some Ad
         if (sdkbox::PluginVungle::isCacheAvailable())
         {
@@ -283,11 +281,12 @@ void GameOverLayer::menuCallback_DoubleGold(Ref* pSender)
         {
             // tell player video is not ready
             auto mapGameText = m_pGameMediator->getGameText();
-            this->addChild(NormalNoticeLayer::create(
-                                                     mapGameText->at(GAMETEXT_NORMALNOTICELAYER_NOTIFICATION),
-                                                     "Vungle is not ready."),
+            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")),
                            ZORDER_UPGRADELAYER_NOTICELAYER);
         }
+#else
+		this->realDouble();
+#endif
     }
     else {
         this->realDouble();
@@ -301,7 +300,11 @@ void GameOverLayer::realDouble()
 	int m_nFromGoldNumber = playerData->getGoldNumber();
 	int m_nToGoldNumber = m_nFromGoldNumber * 2;
 	float duration = 0.5f;
-	m_pTextGoldNumber->runAction(TextNumChange::create(duration, m_nFromGoldNumber, m_nToGoldNumber));
+	m_pTextGoldNumber->runAction(Sequence::create(
+		TextNumChange::create(duration, m_nFromGoldNumber, m_nToGoldNumber),
+		DelayTime::create(0.5f),
+		CallFuncN::create(CC_CALLBACK_1(GameOverLayer::menuCallback_MainMenu, this)),
+		NULL));
 	playerData->doublePlayerGoldNumber();
 
 	// disable all buttons
@@ -325,21 +328,4 @@ void GameOverLayer::realDouble()
         [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.double100" percentComplete:(doubleNum)];
     }
 #endif
-    
-    // update gold
-    playerData->finishGameAddGoldNumber();
-    
-	// close the ui & goto mainmenu
-    cocos2d::Size winSize = Director::getInstance()->getWinSize();
-	m_pLayout->runAction(Sequence::create(
-                                          DelayTime::create(duration + 0.5f),
-                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-                                          CallFuncN::create([=](Ref* pSender)->void
-	{
-		Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-		Director::getInstance()->getTextureCache()->removeUnusedTextures();
-        Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(TransitionSlideInL::create(0.5f, MainMenuScene::create()));
-	}),
-		NULL));
 }

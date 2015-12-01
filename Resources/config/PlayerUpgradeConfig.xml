@@ -1,106 +1,106 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <PlayerUpgradeConfig>
 	<JumpType>
-		<Level level="1" needGold="1" powerUpOnTheGround="true" jumpOnTheGround="true" freeJumpTime="0" description_en="Focus on the ground" description_cn="只能在地面蓄力"/>
-		<Level level="2" needGold="2" powerUpOnTheGround="false" jumpOnTheGround="true" freeJumpTime="0" description_en="Focus anywhere jump on th ground" description_cn="可随时蓄力，只能在地面起跳"/>
-		<Level level="3" needGold="3" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="1" description_en="Focus and jump anywhere - 2 stage jump" description_cn="可随时蓄力，可2段跳"/>
-		<Level level="4" needGold="4" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="2" description_en="Focus and jump anywhere - 3 stage jump" description_cn="可随时蓄力，可3段跳"/>
-		<Level level="5" needGold="5" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="3" description_en="Focus and jump anywhere - 4 stage jump" description_cn="可随时蓄力，可4段跳"/>
-		<Level level="6" needGold="6" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="4" description_en="Focus and jump anywhere - 5 stage jump" description_cn="可随时蓄力，可5段跳"/>
-		<Level level="7" needGold="7" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="5" description_en="Focus and jump anywhere - 6 stage jump" description_cn="可随时蓄力，可6段跳"/>
-		<Level level="8" needGold="8" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="6" description_en="Focus and jump anywhere - 7 stage jump" description_cn="可随时蓄力，可7段跳"/>
-		<Level level="9" needGold="9" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="7" description_en="Focus and jump anywhere - 8 stage jump" description_cn="可随时蓄力，可8段跳"/>
-		<Level level="10" needGold="10" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="8" description_en="Focus and jump anywhere - 9 stage jump" description_cn="可随时蓄力，可9段跳"/>
+		<Level level="1" needGold="200" powerUpOnTheGround="true" jumpOnTheGround="true" freeJumpTime="0" description_en="Focus on the ground" description_cn="只能在地面蓄力"/>
+		<Level level="2" needGold="500" powerUpOnTheGround="false" jumpOnTheGround="true" freeJumpTime="0" description_en="Focus anywhere jump on th ground" description_cn="可随时蓄力，只能在地面起跳"/>
+		<Level level="3" needGold="1000" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="1" description_en="Focus and jump anywhere - 2 stage jump" description_cn="可随时蓄力，可2段跳"/>
+		<Level level="4" needGold="1500" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="2" description_en="Focus and jump anywhere - 3 stage jump" description_cn="可随时蓄力，可3段跳"/>
+		<Level level="5" needGold="2000" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="3" description_en="Focus and jump anywhere - 4 stage jump" description_cn="可随时蓄力，可4段跳"/>
+		<Level level="6" needGold="2500" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="4" description_en="Focus and jump anywhere - 5 stage jump" description_cn="可随时蓄力，可5段跳"/>
+		<Level level="7" needGold="3000" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="5" description_en="Focus and jump anywhere - 6 stage jump" description_cn="可随时蓄力，可6段跳"/>
+		<Level level="8" needGold="3500" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="6" description_en="Focus and jump anywhere - 7 stage jump" description_cn="可随时蓄力，可7段跳"/>
+		<Level level="9" needGold="4000" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="7" description_en="Focus and jump anywhere - 8 stage jump" description_cn="可随时蓄力，可8段跳"/>
+		<Level level="10" needGold="5000" powerUpOnTheGround="false" jumpOnTheGround="false" freeJumpTime="8" description_en="Focus and jump anywhere - 9 stage jump" description_cn="可随时蓄力，可9段跳"/>
 	</JumpType>
 	<MaxHeartNumber>
-		<Level level="1" needGold="1" number="1.5"/>
-		<Level level="2" needGold="2" number="2"/>
-		<Level level="3" needGold="3" number="2.5"/>
-		<Level level="4" needGold="4" number="3"/>
-		<Level level="5" needGold="5" number="3.5"/>
-		<Level level="6" needGold="6" number="4"/>
-		<Level level="7" needGold="7" number="4.5"/>
-		<Level level="8" needGold="8" number="5"/>
+		<Level level="1" needGold="125" number="1.5"/>
+		<Level level="2" needGold="250" number="2"/>
+		<Level level="3" needGold="500" number="2.5"/>
+		<Level level="4" needGold="1000" number="3"/>
+		<Level level="5" needGold="2000" number="3.5"/>
+		<Level level="6" needGold="4000" number="4"/>
+		<Level level="7" needGold="8000" number="4.5"/>
+		<Level level="8" needGold="16000" number="5"/>
 	</MaxHeartNumber>
 	<Strength> <!-- strength = minStrength*number + 99 -->
-		<Level level="1" needGold="1" number="1"/>
-		<Level level="2" needGold="2" number="2"/>
-		<Level level="3" needGold="3" number="3"/>
-		<Level level="4" needGold="4" number="4"/>
-		<Level level="5" needGold="5" number="5"/>
-		<Level level="6" needGold="6" number="6"/>
-		<Level level="7" needGold="7" number="7"/>
-		<Level level="8" needGold="8" number="8"/>
-		<Level level="9" needGold="9" number="9"/>
-		<Level level="10" needGold="10" number="10"/>
-		<Level level="11" needGold="11" number="11"/>
-		<Level level="12" needGold="12" number="12"/>
-		<Level level="13" needGold="13" number="13"/>
-		<Level level="14" needGold="14" number="14"/>
-		<Level level="15" needGold="15" number="15"/>
-		<Level level="16" needGold="16" number="16"/>
-		<Level level="17" needGold="17" number="17"/>
-		<Level level="18" needGold="18" number="18"/>
+		<Level level="1" needGold="100" number="1"/>
+		<Level level="2" needGold="200" number="2"/>
+		<Level level="3" needGold="400" number="3"/>
+		<Level level="4" needGold="600" number="4"/>
+		<Level level="5" needGold="800" number="5"/>
+		<Level level="6" needGold="1000" number="6"/>
+		<Level level="7" needGold="1500" number="7"/>
+		<Level level="8" needGold="2000" number="8"/>
+		<Level level="9" needGold="3000" number="9"/>
+		<Level level="10" needGold="4000" number="10"/>
+		<Level level="11" needGold="5000" number="11"/>
+		<Level level="12" needGold="6000" number="12"/>
+		<Level level="13" needGold="7000" number="13"/>
+		<Level level="14" needGold="8000" number="14"/>
+		<Level level="15" needGold="9000" number="15"/>
+		<Level level="16" needGold="10000" number="16"/>
+		<Level level="17" needGold="11000" number="17"/>
+		<Level level="18" needGold="12000" number="18"/>
 	</Strength>
 	<PowerTime>
-		<Level level="1" needGold="1" number="1"/>
-		<Level level="2" needGold="2" number="0.95"/>
-		<Level level="3" needGold="3" number="0.9"/>
-		<Level level="4" needGold="4" number="0.85"/>
-		<Level level="5" needGold="5" number="0.8"/>
-		<Level level="6" needGold="6" number="0.75"/>
-		<Level level="7" needGold="7" number="0.7"/>
-		<Level level="8" needGold="8" number="0.65"/>
-		<Level level="9" needGold="9" number="0.6"/>
-		<Level level="10" needGold="10" number="0.55"/>
-		<Level level="11" needGold="11" number="0.5"/>
+		<Level level="1" needGold="150" number="1"/>
+		<Level level="2" needGold="300" number="0.95"/>
+		<Level level="3" needGold="600" number="0.9"/>
+		<Level level="4" needGold="900" number="0.85"/>
+		<Level level="5" needGold="1200" number="0.8"/>
+		<Level level="6" needGold="1500" number="0.75"/>
+		<Level level="7" needGold="2000" number="0.7"/>
+		<Level level="8" needGold="2500" number="0.65"/>
+		<Level level="9" needGold="3000" number="0.6"/>
+		<Level level="10" needGold="4000" number="0.55"/>
+		<Level level="11" needGold="5000" number="0.5"/>
 	</PowerTime>
 	<GuidelineTime>
-		<Level level="1" needGold="1" number="10"/>
-		<Level level="2" needGold="2" number="11"/>
-		<Level level="3" needGold="3" number="12"/>
-		<Level level="4" needGold="4" number="13"/>
-		<Level level="5" needGold="5" number="14"/>
-		<Level level="6" needGold="6" number="15"/>
-		<Level level="7" needGold="7" number="16"/>
-		<Level level="8" needGold="8" number="17"/>
-		<Level level="9" needGold="9" number="18"/>
-		<Level level="10" needGold="10" number="19"/>
+		<Level level="1" needGold="100" number="10"/>
+		<Level level="2" needGold="200" number="11"/>
+		<Level level="3" needGold="400" number="12"/>
+		<Level level="4" needGold="600" number="13"/>
+		<Level level="5" needGold="800" number="14"/>
+		<Level level="6" needGold="1000" number="15"/>
+		<Level level="7" needGold="1500" number="16"/>
+		<Level level="8" needGold="2000" number="17"/>
+		<Level level="9" needGold="3000" number="18"/>
+		<Level level="10" needGold="4000" number="19"/>
 	</GuidelineTime>
 	<EnlargeTime>
-		<Level level="1" needGold="1" number="10"/>
-		<Level level="2" needGold="2" number="9.5"/>
-		<Level level="3" needGold="3" number="9"/>
-		<Level level="4" needGold="4" number="8.5"/>
-		<Level level="5" needGold="5" number="8"/>
-		<Level level="6" needGold="6" number="7.5"/>
-		<Level level="7" needGold="7" number="7"/>
-		<Level level="8" needGold="8" number="6.5"/>
-		<Level level="9" needGold="9" number="6"/>
-		<Level level="10" needGold="10" number="5.5"/>
+		<Level level="1" needGold="100" number="10"/>
+		<Level level="2" needGold="200" number="9.5"/>
+		<Level level="3" needGold="400" number="9"/>
+		<Level level="4" needGold="600" number="8.5"/>
+		<Level level="5" needGold="800" number="8"/>
+		<Level level="6" needGold="1000" number="7.5"/>
+		<Level level="7" needGold="1500" number="7"/>
+		<Level level="8" needGold="2000" number="6.5"/>
+		<Level level="9" needGold="3000" number="6"/>
+		<Level level="10" needGold="4000" number="5.5"/>
 	</EnlargeTime>
 	<ShrinkTime>
-		<Level level="1" needGold="1" number="5"/>
-		<Level level="2" needGold="2" number="6"/>
-		<Level level="3" needGold="3" number="7"/>
-		<Level level="4" needGold="4" number="8"/>
-		<Level level="5" needGold="5" number="9"/>
-		<Level level="6" needGold="6" number="10"/>
-		<Level level="7" needGold="7" number="11"/>
-		<Level level="8" needGold="8" number="12"/>
-		<Level level="9" needGold="9" number="13"/>
-		<Level level="10" needGold="10" number="14"/>
+		<Level level="1" needGold="100" number="5"/>
+		<Level level="2" needGold="200" number="6"/>
+		<Level level="3" needGold="400" number="7"/>
+		<Level level="4" needGold="600" number="8"/>
+		<Level level="5" needGold="800" number="9"/>
+		<Level level="6" needGold="1000" number="10"/>
+		<Level level="7" needGold="1500" number="11"/>
+		<Level level="8" needGold="2000" number="12"/>
+		<Level level="9" needGold="3000" number="13"/>
+		<Level level="10" needGold="4000" number="14"/>
 	</ShrinkTime>
 	<ShieldTime>
-		<Level level="1" needGold="1" number="5"/>
-		<Level level="2" needGold="2" number="6"/>
-		<Level level="3" needGold="3" number="7"/>
-		<Level level="4" needGold="4" number="8"/>
-		<Level level="5" needGold="5" number="9"/>
-		<Level level="6" needGold="6" number="10"/>
-		<Level level="7" needGold="7" number="11"/>
-		<Level level="8" needGold="8" number="12"/>
-		<Level level="9" needGold="9" number="13"/>
-		<Level level="10" needGold="10" number="14"/>
+		<Level level="1" needGold="100" number="5"/>
+		<Level level="2" needGold="200" number="6"/>
+		<Level level="3" needGold="400" number="7"/>
+		<Level level="4" needGold="600" number="8"/>
+		<Level level="5" needGold="800" number="9"/>
+		<Level level="6" needGold="1000" number="10"/>
+		<Level level="7" needGold="1500" number="11"/>
+		<Level level="8" needGold="2000" number="12"/>
+		<Level level="9" needGold="3000" number="13"/>
+		<Level level="10" needGold="4000" number="14"/>
 	</ShieldTime>
 </PlayerUpgradeConfig>

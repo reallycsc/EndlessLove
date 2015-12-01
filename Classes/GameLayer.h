@@ -7,6 +7,11 @@
 #include "GameMediator.h"
 #include "CCShake.h"
 
+const int ZORDER_GAMELAYER_BACKLAYER = 1;
+const int ZORDER_GAMELAYER_ENEMYLAYER = 2;
+const int ZORDER_GAMELAYER_PLAYERLAYER = 3;
+const int ZORDER_GAMELAYER_CONTROLLAYER = 4;
+
 class GameLayer :
 	public Layer
 {
@@ -18,12 +23,14 @@ public:
 
 	CREATE_FUNC(GameLayer);
 
-	virtual bool onTouchBegan(Touch* touch, Event* event); 
-	virtual void onTouchMoved(Touch* touch, Event* event); 
-	virtual void onTouchEnded(Touch* touch, Event* event); 
-
 	void update(float dt);
+
+	virtual void onEnter() override;
 private:
+	void actionCallback_GameStart();
+
+	void gameOver();
+
 	void checkItemIntersect(Player* player);
 
 private:
@@ -34,5 +41,7 @@ private:
 	ControlLayer*	m_pControlLayer;
 	EnemyLayer*		m_pEnemyLayer;
 	PlayerLayer*	m_pPlayerLayer;
+
+	int m_nAllLevelScore;
 };
 

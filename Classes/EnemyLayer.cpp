@@ -64,7 +64,7 @@ bool EnemyLayer::init()
 
 		// set all text
 		auto mapGameText = m_pGameMediator->getGameText();
-		m_pTextLevelUp->setString(mapGameText->at(GAMETEXT_ENEMYLAYER_LEVELUP));
+		m_pTextLevelUp->setString(mapGameText->at("ID_GAME_LEVELUP"));
 
 		// set default game level to level 1
 		m_pLevelData = &(*m_pGameMediator->getGameLevelData())[0];
@@ -94,7 +94,7 @@ bool EnemyLayer::init()
 
 void EnemyLayer::update(float dt)
 {
-	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	if (m_pGameMediator->getGameState() == GAMESTATE_RUN)
 	{
 		// add random item
 		m_nAccItemDistance += moveAllItems(dt);
@@ -385,6 +385,7 @@ void EnemyLayer::increaseGameLevel()
 	float jumpTime = sqrt((float)(2 * m_pLevelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
 	m_nEnemyDownMinInterval = int(m_pLevelData->getPlayerMoveSpeed() * (jumpTime + m_pPlayerData->getPowerTime()));
 
+#if DEBUGFLAG == 1
 	// flow the text
 	m_pTextLevelUp->setVisible(true);
 	m_pTextLevelUp->setOpacity(255);
@@ -393,4 +394,5 @@ void EnemyLayer::increaseGameLevel()
 		MoveTo::create(0.5f, Point(m_pTextLevelUp->getPositionX(), m_pTextLevelUp->getPositionY() + 100)),
 		FadeOut::create(0.5f),
 		NULL));
+#endif
 }

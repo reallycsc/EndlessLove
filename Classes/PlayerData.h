@@ -47,6 +47,8 @@ public:
 
 	void initPlayerData();
 
+	void changeLanguageTo(LanguageType &type);
+
 	void initPlayerHeartNumber();
 
 	void doublePlayerGoldNumber() {
@@ -122,6 +124,7 @@ public:
     CC_SYNTHESIZE(long long, m_nDoubleNumber, DoubleNumber);
 
 private:
+	LanguageType	m_languageType;
 	int	m_nMinStrength;
 	float m_fDefaultHeartNumber;
 

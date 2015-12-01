@@ -28,7 +28,6 @@ public:
 
 private:
 	void blink();
-	void playShieldAnimation();
 
 public:
 	CC_SYNTHESIZE(Sprite*, m_pSprite, Sprite);
@@ -48,7 +47,6 @@ public:
 	CC_SYNTHESIZE(int, m_nTopPosY, TopPosY);
 
 private:
-	GameMediator*	m_pGameMediator;
 	PlayerData*	m_pPlayerData;
 
 	Sprite*	m_pSpriteShield;

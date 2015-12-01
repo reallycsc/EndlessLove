@@ -28,13 +28,13 @@
             <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Item_GuideLine" ActionTag="-292138464" Tag="107" IconVisible="False" LeftMargin="-76.0000" RightMargin="984.0000" TopMargin="674.0000" BottomMargin="-86.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Item_GuideLine" ActionTag="-292138464" Tag="107" IconVisible="False" LeftMargin="-78.9370" RightMargin="986.9370" TopMargin="1070.4954" BottomMargin="-482.4954" ctype="SpriteObjectData">
             <Size X="52.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-50.0000" Y="-60.0000" />
+            <Position X="-52.9370" Y="-456.4954" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.0521" Y="-0.0938" />
+            <PrePosition X="-0.0551" Y="-0.7133" />
             <PreSize X="0.0542" Y="0.0812" />
             <FileData Type="Normal" Path="Resource/Item/guideItem.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
@@ -50,26 +50,26 @@
             <FileData Type="Normal" Path="Resource/Item/Heart.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Item_Enlarge" ActionTag="-1293565433" Tag="106" IconVisible="False" LeftMargin="-75.5000" RightMargin="984.5000" TopMargin="794.0000" BottomMargin="-206.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Item_Enlarge" ActionTag="-1293565433" Tag="106" IconVisible="False" LeftMargin="-73.0000" RightMargin="987.0000" TopMargin="797.0000" BottomMargin="-203.0000" ctype="SpriteObjectData">
             <Size X="51.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-50.0000" Y="-180.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.2813" />
-            <PreSize X="0.0531" Y="0.0812" />
-            <FileData Type="Normal" Path="Resource/Item/enlargeItem1.png" Plist="" />
+            <PreSize X="0.0479" Y="0.0719" />
+            <FileData Type="Normal" Path="Resource/Item/enlargeItem.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Item_Shink" ActionTag="-101851337" Tag="107" IconVisible="False" LeftMargin="-75.5000" RightMargin="984.5000" TopMargin="854.0000" BottomMargin="-266.0000" ctype="SpriteObjectData">
-            <Size X="51.0000" Y="52.0000" />
+          <AbstractNodeData Name="Sprite_Item_Shink" ActionTag="-101851337" Tag="107" IconVisible="False" LeftMargin="-73.0000" RightMargin="987.0000" TopMargin="857.0000" BottomMargin="-263.0000" ctype="SpriteObjectData">
+            <Size X="51.0000" Y="51.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-50.0000" Y="-240.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.3750" />
-            <PreSize X="0.0531" Y="0.0812" />
-            <FileData Type="Normal" Path="Resource/Item/shrinkItem1.png" Plist="" />
+            <PreSize X="0.0479" Y="0.0719" />
+            <FileData Type="Normal" Path="Resource/Item/shrinkItem.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_Bomb" ActionTag="281585934" Tag="79" IconVisible="False" LeftMargin="-85.5000" RightMargin="974.5000" TopMargin="904.0000" BottomMargin="-336.0000" ctype="SpriteObjectData">
@@ -138,13 +138,13 @@
             <FileData Type="Normal" Path="Resource/Item/Heart_GreenTea.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Item_Shield" ActionTag="-1258104373" Tag="100" IconVisible="False" LeftMargin="-76.5000" RightMargin="983.5000" TopMargin="668.0000" BottomMargin="-92.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Item_Shield" ActionTag="-1258104373" Tag="100" IconVisible="False" LeftMargin="-79.4371" RightMargin="986.4371" TopMargin="994.0070" BottomMargin="-418.0070" ctype="SpriteObjectData">
             <Size X="53.0000" Y="64.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-            <Position X="-50.0000" Y="-60.0000" />
+            <Position X="-52.9371" Y="-386.0070" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.0521" Y="-0.0938" />
+            <PrePosition X="-0.0551" Y="-0.6031" />
             <PreSize X="0.0552" Y="0.1000" />
             <FileData Type="Normal" Path="Resource/Item/shield.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />

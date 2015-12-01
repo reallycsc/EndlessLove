@@ -28,7 +28,7 @@
 				<EnemyInterval minScale="0.1" maxScale="1.0"/> <!-- relevent with winSize.width, like minInterval = winSize.width * minScale -->
 			</EnemyDown>
         </Level>
-		<Level level="2" stage="2" levelUpScore="4">
+		<Level level="2" stage="1" levelUpScore="4">
 			<Player>
 				<PlayerMoveTime time="2.8"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
 			</Player>
@@ -56,7 +56,7 @@
 				<EnemyInterval minScale="0.1" maxScale="1.0"/> <!-- relevent with winSize.width, like minInterval = winSize.width * minScale -->
 			</EnemyUp>
 		</Level>
-		<Level level="5" stage="3" levelUpScore="5">
+		<Level level="5" stage="2" levelUpScore="5">
 			<Player>
 				<PlayerMoveTime time="2.4"/> <!-- relevent with winSize.width, like moveSpeed = winSize.width / time -->
 			</Player>

@@ -21,6 +21,7 @@ bool PlayerUpgradeScene::init()
 		// add backlayer
 		BackLayer* backLayer = BackLayer::create();
 		CC_BREAK_IF(!backLayer);
+		backLayer->setBackImageFor(BACKIMAGE_MAINMENU);
 		this->addChild(backLayer);
 		backLayer->moveRandomBackSprite();
 

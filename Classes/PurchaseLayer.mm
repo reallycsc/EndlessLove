@@ -40,7 +40,7 @@ bool PurchaseLayer::init()
         buttonClose->addClickEventListener(CC_CALLBACK_1(PurchaseLayer::menuCallback_Close, this));
         
 		// set all text
-		buttonClose->setTitleText(m_pmGameText->at(GAMETEXT_COMMON_CLOSE));
+		buttonClose->setTitleText(m_pmGameText->at("ID_COMMON_CLOSE"));
 
         // run animation
         m_pLayout->setPosition(cocos2d::Point(winSize.width/2, winSize.height+ m_pLayout->getContentSize().height));
@@ -69,7 +69,7 @@ bool PurchaseLayer::init()
                         this->showListItems();
                     }
                 }];
-                [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_DOWNLOADINFO).c_str()
+                [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at("ID_IAP_DOWNLOAD").c_str()
                                                       encoding:NSUTF8StringEncoding]
                       Interaction:FALSE];
                 this->scheduleOnce(schedule_selector(PurchaseLayer::waitingTimeOut), 10.0f);
@@ -104,9 +104,7 @@ void PurchaseLayer::showListItems()
         
         itemName->setString([product.localizedTitle UTF8String]);
         itemDesc->setString([product.localizedDescription UTF8String]);
-        itemDesc->setTextAreaSize(cocos2d::Size(scrollView->getInnerContainerSize().width,0));
-        scrollView->setInnerContainerSize(itemDesc->getVirtualRendererSize());
-        itemDesc->setPosition(cocos2d::Point(10,scrollView->getInnerContainerSize().height));
+		GameMediator::setLineWrap(scrollView, itemDesc);
 
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setFormatterBehavior:NSNumberFormatterBehavior10_4];
@@ -128,7 +126,7 @@ void PurchaseLayer::showListItems()
 void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* product)
 {
     IAPHelper* helper = [IAPShare sharedHelper].iap;
-    [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_BUYING).c_str()
+    [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at("ID_IAP_BUYING").c_str()
                                           encoding:NSUTF8StringEncoding]
           Interaction:FALSE];
     [helper buyProduct:product
@@ -138,7 +136,7 @@ void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* pr
                   NSLog(@"Fail %@",[trans.error localizedDescription]);
               }
               else if(trans.transactionState == SKPaymentTransactionStatePurchased) {
-                  [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_CHECKINGRECEPIT).c_str()
+                  [ProgressHUD show: [NSString stringWithCString:m_pmGameText->at("ID_IAP_CHECKRECEIPT").c_str()
                                                         encoding:NSUTF8StringEncoding]
                         Interaction:FALSE];
                   [helper checkReceipt:trans.transactionReceipt
@@ -154,19 +152,19 @@ void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, SKProduct* pr
                                       NSLog(@"Pruchases %@",helper.purchasedProducts);
                                   }
                                   else {
-                                      [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTSTATUSERROR).c_str()
+                                      [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at("ID_IAP_RECEIPTWRONG").c_str()
                                                                                 encoding:NSUTF8StringEncoding]];
                                       NSLog(@"Fail in response status is 0");
                                   }
                               }
                               else {
-                                  [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_NORESPONSE).c_str()
+                                  [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at("ID_IAP_NORESPONSE").c_str()
                                                                             encoding:NSUTF8StringEncoding]];
                               }
                           }];
               }
               else if(trans.transactionState == SKPaymentTransactionStateFailed) {
-                  [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_RECEIPTCHECKERROR).c_str()
+                  [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at("ID_IAP_NORECEIPT").c_str()
                                                             encoding:NSUTF8StringEncoding]];
                   NSLog(@"Fail in SKPaymentTransactionStateFailed");
               }
@@ -178,20 +176,18 @@ void PurchaseLayer::menuCallback_Close(Ref* pSender)
 {
     cocos2d::Size winSize = Director::getInstance()->getWinSize();
     m_pLayout->runAction(Sequence::create(
-                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-                                          CallFuncN::create(CC_CALLBACK_1(PurchaseLayer::moveToFinished, this)),
-                                          NULL));
-}
-
-void PurchaseLayer::moveToFinished(Ref* pSender)
-{
-    this->removeFromParent();
+		MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		CallFuncN::create([=](Ref* pSender)->void
+	{
+		this->removeFromParent();
+	}),
+		NULL));
 }
 
 void PurchaseLayer::waitingTimeOut(float dt)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at(GAMETEXT_PROGRESSHUD_RESPONSETIMEOUT).c_str()
+    [ProgressHUD showError:[NSString stringWithCString:m_pmGameText->at("ID_IAP_TIMEOUT").c_str()
                                               encoding:NSUTF8StringEncoding]];
 #endif
 }

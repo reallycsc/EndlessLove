@@ -9,6 +9,14 @@ enum {
 	TYPE_HEARTRIGHT,
 };
 
+const int ZORDER_PLAYERLAYER_MAINLAYER = 0;
+const int ZORDER_PLAYERLAYER_FLOWINGGOLD = 1;
+const int ZORDER_PLAYERLAYER_PLAYER = 2;
+const int ZORDER_PLAYERLAYER_HEARTGREY = 3;
+const int ZORDER_PLAYERLAYER_HEART = 4;
+const int ZORDER_PLAYERLAYER_HEARTHALF = 5;
+const int ZORDER_PLAYERLAYER_HEARTPROGRESS = 6;
+
 class PlayerLayer :
 	public Layer
 {
@@ -36,7 +44,7 @@ public:
 	void startPlayerShield(float duration);
 
 private:
-	void startCountDown(float dt, int countDownType, int textType);
+	void startCountDown(float dt, int countDownType, const char* textType);
 
 	void guideLineFadeOutFinished(Node* pSender);
 	void setCountDownPosition();
@@ -51,7 +59,7 @@ public:
 
 private:
 	GameMediator*	m_pGameMediator;
-	map<int, string>*	m_pMapGameText;
+	map<string, string>*	m_pMapGameText;
 	PlayerData*	m_pPlayerData;
 
 	Text*	m_pTextScore;
@@ -60,9 +68,9 @@ private:
 	Sprite*	m_pSpriteGold;
 
 	Sprite* m_pSpriteHeart;
-	Vector<Sprite*>	m_vSpriteHearts;
 	Sprite*	m_pSpriteHalfHeartLeft;
 	Sprite*	m_pSpriteHalfHeartRight;
+	Vector<Sprite*>	m_vSpriteHearts;
 
 	Sprite* m_pSpriteGuideLine;
 
@@ -71,7 +79,7 @@ private:
 	map<int, float> m_mCurCountDownTime;
 	map<int, float> m_mMaxCountDownTime;
 
-	Node*	m_pNodeHeart;
+	Node*	m_pNodePlayerHeart;
 	Text*	m_pTextHeartNumber;
 	Text*	m_pTextGood;
 	Text*	m_pTextGreat;

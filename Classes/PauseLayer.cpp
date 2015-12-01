@@ -39,10 +39,10 @@ bool PauseLayer::init()
 
 		// set all text
 		auto mapGameText = GameMediator::getInstance()->getGameText();
-		dynamic_cast<Text*>(m_pLayout->getChildByName("Text_Paused"))->setString(mapGameText->at(GAMETEXT_PAUSELAYER_TITLE));
-		buttonResume->setTitleText(mapGameText->at(GAMETEXT_PAUSELAYER_RESUME));
-		buttonRetry->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_RETRY));
-		buttonMainMenu->setTitleText(mapGameText->at(GAMETEXT_GAMEOVERLAYER_MAINMENU));
+		dynamic_cast<Text*>(m_pLayout->getChildByName("Text_Paused"))->setString(mapGameText->at("ID_PAUSE_TITLE"));
+		buttonResume->setTitleText(mapGameText->at("ID_PAUSE_RESUME"));
+		buttonRetry->setTitleText(mapGameText->at("ID_GAME_RETRY"));
+		buttonMainMenu->setTitleText(mapGameText->at("ID_GAME_MAINMENU"));
 
 		// run animation
 		m_pLayout->setPosition(Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
@@ -61,8 +61,7 @@ void PauseLayer::menuCallback_Resume(Ref* pSender)
 		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
-        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-        Director::getInstance()->getTextureCache()->removeUnusedTextures();
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GamePauseImage");
 		Director::getInstance()->popScene(); 
 	}),
 		NULL));
@@ -79,10 +78,9 @@ void PauseLayer::menuCallback_Retry(Ref* pSender)
 		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
-        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-		Director::getInstance()->getTextureCache()->removeUnusedTextures();
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GamePauseImage");
 		Director::getInstance()->popScene();
-		Director::getInstance()->replaceScene(GameScene::create());
+		Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::create()));
 	}),
 		NULL));
 }
@@ -99,10 +97,9 @@ void PauseLayer::menuCallback_MainMenu(Ref* pSender)
 		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
-        Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
-		Director::getInstance()->getTextureCache()->removeUnusedTextures();
+        Director::getInstance()->getTextureCache()->removeTextureForKey("GamePauseImage");
 		Director::getInstance()->popScene();
-        Director::getInstance()->replaceScene(TransitionSlideInL::create(0.5f, MainMenuScene::create()));
+        Director::getInstance()->replaceScene(TransitionFade::create(0.5f, MainMenuScene::create()));
 	}),
 		NULL));
 }

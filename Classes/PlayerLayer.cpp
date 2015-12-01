@@ -13,9 +13,9 @@ PlayerLayer::PlayerLayer(void)
 	m_pSpriteGold = NULL;
 
 	m_pSpriteHeart = NULL;
-	m_vSpriteHearts.clear();
 	m_pSpriteHalfHeartLeft = NULL;
 	m_pSpriteHalfHeartRight = NULL;
+	m_vSpriteHearts.clear();
 	
 	m_pSpriteGuideLine = NULL;
 
@@ -24,7 +24,7 @@ PlayerLayer::PlayerLayer(void)
 	m_mCurCountDownTime.clear();
 	m_mMaxCountDownTime.clear();
 
-	m_pNodeHeart = NULL;
+	m_pNodePlayerHeart = NULL;
 	m_pTextHeartNumber = NULL;
 	m_pTextGood = NULL;
 	m_pTextGreat = NULL;
@@ -51,7 +51,7 @@ bool PlayerLayer::init()
 		CC_BREAK_IF(!Layer::init());
 		Size winSize = Director::getInstance()->getWinSize();
 
-		//建立触摸监听
+		// bind touch event
 		auto touchListener = EventListenerTouchOneByOne::create();
 		touchListener->onTouchBegan = CC_CALLBACK_2(PlayerLayer::onTouchBegan, this);
 		touchListener->onTouchMoved = CC_CALLBACK_2(PlayerLayer::onTouchMoved, this);
@@ -60,86 +60,30 @@ bool PlayerLayer::init()
 
 		// Load csb
 		auto rootNode = CSLoader::createNode("PlayerLayer.csb");
+		auto animate = CSLoader::createTimeline("PlayerLayer.csb");
+		rootNode->runAction(animate);
+		animate->pause();
 		this->addChild(rootNode, ZORDER_PLAYERLAYER_MAINLAYER);
 
-		// Add Player
-		m_pPlayer = Player::create();
-		m_pPlayer->setPosition(winSize.width / 4, 0);
-		this->addChild(m_pPlayer, ZORDER_PLAYERLAYER_PLAYER);
-
+		// get node
+		Node* nodeHeartNumber = dynamic_cast<Node*>(rootNode->getChildByName("Node_MaxHeart"));
+		Node* nodeCountdown = dynamic_cast<Node*>(rootNode->getChildByName("Node_CountDown"));
 		Node* nodePlayer = dynamic_cast<Node*>(rootNode->getChildByName("Node_Player"));
-		m_pNodeHeart = dynamic_cast<Node*>(nodePlayer->getChildByName("Node_Heart"));
-		m_pNodeHeart->setVisible(false);
-		m_pTextHeartNumber = dynamic_cast<Text*>(m_pNodeHeart->getChildByName("Text_HeartNumber"));
-		m_pTextGood = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Good"));
-		m_pTextGood->setVisible(false);
-		m_pTextGreat = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Great"));
-		m_pTextGreat->setVisible(false);
-		m_pTextPerfect = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Perfect"));
-		m_pTextPerfect->setVisible(false);
 
-		// Add text
-		m_pTextScore = dynamic_cast<Text*>(rootNode->getChildByName("Text_Score"));
-		m_pNodeGoldNum = dynamic_cast<Node*>(rootNode->getChildByName("Node_GoldNumber"));
-		m_pTextGoldNum = dynamic_cast<Text*>(m_pNodeGoldNum->getChildByName("Text_GoldNumber"));
-		m_pSpriteGold = dynamic_cast<Sprite*>(m_pNodeGoldNum->getChildByName("Sprite_GoldCoin"));
-
-		// Add heart
-		m_pSpriteHeart = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_Heart"));
-		m_pSpriteHalfHeartLeft = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_HeartBrokenLeft"));
+		// get heart
+		auto spriteHeartGrey = dynamic_cast<Sprite*>(nodeHeartNumber->getChildByName("Sprite_HeartGrey"));
+		auto spriteHalfHeartLeftGrey = dynamic_cast<Sprite*>(nodeHeartNumber->getChildByName("Sprite_HeartLeftGrey"));
+		m_pSpriteHeart = dynamic_cast<Sprite*>(nodeHeartNumber->getChildByName("Sprite_Heart"));
+		m_pSpriteHalfHeartLeft = dynamic_cast<Sprite*>(nodeHeartNumber->getChildByName("Sprite_HeartBrokenLeft"));
 		m_pSpriteHalfHeartLeft->setGlobalZOrder(ZORDER_PLAYERLAYER_HEARTHALF);
-		m_pSpriteHalfHeartRight = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_HeartBrokenRight"));
+		m_pSpriteHalfHeartRight = dynamic_cast<Sprite*>(nodeHeartNumber->getChildByName("Sprite_HeartBrokenRight"));
 		m_pSpriteHalfHeartRight->setGlobalZOrder(ZORDER_PLAYERLAYER_HEARTHALF);
 
-		auto spriteGrey = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_HeartGrey"));
-		auto spriteLeftGrey = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_HeartLeftGrey"));
-		float maxHeartNumber = m_pPlayerData->getMaxHeartNumber();
-		int posY = winSize.height - 10;
-		int i = 0;
-		while(maxHeartNumber - i >= 1)
-		{
-			Sprite* sprite = Sprite::createWithSpriteFrame(spriteGrey->getSpriteFrame());
-			sprite->setAnchorPoint(spriteGrey->getAnchorPoint());
-			sprite->setPosition(10 + i * 60, posY);
-			this->addChild(sprite, ZORDER_PLAYERLAYER_HEARTGREY);
-			i++;
-		}
-		if (maxHeartNumber - i > 0)
-		{
-			Sprite* sprite = Sprite::createWithSpriteFrame(spriteLeftGrey->getSpriteFrame());
-			sprite->setAnchorPoint(spriteLeftGrey->getAnchorPoint());
-			sprite->setPosition(10 + floor(maxHeartNumber) * 60, posY);
-			this->addChild(sprite, ZORDER_PLAYERLAYER_HEARTGREY);
-		}
-
-		m_fCurHeartNumber = m_pPlayerData->getHeartNumber();
-		for (int i = 0; i < m_fCurHeartNumber; i++)
-		{
-			Sprite* sprite = Sprite::createWithSpriteFrame(m_pSpriteHeart->getSpriteFrame());
-			sprite->setAnchorPoint(m_pSpriteHeart->getAnchorPoint());
-			sprite->setPosition(10 + i * 60, posY);
-			m_vSpriteHearts.pushBack(sprite);
-			this->addChild(sprite, ZORDER_PLAYERLAYER_HEART);
-		}
-		
-
-		// 加入辅助虚线
-		m_pSpriteGuideLine = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_GuideLine"));
-		if (m_pGameMediator->getIsGuidelineForever())
-		{
-			m_pSpriteGuideLine->setPosition(winSize.width / 2, 0);
-		}
-		else
-		{
-			m_pSpriteGuideLine->setVisible(false);
-		}
-
-
-		// 加入倒计时指示
-		Node* nodeGuideLine = dynamic_cast<Node*>(rootNode->getChildByName("Node_GuideLineCountDown"));
-		Node* nodeEnlarge = dynamic_cast<Node*>(rootNode->getChildByName("Node_EnlargeCountDown"));
-		Node* nodeShrink = dynamic_cast<Node*>(rootNode->getChildByName("Node_ShrinkCountDown"));
-		Node* nodeShield = dynamic_cast<Node*>(rootNode->getChildByName("Node_ShieldCountDown"));
+		// get countdown
+		Node* nodeGuideLine = dynamic_cast<Node*>(nodeCountdown->getChildByName("Node_GuideLineCountDown"));
+		Node* nodeEnlarge = dynamic_cast<Node*>(nodeCountdown->getChildByName("Node_EnlargeCountDown"));
+		Node* nodeShrink = dynamic_cast<Node*>(nodeCountdown->getChildByName("Node_ShrinkCountDown"));
+		Node* nodeShield = dynamic_cast<Node*>(nodeCountdown->getChildByName("Node_ShieldCountDown"));
 		m_mCountDown.insert(COUNTDOWN_GUIDELINE, nodeGuideLine);
 		m_mCountDown.insert(COUNTDOWN_ENLARGE, nodeEnlarge);
 		m_mCountDown.insert(COUNTDOWN_SHRINK, nodeShrink);
@@ -149,24 +93,93 @@ bool PlayerLayer::init()
 			iter.second->setVisible(false);
 		}
 
+		// get player heart & text
+		m_pNodePlayerHeart = dynamic_cast<Node*>(nodePlayer->getChildByName("Node_Heart"));
+		m_pNodePlayerHeart->setVisible(false);
+		m_pTextHeartNumber = dynamic_cast<Text*>(m_pNodePlayerHeart->getChildByName("Text_HeartNumber"));
+		m_pTextGood = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Good"));
+		m_pTextGreat = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Great"));
+		m_pTextPerfect = dynamic_cast<Text*>(nodePlayer->getChildByName("Text_Perfect"));
+
+		// get text
+		m_pTextScore = dynamic_cast<Text*>(rootNode->getChildByName("Text_Score"));
+		m_pNodeGoldNum = dynamic_cast<Node*>(rootNode->getChildByName("Node_GoldNumber"));
+		m_pTextGoldNum = dynamic_cast<Text*>(m_pNodeGoldNum->getChildByName("Text_GoldNumber"));
+		m_pSpriteGold = dynamic_cast<Sprite*>(m_pNodeGoldNum->getChildByName("Sprite_GoldCoin"));
+
+		// add player
+		m_pPlayer = Player::create();
+		m_pPlayer->setPosition(winSize.width / 4, 0);
+		this->addChild(m_pPlayer, ZORDER_PLAYERLAYER_PLAYER);
+
+		// init heart number
+		float maxHeartNumber = m_pPlayerData->getMaxHeartNumber();
+		int posY = winSize.height - 10;
+		int i = 0;
+		while (maxHeartNumber - i >= 1)
+		{
+			Sprite* sprite = Sprite::createWithSpriteFrame(spriteHeartGrey->getSpriteFrame());
+			sprite->setAnchorPoint(spriteHeartGrey->getAnchorPoint());
+			sprite->setPosition(10 + i * 60, posY);
+			nodeHeartNumber->addChild(sprite, ZORDER_PLAYERLAYER_HEARTGREY);
+			i++;
+		}
+		if (maxHeartNumber - i > 0)
+		{
+			Sprite* sprite = Sprite::createWithSpriteFrame(spriteHalfHeartLeftGrey->getSpriteFrame());
+			sprite->setAnchorPoint(spriteHalfHeartLeftGrey->getAnchorPoint());
+			sprite->setPosition(10 + floor(maxHeartNumber) * 60, posY);
+			nodeHeartNumber->addChild(sprite, ZORDER_PLAYERLAYER_HEARTGREY);
+		}
+		m_fCurHeartNumber = m_pPlayerData->getHeartNumber();
+		i = 0;
+		while (m_fCurHeartNumber - i >= 1)
+		{
+			Sprite* sprite = Sprite::createWithSpriteFrame(m_pSpriteHeart->getSpriteFrame());
+			sprite->setAnchorPoint(m_pSpriteHeart->getAnchorPoint());
+			sprite->setPosition(10 + i * 60, posY);
+			m_vSpriteHearts.pushBack(sprite);
+			nodeHeartNumber->addChild(sprite, ZORDER_PLAYERLAYER_HEART);
+			i++;
+		}
+		if (m_fCurHeartNumber - i > 0)
+		{
+			m_pSpriteHalfHeartLeft->setVisible(true);
+			m_pSpriteHalfHeartLeft->setPosition(10 + i * 60, posY);
+		}
+
+		// add guideline
+		m_pSpriteGuideLine = dynamic_cast<Sprite*>(rootNode->getChildByName("Sprite_GuideLine"));
+		if (m_pGameMediator->getIsGuidelineForever())
+		{
+			m_pSpriteGuideLine->setPosition(winSize.width * 0.5, 0);
+		}
+		else
+		{
+			m_pSpriteGuideLine->setVisible(false);
+		}
+
 		// set all text
-		m_pTextGood->setString(m_pMapGameText->at(GAMETEXT_PLAYER_GOOD));
-		m_pTextGreat->setString(m_pMapGameText->at(GAMETEXT_PLAYER_GREAT));
-		m_pTextPerfect->setString(m_pMapGameText->at(GAMETEXT_PLAYER_PERFECT));
+		m_pTextGood->setString(m_pMapGameText->at("ID_GAME_GOOD"));
+		m_pTextGreat->setString(m_pMapGameText->at("ID_GAME_GREAT"));
+		m_pTextPerfect->setString(m_pMapGameText->at("ID_GAME_PERFECT"));
 
 		m_pTextScore->setString(StringUtils::format("%d", m_pPlayerData->getScore()));
 		dynamic_cast<Text*>(nodeGuideLine->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
-			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_GUIDELINE).c_str(),
+			m_pMapGameText->at("ID_GAME_GUIDELINE").c_str(),
 			10.0));
 		dynamic_cast<Text*>(nodeEnlarge->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
-			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_ENLARGE).c_str(),
+			m_pMapGameText->at("ID_GAME_ENLARGE").c_str(),
 			10.0));
 		dynamic_cast<Text*>(nodeShrink->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
-			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SHRINK).c_str(),
+			m_pMapGameText->at("ID_GAME_SHRINK").c_str(),
 			10.0));
 		dynamic_cast<Text*>(nodeShield->getChildByName("Text_CountDown"))->setString(StringUtils::format("%s%.1f",
-			m_pMapGameText->at(GAMETEXT_PLAYERLAYER_SHIELD).c_str(),
+			m_pMapGameText->at("ID_GAME_SHIELD").c_str(),
 			10.0));
+
+		// play animation
+		animate->play("Scene_Start", false);
 
 		this->scheduleUpdate();
 
@@ -177,11 +190,8 @@ bool PlayerLayer::init()
 
 bool PlayerLayer::onTouchBegan(Touch *touch, Event *event)
 {
-	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
-	{
-		//Point point = touch->getLocation();  //获取触摸坐标
-		m_pPlayer->setIsNeedToPowerUp(true);
-	}
+	//Point point = touch->getLocation();  //获取触摸坐标
+	m_pPlayer->setIsNeedToPowerUp(true);
 	return true;
 }
 
@@ -192,45 +202,38 @@ void PlayerLayer::onTouchMoved(Touch *touch, Event *event)
 
 void PlayerLayer::onTouchEnded(Touch *touch, Event *event)
 {
-	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	if (m_pPlayer->getIsPowerUp())
 	{
-		if (m_pPlayer->getIsPowerUp())
-		{
-			m_pPlayer->scheduleJump();
-		}
-		else
-		{
-			m_pPlayer->setIsNeedToPowerUp(false);
-		}
+		m_pPlayer->scheduleJump();
+	}
+	else
+	{
+		m_pPlayer->setIsNeedToPowerUp(false);
 	}
 }
 
 // schedule functions
 void PlayerLayer::update(float dt)
 {
-	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	// change guideline position Y duration player power up
+	if (m_pSpriteGuideLine->isVisible() == true)
 	{
-		// change guideline position Y duration player power up
-		if (m_pSpriteGuideLine->isVisible() == true)
+		if (m_pPlayer->getIsPowerUp() == true)
 		{
-			if (m_pPlayer->getIsPowerUp() == true)
-			{
-				auto speed = m_pPlayer->getCurPower() * m_pPlayerData->getStrength() / MAXPOWER;
-				int positionY = (speed * speed) / (2 * GRAVITY);
-				m_pSpriteGuideLine->setPositionY(positionY);
-			}
+			auto speed = m_pPlayer->getCurPower() * m_pPlayerData->getStrength() / MAXPOWER;
+			int positionY = (speed * speed) / (2 * GRAVITY);
+			m_pSpriteGuideLine->setPositionY(positionY);
 		}
-		// update heart number
-		this->updateHeartNumber(m_pPlayerData->getHeartNumber() - m_fCurHeartNumber);
 	}
-
+	// update heart number
+	this->updateHeartNumber(m_pPlayerData->getHeartNumber() - m_fCurHeartNumber);
 }
 
-void PlayerLayer::startCountDown(float dt, int countDownType, int textType)
+void PlayerLayer::startCountDown(float dt, int countDownType, const char* textType)
 {
 	if (countDownType <= COUNTDOWN_MIN || countDownType >= COUNTDOWN_MAX)
 		return;
-	if (m_pGameMediator->getGameState() == STATE_GAME_RUN)
+	if (m_pGameMediator->getGameState() == GAMESTATE_RUN)
 	{
 		float curTime = m_mCurCountDownTime.at(countDownType);
 		Node* node = m_mCountDown.at(countDownType);
@@ -323,11 +326,11 @@ void PlayerLayer::addHeartNumber(float number) // return heart number before cha
 		else
 			m_pTextHeartNumber->setString(StringUtils::format("%d", int(number)));
 	}
-	m_pNodeHeart->setVisible(true);
-	m_pNodeHeart->setOpacity(255);
-	m_pNodeHeart->setPosition(m_pPlayer->getPositionX(), m_pPlayer->getPositionY() + m_pPlayer->getBoundingBox().size.height + 20);
-	m_pNodeHeart->runAction(Sequence::create(
-		MoveTo::create(0.5f, Point(m_pNodeHeart->getPositionX(), m_pNodeHeart->getPositionY() + 100)),
+	m_pNodePlayerHeart->setVisible(true);
+	m_pNodePlayerHeart->setOpacity(255);
+	m_pNodePlayerHeart->setPosition(m_pPlayer->getPositionX(), m_pPlayer->getPositionY() + m_pPlayer->getBoundingBox().size.height + 20);
+	m_pNodePlayerHeart->runAction(Sequence::create(
+		MoveTo::create(0.5f, Point(m_pNodePlayerHeart->getPositionX(), m_pNodePlayerHeart->getPositionY() + 100)),
 		FadeOut::create(0.5f),
 		NULL));
 }
@@ -449,8 +452,6 @@ void PlayerLayer::showEvaluation(int y)
 		return;
 	if (y < 10) // Perfect
 	{
-		m_pTextPerfect->setScale(1);
-		m_pTextPerfect->setVisible(true);
 		m_pTextPerfect->setOpacity(255);
 		m_pTextPerfect->setPosition(Point(m_pPlayer->getPositionX(), m_pPlayer->getPositionY() + m_pPlayer->getBoundingBox().size.height + 70));
 		m_pTextPerfect->runAction(Sequence::create(
@@ -463,8 +464,6 @@ void PlayerLayer::showEvaluation(int y)
 	}
 	else if (y >= 10 && y < 50) // Great
 	{
-		m_pTextGreat->setScale(1);
-		m_pTextGreat->setVisible(true);
 		m_pTextGreat->setOpacity(255);
 		m_pTextGreat->setPosition(Point(m_pPlayer->getPositionX(), m_pPlayer->getPositionY() + m_pPlayer->getBoundingBox().size.height + 70));
 		m_pTextGreat->runAction(Sequence::create(
@@ -477,8 +476,6 @@ void PlayerLayer::showEvaluation(int y)
 	}
 	else // Good
 	{
-		m_pTextGood->setScale(1);
-		m_pTextGood->setVisible(true);
 		m_pTextGood->setOpacity(255);
 		m_pTextGood->setPosition(Point(m_pPlayer->getPositionX(), m_pPlayer->getPositionY() + m_pPlayer->getBoundingBox().size.height + 70));
 		m_pTextGood->runAction(Sequence::create(
@@ -513,7 +510,7 @@ void PlayerLayer::startShowGuideLine(float duration)
 	}
 	
 	this->unschedule("guideLineCountDown");
-	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_GUIDELINE, GAMETEXT_PLAYERLAYER_GUIDELINE),
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_GUIDELINE, "ID_GAME_GUIDELINE"),
 		0.1f, int(duration * 10), 0, "guideLineCountDown");
 }
 
@@ -543,7 +540,7 @@ void PlayerLayer::startPlayerEnlarge(float duration)
 	}
 
 	this->unschedule("enlargeCountDown");
-	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_ENLARGE, GAMETEXT_PLAYERLAYER_ENLARGE),
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_ENLARGE, "ID_GAME_ENLARGE"),
 		0.1f, int(duration * 10), 0, "enlargeCountDown");
 }
 
@@ -574,7 +571,7 @@ void PlayerLayer::startPlayerShrink(float duration)
 
 	
 	this->unschedule("shrinkCountDown");
-	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHRINK, GAMETEXT_PLAYERLAYER_SHRINK),
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHRINK, "ID_GAME_SHRINK"),
 		0.1f, int(duration * 10), 0, "shrinkCountDown");
 }
 
@@ -592,7 +589,7 @@ void PlayerLayer::startPlayerShield(float duration)
 	}
 
 	this->unschedule("shieldCountDown");
-	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHIELD, GAMETEXT_PLAYERLAYER_SHIELD),
+	this->schedule(CC_CALLBACK_1(PlayerLayer::startCountDown, this, COUNTDOWN_SHIELD, "ID_GAME_SHIELD"),
 		0.1f, int(duration * 10), 0, "shieldCountDown");
 
 	return;
