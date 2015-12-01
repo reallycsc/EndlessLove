@@ -166,15 +166,15 @@ bool PlayerData::loadPlayerUpgradeConfigFile()
 			data.freeJumpTime = surface2->IntAttribute("freeJumpTime");
 			switch (m_languageType)
 			{
-			case kLanguageChinese:
-				data.description = surface2->Attribute("description_cn");
-				break;
-			case kLanguageEnglish:
-				data.description = surface2->Attribute("description_en");
-				break;
-			default:
-				data.description = surface2->Attribute("description_en");
-				break;
+                case LanguageType::CHINESE:
+                    data.description = surface2->Attribute("description_cn");
+                    break;
+                case LanguageType::ENGLISH:
+                    data.description = surface2->Attribute("description_en");
+                    break;
+                default:
+                    data.description = surface2->Attribute("description_en");
+                    break;
 		}
 			m_vJumpTypeLevelInfo.push_back(data);
 		}

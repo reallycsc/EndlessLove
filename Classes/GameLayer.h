@@ -19,11 +19,11 @@ public:
 	GameLayer(void);
 	~GameLayer(void);
 
-	virtual bool init();
+	virtual bool init() override;
 
 	CREATE_FUNC(GameLayer);
 
-	void update(float dt);
+	virtual void update(float dt) override;
 
 	virtual void onEnter() override;
 private:

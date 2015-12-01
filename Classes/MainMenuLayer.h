@@ -47,4 +47,8 @@ private:
 	ActionTimeline* m_pAnimate;
 	ActionTimeline* m_pPlayerAnimate;
     Text*   m_pTextHighscore;
+    
+    Button*     m_pButtonSignIn;
+    Button*     m_pButtonAchievement;
+    Button*     m_pButtonLeaderboard;
 };

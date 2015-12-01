@@ -19,6 +19,9 @@ MainMenuLayer::MainMenuLayer(void)
 	m_pAnimate = NULL;
 	m_pPlayerAnimate = NULL;
 	m_pTextHighscore = NULL;
+    m_pButtonSignIn = NULL;
+    m_pButtonAchievement = NULL;
+    m_pButtonLeaderboard = NULL;
 }
 
 
@@ -34,7 +37,7 @@ bool MainMenuLayer::init()
         return false;
     }
 
-	Size winSize = Director::getInstance()->getWinSize();
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
 	// bind touch event
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -67,12 +70,12 @@ bool MainMenuLayer::init()
 	// get button
 	auto buttonSetting = dynamic_cast<Button*>(nodeUp->getChildByName("Button_Setting"));
 	buttonSetting->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Setting, this));
-	auto buttonSignIn = dynamic_cast<Button*>(nodeDown->getChildByName("Button_SignIn"));
-	buttonSignIn->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_SignIn, this));
-	auto buttonAchievement = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Achievement"));
-	buttonAchievement->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Achievement, this));
-	auto buttonLeaderboard = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Leaderboard"));
-    buttonLeaderboard->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Leaderboard, this));
+	m_pButtonSignIn = dynamic_cast<Button*>(nodeDown->getChildByName("Button_SignIn"));
+	m_pButtonSignIn->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_SignIn, this));
+	m_pButtonAchievement = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Achievement"));
+	m_pButtonAchievement->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Achievement, this));
+	m_pButtonLeaderboard = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Leaderboard"));
+    m_pButtonLeaderboard->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Leaderboard, this));
 	auto buttonPurchaseNoAd = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Purchase_noAd"));
 	buttonPurchaseNoAd->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_PurchaseNoAd, this));
 	auto buttonUpgrade = dynamic_cast<Button*>(rootNode->getChildByName("Button_Upgrade"));
@@ -84,8 +87,8 @@ bool MainMenuLayer::init()
     auto buttonReset = dynamic_cast<Button*>(rootNode->getChildByName("Button_ResetGameCenter"));
     buttonReset->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Reset, this));
 	// set button
-	buttonAchievement->setPositionY(-200);
-	buttonLeaderboard->setPositionY(-200);
+	m_pButtonAchievement->setPositionY(-200);
+	m_pButtonLeaderboard->setPositionY(-200);
 
 #if DEBUGFLAG == 0
     buttonReload->setVisible(false);
@@ -100,9 +103,9 @@ bool MainMenuLayer::init()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		auto listener = EventListenerCustom::create(EVENT_GAMECENTER_AUTHENTICATED, [=](EventCustom* event) {
 			// change game center buttons when authenticated
-			buttonAchievement->runAction(MoveTo::create(0.5f, Point(buttonAchievement->getPositionX(), 10)));
-			buttonLeaderboard->runAction(MoveTo::create(0.5f, Point(buttonLeaderboard->getPositionX(), 10)));
-			buttonSignIn->runAction(MoveTo::create(0.5f, Point(buttonSignIn->getPositionX(), -200)));
+            m_pButtonAchievement->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonAchievement->getPositionX(), 10)));
+			m_pButtonLeaderboard->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonLeaderboard->getPositionX(), 10)));
+			m_pButtonSignIn->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonSignIn->getPositionX(), -200)));
 			// load iap & request products
 			IAPHelper* helper = [IAPShare sharedHelper].iap;
 			Reachability *reach = [Reachability reachabilityForInternetConnection];
@@ -154,7 +157,7 @@ bool MainMenuLayer::init()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     auto listener = EventListenerCustom::create(EVENT_PLARERDATA_SCOREUPDATED+"Highscore", [=](EventCustom* event){
         textHighscore->setString(StringUtils::format("%s%lld",
-			m_pGameMediator->getGameText()->at(GAMETEXT_MAINMENU_HIGHESCORE).c_str(),
+			m_pGameMediator->getGameText()->at("ID_COMMON_HIGHSCORE").c_str(),
 			m_pPlayerData->getHighscore()));
     });
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
@@ -190,7 +193,7 @@ void MainMenuLayer::onTouchMoved(Touch *touch, Event *event)
 void MainMenuLayer::onTouchEnded(Touch *touch, Event *event)
 {
 	m_pAnimate->play("Scene_End", false);
-    Director::getInstance()->replaceScene(CCTransitionFade::create(0.5f, GameScene::create()));
+    Director::getInstance()->replaceScene(TransitionFade::create(0.5f, GameScene::create()));
 }
 
 // Callback functions
@@ -207,8 +210,16 @@ void MainMenuLayer::menuCallback_Setting(Ref* pSender)
 void MainMenuLayer::menuCallback_SignIn(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	GameKitHelper* helper = [GameKitHelper sharedHelper];
-	[helper authenticateLocalUser];
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    if (helper.isAuthenticated == YES) {
+        // change game center buttons when authenticated
+        m_pButtonAchievement->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonAchievement->getPositionX(), 10)));
+        m_pButtonLeaderboard->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonLeaderboard->getPositionX(), 10)));
+        m_pButtonSignIn->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonSignIn->getPositionX(), -200)));
+    }
+    else {
+        [helper authenticateLocalUser];
+    }
 #endif
 }
 

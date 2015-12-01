@@ -89,8 +89,10 @@ bool GameOverLayer::init()
 		if (!sdkbox::PluginVungle::isCacheAvailable())
 		{
 			// if vungle not ready
-			GameMediator::spriteToGray(m_pSpriteRevivePlay, 0);
-			GameMediator::spriteToGray(m_pSpriteDoublePlay, 0);
+            m_pSpriteRevivePlay->setColor(Color3B(77, 77, 77));
+            m_pSpriteDoublePlay->setColor(Color3B(77, 77, 77));
+			//GameMediator::spriteToGray(m_pSpriteRevivePlay, 0);
+			//GameMediator::spriteToGray(m_pSpriteDoublePlay, 0);
 		}
 #endif
 	}
@@ -135,8 +137,10 @@ void GameOverLayer::onVungleCacheAvailable()
     if (this)
     {
         CCLOG("Video loaded");
-        GameMediator::spriteToGray(m_pSpriteRevivePlay, 1);
-        GameMediator::spriteToGray(m_pSpriteDoublePlay, 1);
+        m_pSpriteRevivePlay->setColor(Color3B(255, 255, 255));
+        m_pSpriteDoublePlay->setColor(Color3B(255, 255, 255));
+        //GameMediator::spriteToGray(m_pSpriteRevivePlay, 1);
+        //GameMediator::spriteToGray(m_pSpriteDoublePlay, 1);
     }
 }
 
@@ -225,8 +229,7 @@ void GameOverLayer::menuCallback_Revive(Ref* pSender)
         {
             // tell player video is not ready
             auto mapGameText = m_pGameMediator->getGameText();
-            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")),
-				ZORDER_UPGRADELAYER_NOTICELAYER);
+            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")));
         }
 #else
 		this->realRevive();
@@ -281,8 +284,7 @@ void GameOverLayer::menuCallback_DoubleGold(Ref* pSender)
         {
             // tell player video is not ready
             auto mapGameText = m_pGameMediator->getGameText();
-            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")),
-                           ZORDER_UPGRADELAYER_NOTICELAYER);
+            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")));
         }
 #else
 		this->realDouble();

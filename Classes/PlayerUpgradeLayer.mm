@@ -42,7 +42,7 @@ bool PlayerUpgradeLayer::init()
 	// get gold number
 	auto spriteGold = dynamic_cast<Sprite*>(rootNode->getChildByName("Node_GoldNumber")->getChildByName("Sprite_GoldCoin"));
 	m_pGoldNumberAll = dynamic_cast<Text*>(rootNode->getChildByName("Node_GoldNumber")->getChildByName("Text_GoldNumber"));
-	m_pGoldNumberAll->setString(StringUtils::format("%d", m_pPlayerData->getGoldNumberAll()));
+	m_pGoldNumberAll->setString(StringUtils::format("%lld", m_pPlayerData->getGoldNumberAll()));
 	int widthImg = spriteGold->getBoundingBox().size.width;
 	int posXImg = - (m_pGoldNumberAll->getBoundingBox().size.width + widthImg) * 0.5;
 	spriteGold->setPositionX(posXImg);
@@ -53,7 +53,7 @@ bool PlayerUpgradeLayer::init()
 
 	// get upgrade items
 	m_pListView = dynamic_cast<ListView*>(rootNode->getChildByName("ListView_UpgradeItems"));
-	m_pListView->setScrollBarPositionFromCornerForVertical(Point(5, 5));
+    m_pListView->setScrollBarPositionFromCornerForVertical(cocos2d::Point(5, 5));
 	this->loadUpgradeItem(ID_JUMP_TYPE);
 	this->loadUpgradeItem(ID_MAXHEART_NUMBER);
 	this->loadUpgradeItem(ID_STRENGTH);
