@@ -7,6 +7,7 @@
 	<Text id="ID_SETTING_TITLE">设  置</Text>
 	<Text id="ID_SETTING_APPLY">确  定</Text>
 	<Text id="ID_SETTING_CANCEL">取  消</Text>
+    <Text id="ID_SETTING_RESTORE">恢复购买</Text>
 	<Text id="ID_GAME_LEVELUP">难度提升</Text>
 	<Text id="ID_GAME_RETRY">重  试</Text>
 	<Text id="ID_GAME_MAINMENU">主菜单</Text>

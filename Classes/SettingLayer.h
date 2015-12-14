@@ -18,6 +18,8 @@ private:
 
 	void selectedStateEvent_CN(Ref *pSender, CheckBox::EventType type);
 	void selectedStateEvent_EN(Ref *pSender, CheckBox::EventType type);
+    
+    void waitingTimeOut(float dt);
 
 private:
 	Layout*	m_pLayout;

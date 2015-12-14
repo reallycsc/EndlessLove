@@ -58,6 +58,7 @@ bool PurchaseLayer::init()
         Reachability *reach = [Reachability reachabilityForInternetConnection];
         NetworkStatus netStatus = [reach currentReachabilityStatus];
         if (netStatus == NotReachable) {
+            [ProgressHUD showError : @"No internet connection!"];
             NSLog(@"No internet connection!");
         } else {
             if (helper.products == nil) {

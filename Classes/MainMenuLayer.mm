@@ -20,9 +20,6 @@ MainMenuLayer::MainMenuLayer(void)
 	m_pAnimate = NULL;
 	m_pPlayerAnimate = NULL;
 	m_pTextHighscore = NULL;
-    m_pButtonSignIn = NULL;
-    m_pButtonAchievement = NULL;
-    m_pButtonLeaderboard = NULL;
 }
 
 
@@ -71,12 +68,12 @@ bool MainMenuLayer::init()
 	// get button
 	auto buttonSetting = dynamic_cast<Button*>(nodeUp->getChildByName("Button_Setting"));
 	buttonSetting->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Setting, this));
-	m_pButtonSignIn = dynamic_cast<Button*>(nodeDown->getChildByName("Button_SignIn"));
-	m_pButtonSignIn->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_SignIn, this));
-	m_pButtonAchievement = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Achievement"));
-	m_pButtonAchievement->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Achievement, this));
-	m_pButtonLeaderboard = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Leaderboard"));
-    m_pButtonLeaderboard->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Leaderboard, this));
+	auto buttonSignIn = dynamic_cast<Button*>(nodeDown->getChildByName("Button_SignIn"));
+	buttonSignIn->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_SignIn, this));
+	auto buttonAchievement = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Achievement"));
+	buttonAchievement->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Achievement, this));
+	auto buttonLeaderboard = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Leaderboard"));
+    buttonLeaderboard->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Leaderboard, this));
 	auto buttonPurchaseNoAd = dynamic_cast<Button*>(nodeDown->getChildByName("Button_Purchase_noAd"));
 	buttonPurchaseNoAd->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_PurchaseNoAd, this));
 	auto buttonUpgrade = dynamic_cast<Button*>(rootNode->getChildByName("Button_Upgrade"));
@@ -91,13 +88,21 @@ bool MainMenuLayer::init()
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     GameKitHelper* helper = [GameKitHelper sharedHelper];
     if (helper.isAuthenticated == YES) {
-        m_pButtonAchievement->setPositionY(10);
-        m_pButtonLeaderboard->setPositionY(10);
-        m_pButtonSignIn->setPositionY(-200);
+        buttonAchievement->setPositionY(10);
+        buttonLeaderboard->setPositionY(10);
+        buttonSignIn->setPositionY(-200);
     }
     else {
-        m_pButtonAchievement->setPositionY(-200);
-        m_pButtonLeaderboard->setPositionY(-200);
+        buttonAchievement->setPositionY(-200);
+        buttonLeaderboard->setPositionY(-200);
+        buttonSignIn->setPositionY(10);
+        auto listener = EventListenerCustom::create(EVENT_GAMECENTER_AUTHENTICATED, [=](EventCustom* event) {
+            // change game center buttons when authenticated
+            buttonAchievement->runAction(MoveTo::create(0.5f, cocos2d::Point(buttonAchievement->getPositionX(), 10)));
+            buttonLeaderboard->runAction(MoveTo::create(0.5f, cocos2d::Point(buttonLeaderboard->getPositionX(), 10)));
+            buttonSignIn->runAction(MoveTo::create(0.5f, cocos2d::Point(buttonSignIn->getPositionX(), -200)));
+        });
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     }
 #endif
 
@@ -107,62 +112,34 @@ bool MainMenuLayer::init()
     buttonReset->setVisible(false);
 #endif
 	if (!m_pGameMediator->getIsAd()) {
-		buttonPurchaseNoAd->setEnabled(false);
-		buttonPurchaseNoAd->setVisible(false);
+        buttonPurchaseNoAd->setPositionY(-200);
 	}
 	else {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		auto listener = EventListenerCustom::create(EVENT_GAMECENTER_AUTHENTICATED, [=](EventCustom* event) {
-			// change game center buttons when authenticated
-            m_pButtonAchievement->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonAchievement->getPositionX(), 10)));
-			m_pButtonLeaderboard->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonLeaderboard->getPositionX(), 10)));
-			m_pButtonSignIn->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonSignIn->getPositionX(), -200)));
-			// load iap & request products
-			IAPHelper* helper = [IAPShare sharedHelper].iap;
-			Reachability *reach = [Reachability reachabilityForInternetConnection];
-			NetworkStatus netStatus = [reach currentReachabilityStatus];
-			if (netStatus == NotReachable) {
-				NSLog(@"No internet connection!");
-			}
-			else {
-				if (helper.products == nil) {
-#if (IAPTEST_FLAG == 1)
-					helper.production = NO; // No for test, YES for release
+        // load iap & request products
+        if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable) {
+            [ProgressHUD showError : @"No internet connection!"];
+            NSLog(@"No internet connection!");
+        }
+        else {
+#if IAPTEST_FLAG == 1
+            [[IAPShare sharedHelper] requestProductWithID:@"com.reallycsc.endlesslove.adremove" isProduction: NO];
 #else
-                    helper.production = YES; // No for test, YES for release
+            [[IAPShare sharedHelper] requestProductWithID@"com.reallycsc.endlesslove.adremove" isProduction:YES];
 #endif
-					[helper requestProductsWithCompletion : ^ (SKProductsRequest* request, SKProductsResponse* response) {
-						if (response > 0) {
-							// check is purcahsed
-							if ([helper isPurchasedProductsIdentifier : @"com.reallycsc.endlesslove.adremove"] == YES) 
-							{
-								m_pGameMediator->setIsAd(false);
-								m_pGameMediator->setIsGuidelineForever(true);
-								buttonPurchaseNoAd->setEnabled(false);
-								buttonPurchaseNoAd->setVisible(false);
-							}
-						}
-					}];
-				}
-				else {
-					// check is purcahsed
-					if ([helper isPurchasedProductsIdentifier : @"com.reallycsc.endlesslove.adremove"] == YES) 
-					{
-						m_pGameMediator->setIsAd(false);
-						m_pGameMediator->setIsGuidelineForever(true);
-						buttonPurchaseNoAd->setEnabled(false);
-						buttonPurchaseNoAd->setVisible(false);
-					}
-				}
-			}
-		});
-		_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+        }
         
-        listener = EventListenerCustom::create(EVENT_PURCHASED_REMOVEAD, [=](EventCustom* event) {
+        auto listener = EventListenerCustom::create(EVENT_RESTORED_REMOVEAD + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
             m_pGameMediator->setIsAd(false);
             m_pGameMediator->setIsGuidelineForever(true);
-            buttonPurchaseNoAd->setEnabled(false);
-            buttonPurchaseNoAd->setVisible(false);
+            buttonPurchaseNoAd->runAction(MoveTo::create(0.5f, cocos2d::Point(buttonPurchaseNoAd->getPositionX(), -200)));
+        });
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+        listener = EventListenerCustom::create(EVENT_PURCHASED_REMOVEAD + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
+            m_pGameMediator->setIsAd(false);
+            m_pGameMediator->setIsGuidelineForever(true);
+            buttonPurchaseNoAd->runAction(MoveTo::create(0.5f, cocos2d::Point(buttonPurchaseNoAd->getPositionX(), -200)));
+            [[GameKitHelper sharedHelper] checkAndUnlockAchievement:@"com.reallycsc.endlesslove.adremove"];
         });
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 #endif
@@ -235,10 +212,7 @@ void MainMenuLayer::menuCallback_SignIn(Ref* pSender)
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     GameKitHelper* helper = [GameKitHelper sharedHelper];
     if (helper.isAuthenticated == YES) {
-        // change game center buttons when authenticated
-        m_pButtonAchievement->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonAchievement->getPositionX(), 10)));
-        m_pButtonLeaderboard->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonLeaderboard->getPositionX(), 10)));
-        m_pButtonSignIn->runAction(MoveTo::create(0.5f, cocos2d::Point(m_pButtonSignIn->getPositionX(), -200)));
+        Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_GAMECENTER_AUTHENTICATED);
     }
     else {
         [helper authenticateLocalUser];
@@ -266,13 +240,12 @@ void MainMenuLayer::menuCallback_PurchaseNoAd(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	// load iap
-	IAPHelper* helper = [IAPShare sharedHelper].iap;
-	Reachability *reach = [Reachability reachabilityForInternetConnection];
-	NetworkStatus netStatus = [reach currentReachabilityStatus];
-	if (netStatus == NotReachable) {
+	if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable) {
+        [ProgressHUD showError : @"No internet connection!"];
 		NSLog(@"No internet connection!");
 	}
 	else {
+        IAPHelper* helper = [IAPShare sharedHelper].iap;
 		if (helper.products == nil) {
 #if (IAPTEST_FLAG == 1)
             helper.production = NO; // No for test, YES for release
@@ -281,9 +254,10 @@ void MainMenuLayer::menuCallback_PurchaseNoAd(Ref* pSender)
 #endif
 			[helper requestProductsWithCompletion : ^ (SKProductsRequest* request, SKProductsResponse* response) {
 				if (response > 0) {
+                    // buy product
 					[ProgressHUD dismiss];
 					this->unschedule(schedule_selector(MainMenuLayer::waitingTimeOut));
-                    this->realBuy(pSender);
+                    [[IAPShare sharedHelper] buyProductWithID:@"com.reallycsc.endlesslove.adremove"];
 				}
 			}];
 			[ProgressHUD show : [NSString stringWithCString:m_pmGameText->at("ID_IAP_DOWNLOAD").c_str()
@@ -293,7 +267,7 @@ void MainMenuLayer::menuCallback_PurchaseNoAd(Ref* pSender)
 		}
 		else {
 			// buy product
-            this->realBuy(pSender);
+            [[IAPShare sharedHelper] buyProductWithID:@"com.reallycsc.endlesslove.adremove"];
 		}
 	}
 #endif
@@ -306,63 +280,6 @@ void MainMenuLayer::playerBlink()
 		CallFunc::create(CC_CALLBACK_0(MainMenuLayer::playerBlink, this))
 		));
 	m_pPlayerAnimate->play("Player_Blink", false);
-}
-
-void MainMenuLayer::realBuy(Ref* pSender)
-{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    IAPHelper* helper = [IAPShare sharedHelper].iap;
-    [ProgressHUD show : [NSString stringWithCString:m_pmGameText->at("ID_IAP_BUYING").c_str()
-                                           encoding:NSUTF8StringEncoding]
-          Interaction : FALSE];
-    [helper buyProductWithID : @"com.reallycsc.endlesslove.adremove"
-                onCompletion : ^ (SKPaymentTransaction* trans) {
-                    [ProgressHUD dismiss];
-                    if (trans.error) {
-                        NSLog(@"Fail %@",[trans.error localizedDescription]);
-                    }
-                    else if (trans.transactionState == SKPaymentTransactionStatePurchased) {
-                        [ProgressHUD show : [NSString stringWithCString:m_pmGameText->at("ID_IAP_CHECKRECEIPT").c_str()
-                                                               encoding:NSUTF8StringEncoding]
-                              Interaction : FALSE];
-                        [helper checkReceipt : trans.transactionReceipt
-                             AndSharedSecret : @"your sharesecret"
-                                 onCompletion: ^ (NSString *response, NSError *error) {
-                                     [ProgressHUD dismiss];
-                                     if (response) {
-                                         //Convert JSON String to NSDictionary
-                                         NSDictionary* rec = [IAPShare toJSON : response];
-                                         if ([rec[@"status"] integerValue] == 0) {
-                                             [helper provideContentWithTransaction : trans];
-                                             NSLog(@"SUCCESS %@",response);
-                                             NSLog(@"Pruchases %@",helper.purchasedProducts);
-                                             // buy success, proceed next step
-                                             m_pGameMediator->setIsAd(false);
-                                             m_pGameMediator->setIsGuidelineForever(true);
-                                             [[GameKitHelper sharedHelper] checkAndUnlockAchievement:@"com.reallycsc.endlesslove.adremove"];
-                                             Button* button = (Button*)pSender;
-                                             button->setEnabled(false);
-                                             button->setVisible(false);
-                                         }
-                                         else {
-                                             [ProgressHUD showError : [NSString stringWithCString:m_pmGameText->at("ID_IAP_RECEIPTWRONG").c_str()
-                                                                                         encoding:NSUTF8StringEncoding]];
-                                             NSLog(@"Fail in response status is 0");
-                                         }
-                                     }
-                                     else {
-                                         [ProgressHUD showError : [NSString stringWithCString:m_pmGameText->at("ID_IAP_NORESPONSE").c_str()
-                                                                                     encoding:NSUTF8StringEncoding]];
-                                     }
-                                 }];
-                    }
-                    else if (trans.transactionState == SKPaymentTransactionStateFailed) {
-                        [ProgressHUD showError : [NSString stringWithCString:m_pmGameText->at("ID_IAP_NORECEIPT").c_str()
-                                                                    encoding:NSUTF8StringEncoding]];
-                        NSLog(@"Fail in SKPaymentTransactionStateFailed");
-                    }
-                }];//end of buy product
-#endif
 }
 
 void MainMenuLayer::waitingTimeOut(float dt)

@@ -16,6 +16,10 @@
 
 + (IAPShare *) sharedHelper;
 
+- (void)requestProductWithID:(NSString *)productID isProduction:(BOOL)production;
+
+- (void)buyProductWithID:(NSString *)productID;
+
 + (id)toJSON:(NSString*)json;
 
 @end

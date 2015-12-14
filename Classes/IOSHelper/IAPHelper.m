@@ -188,7 +188,6 @@
     
     if ([SKPaymentQueue defaultQueue]) {
         [[SKPaymentQueue defaultQueue] finishTransaction: transaction];
-            
 
         if(_buyProductCompleteBlock!=nil)
         {
@@ -234,23 +233,7 @@
     }
 }
 
-- (void)buyProductWithID:(NSString *)productID onCompletion:(IAPbuyProductCompleteResponseBlock)completion {
-    self.buyProductCompleteBlock = completion;
-    
-    self.restoreCompletedBlock = nil;
-    
-    for(SKProduct* skProduct in self.products) {
-        if ([skProduct.productIdentifier compare:productID] == NSOrderedSame) {
-            SKPayment *payment = [SKPayment paymentWithProduct:skProduct];
-            
-            if ([SKPaymentQueue defaultQueue]) {
-                [[SKPaymentQueue defaultQueue] addPayment:payment];
-            }
-        }
-    }
-}
-
-- (void)buyProduct:(SKProduct *)productIdentifier onCompletion:(IAPbuyProductCompleteResponseBlock)completion {
+- (void)buyProductOnCompletion:(SKProduct *)productIdentifier onCompletion:(IAPbuyProductCompleteResponseBlock)completion {
     
     self.buyProductCompleteBlock = completion;
     
@@ -289,6 +272,8 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
     
+    NSLog(@"IAPHepler - Resotre transations finished");
+
     for (SKPaymentTransaction *transaction in queue.transactions)
     {
         switch (transaction.transactionState)

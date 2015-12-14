@@ -7,6 +7,7 @@
 	<Text id="ID_SETTING_TITLE">Setting</Text>
 	<Text id="ID_SETTING_APPLY">OK</Text>
 	<Text id="ID_SETTING_CANCEL">Cancel</Text>
+    <Text id="ID_SETTING_RESTORE">Resotre purchase</Text>
 	<Text id="ID_GAME_LEVELUP">Level Up</Text>
 	<Text id="ID_GAME_RETRY">Restart</Text>
 	<Text id="ID_GAME_MAINMENU">Quit</Text>

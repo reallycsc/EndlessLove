@@ -35,7 +35,6 @@ private:
 	void menuCallback_Reset(Ref* pSender);
 
 	void playerBlink();
-    void realBuy(Ref* pSender);
 	void waitingTimeOut(float dt);
     
 private:
@@ -47,8 +46,4 @@ private:
 	ActionTimeline* m_pAnimate;
 	ActionTimeline* m_pPlayerAnimate;
     Text*   m_pTextHighscore;
-    
-    Button*     m_pButtonSignIn;
-    Button*     m_pButtonAchievement;
-    Button*     m_pButtonLeaderboard;
 };

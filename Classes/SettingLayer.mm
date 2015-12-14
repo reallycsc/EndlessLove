@@ -75,6 +75,7 @@ bool SettingLayer::init()
 		dynamic_cast<Text*>(m_pLayout->getChildByName("Text_Setting"))->setString(mapGameText->at("ID_SETTING_TITLE"));
 		buttonApply->setTitleText(mapGameText->at("ID_SETTING_APPLY"));
 		buttonCancel->setTitleText(mapGameText->at("ID_SETTING_CANCEL"));
+        buttonRestore->setTitleText(mapGameText->at("ID_SETTING_RESTORE"));
 
 		// swallow all touches
 		auto touchListener = EventListenerTouchOneByOne::create();
@@ -128,26 +129,34 @@ void SettingLayer::menuCallback_Cancel(Ref* pSender)
 void SettingLayer::menuCallback_Restore(Ref* pSender)
 {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // load iap
-    IAPHelper* helper = [IAPShare sharedHelper].iap;
-    NetworkStatus netStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
-    if (netStatus == NotReachable) {
+    // load iap & request products
+    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable) {
+        [ProgressHUD showError : @"No internet connection!"];
         NSLog(@"No internet connection!");
     }
     else {
-        [helper restoreProductsWithCompletion:^(SKPaymentQueue *payment, NSError *error) {
-         // check with SKPaymentQueue
-         for (SKPaymentTransaction *transaction in payment.transactions)
-         {
-            NSString *purchased = transaction.payment.productIdentifier;
-            if ([purchased isEqualToString:@"com.reallycsc.endlesslove.adremove"])
-            {
-                // notify others to reset removead statues
-                Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_PURCHASED_REMOVEAD);
+        [[IAPShare sharedHelper].iap restoreProductsWithCompletion:^(SKPaymentQueue *payment, NSError *error) {
+            if (payment.transactions.count == 0) {
+                [ProgressHUD showError : @"Restored nothing!"];
+                NSLog(@"Restored nothing!");
             }
-         }
-         NSLog(@"restore completion");
-         }];
+            else {
+                for (SKPaymentTransaction *transaction in payment.transactions) {
+                    NSLog(@"Restored %@" , transaction.payment.productIdentifier);
+                    if  ([transaction.payment.productIdentifier isEqualToString:@"com.reallycsc.endlesslove.adremove"]) {
+                        // notify others to reset removead statues
+                        Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_RESTORED_REMOVEAD);
+                    }
+                }
+                //[ProgressHUD dismiss];
+                this->unschedule(schedule_selector(SettingLayer::waitingTimeOut));
+                [ProgressHUD showSuccess:@"Restore success."];
+            }
+        }];
+        [ProgressHUD show : [NSString stringWithCString:GameMediator::getInstance()->getGameText()->at("ID_IAP_DOWNLOAD").c_str()
+                                               encoding:NSUTF8StringEncoding]
+              Interaction : FALSE];
+        this->scheduleOnce(schedule_selector(SettingLayer::waitingTimeOut), 10.0f);
     }
 #endif
 }
@@ -164,4 +173,12 @@ void SettingLayer::selectedStateEvent_EN(Ref *pSender, CheckBox::EventType type)
 	m_pCheckBoxEN->setSelected(true);
 	m_pCheckBoxCN->setSelected(false);
 	m_languageType = LanguageType::ENGLISH;
+}
+
+void SettingLayer::waitingTimeOut(float dt)
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    [ProgressHUD showError : [NSString stringWithCString:GameMediator::getInstance()->getGameText()->at("ID_IAP_TIMEOUT").c_str()
+                                                encoding:NSUTF8StringEncoding]];
+#endif
 }
