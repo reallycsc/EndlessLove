@@ -14,7 +14,8 @@ const int GRAVITY = 2940;
 
 #define MAXDWORD 0xffffffff
 // Flags 
-#define DEBUGFLAG 0
+#define DEBUG_FLAG 0
+#define IAPTEST_FLAG 1
 
 enum GameState {
 	GAMESTATE_ENTER = 0,
@@ -78,3 +79,4 @@ enum BackImageID {
 const string EVENT_GAMECENTER_AUTHENTICATED = "event_gamecenter_authenticated";
 const string EVENT_GAMECENTER_SCORERETRIVED = "event_gamecenter_scoreretrived";
 const string EVENT_PLARERDATA_SCOREUPDATED = "event_playerdata_scoreupdated";
+const string EVENT_PURCHASED_REMOVEAD = "event_purchased_removead";

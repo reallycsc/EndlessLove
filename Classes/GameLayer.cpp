@@ -101,7 +101,7 @@ void GameLayer::update(float dt)
 		}
 		// test item itersection
 		this->checkItemIntersect(player);
-#if DEBUGFLAG == 0
+#if DEBUG_FLAG == 0
 		// game over if heart is zero
 		if (m_pPlayerData->getHeartNumber() <= 0)
 		{
@@ -161,7 +161,7 @@ void GameLayer::checkItemIntersect(Player* player)
 		break;
 	case ITEMTYPE_BOMB:
 	{
-#if DEBUGFLAG == 0
+#if DEBUG_FLAG == 0
 		if (!player->getIsShield())
 		{
 			this->gameOver();

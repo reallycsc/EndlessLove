@@ -103,7 +103,7 @@
     if(_requestProductsBlock) {
         _requestProductsBlock (request,response);
     }
-    
+
     // notify someone
 
 }

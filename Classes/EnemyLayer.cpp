@@ -385,7 +385,7 @@ void EnemyLayer::increaseGameLevel()
 	float jumpTime = sqrt((float)(2 * m_pLevelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
 	m_nEnemyDownMinInterval = int(m_pLevelData->getPlayerMoveSpeed() * (jumpTime + m_pPlayerData->getPowerTime()));
 
-#if DEBUGFLAG == 1
+#if DEBUG_FLAG == 1
 	// flow the text
 	m_pTextLevelUp->setVisible(true);
 	m_pTextLevelUp->setOpacity(255);

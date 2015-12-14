@@ -2,6 +2,13 @@
 #include "GameMediator.h"
 #include "MainMenuScene.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#import "IOSHelper/IAPShare.h"
+#import "IOSHelper/Reachability.h"
+#import "IOSHelper/ProgressHUD.h"
+#endif
+
+
 SettingLayer::SettingLayer(void)
 {
 	m_pLayout = NULL;
@@ -25,7 +32,7 @@ bool SettingLayer::init()
     {  
         CC_BREAK_IF(!Layer::init());  
 
-		Size winSize = Director::getInstance()->getWinSize();
+        cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
 		// load csb
 		auto rootNode = CSLoader::createNode("SettingLayer.csb");
@@ -37,6 +44,8 @@ bool SettingLayer::init()
 		buttonApply->addClickEventListener(CC_CALLBACK_1(SettingLayer::menuCallback_Apply, this));
 		auto buttonCancel = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_Cancel"));
 		buttonCancel->addClickEventListener(CC_CALLBACK_1(SettingLayer::menuCallback_Cancel, this));
+        auto buttonRestore = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_RestorePurcahse"));
+        buttonRestore->addClickEventListener(CC_CALLBACK_1(SettingLayer::menuCallback_Restore, this));
 
 		// get checkbox
 		m_pCheckBoxCN = dynamic_cast<CheckBox*>(m_pLayout->getChildByName("Node_Chinese")->getChildByName("CheckBox"));
@@ -74,8 +83,8 @@ bool SettingLayer::init()
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 		// run animation
-		m_pLayout->setPosition(Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
-		m_pLayout->runAction(MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height / 2)));
+        m_pLayout->setPosition(cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
+		m_pLayout->runAction(MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height / 2)));
 
         bRet = true;
     } while (0);  
@@ -86,9 +95,9 @@ bool SettingLayer::init()
 void SettingLayer::menuCallback_Apply(Ref* pSender)
 {
 	
-	Size winSize = Director::getInstance()->getWinSize();
+	cocos2d::Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
 		if (m_languageTypeOriginal != m_languageType)
@@ -106,14 +115,41 @@ void SettingLayer::menuCallback_Apply(Ref* pSender)
 
 void SettingLayer::menuCallback_Cancel(Ref* pSender)
 {
-	Size winSize = Director::getInstance()->getWinSize();
+    cocos2d::Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
 		CallFuncN::create([=](Ref* pSender)->void
 	{
 		this->removeFromParent();
 	}),
 		NULL));
+}
+
+void SettingLayer::menuCallback_Restore(Ref* pSender)
+{
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    // load iap
+    IAPHelper* helper = [IAPShare sharedHelper].iap;
+    NetworkStatus netStatus = [[Reachability reachabilityForInternetConnection] currentReachabilityStatus];
+    if (netStatus == NotReachable) {
+        NSLog(@"No internet connection!");
+    }
+    else {
+        [helper restoreProductsWithCompletion:^(SKPaymentQueue *payment, NSError *error) {
+         // check with SKPaymentQueue
+         for (SKPaymentTransaction *transaction in payment.transactions)
+         {
+            NSString *purchased = transaction.payment.productIdentifier;
+            if ([purchased isEqualToString:@"com.reallycsc.endlesslove.adremove"])
+            {
+                // notify others to reset removead statues
+                Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_PURCHASED_REMOVEAD);
+            }
+         }
+         NSLog(@"restore completion");
+         }];
+    }
+#endif
 }
 
 void SettingLayer::selectedStateEvent_CN(Ref *pSender, CheckBox::EventType type)

@@ -14,6 +14,7 @@ public:
 private:
 	void menuCallback_Apply(Ref* pSender);
 	void menuCallback_Cancel(Ref* pSender);
+    void menuCallback_Restore(Ref* pSender);
 
 	void selectedStateEvent_CN(Ref *pSender, CheckBox::EventType type);
 	void selectedStateEvent_EN(Ref *pSender, CheckBox::EventType type);

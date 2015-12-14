@@ -6,6 +6,7 @@
 #include "Player.h"
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#import "IOSHelper/IAPShare.h"
 #import "IOSHelper/GameKitHelper.h"
 #import "IOSHelper/Reachability.h"
 #import "IOSHelper/ProgressHUD.h"
@@ -100,7 +101,7 @@ bool MainMenuLayer::init()
     }
 #endif
 
-#if DEBUGFLAG == 0
+#if DEBUG_FLAG == 0
     buttonReload->setVisible(false);
     buttonPurchase->setVisible(false);
     buttonReset->setVisible(false);
@@ -125,7 +126,11 @@ bool MainMenuLayer::init()
 			}
 			else {
 				if (helper.products == nil) {
+#if (IAPTEST_FLAG == 1)
 					helper.production = NO; // No for test, YES for release
+#else
+                    helper.production = YES; // No for test, YES for release
+#endif
 					[helper requestProductsWithCompletion : ^ (SKProductsRequest* request, SKProductsResponse* response) {
 						if (response > 0) {
 							// check is purcahsed
@@ -152,6 +157,14 @@ bool MainMenuLayer::init()
 			}
 		});
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+        
+        listener = EventListenerCustom::create(EVENT_PURCHASED_REMOVEAD, [=](EventCustom* event) {
+            m_pGameMediator->setIsAd(false);
+            m_pGameMediator->setIsGuidelineForever(true);
+            buttonPurchaseNoAd->setEnabled(false);
+            buttonPurchaseNoAd->setVisible(false);
+        });
+        _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 #endif
 	}
 	// set all text
@@ -261,7 +274,11 @@ void MainMenuLayer::menuCallback_PurchaseNoAd(Ref* pSender)
 	}
 	else {
 		if (helper.products == nil) {
-			helper.production = NO; // No for test, YES for release
+#if (IAPTEST_FLAG == 1)
+            helper.production = NO; // No for test, YES for release
+#else
+            helper.production = YES; // No for test, YES for release
+#endif
 			[helper requestProductsWithCompletion : ^ (SKProductsRequest* request, SKProductsResponse* response) {
 				if (response > 0) {
 					[ProgressHUD dismiss];

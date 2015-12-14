@@ -61,7 +61,11 @@ bool PurchaseLayer::init()
             NSLog(@"No internet connection!");
         } else {
             if (helper.products == nil) {
+#if (IAPTEST_FLAG == 1)
                 helper.production = NO; // No for test, YES for release
+#else
+                helper.production = YES; // No for test, YES for release
+#endif
                 [helper requestProductsWithCompletion:^(SKProductsRequest* request,SKProductsResponse* response) {
                     if(response > 0 ) {
                         [ProgressHUD dismiss];

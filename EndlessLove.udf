@@ -31,10 +31,9 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="BackgroundLayer.csd" />
-          <FilePathData Path="LoadingScene.csd" />
+          <FilePathData Path="SettingLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="LoadingScene.csd" />
+        <ActiveDocument Path="SettingLayer.csd" />
       </Value>
     </Item>
   </Properties>
