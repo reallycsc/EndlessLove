@@ -31,10 +31,10 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="EnemyLayer.csd" />
-          <FilePathData Path="GameOverLayer.csd" />
+          <FilePathData Path="BackgroundLayer.csd" />
+          <FilePathData Path="LoadingScene.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="GameOverLayer.csd" />
+        <ActiveDocument Path="LoadingScene.csd" />
       </Value>
     </Item>
   </Properties>

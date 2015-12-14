@@ -22,7 +22,7 @@
                 <EndColor A="255" R="229" G="229" B="229" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Panel_GameScene_Birth" ActionTag="1756734250" Tag="59" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="Panel_GameScene_Birth" Visible="False" ActionTag="1756734250" Tag="59" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="960.0000" Y="640.0000" />
                 <AnchorPoint />
                 <Position />
@@ -48,7 +48,7 @@
                 <EndColor A="255" R="255" G="255" B="255" />
                 <ColorVector ScaleY="1.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Panel_GameScene_Teenage" Visible="False" ActionTag="-511730608" Tag="99" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+              <AbstractNodeData Name="Panel_GameScene_Teenage" ActionTag="-511730608" Tag="99" IconVisible="False" RightMargin="-960.0000" TopMargin="-640.0000" ClipAble="True" ComboBoxIndex="2" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
                 <Size X="960.0000" Y="640.0000" />
                 <AnchorPoint />
                 <Position />

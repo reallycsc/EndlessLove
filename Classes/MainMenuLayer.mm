@@ -87,8 +87,18 @@ bool MainMenuLayer::init()
     auto buttonReset = dynamic_cast<Button*>(rootNode->getChildByName("Button_ResetGameCenter"));
     buttonReset->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Reset, this));
 	// set button
-	m_pButtonAchievement->setPositionY(-200);
-	m_pButtonLeaderboard->setPositionY(-200);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    GameKitHelper* helper = [GameKitHelper sharedHelper];
+    if (helper.isAuthenticated == YES) {
+        m_pButtonAchievement->setPositionY(10);
+        m_pButtonLeaderboard->setPositionY(10);
+        m_pButtonSignIn->setPositionY(-200);
+    }
+    else {
+        m_pButtonAchievement->setPositionY(-200);
+        m_pButtonLeaderboard->setPositionY(-200);
+    }
+#endif
 
 #if DEBUGFLAG == 0
     buttonReload->setVisible(false);

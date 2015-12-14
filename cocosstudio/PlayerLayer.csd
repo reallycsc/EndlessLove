@@ -3,54 +3,6 @@
   <Content ctype="GameProjectContent">
     <Content>
       <Animation Duration="30" Speed="1.0000">
-        <Timeline ActionTag="635736572" Property="Position">
-          <PointFrame FrameIndex="0" X="0.0000" Y="60.0000">
-            <EasingData Type="0" />
-          </PointFrame>
-          <PointFrame FrameIndex="30" X="0.0000" Y="0.0000">
-            <EasingData Type="0" />
-          </PointFrame>
-        </Timeline>
-        <Timeline ActionTag="635736572" Property="Scale">
-          <ScaleFrame FrameIndex="0" X="1.0000" Y="1.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-          <ScaleFrame FrameIndex="30" X="1.0000" Y="1.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-        </Timeline>
-        <Timeline ActionTag="635736572" Property="RotationSkew">
-          <ScaleFrame FrameIndex="0" X="0.0000" Y="0.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-          <ScaleFrame FrameIndex="30" X="0.0000" Y="0.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-        </Timeline>
-        <Timeline ActionTag="1286181810" Property="Position">
-          <PointFrame FrameIndex="0" X="-220.0000" Y="0.0000">
-            <EasingData Type="0" />
-          </PointFrame>
-          <PointFrame FrameIndex="30" X="0.0000" Y="0.0000">
-            <EasingData Type="0" />
-          </PointFrame>
-        </Timeline>
-        <Timeline ActionTag="1286181810" Property="Scale">
-          <ScaleFrame FrameIndex="0" X="1.0000" Y="1.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-          <ScaleFrame FrameIndex="30" X="1.0000" Y="1.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-        </Timeline>
-        <Timeline ActionTag="1286181810" Property="RotationSkew">
-          <ScaleFrame FrameIndex="0" X="0.0000" Y="0.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-          <ScaleFrame FrameIndex="30" X="0.0000" Y="0.0000">
-            <EasingData Type="0" />
-          </ScaleFrame>
-        </Timeline>
         <Timeline ActionTag="1025794162" Property="Position">
           <PointFrame FrameIndex="0" X="-100.0000" Y="530.0000">
             <EasingData Type="0" />
@@ -99,6 +51,54 @@
             <EasingData Type="0" />
           </ScaleFrame>
         </Timeline>
+        <Timeline ActionTag="635736572" Property="Position">
+          <PointFrame FrameIndex="0" X="0.0000" Y="60.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="30" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="635736572" Property="Scale">
+          <ScaleFrame FrameIndex="0" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="30" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="635736572" Property="RotationSkew">
+          <ScaleFrame FrameIndex="0" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="30" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="1286181810" Property="Position">
+          <PointFrame FrameIndex="0" X="-220.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+          <PointFrame FrameIndex="30" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </PointFrame>
+        </Timeline>
+        <Timeline ActionTag="1286181810" Property="Scale">
+          <ScaleFrame FrameIndex="0" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="30" X="1.0000" Y="1.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
+        <Timeline ActionTag="1286181810" Property="RotationSkew">
+          <ScaleFrame FrameIndex="0" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+          <ScaleFrame FrameIndex="30" X="0.0000" Y="0.0000">
+            <EasingData Type="0" />
+          </ScaleFrame>
+        </Timeline>
       </Animation>
       <AnimationList>
         <AnimationInfo Name="Scene_Start" StartIndex="0" EndIndex="30">
@@ -118,6 +118,132 @@
             <PreSize X="0.9979" Y="0.0031" />
             <FileData Type="Normal" Path="Resource/guideLine.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Node_Player" ActionTag="982365389" Tag="126" IconVisible="True" RightMargin="960.0000" TopMargin="640.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <Children>
+              <AbstractNodeData Name="Node_Heart" ActionTag="-561847720" Tag="120" IconVisible="True" TopMargin="70.0000" BottomMargin="-70.0000" ctype="SingleNodeObjectData">
+                <Size X="0.0000" Y="0.0000" />
+                <Children>
+                  <AbstractNodeData Name="Sprite_Heart" ActionTag="-1005586582" Tag="121" IconVisible="False" LeftMargin="-58.0000" TopMargin="-27.5000" BottomMargin="-27.5000" ctype="SpriteObjectData">
+                    <Size X="58.0000" Y="55.0000" />
+                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="0.6000" ScaleY="0.6000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <FileData Type="Normal" Path="Resource/Item/Heart.png" Plist="" />
+                    <BlendFunc Src="770" Dst="771" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Text_HeartNumber" ActionTag="139768774" Tag="122" IconVisible="False" RightMargin="-23.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="26" LabelText="-1" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="23.0000" Y="31.0000" />
+                    <AnchorPoint ScaleY="0.5000" />
+                    <Position />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition />
+                    <PreSize X="0.0000" Y="0.0000" />
+                    <OutlineColor A="255" R="0" G="0" B="0" />
+                    <ShadowColor A="255" R="110" G="110" B="110" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position Y="-70.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_Good" ActionTag="296069100" Tag="123" IconVisible="False" LeftMargin="-43.0000" RightMargin="-43.0000" TopMargin="97.0000" BottomMargin="-143.0000" FontSize="32" LabelText="Good" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="86.0000" Y="46.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position Y="-120.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <OutlineColor A="255" R="30" G="144" B="255" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_Great" ActionTag="-1405362863" Tag="124" IconVisible="False" LeftMargin="-44.0000" RightMargin="-44.0000" TopMargin="147.0000" BottomMargin="-193.0000" FontSize="32" LabelText="Great" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="88.0000" Y="46.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position Y="-170.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <OutlineColor A="255" R="128" G="0" B="128" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_Perfect" ActionTag="1583817938" Tag="125" IconVisible="False" LeftMargin="-55.5000" RightMargin="-55.5000" TopMargin="197.0000" BottomMargin="-243.0000" FontSize="32" LabelText="Perfect" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="111.0000" Y="46.0000" />
+                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                <Position Y="-220.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <OutlineColor A="255" R="255" G="165" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition />
+            <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Node_GoldNumber" ActionTag="1025794162" Tag="28" IconVisible="True" VerticalEdge="TopEdge" LeftMargin="-100.0000" RightMargin="1060.0000" TopMargin="110.0000" BottomMargin="530.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <Children>
+              <AbstractNodeData Name="Sprite_GoldCoin" ActionTag="-1661813811" Tag="29" IconVisible="False" LeftMargin="10.0000" RightMargin="-62.0000" TopMargin="-26.0000" BottomMargin="-26.0000" ctype="SpriteObjectData">
+                <Size X="52.0000" Y="52.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="10.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
+                <BlendFunc Src="1" Dst="771" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_GoldNumber" ActionTag="1494759146" Tag="30" IconVisible="False" LeftMargin="70.0000" RightMargin="-94.0000" TopMargin="-25.0000" BottomMargin="-25.0000" FontSize="36" LabelText="0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="24.0000" Y="50.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="70.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <OutlineColor A="255" R="0" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
+              </AbstractNodeData>
+            </Children>
+            <AnchorPoint />
+            <Position X="-100.0000" Y="530.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="255" G="255" B="255" />
+            <PrePosition X="-0.1042" Y="0.8281" />
+            <PreSize X="0.0000" Y="0.0000" />
+          </AbstractNodeData>
+          <AbstractNodeData Name="Text_Score" ActionTag="-102351201" Tag="34" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="463.5000" RightMargin="463.5000" TopMargin="-80.0000" BottomMargin="646.0000" FontSize="56" LabelText="0" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="33.0000" Y="74.0000" />
+            <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
+            <Position X="480.0000" Y="720.0000" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
+            <CColor A="255" R="0" G="0" B="0" />
+            <PrePosition X="0.5000" Y="1.1250" />
+            <PreSize X="0.0344" Y="0.1156" />
+            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <OutlineColor A="255" R="0" G="0" B="0" />
+            <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
           <AbstractNodeData Name="Node_MaxHeart" ActionTag="635736572" Tag="476" IconVisible="True" RightMargin="960.0000" TopMargin="580.0000" BottomMargin="60.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
@@ -277,7 +403,7 @@
                     <OutlineColor A="255" R="165" G="42" B="42" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Sprite_Item" ActionTag="1172393417" Tag="186" IconVisible="False" LeftMargin="5.0000" RightMargin="-56.0000" TopMargin="-26.0000" BottomMargin="-26.0000" ctype="SpriteObjectData">
+                  <AbstractNodeData Name="Sprite_Item" ActionTag="1172393417" Tag="186" IconVisible="False" LeftMargin="5.0000" RightMargin="-51.0000" TopMargin="-23.0000" BottomMargin="-23.0000" ctype="SpriteObjectData">
                     <Size X="51.0000" Y="52.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="5.0000" />
@@ -285,7 +411,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                    <FileData Type="Normal" Path="Resource/Item/enlargeItem.png" Plist="" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -331,15 +457,15 @@
                     <OutlineColor A="255" R="165" G="42" B="42" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Sprite_Item" ActionTag="-1944775913" Tag="254" IconVisible="False" LeftMargin="5.0000" RightMargin="-56.0000" TopMargin="-26.0000" BottomMargin="-26.0000" ctype="SpriteObjectData">
-                    <Size X="51.0000" Y="52.0000" />
+                  <AbstractNodeData Name="Sprite_Item" ActionTag="-1944775913" Tag="254" IconVisible="False" LeftMargin="5.0000" RightMargin="-51.0000" TopMargin="-23.0000" BottomMargin="-23.0000" ctype="SpriteObjectData">
+                    <Size X="51.0000" Y="51.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="5.0000" />
                     <Scale ScaleX="0.5000" ScaleY="0.5000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
+                    <FileData Type="Normal" Path="Resource/Item/shrinkItem.png" Plist="" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -410,133 +536,6 @@
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.2292" />
-            <PreSize X="0.0000" Y="0.0000" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Node_GoldNumber" ActionTag="1025794162" Tag="28" IconVisible="True" VerticalEdge="TopEdge" LeftMargin="-100.0000" RightMargin="1060.0000" TopMargin="110.0000" BottomMargin="530.0000" ctype="SingleNodeObjectData">
-            <Size X="0.0000" Y="0.0000" />
-            <Children>
-              <AbstractNodeData Name="Sprite_GoldCoin" ActionTag="-1661813811" Tag="29" IconVisible="False" LeftMargin="10.0000" RightMargin="-62.0000" TopMargin="-26.0000" BottomMargin="-26.0000" ctype="SpriteObjectData">
-                <Size X="52.0000" Y="52.0000" />
-                <AnchorPoint ScaleY="0.5000" />
-                <Position X="10.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
-                <BlendFunc Src="1" Dst="771" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="Text_GoldNumber" ActionTag="1494759146" Tag="30" IconVisible="False" LeftMargin="70.0000" RightMargin="-93.0000" TopMargin="-24.0000" BottomMargin="-24.0000" FontSize="36" LabelText="0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="24.0000" Y="50.0000" />
-                <AnchorPoint ScaleY="0.5000" />
-                <Position X="70.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
-                <OutlineColor A="255" R="0" G="0" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-            </Children>
-            <AnchorPoint />
-            <Position X="-100.0000" Y="530.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="-0.1042" Y="0.8281" />
-            <PreSize X="0.0000" Y="0.0000" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Text_Score" ActionTag="-102351201" Tag="34" IconVisible="False" VerticalEdge="TopEdge" LeftMargin="463.5000" RightMargin="463.5000" TopMargin="-80.0000" BottomMargin="646.0000" FontSize="56" LabelText="0" HorizontalAlignmentType="HT_Center" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="33.0000" Y="74.0000" />
-            <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
-            <Position X="480.0000" Y="720.0000" />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="0" G="0" B="0" />
-            <PrePosition X="0.5000" Y="1.1250" />
-            <PreSize X="0.0354" Y="0.1187" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
-            <OutlineColor A="255" R="0" G="0" B="0" />
-            <ShadowColor A="255" R="110" G="110" B="110" />
-          </AbstractNodeData>
-          <AbstractNodeData Name="Node_Player" ActionTag="982365389" Tag="126" IconVisible="True" RightMargin="960.0000" TopMargin="640.0000" ctype="SingleNodeObjectData">
-            <Size X="0.0000" Y="0.0000" />
-            <Children>
-              <AbstractNodeData Name="Node_Heart" ActionTag="-561847720" Tag="120" IconVisible="True" TopMargin="70.0000" BottomMargin="-70.0000" ctype="SingleNodeObjectData">
-                <Size X="0.0000" Y="0.0000" />
-                <Children>
-                  <AbstractNodeData Name="Sprite_Heart" ActionTag="-1005586582" Tag="121" IconVisible="False" LeftMargin="-58.0000" TopMargin="-27.5000" BottomMargin="-27.5000" ctype="SpriteObjectData">
-                    <Size X="58.0000" Y="55.0000" />
-                    <AnchorPoint ScaleX="1.0000" ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="0.6000" ScaleY="0.6000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="Resource/Item/Heart.png" Plist="" />
-                    <BlendFunc Src="770" Dst="771" />
-                  </AbstractNodeData>
-                  <AbstractNodeData Name="Text_HeartNumber" ActionTag="139768774" Tag="122" IconVisible="False" RightMargin="-22.0000" TopMargin="-16.0000" BottomMargin="-16.0000" FontSize="26" LabelText="-1" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="22.0000" Y="32.0000" />
-                    <AnchorPoint ScaleY="0.5000" />
-                    <Position />
-                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                    <CColor A="255" R="255" G="255" B="255" />
-                    <PrePosition />
-                    <PreSize X="0.0000" Y="0.0000" />
-                    <FontResource Type="Normal" Path="" Plist="" />
-                    <OutlineColor A="255" R="0" G="0" B="0" />
-                    <ShadowColor A="255" R="110" G="110" B="110" />
-                  </AbstractNodeData>
-                </Children>
-                <AnchorPoint />
-                <Position Y="-70.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="Text_Good" ActionTag="296069100" Tag="123" IconVisible="False" LeftMargin="-43.0000" RightMargin="-43.0000" TopMargin="97.0000" BottomMargin="-143.0000" FontSize="32" LabelText="Good" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="86.0000" Y="46.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="-120.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
-                <OutlineColor A="255" R="30" G="144" B="255" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="Text_Great" ActionTag="-1405362863" Tag="124" IconVisible="False" LeftMargin="-44.0000" RightMargin="-44.0000" TopMargin="147.0000" BottomMargin="-193.0000" FontSize="32" LabelText="Great" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="88.0000" Y="46.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="-170.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
-                <OutlineColor A="255" R="128" G="0" B="128" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-              <AbstractNodeData Name="Text_Perfect" ActionTag="1583817938" Tag="125" IconVisible="False" LeftMargin="-55.5000" RightMargin="-55.5000" TopMargin="197.0000" BottomMargin="-243.0000" FontSize="32" LabelText="Perfect" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="111.0000" Y="46.0000" />
-                <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position Y="-220.0000" />
-                <Scale ScaleX="1.0000" ScaleY="1.0000" />
-                <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition />
-                <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
-                <OutlineColor A="255" R="255" G="165" B="0" />
-                <ShadowColor A="255" R="110" G="110" B="110" />
-              </AbstractNodeData>
-            </Children>
-            <AnchorPoint />
-            <Position />
-            <Scale ScaleX="1.0000" ScaleY="1.0000" />
-            <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition />
             <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
         </Children>

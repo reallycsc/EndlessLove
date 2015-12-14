@@ -53,13 +53,13 @@
       </Animation>
       <AnimationList>
         <AnimationInfo Name="Scene_Start" StartIndex="0" EndIndex="90">
-          <RenderColor A="150" R="0" G="255" B="127" />
+          <RenderColor A="255" R="0" G="255" B="127" />
         </AnimationInfo>
       </AnimationList>
       <ObjectData Name="Scene" Tag="141" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_Loading" ActionTag="-1261380881" Alpha="0" Tag="454" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" TouchEnable="True" ClipAble="True" ComboBoxIndex="2" ColorAngle="145.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_Loading" ActionTag="-1261380881" Tag="454" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" PercentWidthEnable="True" PercentHeightEnable="True" PercentWidthEnabled="True" PercentHeightEnabled="True" TouchEnable="True" ClipAble="True" ComboBoxIndex="2" ColorAngle="145.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="960.0000" Y="640.0000" />
             <Children>
               <AbstractNodeData Name="Loading_Title" ActionTag="1069635060" Tag="453" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="319.0000" RightMargin="319.0000" TopMargin="279.0000" BottomMargin="279.0000" ctype="SpriteObjectData">

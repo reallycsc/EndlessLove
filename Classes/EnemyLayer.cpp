@@ -127,10 +127,10 @@ void EnemyLayer::update(float dt)
 				m_nAccEnemyDownDistance = 0;
 				int enemyInterval = m_pLevelData->getEnemyDownInterval();
 				m_nAddEnemyDownDistance = MAX(MIN(enemyInterval, m_nEnemyDownMaxInterval), m_nEnemyDownMinInterval);
-				if (m_nAddEnemyDownDistance <= 200)
-				{
-					int i = 0;
-				}
+				//if (m_nAddEnemyDownDistance <= 200)
+				//{
+				//	int i = 0;
+				//}
 			}
 		}
 	}
@@ -212,7 +212,7 @@ void EnemyLayer::addItem()
 
 	Size winSize = Director::getInstance()->getWinSize();
 	map<int, int>* _itemAddMap = m_pLevelData->getItemAddMap();
-	//Ëæ»úµÀ¾ßÖÖÀà
+	//Ã€ÃŠÂªË™ÂµÂ¿Ã¦ï¬‚Ã·Ã·Â¿â€¡
 	int itemType = ITEMTYPE_MIN;
 	int rand = random(1, maxProp); // delete the zero
 	int randAcc = 0;
@@ -229,7 +229,7 @@ void EnemyLayer::addItem()
 	{
 		return;
 	}
-	//ÔÚÆÁÄ»×îÓÒ²à¼ÓÈëµÀ¾ß
+	//â€˜â„âˆ†Â¡Æ’Âªâ—ŠÃ“â€â€œâ‰¤â€¡Âºâ€Â»ÃŽÂµÂ¿Ã¦ï¬‚
 	Item* item = Item::createItem(m_mSpriteMap.at(itemType)->getSpriteFrame(), itemType, m_pLevelData->getItemMoveSpeed());
 	int minHeight = winSize.height / 4;
 	int maxHeight = winSize.height / 2;
