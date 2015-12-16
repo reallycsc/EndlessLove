@@ -10,9 +10,9 @@ public:
 	~LoadingLayer(void);
 
 	CREATE_FUNC(LoadingLayer);
-	virtual bool init();
+	virtual bool init() override;
     
 private:
-	void onFrameEvent(Frame* frame);
+	void onFrameEvent(Frame* frame) const;
 };
 

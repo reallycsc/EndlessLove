@@ -71,7 +71,7 @@ bool EnemyLayer::init()
 		m_pGameMediator->setGameLevel(m_pLevelData->getLevel());
 
 		// calculate min & max interval for enemy down
-		float jumpTime = sqrt((float)(2 * m_pLevelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
+		float jumpTime = sqrt(static_cast<float>(2 * m_pLevelData->getEnemyDownMaxHeight()) / static_cast<float>(GRAVITY)) * 2;
 		m_nEnemyDownMinInterval = int(m_pLevelData->getPlayerMoveSpeed() * (jumpTime + m_pPlayerData->getPowerTime()));
 		m_nEnemyDownMaxInterval = int(winSize.width * 0.75);
 		m_nAddEnemyDownDistance = MAX(MIN(m_pLevelData->getEnemyDownInterval(), m_nEnemyDownMaxInterval), m_nEnemyDownMinInterval);
@@ -212,7 +212,7 @@ void EnemyLayer::addItem()
 
 	Size winSize = Director::getInstance()->getWinSize();
 	map<int, int>* _itemAddMap = m_pLevelData->getItemAddMap();
-	//ÀÊª˙µ¿æﬂ÷÷¿‡
+	// get random item
 	int itemType = ITEMTYPE_MIN;
 	int rand = random(1, maxProp); // delete the zero
 	int randAcc = 0;
@@ -229,7 +229,7 @@ void EnemyLayer::addItem()
 	{
 		return;
 	}
-	//‘⁄∆¡ƒª◊Ó”“≤‡º”»Îµ¿æﬂ
+	// add item to random height
 	Item* item = Item::createItem(m_mSpriteMap.at(itemType)->getSpriteFrame(), itemType, m_pLevelData->getItemMoveSpeed());
 	int minHeight = winSize.height / 4;
 	int maxHeight = winSize.height / 2;
@@ -239,7 +239,7 @@ void EnemyLayer::addItem()
 	m_vAllItems.pushBack(item);
 }
 
-int EnemyLayer::moveAllEnemys(Vector<Enemy*>* pAllEnemys, float dt)
+int EnemyLayer::moveAllEnemys(Vector<Enemy*>* pAllEnemys, float dt) const
 {
 	int playerSpeed = m_pLevelData->getPlayerMoveSpeed();
 	int moveDistance = 0;
@@ -255,7 +255,7 @@ int EnemyLayer::moveAllEnemys(Vector<Enemy*>* pAllEnemys, float dt)
 		{
 			moveDistance = ((*iterEnemy)->getMoveSpeed() + playerSpeed) * dt;
 			(*iterEnemy)->setPositionX((*iterEnemy)->getPositionX() - moveDistance);
-			iterEnemy++;
+			++iterEnemy;
 		}
 	}
 	if (moveDistance == 0)
@@ -279,7 +279,7 @@ int EnemyLayer::moveAllItems(float dt)
 		{
 			moveDistance = ((*iterItems)->getMoveSpeed() + playerSpeed) * dt;
 			(*iterItems)->setPositionX((*iterItems)->getPositionX() - moveDistance);
-			iterItems++;
+			++iterItems;
 		}
 	}
 	if (moveDistance == 0)
@@ -382,7 +382,7 @@ void EnemyLayer::increaseGameLevel()
 	m_pLevelData = &(*m_pGameMediator->getGameLevelData())[level-1];
 
 	// change the min Interval
-	float jumpTime = sqrt((float)(2 * m_pLevelData->getEnemyDownMaxHeight()) / (float)GRAVITY) * 2;
+	float jumpTime = sqrt(static_cast<float>(2 * m_pLevelData->getEnemyDownMaxHeight()) / static_cast<float>(GRAVITY)) * 2;
 	m_nEnemyDownMinInterval = int(m_pLevelData->getPlayerMoveSpeed() * (jumpTime + m_pPlayerData->getPowerTime()));
 
 #if DEBUG_FLAG == 1

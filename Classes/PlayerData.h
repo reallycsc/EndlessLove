@@ -81,7 +81,7 @@ public:
 
 	// data load & save
 	bool loadPlayerData();
-	bool saveAllPlayerData(bool isGameCenter = true);
+	bool saveAllPlayerData();
 
 	bool loadPlayerUpgradeConfigFile();
 
@@ -96,8 +96,8 @@ private:
 	void saveDefaultData(UserDefault* user);
     
     void addCustomEventLisenter(const string suffix, long long* pScore);
-    
-    bool saveIntPlayerDara(const char* dataName, int data, bool isGameCenter = true);
+
+	static bool saveIntPlayerDara(const char* dataName, int data, bool isGameCenter = true);
     bool saveLevelPlayerData(int id);
 
 public:

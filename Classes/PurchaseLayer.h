@@ -1,11 +1,5 @@
 #pragma once
 #include "CommonHeader.h"
-#include "GameMediator.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/IAPShare.h"
-#endif
-
 
 class PurchaseLayer :
 	public Layer
@@ -15,21 +9,14 @@ public:
 	~PurchaseLayer(void);
 
 	CREATE_FUNC(PurchaseLayer);
-	virtual bool init();
+	virtual bool init() override;
     
-    void showListItems();
+private:
+	void showListItems();
 
-private:
 	void menuCallback_Close(Ref* pSender);
-    
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    void menuCallback_Buy(Ref* pSender, Button* button, SKProduct* product);
-#endif
-    
-    void waitingTimeOut(float dt);
-    
+	void menuCallback_Buy(Ref* pSender, Button* button, const char* id);
 private:
-	map<string, string>*	m_pmGameText;
     Layout*	m_pLayout;
     ListView*   m_pListView;
 };

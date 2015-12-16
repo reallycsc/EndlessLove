@@ -26,9 +26,9 @@ public:
 
 	CREATE_FUNC(PlayerUpgradeLayer);
 
-	virtual bool init();
+	virtual bool init() override;
 
-	void update(float dt);
+	void update(float dt) override;
 
 	void menuCallback_MainMenu(Ref* pSender);
 	void menuCallback_Upgrade(Ref* pSender, int id);
@@ -37,7 +37,7 @@ private:
 	void loadUpgradeItem(int id);
 	void setItemContent(int id, const char* textid, const char* format1, const char* format2, bool isSetText = true);
 	void setAllItemContents(bool isSetText = true);
-    void unlockAchievement(int id, int level, unsigned long maxLevel);
+	static void unlockAchievement(int id, int level, unsigned long maxLevel);
 
 private:
 	PlayerData*	m_pPlayerData;

@@ -1,10 +1,8 @@
 #include "PlayerUpgradeLayer.h"
 #include "MainMenuScene.h"
 #include "NormalNoticeLayer.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/GameKitHelper.h"
-#endif
+#include "CSCClass\CSC_IOSHelper.h"
+#include "CSCClass\CommonFunctions.h"
 
 PlayerUpgradeLayer::PlayerUpgradeLayer(void)
 {
@@ -98,7 +96,7 @@ void PlayerUpgradeLayer::loadUpgradeItem(int id)
 
 	item.scrollView = dynamic_cast<ScrollView*>(layout->getChildByName("ScrollView_Desc"));
 	item.description = dynamic_cast<Text*>(item.scrollView->getChildByName("Text_Desc"));
-	GameMediator::setLineWrap(item.scrollView, item.description);
+	CSC::setScrollViewTextAutoWrap(item.scrollView, item.description);
 
 	item.button = dynamic_cast<Button*>(layout->getChildByName("Button_Item"));
 	item.button->addClickEventListener(CC_CALLBACK_1(PlayerUpgradeLayer::menuCallback_Upgrade, this, id));
@@ -131,7 +129,7 @@ void PlayerUpgradeLayer::setItemContent(int id, const char* textid, const char* 
 			item.goldImg->setVisible(true);
 			item.textMax->setVisible(false);
 
-			GameMediator::setLineWrap(item.scrollView, item.description);
+			CSC::setScrollViewTextAutoWrap(item.scrollView, item.description);
 
 			int widthImg = item.goldImg->getBoundingBox().size.width;
 			int posXImg = -(item.goldNum->getBoundingBox().size.width + widthImg) * 0.5;
@@ -146,7 +144,7 @@ void PlayerUpgradeLayer::setItemContent(int id, const char* textid, const char* 
 			item.goldImg->setVisible(false);
 			item.textMax->setVisible(true);
 
-			GameMediator::setLineWrap(item.scrollView, item.description);
+			CSC::setScrollViewTextAutoWrap(item.scrollView, item.description);
 		}
 	}
 	else
@@ -164,7 +162,7 @@ void PlayerUpgradeLayer::setItemContent(int id, const char* textid, const char* 
 			item.goldImg->setVisible(true);
 			item.textMax->setVisible(false);
 
-			GameMediator::setLineWrap(item.scrollView, item.description);
+			CSC::setScrollViewTextAutoWrap(item.scrollView, item.description);
 
 			int widthImg = item.goldImg->getBoundingBox().size.width;
 			int posXImg = -(item.goldNum->getBoundingBox().size.width + widthImg) * 0.5;
@@ -179,7 +177,7 @@ void PlayerUpgradeLayer::setItemContent(int id, const char* textid, const char* 
 			item.goldImg->setVisible(false);
 			item.textMax->setVisible(true);
 
-			GameMediator::setLineWrap(item.scrollView, item.description);
+			CSC::setScrollViewTextAutoWrap(item.scrollView, item.description);
 		}
 	}
 }
@@ -291,44 +289,40 @@ void PlayerUpgradeLayer::menuCallback_Upgrade(Ref* pSender, int id)
 
 void PlayerUpgradeLayer::unlockAchievement(int id, int level, unsigned long maxLevel)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     // delete the level 1
     level = level - 1;
     maxLevel = maxLevel - 1;
     int percent = (level * 100) / maxLevel;
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    [helper checkAndUnlockAchievement:@"com.reallycsc.endlesslove.firstupgrade"];
+
+	CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.firstupgrade");
     switch (id) {
         case ID_JUMP_TYPE:
-            if (level <= 2)
-            {
-                [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.twostagejump" percentComplete:((level * 100) / 2 )];
-            }
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxjumptype" percentComplete:percent];
+			if (level <= 2)
+				CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.twostagejump", (level * 100) / 2);
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxjumptype", percent);
             break;
         case ID_MAXHEART_NUMBER:
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxheartnumber" percentComplete:percent];
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxheartnumber", percent);
             break;
         case ID_STRENGTH:
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxjumpstrength" percentComplete:percent];
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxjumpstrength", percent);
             break;
         case ID_POWER_TIME:
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxfocusduration" percentComplete:percent];
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxfocusduration", percent);
             break;
         case ID_GUIDELINE_TIME:
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxguideline" percentComplete:percent];
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxguideline", percent);
             break;
         case ID_ENLARGE_TIME:
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxenlarge" percentComplete:percent];
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxenlarge", percent);
             break;
         case ID_SHRINK_TIME:
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxshrink" percentComplete:percent];
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxshrink", percent);
             break;
         case ID_SHIELD_TIME:
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.maxshield" percentComplete:percent];
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.maxshield", percent);
             break;
         default:
             break;
     }
-#endif
 }

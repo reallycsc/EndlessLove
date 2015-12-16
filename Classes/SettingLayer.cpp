@@ -1,12 +1,7 @@
 #include "SettingLayer.h"
 #include "GameMediator.h"
 #include "MainMenuScene.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/IAPShare.h"
-#import "IOSHelper/Reachability.h"
-#import "IOSHelper/ProgressHUD.h"
-#endif
+#include "CSCClass\CSC_IOSHelper.h"
 
 
 SettingLayer::SettingLayer(void)
@@ -32,7 +27,7 @@ bool SettingLayer::init()
     {  
         CC_BREAK_IF(!Layer::init());  
 
-        cocos2d::Size winSize = Director::getInstance()->getWinSize();
+        Size winSize = Director::getInstance()->getWinSize();
 
 		// load csb
 		auto rootNode = CSLoader::createNode("SettingLayer.csb");
@@ -84,8 +79,8 @@ bool SettingLayer::init()
 		_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 		// run animation
-        m_pLayout->setPosition(cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
-		m_pLayout->runAction(MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height / 2)));
+        m_pLayout->setPosition(Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height));
+		m_pLayout->runAction(MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height / 2)));
 
         bRet = true;
     } while (0);  
@@ -96,10 +91,10 @@ bool SettingLayer::init()
 void SettingLayer::menuCallback_Apply(Ref* pSender)
 {
 	
-	cocos2d::Size winSize = Director::getInstance()->getWinSize();
+	Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-		MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-		CallFuncN::create([=](Ref* pSender)->void
+		MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		CallFuncN::create([=](Ref* pSenderNew)->void
 	{
 		if (m_languageTypeOriginal != m_languageType)
 		{
@@ -116,10 +111,10 @@ void SettingLayer::menuCallback_Apply(Ref* pSender)
 
 void SettingLayer::menuCallback_Cancel(Ref* pSender)
 {
-    cocos2d::Size winSize = Director::getInstance()->getWinSize();
+    Size winSize = Director::getInstance()->getWinSize();
 	m_pLayout->runAction(Sequence::create(
-                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-		CallFuncN::create([=](Ref* pSender)->void
+                                          MoveTo::create(0.2f, Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		CallFuncN::create([=](Ref* pSenderNew)->void
 	{
 		this->removeFromParent();
 	}),
@@ -128,37 +123,7 @@ void SettingLayer::menuCallback_Cancel(Ref* pSender)
 
 void SettingLayer::menuCallback_Restore(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // load iap & request products
-    if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable) {
-        [ProgressHUD showError : @"No internet connection!"];
-        NSLog(@"No internet connection!");
-    }
-    else {
-        [[IAPShare sharedHelper].iap restoreProductsWithCompletion:^(SKPaymentQueue *payment, NSError *error) {
-            if (payment.transactions.count == 0) {
-                [ProgressHUD showError : @"Restored nothing!"];
-                NSLog(@"Restored nothing!");
-            }
-            else {
-                for (SKPaymentTransaction *transaction in payment.transactions) {
-                    NSLog(@"Restored %@" , transaction.payment.productIdentifier);
-                    if  ([transaction.payment.productIdentifier isEqualToString:@"com.reallycsc.endlesslove.adremove"]) {
-                        // notify others to reset removead statues
-                        Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_RESTORED_REMOVEAD);
-                    }
-                }
-                //[ProgressHUD dismiss];
-                this->unschedule(schedule_selector(SettingLayer::waitingTimeOut));
-                [ProgressHUD showSuccess:@"Restore success."];
-            }
-        }];
-        [ProgressHUD show : [NSString stringWithCString:GameMediator::getInstance()->getGameText()->at("ID_IAP_DOWNLOAD").c_str()
-                                               encoding:NSUTF8StringEncoding]
-              Interaction : FALSE];
-        this->scheduleOnce(schedule_selector(SettingLayer::waitingTimeOut), 10.0f);
-    }
-#endif
+	CSC_IOSHelper::IAP_restorePurchase();
 }
 
 void SettingLayer::selectedStateEvent_CN(Ref *pSender, CheckBox::EventType type)
@@ -173,12 +138,4 @@ void SettingLayer::selectedStateEvent_EN(Ref *pSender, CheckBox::EventType type)
 	m_pCheckBoxEN->setSelected(true);
 	m_pCheckBoxCN->setSelected(false);
 	m_languageType = LanguageType::ENGLISH;
-}
-
-void SettingLayer::waitingTimeOut(float dt)
-{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    [ProgressHUD showError : [NSString stringWithCString:GameMediator::getInstance()->getGameText()->at("ID_IAP_TIMEOUT").c_str()
-                                                encoding:NSUTF8StringEncoding]];
-#endif
 }

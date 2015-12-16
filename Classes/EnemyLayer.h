@@ -18,14 +18,14 @@ public:
 	~EnemyLayer(void);
 
 	CREATE_FUNC(EnemyLayer);
-	virtual bool init();
+	virtual bool init() override;
 
-	void update(float dt);
+	void update(float dt) override;
 
 	void addEnemyDown(bool isWithUp);
 	void addEnemyUp(int speed);
 	void addItem();
-	int moveAllEnemys(Vector<Enemy*>* pAllEnemys, float dt);
+	int moveAllEnemys(Vector<Enemy*>* pAllEnemys, float dt) const;
 	int moveAllItems(float dt);
 
 	bool playerEnemyIntersect(Player* player);
@@ -46,15 +46,15 @@ private:
 
 	GameLevelData*	m_pLevelData;
 
-	int m_nEnemyDownMinInterval; // 敌人最小间隔
-	int m_nEnemyDownMaxInterval; // 敌人最大间隔
+	int m_nEnemyDownMinInterval;
+	int m_nEnemyDownMaxInterval;
 
-	int m_nAddEnemyDownDistance; // 敌人间隔距离像素
+	int m_nAddEnemyDownDistance; // with pixel
 	int m_nAccEnemyDownDistance;
 	int m_nAddEnemyUpDistance;
 	int m_nAccEnemyUpDistance;
 
-	int m_nAddItemDistance; // 道具间隔距离像素
+	int m_nAddItemDistance; // with pixel
 	int m_nAccItemDistance;
 };
 

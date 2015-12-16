@@ -9,18 +9,16 @@ public:
 	~SettingLayer(void);
 
 	CREATE_FUNC(SettingLayer);
-	virtual bool init();
+	virtual bool init() override;
 
 private:
 	void menuCallback_Apply(Ref* pSender);
 	void menuCallback_Cancel(Ref* pSender);
-    void menuCallback_Restore(Ref* pSender);
+	void menuCallback_Restore(Ref* pSender);
 
 	void selectedStateEvent_CN(Ref *pSender, CheckBox::EventType type);
 	void selectedStateEvent_EN(Ref *pSender, CheckBox::EventType type);
     
-    void waitingTimeOut(float dt);
-
 private:
 	Layout*	m_pLayout;
 	CheckBox*	m_pCheckBoxCN;

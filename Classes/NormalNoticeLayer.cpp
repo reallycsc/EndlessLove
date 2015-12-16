@@ -1,5 +1,6 @@
 #include "NormalNoticeLayer.h"
 #include "GameMediator.h"
+#include "CSCClass\CommonFunctions.h"
 
 NormalNoticeLayer::NormalNoticeLayer(void)
 {
@@ -53,7 +54,7 @@ bool NormalNoticeLayer::init(const string &title, const string &info)
 	// set all text
 	textTitle->setString(title);
 	textInfo->setString(info);
-	GameMediator::setLineWrap(scrollView, textInfo);
+	CSC::setScrollViewTextAutoWrap(scrollView, textInfo);
 	buttonOK->setTitleText(GameMediator::getInstance()->getGameText()->at("ID_NOTICE_OK"));
 
 	// run animation

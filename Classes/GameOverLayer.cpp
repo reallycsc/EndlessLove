@@ -1,12 +1,9 @@
 #include "GameOverLayer.h"
 #include "GameScene.h"
 #include "MainMenuScene.h"
-#include "CSCClass/TextNumChange.h"
+#include "CSCClass\CommonFunctions.h"
+#include "CSCClass\CSCAction\TextNumChange.h"
 #include "NormalNoticeLayer.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/GameKitHelper.h"
-#endif
 
 GameOverLayer::GameOverLayer(void)
 {
@@ -91,8 +88,6 @@ bool GameOverLayer::init()
 			// if vungle not ready
             m_pSpriteRevivePlay->setColor(Color3B(77, 77, 77));
             m_pSpriteDoublePlay->setColor(Color3B(77, 77, 77));
-			//GameMediator::spriteToGray(m_pSpriteRevivePlay, 0);
-			//GameMediator::spriteToGray(m_pSpriteDoublePlay, 0);
 		}
 #endif
 	}
@@ -116,7 +111,7 @@ bool GameOverLayer::init()
     return true;
 }
 
-void GameOverLayer::showScore()
+void GameOverLayer::showScore() const
 {
 	auto playerData = m_pGameMediator->getPlayerData();
 
@@ -132,6 +127,7 @@ void GameOverLayer::showScore()
 	m_pAnimate->gotoFrameAndPlay(0, false);
 }
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 void GameOverLayer::onVungleCacheAvailable()
 {
     if (this)
@@ -139,8 +135,6 @@ void GameOverLayer::onVungleCacheAvailable()
         CCLOG("Video loaded");
         m_pSpriteRevivePlay->setColor(Color3B(255, 255, 255));
         m_pSpriteDoublePlay->setColor(Color3B(255, 255, 255));
-        //GameMediator::spriteToGray(m_pSpriteRevivePlay, 1);
-        //GameMediator::spriteToGray(m_pSpriteDoublePlay, 1);
     }
 }
 
@@ -179,8 +173,8 @@ void GameOverLayer::onVungleAdReward(const std::string& name)
             this->realDouble();
         });
     }
-
 }
+#endif
 
 void GameOverLayer::menuCallback_Retry(Ref* pSender)
 {
@@ -228,8 +222,7 @@ void GameOverLayer::menuCallback_Revive(Ref* pSender)
         else
         {
             // tell player video is not ready
-            auto mapGameText = m_pGameMediator->getGameText();
-            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")));
+			[ProgressHUD showError : m_pMapGameText->at("ID_NOTICE_NOVUNGLE")];
         }
 #else
 		this->realRevive();
@@ -245,25 +238,19 @@ void GameOverLayer::realRevive()
     cocos2d::Size winSize = Director::getInstance()->getWinSize();
     m_pGameMediator->getPlayerData()->initPlayerHeartNumber();
     m_pGameMediator->increaseReviveNumber();
-    // update GameCenter Achievement
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    long long reviveNum = m_pGameMediator->getPlayerData()->getReviveNumber();
-    [helper checkAndUnlockAchievement:@"com.reallycsc.endlesslove.revive1"];
-    if (reviveNum > 1) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.revive10" percentComplete:(reviveNum*10)];
-    }
-    if (reviveNum > 10) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.revive50" percentComplete:(reviveNum*2)];
-    }
-    if (reviveNum > 50) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.revive100" percentComplete:(reviveNum)];
-    }
-#endif
+	// update GameCenter Achievement
+	long long reviveNum = m_pGameMediator->getPlayerData()->getReviveNumber();
+	CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.revive1");
+    if (reviveNum > 1)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive10", reviveNum * 10);
+    if (reviveNum > 10)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive50", reviveNum * 2);
+    if (reviveNum > 50)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive100", reviveNum);
     // close the ui & resume
 	m_pLayout->runAction(Sequence::create(
-                                          MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
-                                          CallFuncN::create([=](Ref* pSender)->void
+		MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
+		CallFuncN::create([=](Ref* pSender)->void
 	{
         Director::getInstance()->getTextureCache()->removeTextureForKey("GameOverImage");
         Director::getInstance()->popScene();
@@ -283,8 +270,7 @@ void GameOverLayer::menuCallback_DoubleGold(Ref* pSender)
         else
         {
             // tell player video is not ready
-            auto mapGameText = m_pGameMediator->getGameText();
-            this->addChild(NormalNoticeLayer::create(mapGameText->at("ID_NOTICE_TITLE"), mapGameText->at("ID_NOTICE_NOVUNGLE")));
+			[ProgressHUD showError : m_pMapGameText->at("ID_NOTICE_NOVUNGLE")];
         }
 #else
 		this->realDouble();
@@ -316,18 +302,12 @@ void GameOverLayer::realDouble()
 	m_pButtonDoubleCoin->setEnabled(false);
 
     // update GameCenter Achievement
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
     long long doubleNum = playerData->getDoubleNumber();
-    [helper checkAndUnlockAchievement:@"com.reallycsc.endlesslove.double1"];
-    if (doubleNum > 1) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.double10" percentComplete:(doubleNum*10)];
-    }
-    if (doubleNum > 10) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.double50" percentComplete:(doubleNum*2)];
-    }
-    if (doubleNum > 50) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.double100" percentComplete:(doubleNum)];
-    }
-#endif
+	CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.double1");
+    if (doubleNum > 1)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double10", doubleNum * 10);
+    if (doubleNum > 10)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double50", doubleNum * 2);
+    if (doubleNum > 50)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double100", doubleNum);
 }
