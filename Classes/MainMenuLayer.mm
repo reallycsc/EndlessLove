@@ -125,7 +125,7 @@ bool MainMenuLayer::init()
 #if IAPTEST_FLAG == 1
             [[IAPShare sharedHelper] requestProductWithID:@"com.reallycsc.endlesslove.adremove" isProduction: NO];
 #else
-            [[IAPShare sharedHelper] requestProductWithID@"com.reallycsc.endlesslove.adremove" isProduction:YES];
+            [[IAPShare sharedHelper] requestProductWithID:@"com.reallycsc.endlesslove.adremove" isProduction:YES];
 #endif
         }
         
