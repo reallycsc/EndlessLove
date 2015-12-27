@@ -1,6 +1,6 @@
 #include "LoadingLayer.h"
 #include "MainMenuScene.h"
-#include "CSCClass\CSC_IOSHelper.h"
+#include "CSCClass/CSC_IOSHelper.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #import "PluginVungle/PluginVungle.h"
 #endif

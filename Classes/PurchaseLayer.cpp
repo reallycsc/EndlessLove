@@ -1,7 +1,7 @@
 #include "PurchaseLayer.h"
-#include "CSCClass\CommonFunctions.h"
+#include "CSCClass/CommonFunctions.h"
 #include "GameMediator.h"
-#include "CSCClass\CSC_IOSHelper.h"
+#include "CSCClass/CSC_IOSHelper.h"
 
 PurchaseLayer::PurchaseLayer(void)
 {
@@ -50,9 +50,9 @@ bool PurchaseLayer::init()
         
 		// request IAP
 #if IAPTEST_FLAG == 1
-		CSC_IOSHelper::IAP_requestAllPurchasedProductsWithCallback(true, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
+		CSC_IOSHelper::getInstance()->IAP_requestAllPurchasedProductsWithCallback(true, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
 #else
-		CSC_IOSHelper::IAP_requestAllPurchasedProductsWithCallback(false, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
+		CSC_IOSHelper::getInstance()->IAP_requestAllPurchasedProductsWithCallback(false, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
 #endif
 		
         bRet = true;
@@ -91,9 +91,9 @@ void PurchaseLayer::showListItems()
 void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, const char* id)
 {
 #if IAPTEST_FLAG == 1
-	CSC_IOSHelper::IAP_purchaseProduct(true, id);
+	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(true, id);
 #else
-	CSC_IOSHelper::IAP_purchaseProduct(false, id);
+	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(false, id);
 #endif
 }
 

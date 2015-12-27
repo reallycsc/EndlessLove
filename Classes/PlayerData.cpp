@@ -1,5 +1,5 @@
 #include "PlayerData.h"
-#include "CSCClass\CSC_IOSHelper.h"
+#include "CSCClass/CSC_IOSHelper.h"
 
 static PlayerData _sharedContext;
 

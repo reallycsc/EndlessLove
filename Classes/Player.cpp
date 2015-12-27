@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "CSCClass\CommonFunctions.h"
+#include "CSCClass/CommonFunctions.h"
 
 Player::Player(void)
 {

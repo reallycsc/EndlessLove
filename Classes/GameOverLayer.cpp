@@ -1,8 +1,8 @@
 #include "GameOverLayer.h"
 #include "GameScene.h"
 #include "MainMenuScene.h"
-#include "CSCClass\CommonFunctions.h"
-#include "CSCClass\CSCAction\TextNumChange.h"
+#include "CSCClass/CommonFunctions.h"
+#include "CSCClass/CSCAction/TextNumChange.h"
 #include "NormalNoticeLayer.h"
 
 GameOverLayer::GameOverLayer(void)
@@ -40,6 +40,7 @@ bool GameOverLayer::init()
     cocos2d::Size winSize = Director::getInstance()->getWinSize();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    sdkbox::PluginVungle::init();
     sdkbox::PluginVungle::setListener(this);
 #endif
 
@@ -222,7 +223,9 @@ void GameOverLayer::menuCallback_Revive(Ref* pSender)
         else
         {
             // tell player video is not ready
-			[ProgressHUD showError : m_pMapGameText->at("ID_NOTICE_NOVUNGLE")];
+            this->addChild(NormalNoticeLayer::create(
+                                                     m_pMapGameText->at("ID_NOTICE_TITLE"),
+                                                     m_pMapGameText->at("ID_NOTICE_NOVUNGLE")));
         }
 #else
 		this->realRevive();
@@ -270,7 +273,9 @@ void GameOverLayer::menuCallback_DoubleGold(Ref* pSender)
         else
         {
             // tell player video is not ready
-			[ProgressHUD showError : m_pMapGameText->at("ID_NOTICE_NOVUNGLE")];
+            this->addChild(NormalNoticeLayer::create(
+                                                     m_pMapGameText->at("ID_NOTICE_TITLE"),
+                                                     m_pMapGameText->at("ID_NOTICE_NOVUNGLE")));
         }
 #else
 		this->realDouble();

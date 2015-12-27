@@ -1,11 +1,14 @@
 #pragma once
 #include "CommonHeader.h"
 #include "GameMediator.h"
-#include "CSCClass\CSC_IOSHelper.h"
+#include "CSCClass/CSC_IOSHelper.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+#include "PluginVungle/PluginVungle.h"
+#endif
 
 class GameOverLayer : public Layer
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	, sdkbox::VungleListener
+, sdkbox::VungleListener
 #endif
 {
 public:
@@ -24,11 +27,11 @@ private:
 	void showScore() const;
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    void onVungleCacheAvailable();
-    void onVungleStarted();
-    void onVungleFinished();
-    void onVungleAdViewed(bool isComplete);
-    void onVungleAdReward(const std::string& name);
+    void onVungleCacheAvailable() override;
+    void onVungleStarted() override;
+    void onVungleFinished() override;
+    void onVungleAdViewed(bool isComplete) override;
+    void onVungleAdReward(const std::string& name) override;
 #endif
 
     void realRevive();

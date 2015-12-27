@@ -1,6 +1,6 @@
 #include "NormalNoticeLayer.h"
 #include "GameMediator.h"
-#include "CSCClass\CommonFunctions.h"
+#include "CSCClass/CommonFunctions.h"
 
 NormalNoticeLayer::NormalNoticeLayer(void)
 {

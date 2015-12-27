@@ -1,7 +1,7 @@
 #include "SettingLayer.h"
 #include "GameMediator.h"
 #include "MainMenuScene.h"
-#include "CSCClass\CSC_IOSHelper.h"
+#include "CSCClass/CSC_IOSHelper.h"
 
 
 SettingLayer::SettingLayer(void)
@@ -123,7 +123,7 @@ void SettingLayer::menuCallback_Cancel(Ref* pSender)
 
 void SettingLayer::menuCallback_Restore(Ref* pSender)
 {
-	CSC_IOSHelper::IAP_restorePurchase();
+    CSC_IOSHelper::getInstance()->IAP_restorePurchase();
 }
 
 void SettingLayer::selectedStateEvent_CN(Ref *pSender, CheckBox::EventType type)

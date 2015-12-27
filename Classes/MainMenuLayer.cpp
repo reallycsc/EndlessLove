@@ -4,7 +4,7 @@
 #include "PurchaseLayer.h"
 #include "SettingLayer.h"
 #include "Player.h"
-#include "CSCClass\CSC_IOSHelper.h"
+#include "CSCClass/CSC_IOSHelper.h"
 
 MainMenuLayer::MainMenuLayer(void)
 {
@@ -109,7 +109,7 @@ bool MainMenuLayer::init()
 #if IAPTEST_FLAG == 1
 		CSC_IOSHelper::IAP_requestAllPurchasedProducts(true);
 #else
-            [[IAPShare sharedHelper] requestProductWithID:@"com.reallycsc.endlesslove.adremove" isProduction:YES];
+        CSC_IOSHelper::IAP_requestAllPurchasedProducts(false);
 #endif
         auto listener = EventListenerCustom::create(EVENT_RESTORED + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
             m_pGameMediator->setIsAd(false);
@@ -209,9 +209,9 @@ void MainMenuLayer::menuCallback_Achievement(Ref* pSender)
 void MainMenuLayer::menuCallback_PurchaseNoAd(Ref* pSender)
 {
 #if (IAPTEST_FLAG == 1)
-	CSC_IOSHelper::IAP_purchaseProduct(true, "com.reallycsc.endlesslove.adremove");
+	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(true, "com.reallycsc.endlesslove.adremove");
 #else
-	CSC_IOSHelper::IAP_purchaseProduct(false, "com.reallycsc.endlesslove.adremove");
+	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(false, "com.reallycsc.endlesslove.adremove");
 #endif
 }
 

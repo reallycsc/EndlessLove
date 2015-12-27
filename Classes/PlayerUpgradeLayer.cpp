@@ -1,8 +1,8 @@
 #include "PlayerUpgradeLayer.h"
 #include "MainMenuScene.h"
 #include "NormalNoticeLayer.h"
-#include "CSCClass\CSC_IOSHelper.h"
-#include "CSCClass\CommonFunctions.h"
+#include "CSCClass/CSC_IOSHelper.h"
+#include "CSCClass/CommonFunctions.h"
 
 PlayerUpgradeLayer::PlayerUpgradeLayer(void)
 {
