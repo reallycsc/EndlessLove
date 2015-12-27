@@ -1,8 +1,5 @@
 #include "PlayerData.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/GameKitHelper.h"
-#endif
+#include "CSCClass\CSC_IOSHelper.h"
 
 static PlayerData _sharedContext;
 
@@ -73,14 +70,12 @@ bool PlayerData::init()
 
 		this->initPlayerData();
         
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
         // add custom event lisenter
         this->addCustomEventLisenter("Highscore", &m_nHighscore);
         this->addCustomEventLisenter("GoldNumber", &m_nGoldNumberAll);
         this->addCustomEventLisenter("GoldNumberAll", &m_nGoldNumberAcc);
         this->addCustomEventLisenter("ReviveNumber", &m_nReviveNumber);
         this->addCustomEventLisenter("DoubleNumber", &m_nDoubleNumber);
-#endif
         
         bRet = true;
     } while (0);
@@ -109,8 +104,8 @@ inline void PlayerData::addCustomEventLisenter(const string suffix, long long* p
         long long score;
         sscanf(buf, "%lld", &score);
         (*pScore) = score;
-        this->saveIntPlayerDara(suffix.c_str(), (int)score, false);
-        dispatcher->dispatchCustomEvent(EVENT_PLARERDATA_SCOREUPDATED+ suffix);
+        this->saveIntPlayerDara(suffix.c_str(), static_cast<int>(score), false);
+        dispatcher->dispatchCustomEvent(EVENT_PLARERDATA_SCOREUPDATED + suffix);
     });
     dispatcher->addEventListenerWithFixedPriority(listener, 1);
 }
@@ -222,24 +217,17 @@ void PlayerData::finishGameAddGoldNumber()
 {
     m_nGoldNumberAll += m_nGoldNumber;
     m_nGoldNumberAcc += m_nGoldNumber;
-    this->saveIntPlayerDara("GoldNumber", (int)m_nGoldNumberAll);
-    this->saveIntPlayerDara("GoldNumberAll", (int)m_nGoldNumberAcc);
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.gold50" percentComplete:(m_nGoldNumberAcc*2)];
-    if (m_nGoldNumberAcc > 50) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.gold100" percentComplete:(m_nGoldNumberAcc)];
-    }
-    if (m_nGoldNumberAcc > 100) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.gold500" percentComplete:(m_nGoldNumberAcc/5)];
-    }
-    if (m_nGoldNumberAcc > 500) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.gold1000" percentComplete:(m_nGoldNumberAcc/10)];
-    }
-    if (m_nGoldNumberAcc > 1000) {
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.gold5000" percentComplete:(m_nGoldNumberAcc/50)];
-    }
-#endif
+    this->saveIntPlayerDara("GoldNumber", static_cast<int>(m_nGoldNumberAll));
+    this->saveIntPlayerDara("GoldNumberAll", static_cast<int>(m_nGoldNumberAcc));
+	CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.gold50", m_nGoldNumberAcc * 2);
+    if (m_nGoldNumberAcc > 50)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.gold100", m_nGoldNumberAcc);
+    if (m_nGoldNumberAcc > 100)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.gold500", m_nGoldNumberAcc / 5);
+    if (m_nGoldNumberAcc > 500)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.gold1000", m_nGoldNumberAcc / 10);
+    if (m_nGoldNumberAcc > 1000)
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.gold5000", m_nGoldNumberAcc / 50);
 }
 
 void PlayerData::finishGameAddScore()
@@ -247,35 +235,24 @@ void PlayerData::finishGameAddScore()
     if (m_nScore > m_nHighscore)
     {
         m_nHighscore = m_nScore;
-        this->saveIntPlayerDara("Highscore", (int)m_nHighscore);
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        GameKitHelper* helper = [GameKitHelper sharedHelper];
-        [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score25" percentComplete:(m_nHighscore*4)];
-        if (m_nHighscore > 25) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score50" percentComplete:(m_nHighscore*2)];
-        }
-        if (m_nHighscore > 50) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score75" percentComplete:(m_nHighscore/3*4)];
-        }
-        if (m_nHighscore > 75) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score100" percentComplete:(m_nHighscore)];
-        }
-        if (m_nHighscore > 100) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score150" percentComplete:(m_nHighscore/3*2)];
-        }
-        if (m_nHighscore > 150) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score200" percentComplete:(m_nHighscore/2)];
-        }
-        if (m_nHighscore > 200) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score300" percentComplete:(m_nHighscore/3)];
-        }
-        if (m_nHighscore > 300) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score400" percentComplete:(m_nHighscore/4)];
-        }
-        if (m_nHighscore > 400) {
-            [helper unlockAchievementPercent:@"com.reallycsc.endlesslove.score500" percentComplete:(m_nHighscore/5)];
-        }
-#endif
+        this->saveIntPlayerDara("Highscore", static_cast<int>(m_nHighscore));
+		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score25", m_nHighscore * 4);
+        if (m_nHighscore > 25)
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score50", m_nHighscore * 2);
+        if (m_nHighscore > 50)
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score75", m_nHighscore * 4 / 3);
+        if (m_nHighscore > 75)
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score100", m_nHighscore);
+        if (m_nHighscore > 100)
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score150", m_nHighscore * 2 / 3);
+        if (m_nHighscore > 150)
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score200", m_nHighscore / 2);
+        if (m_nHighscore > 200)
+			CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score300", m_nHighscore / 3);
+        if (m_nHighscore > 300)
+	        CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score400", m_nHighscore / 4);
+	    if (m_nHighscore > 400)
+		    CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.score500", m_nHighscore / 5);
     }
 }
 
@@ -303,20 +280,18 @@ void PlayerData::saveDefaultData(UserDefault* user)
 
 bool PlayerData::loadPlayerData()
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // get data from game center
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    if (helper.isAuthenticated == YES)
-    {
-        [helper retirieveLocalPlayerScore:@"Highscore"];
-        [helper retirieveLocalPlayerScore:@"GoldNumber"];
-        [helper retirieveLocalPlayerScore:@"GoldNumberAll"];
-        [helper retirieveLocalPlayerScore:@"ReviveNumber"];
-        [helper retirieveLocalPlayerScore:@"DoubleNumber"];
-    }
-#endif
-    
-    // get local data
+	bool isGameCenterLogged = CSC_IOSHelper::GameCenter_isAuthenticated();
+	// get data from game center
+	if (isGameCenterLogged)
+	{
+		CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("Highscore");
+		CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("GoldNumber");
+		CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("GoldNumberAll");
+		CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("ReviveNumber");
+		CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("DoubleNumber");
+	}
+
+	// get local data
 	UserDefault* user = UserDefault::getInstance();
 	if (!user->getBoolForKey("isHaveSaveFileXml"))
 	{
@@ -325,16 +300,16 @@ bool PlayerData::loadPlayerData()
 	}
 	else
 	{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        // do nothing, wait for GameCenter
-#else
-        m_nHighscore = user->getIntegerForKey("Highscore", 0);
-        m_nGoldNumberAll = user->getIntegerForKey("GoldNumber", 0);
-        m_nGoldNumberAcc = user->getIntegerForKey("GoldNumberAll", 0);
-        m_nReviveNumber = user->getIntegerForKey("ReviveNumber", 0);
-        m_nDoubleNumber = user->getIntegerForKey("DoubleNumber", 0);
-#endif
-        
+		// get data from local file
+		if (!isGameCenterLogged)
+		{
+			m_nHighscore = user->getIntegerForKey("Highscore", 0);
+			m_nGoldNumberAll = user->getIntegerForKey("GoldNumber", 0);
+			m_nGoldNumberAcc = user->getIntegerForKey("GoldNumberAll", 0);
+			m_nReviveNumber = user->getIntegerForKey("ReviveNumber", 0);
+			m_nDoubleNumber = user->getIntegerForKey("DoubleNumber", 0);
+		}
+    
 		for (int i = ID_MIN + 1; i < ID_MAX; i++)
 		{
 			string str = m_mInfoName.at(i) + "Level";
@@ -345,23 +320,17 @@ bool PlayerData::loadPlayerData()
 	}
 }
 
-bool PlayerData::saveAllPlayerData(bool isGameCenter)
+bool PlayerData::saveAllPlayerData()
 {
-    if (isGameCenter)
-    {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        // save data to game center
-        GameKitHelper* helper = [GameKitHelper sharedHelper];
-        if (helper.isAuthenticated == YES)
-        {
-            [helper reportScore:m_nHighscore forLeaderboard:@"Highscore"];
-            [helper reportScore:m_nGoldNumberAll forLeaderboard:@"GoldNumber"];
-            [helper reportScore:m_nGoldNumberAcc forLeaderboard:@"GoldNumberAll"];
-            [helper reportScore:m_nReviveNumber forLeaderboard:@"ReviveNumber"];
-            [helper reportScore:m_nDoubleNumber forLeaderboard:@"DoubleNumber"];
-        }
-#endif
-    }
+	if (CSC_IOSHelper::GameCenter_isAuthenticated())
+	{
+		// save data to game center
+		CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("Highscore", m_nHighscore);
+		CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumber", m_nGoldNumberAll);
+		CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumberAll", m_nGoldNumberAcc);
+		CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("ReviveNumber", m_nReviveNumber);
+		CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("DoubleNumber", m_nDoubleNumber);
+	}
 
     // save to local data
 	UserDefault* user = UserDefault::getInstance();
@@ -383,14 +352,11 @@ bool PlayerData::saveIntPlayerDara(const char* dataName, int data, bool isGameCe
 {
     if (isGameCenter)
     {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        // save data to game center
-        GameKitHelper* helper = [GameKitHelper sharedHelper];
-        if (helper.isAuthenticated == YES)
-        {
-            [helper reportScore:data forLeaderboard:[NSString stringWithCString:dataName encoding:NSUTF8StringEncoding]];
-        }
-#endif
+		if (CSC_IOSHelper::GameCenter_isAuthenticated())
+		{
+			// save data to game center
+			CSC_IOSHelper::GameCenter_reportScoreForLeaderboard(dataName, data);
+		}
     }
     
     // save to local data

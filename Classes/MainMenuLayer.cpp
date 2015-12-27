@@ -4,13 +4,7 @@
 #include "PurchaseLayer.h"
 #include "SettingLayer.h"
 #include "Player.h"
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/IAPShare.h"
-#import "IOSHelper/GameKitHelper.h"
-#import "IOSHelper/Reachability.h"
-#import "IOSHelper/ProgressHUD.h"
-#endif
+#include "CSCClass\CSC_IOSHelper.h"
 
 MainMenuLayer::MainMenuLayer(void)
 {
@@ -35,7 +29,7 @@ bool MainMenuLayer::init()
         return false;
     }
 
-    cocos2d::Size winSize = Director::getInstance()->getWinSize();
+    Size winSize = Director::getInstance()->getWinSize();
 
 	// bind touch event
 	auto touchListener = EventListenerTouchOneByOne::create();
@@ -85,9 +79,12 @@ bool MainMenuLayer::init()
     auto buttonReset = dynamic_cast<Button*>(rootNode->getChildByName("Button_ResetGameCenter"));
     buttonReset->addClickEventListener(CC_CALLBACK_1(MainMenuLayer::menuCallback_Reset, this));
 	// set button
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    if (helper.isAuthenticated == YES) {
+#if DEBUG_FLAG == 0
+	buttonReload->setVisible(false);
+	buttonPurchase->setVisible(false);
+	buttonReset->setVisible(false);
+#endif
+    if (CSC_IOSHelper::GameCenter_isAuthenticated()) {
         buttonAchievement->setPositionY(10);
         buttonLeaderboard->setPositionY(10);
         buttonSignIn->setPositionY(-200);
@@ -104,45 +101,29 @@ bool MainMenuLayer::init()
         });
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
     }
-#endif
 
-#if DEBUG_FLAG == 0
-    buttonReload->setVisible(false);
-    buttonPurchase->setVisible(false);
-    buttonReset->setVisible(false);
-#endif
 	if (!m_pGameMediator->getIsAd()) {
         buttonPurchaseNoAd->setPositionY(-200);
 	}
 	else {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-        // load iap & request products
-        if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable) {
-            [ProgressHUD showError : @"No internet connection!"];
-            NSLog(@"No internet connection!");
-        }
-        else {
 #if IAPTEST_FLAG == 1
-            [[IAPShare sharedHelper] requestProductWithID:@"com.reallycsc.endlesslove.adremove" isProduction: NO];
+		CSC_IOSHelper::IAP_requestAllPurchasedProducts(true);
 #else
             [[IAPShare sharedHelper] requestProductWithID:@"com.reallycsc.endlesslove.adremove" isProduction:YES];
 #endif
-        }
-        
-        auto listener = EventListenerCustom::create(EVENT_RESTORED_REMOVEAD + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
+        auto listener = EventListenerCustom::create(EVENT_RESTORED + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
             m_pGameMediator->setIsAd(false);
             m_pGameMediator->setIsGuidelineForever(true);
-            buttonPurchaseNoAd->runAction(MoveTo::create(0.5f, cocos2d::Point(buttonPurchaseNoAd->getPositionX(), -200)));
+            buttonPurchaseNoAd->runAction(MoveTo::create(0.5f, Point(buttonPurchaseNoAd->getPositionX(), -200)));
         });
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-        listener = EventListenerCustom::create(EVENT_PURCHASED_REMOVEAD + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
+        listener = EventListenerCustom::create(EVENT_PURCHASED + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
             m_pGameMediator->setIsAd(false);
             m_pGameMediator->setIsGuidelineForever(true);
-            buttonPurchaseNoAd->runAction(MoveTo::create(0.5f, cocos2d::Point(buttonPurchaseNoAd->getPositionX(), -200)));
-            [[GameKitHelper sharedHelper] checkAndUnlockAchievement:@"com.reallycsc.endlesslove.adremove"];
+            buttonPurchaseNoAd->runAction(MoveTo::create(0.5f, Point(buttonPurchaseNoAd->getPositionX(), -200)));
+			CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.adremove");
         });
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-#endif
 	}
 	// set all text
 	auto mapGameText = m_pGameMediator->getGameText();
@@ -154,7 +135,6 @@ bool MainMenuLayer::init()
                                                     m_pPlayerData->getHighscore()));
 
 	// add event listener
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     auto listener = EventListenerCustom::create(EVENT_PLARERDATA_SCOREUPDATED+"Highscore", [=](EventCustom* event){
         textHighscore->setString(StringUtils::format("%s%lld",
 			m_pGameMediator->getGameText()->at("ID_COMMON_HIGHSCORE").c_str(),
@@ -166,7 +146,6 @@ bool MainMenuLayer::init()
         textGoldNumber->setString(StringUtils::format("%lld", m_pPlayerData->getGoldNumberAll()));
     });
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
-#endif
 
 	// Play animation & bind frame event
 	m_pAnimate->play("Cardiogram_Play", true);
@@ -209,67 +188,30 @@ void MainMenuLayer::menuCallback_Setting(Ref* pSender)
 
 void MainMenuLayer::menuCallback_SignIn(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    if (helper.isAuthenticated == YES) {
+    if (CSC_IOSHelper::GameCenter_isAuthenticated()) {
         Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_GAMECENTER_AUTHENTICATED);
     }
     else {
-        [helper authenticateLocalUser];
+		CSC_IOSHelper::GameCenter_authenticateLocalUser();
     }
-#endif
 }
 
 void MainMenuLayer::menuCallback_Leaderboard(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    [helper showLeaderboard : @"Highscore"];
-#endif
+	CSC_IOSHelper::GameCenter_showLeaderboard("Highscore");
 }
 
 void MainMenuLayer::menuCallback_Achievement(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    [helper showAchievements];
-#endif
+	CSC_IOSHelper::GameCenter_showAchievements();
 }
 
 void MainMenuLayer::menuCallback_PurchaseNoAd(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-	// load iap
-	if ([[Reachability reachabilityForInternetConnection] currentReachabilityStatus] == NotReachable) {
-        [ProgressHUD showError : @"No internet connection!"];
-		NSLog(@"No internet connection!");
-	}
-	else {
-        IAPHelper* helper = [IAPShare sharedHelper].iap;
-		if (helper.products == nil) {
 #if (IAPTEST_FLAG == 1)
-            helper.production = NO; // No for test, YES for release
+	CSC_IOSHelper::IAP_purchaseProduct(true, "com.reallycsc.endlesslove.adremove");
 #else
-            helper.production = YES; // No for test, YES for release
-#endif
-			[helper requestProductsWithCompletion : ^ (SKProductsRequest* request, SKProductsResponse* response) {
-				if (response > 0) {
-                    // buy product
-					[ProgressHUD dismiss];
-					this->unschedule(schedule_selector(MainMenuLayer::waitingTimeOut));
-                    [[IAPShare sharedHelper] buyProductWithID:@"com.reallycsc.endlesslove.adremove"];
-				}
-			}];
-			[ProgressHUD show : [NSString stringWithCString:m_pmGameText->at("ID_IAP_DOWNLOAD").c_str()
-                                                   encoding:NSUTF8StringEncoding]
-                  Interaction : FALSE];
-			this->scheduleOnce(schedule_selector(MainMenuLayer::waitingTimeOut), 10.0f);
-		}
-		else {
-			// buy product
-            [[IAPShare sharedHelper] buyProductWithID:@"com.reallycsc.endlesslove.adremove"];
-		}
-	}
+	CSC_IOSHelper::IAP_purchaseProduct(false, "com.reallycsc.endlesslove.adremove");
 #endif
 }
 
@@ -280,14 +222,6 @@ void MainMenuLayer::playerBlink()
 		CallFunc::create(CC_CALLBACK_0(MainMenuLayer::playerBlink, this))
 		));
 	m_pPlayerAnimate->play("Player_Blink", false);
-}
-
-void MainMenuLayer::waitingTimeOut(float dt)
-{
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    [ProgressHUD showError : [NSString stringWithCString:m_pmGameText->at("ID_IAP_TIMEOUT").c_str()
-                                                encoding:NSUTF8StringEncoding]];
-#endif
 }
 
 // DEBUG only
@@ -303,13 +237,10 @@ void MainMenuLayer::menuCallback_Purchase(Ref* pSender)
 
 void MainMenuLayer::menuCallback_Reset(Ref* pSender)
 {
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    GameKitHelper* helper = [GameKitHelper sharedHelper];
-    [helper reportScore:0 forLeaderboard:@"Highscore"];
-    [helper reportScore:0 forLeaderboard:@"GoldNumber"];
-    [helper reportScore:0 forLeaderboard:@"GoldNumberAll"];
-    [helper reportScore:0 forLeaderboard:@"ReviveNumber"];
-    [helper reportScore:0 forLeaderboard:@"DoubleNumber"];
-    [helper resetAchievements];
-#endif
+	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("Highscore", 0);
+	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumber", 0);
+	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumberAll", 0);
+	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("ReviveNumber", 0);
+	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("DoubleNumber", 0);
+	CSC_IOSHelper::GameCenter_resetAchievements();
 }

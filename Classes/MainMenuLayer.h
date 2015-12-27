@@ -16,18 +16,18 @@ public:
 
 	CREATE_FUNC(MainMenuLayer);
 
-	virtual bool init();  
+	virtual bool init() override;  
 
 private:
-	virtual bool onTouchBegan(Touch* touch, Event* event);
-	virtual void onTouchMoved(Touch *touch, Event *event);
-	virtual void onTouchEnded(Touch* touch, Event* event);
+	virtual bool onTouchBegan(Touch* touch, Event* event) override;
+	virtual void onTouchMoved(Touch *touch, Event *event) override;
+	virtual void onTouchEnded(Touch* touch, Event* event) override;
 
 	void menuCallback_Upgrade(Ref* pSender);
 	void menuCallback_Setting(Ref* pSender);
 	void menuCallback_SignIn(Ref* pSender);
-    void menuCallback_Leaderboard(Ref* pSender);
-    void menuCallback_Achievement(Ref* pSender);
+	void menuCallback_Leaderboard(Ref* pSender);
+	void menuCallback_Achievement(Ref* pSender);
 	void menuCallback_PurchaseNoAd(Ref* pSender);
 
 	void menuCallback_Reload(Ref* pSender);
@@ -35,7 +35,6 @@ private:
 	void menuCallback_Reset(Ref* pSender);
 
 	void playerBlink();
-	void waitingTimeOut(float dt);
     
 private:
     GameMediator*   m_pGameMediator;

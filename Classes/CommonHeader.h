@@ -74,10 +74,3 @@ enum BackImageID {
 	BACKIMAGE_GAMESCENE_MIDAGE,
 	BACKIMAGE_GAMESCENE_ELDER,
 };
-
-// Custom event code
-const string EVENT_GAMECENTER_AUTHENTICATED = "event_gamecenter_authenticated";
-const string EVENT_GAMECENTER_SCORERETRIVED = "event_gamecenter_scoreretrived";
-const string EVENT_PLARERDATA_SCOREUPDATED = "event_playerdata_scoreupdated";
-const string EVENT_PURCHASED_REMOVEAD = "event_purchased_removead";
-const string EVENT_RESTORED_REMOVEAD = "event_restored_removead";

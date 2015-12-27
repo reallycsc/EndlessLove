@@ -5,7 +5,7 @@
 #include "PlayerLayer.h"
 #include "EnemyLayer.h"
 #include "GameMediator.h"
-#include "CCShake.h"
+#include "CSCClass/CSCAction/Shake.h"
 
 const int ZORDER_GAMELAYER_BACKLAYER = 1;
 const int ZORDER_GAMELAYER_ENEMYLAYER = 2;

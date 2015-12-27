@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "CSCClass\CommonFunctions.h"
 
 Player::Player(void)
 {
@@ -166,7 +167,7 @@ void Player::changePlayerColorToGrey()
 	float percent = 1.0f;
 	if (minNumber != maxNumber)
 		percent = (m_pPlayerData->getHeartNumber() - minNumber) / (maxNumber - minNumber);
-	GameMediator::spriteToGray(m_pSprite, percent);
+	CSC::spriteToGray(m_pSprite, percent);
 }
 
 void Player::playShieldAnimation(float duration)

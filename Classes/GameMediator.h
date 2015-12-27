@@ -26,12 +26,6 @@ public:
 	// getter function
 	map<string, string>* getGameText() { return &m_mGameText; }
 	vector<GameLevelData>* getGameLevelData() { return &m_vGameLevelData; }
-
-	// common function
-	// percent: 0 - gray, 1 - color
-	static void spriteToGray(Node* pNode, float percent);
-
-	static void setLineWrap(ScrollView* scrollView, Text* text);
     
 private:
     string& replace_all_distinct(string& str, string& old_value, string& new_value);

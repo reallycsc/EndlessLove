@@ -1,15 +1,14 @@
 #include "LoadingLayer.h"
 #include "MainMenuScene.h"
-
+#include "CSCClass\CSC_IOSHelper.h"
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#import "IOSHelper/GameKitHelper.h"
-#import "IOSHelper/IAPShare.h"
-#include "PluginVungle/PluginVungle.h"
+#import "PluginVungle/PluginVungle.h"
 #endif
 
 LoadingLayer::LoadingLayer(void)
 {
 	GameMediator::getInstance();
+	CSC_IOSHelper::getInstance();
 }
 
 
@@ -24,19 +23,13 @@ bool LoadingLayer::init()
         return false;
     }
 
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-    // Game Center login
-    [[GameKitHelper sharedHelper] authenticateLocalUser];
-    
-    // init IAPHelper
-    if(![IAPShare sharedHelper].iap) {
-        NSSet *productIdentifiers = [NSSet setWithObjects:
-                                     @"com.reallycsc.endlesslove.adremove",
-                                     nil];
-        [IAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:productIdentifiers];
-    }
+	CSC_IOSHelper::GameCenter_authenticateLocalUser();
 
-	// init Vungle
+	vector<string> products;
+	products.push_back("com.reallycsc.endlesslove.adremove");
+	CSC_IOSHelper::IAP_initWithProductSet(&products);
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	sdkbox::PluginVungle::init();
 #endif
 
@@ -53,7 +46,7 @@ bool LoadingLayer::init()
     return true;
 }
 
-void LoadingLayer::onFrameEvent(Frame* frame)
+void LoadingLayer::onFrameEvent(Frame* frame) const
 {
 	EventFrame* event = dynamic_cast<EventFrame*>(frame);
 	if (!event)

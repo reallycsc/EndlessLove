@@ -1,9 +1,7 @@
 #pragma once
 #include "CommonHeader.h"
 #include "GameMediator.h"
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-#include "PluginVungle/PluginVungle.h"
-#endif
+#include "CSCClass\CSC_IOSHelper.h"
 
 class GameOverLayer : public Layer
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -15,7 +13,7 @@ public:
 	~GameOverLayer(void);
 
 	CREATE_FUNC(GameOverLayer);
-	virtual bool init();  
+	virtual bool init() override;  
 
 private:
 	void menuCallback_Retry(Ref* pSender);
@@ -23,14 +21,16 @@ private:
 	void menuCallback_Revive(Ref* pSender);
 	void menuCallback_DoubleGold(Ref* pSender);
 
-	void showScore();
+	void showScore() const;
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
     void onVungleCacheAvailable();
     void onVungleStarted();
     void onVungleFinished();
     void onVungleAdViewed(bool isComplete);
     void onVungleAdReward(const std::string& name);
-    
+#endif
+
     void realRevive();
     void realDouble();
     
