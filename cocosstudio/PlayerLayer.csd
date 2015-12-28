@@ -133,7 +133,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="Resource/Item/Heart.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="Resource/Item/Heart.png" Plist="Item.plist" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Text_HeartNumber" ActionTag="139768774" Tag="122" IconVisible="False" RightMargin="-23.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="26" LabelText="-1" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -210,7 +210,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Text_GoldNumber" ActionTag="1494759146" Tag="30" IconVisible="False" LeftMargin="70.0000" RightMargin="-94.0000" TopMargin="-25.0000" BottomMargin="-25.0000" FontSize="36" LabelText="0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -278,7 +278,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Item/Heart.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Item/Heart.png" Plist="Item.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_HeartBrokenLeft" ActionTag="-1752033937" Tag="247" IconVisible="False" LeftMargin="-178.0000" RightMargin="146.0000" BottomMargin="-55.0000" ctype="SpriteObjectData">
@@ -289,7 +289,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Item/Heart_Broken_Left.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Item/Heart_Broken_Left.png" Plist="Item.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_HeartBrokenRight" ActionTag="235678988" Tag="602" IconVisible="False" LeftMargin="-157.0000" RightMargin="120.0000" BottomMargin="-55.0000" ctype="SpriteObjectData">
@@ -300,7 +300,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Item/Heart_Broken_Right.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Item/Heart_Broken_Right.png" Plist="Item.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -345,7 +345,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="Resource/Item/guideItem.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="Resource/Item/guideItem.png" Plist="Item.plist" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Text_CountDown" ActionTag="-132117225" Tag="85" IconVisible="False" VerticalEdge="BothEdge" LeftMargin="35.0000" RightMargin="-206.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="Guide Line: 10.0" VerticalAlignmentType="VT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -411,7 +411,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="Resource/Item/enlargeItem.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="Resource/Item/enlargeItem.png" Plist="Item.plist" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -465,7 +465,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="Resource/Item/shrinkItem.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="Resource/Item/shrinkItem.png" Plist="Item.plist" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                 </Children>
@@ -519,7 +519,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="Resource/Item/shield.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="Resource/Item/shield.png" Plist="Item.plist" />
                     <BlendFunc Src="770" Dst="771" />
                   </AbstractNodeData>
                 </Children>

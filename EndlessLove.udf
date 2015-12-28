@@ -33,8 +33,10 @@
         <OpenedDocuments>
           <FilePathData Path="SettingLayer.csd" />
           <FilePathData Path="GameOverLayer.csd" />
+          <FilePathData Path="Background.csi" />
+          <FilePathData Path="Item.csi" />
         </OpenedDocuments>
-        <ActiveDocument Path="SettingLayer.csd" />
+        <ActiveDocument Path="Item.csi" />
       </Value>
     </Item>
   </Properties>

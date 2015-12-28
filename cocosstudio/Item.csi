@@ -1,0 +1,20 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="Item" Type="Plist" ID="8c543f6b-8084-41dd-9d3d-d51bfb921b2b" Version="2.3.3.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="Resource/Item/bomb.png" />
+      <FilePathData Path="Resource/Item/enlargeItem.png" />
+      <FilePathData Path="Resource/Item/goldCoin.png" />
+      <FilePathData Path="Resource/Item/guideItem.png" />
+      <FilePathData Path="Resource/Item/Heart_GreenTea.png" />
+      <FilePathData Path="Resource/Item/Heart_plus.png" />
+      <FilePathData Path="Resource/Item/Heart_Secret.png" />
+      <FilePathData Path="Resource/Item/shield.png" />
+      <FilePathData Path="Resource/Item/shrinkItem.png" />
+      <FilePathData Path="Resource/Item/Heart.png" />
+      <FilePathData Path="Resource/Item/Heart_Broken_Left.png" />
+      <FilePathData Path="Resource/Item/Heart_Broken_Right.png" />
+    </ImageFiles>
+    <MaxSize Width="256" Height="256" />
+  </Content>
+</PlistInfoProjectFile>

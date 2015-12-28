@@ -164,6 +164,9 @@
         <Project Name="LoadingScene.csd" Type="Scene" />
         <Project Name="MainMenuPlayer.csd" Type="Node" />
         <Project Name="SettingLayer.csd" Type="Layer" />
+        <PlistInfo Name="UI.csi" Type="Plist" />
+        <PlistInfo Name="Background.csi" Type="Plist" />
+        <PlistInfo Name="Item.csi" Type="Plist" />
       </RootFolder>
     </Group>
   </SolutionFolder>

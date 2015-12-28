@@ -1,0 +1,25 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="Background" Type="Plist" ID="b9653463-659c-4bef-b5ba-41fa568f6532" Version="2.3.3.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="Resource/Background/babyBottle_1.png" />
+      <FilePathData Path="Resource/Background/babyBottle_2.png" />
+      <FilePathData Path="Resource/Background/Pinao.png" />
+      <FilePathData Path="Resource/Background/guitar.png" />
+      <FilePathData Path="Resource/Background/mircophone.png" />
+      <FilePathData Path="Resource/Background/saxphone.png" />
+      <FilePathData Path="Resource/Background/violin.png" />
+      <FilePathData Path="Resource/Background/books_1.png" />
+      <FilePathData Path="Resource/Background/books_2.png" />
+      <FilePathData Path="Resource/Background/car.png" />
+      <FilePathData Path="Resource/Background/gift.png" />
+      <FilePathData Path="Resource/Background/graduate.png" />
+      <FilePathData Path="Resource/Background/paint.png" />
+      <FilePathData Path="Resource/Background/wallet.png" />
+      <FilePathData Path="Resource/Background/crutch.png" />
+      <FilePathData Path="Resource/Background/syringe.png" />
+      <FilePathData Path="Resource/Background/wheelchair.png" />
+    </ImageFiles>
+    <MaxSize Width="2048" Height="2048" />
+  </Content>
+</PlistInfoProjectFile>

@@ -119,7 +119,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/babyBottle_1.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/babyBottle_1.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_babyBottle_2" ActionTag="-1028504242" VisibleForFrame="False" Tag="1373" IconVisible="False" LeftMargin="1035.1306" RightMargin="-1174.1306" TopMargin="-503.1006" BottomMargin="148.1006" ctype="SpriteObjectData">
@@ -130,7 +130,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/babyBottle_2.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/babyBottle_2.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -152,7 +152,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/Pinao.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/Pinao.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_guitar" ActionTag="1056708381" VisibleForFrame="False" Tag="2940" IconVisible="False" LeftMargin="1041.1453" RightMargin="-1234.1453" TopMargin="-582.0511" BottomMargin="81.0511" ctype="SpriteObjectData">
@@ -163,7 +163,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/guitar.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/guitar.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_mircophone" ActionTag="1339022696" VisibleForFrame="False" Tag="2941" IconVisible="False" LeftMargin="1053.0847" RightMargin="-1212.0847" TopMargin="-571.9264" BottomMargin="70.9264" ctype="SpriteObjectData">
@@ -174,7 +174,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/mircophone.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/mircophone.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_saxphone" ActionTag="-959027047" VisibleForFrame="False" Tag="2942" IconVisible="False" LeftMargin="1004.6184" RightMargin="-1265.6184" TopMargin="-546.7864" BottomMargin="113.7864" ctype="SpriteObjectData">
@@ -185,7 +185,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/saxphone.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/saxphone.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_violin" ActionTag="-1887208670" VisibleForFrame="False" Tag="2943" IconVisible="False" LeftMargin="1030.6687" RightMargin="-1206.6687" TopMargin="-570.6586" BottomMargin="69.6586" ctype="SpriteObjectData">
@@ -196,7 +196,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/violin.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/violin.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_paint" ActionTag="1663729251" VisibleForFrame="False" Tag="2952" IconVisible="False" LeftMargin="1019.0051" RightMargin="-1442.0051" TopMargin="-564.1387" BottomMargin="63.1387" ctype="SpriteObjectData">
@@ -207,7 +207,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/paint.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/paint.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -229,7 +229,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/books_1.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/books_1.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_books_2" ActionTag="130186597" VisibleForFrame="False" Tag="2948" IconVisible="False" LeftMargin="1001.8284" RightMargin="-1502.8284" TopMargin="-495.4587" BottomMargin="162.4587" ctype="SpriteObjectData">
@@ -240,7 +240,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/books_2.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/books_2.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -262,7 +262,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/gift.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/gift.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_graduate" ActionTag="1333689600" VisibleForFrame="False" Tag="2951" IconVisible="False" LeftMargin="998.9993" RightMargin="-1515.9993" TopMargin="-586.1057" BottomMargin="85.1057" ctype="SpriteObjectData">
@@ -273,7 +273,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/graduate.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/graduate.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -295,7 +295,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/car.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/car.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_wallet" ActionTag="-313846215" VisibleForFrame="False" Tag="2953" IconVisible="False" LeftMargin="983.0210" RightMargin="-1377.0210" TopMargin="-571.9028" BottomMargin="70.9028" ctype="SpriteObjectData">
@@ -306,7 +306,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/wallet.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/wallet.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -328,7 +328,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/crutch.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/crutch.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_syringe" ActionTag="-2033829285" VisibleForFrame="False" Tag="699" IconVisible="False" LeftMargin="1017.7720" RightMargin="-1518.7720" TopMargin="-455.3629" BottomMargin="193.3629" ctype="SpriteObjectData">
@@ -339,7 +339,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/syringe.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/syringe.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_wheelchair" ActionTag="80466398" VisibleForFrame="False" Tag="700" IconVisible="False" LeftMargin="1058.2146" RightMargin="-1492.2146" TopMargin="-522.0865" BottomMargin="121.0865" ctype="SpriteObjectData">
@@ -350,7 +350,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/Background/wheelchair.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Background/wheelchair.png" Plist="Background.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
