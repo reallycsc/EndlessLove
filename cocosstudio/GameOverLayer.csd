@@ -72,7 +72,7 @@
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition />
                         <PreSize X="0.0000" Y="0.0000" />
-                        <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
+                        <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
                       <AbstractNodeData Name="Text_GoldNumber" ActionTag="-1324585572" Tag="141" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="5.0000" RightMargin="-24.0000" TopMargin="-19.5000" BottomMargin="-19.5000" FontSize="28" LabelText="0" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -178,7 +178,7 @@
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition />
                         <PreSize X="0.0000" Y="0.0000" />
-                        <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
+                        <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
                       <AbstractNodeData Name="Text_GoldNumber" ActionTag="1566928842" Tag="145" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="-11.0000" RightMargin="-35.0000" TopMargin="-19.5000" BottomMargin="-19.5000" FontSize="28" LabelText="X 2" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

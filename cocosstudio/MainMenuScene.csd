@@ -427,7 +427,7 @@
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
+                    <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
                   <AbstractNodeData Name="Text_GoldNumber" ActionTag="-1580652236" Tag="37" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="50.0000" RightMargin="-140.0000" TopMargin="-25.0000" BottomMargin="-27.0000" FontSize="38" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">

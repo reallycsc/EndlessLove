@@ -1,0 +1,39 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="UI" Type="Plist" ID="d293ca82-2324-4f5e-be5c-febec36200b2" Version="2.3.3.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="0" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="Resource/UI/button_disable.png" />
+      <FilePathData Path="Resource/UI/button_down.png" />
+      <FilePathData Path="Resource/UI/button_up.png" />
+      <FilePathData Path="Resource/UI/heart_grey.png" />
+      <FilePathData Path="Resource/UI/heart_left_grey.png" />
+      <FilePathData Path="Resource/UI/button_orange_down.png" />
+      <FilePathData Path="Resource/UI/button_orange_up.png" />
+      <FilePathData Path="Resource/UI/button_purchase_noAd_disable.png" />
+      <FilePathData Path="Resource/UI/button_purchase_noAd_down.png" />
+      <FilePathData Path="Resource/UI/button_purchase_noAd_up.png" />
+      <FilePathData Path="Resource/UI/button_GameCenter_down.png" />
+      <FilePathData Path="Resource/UI/button_GameCenter_up.png" />
+      <FilePathData Path="Resource/UI/button_Achievement_down.png" />
+      <FilePathData Path="Resource/UI/button_Achievement_up.png" />
+      <FilePathData Path="Resource/UI/button_disable_long.png" />
+      <FilePathData Path="Resource/UI/button_down_long.png" />
+      <FilePathData Path="Resource/UI/button_Setting_down.png" />
+      <FilePathData Path="Resource/UI/button_Setting_up.png" />
+      <FilePathData Path="Resource/UI/button_up_long.png" />
+      <FilePathData Path="Resource/UI/button_Leaderboard_down.png" />
+      <FilePathData Path="Resource/UI/button_Leaderboard_up.png" />
+      <FilePathData Path="Resource/UI/button_Upgrade_down.png" />
+      <FilePathData Path="Resource/UI/button_Upgrade_up.png" />
+      <FilePathData Path="Resource/UI/button_Pause_down.png.png" />
+      <FilePathData Path="Resource/UI/button_Pause_up.png" />
+      <FilePathData Path="Resource/UI/button_MusicOff_disable.png" />
+      <FilePathData Path="Resource/UI/button_MusicOff_down.png" />
+      <FilePathData Path="Resource/UI/button_MusicOff_up.png" />
+      <FilePathData Path="Resource/UI/button_Music_disable.png" />
+      <FilePathData Path="Resource/UI/button_Music_down.png" />
+      <FilePathData Path="Resource/UI/button_Music_up.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="512" />
+  </Content>
+</PlistInfoProjectFile>

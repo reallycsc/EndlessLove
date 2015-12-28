@@ -25,7 +25,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.0781" />
             <PreSize X="0.0542" Y="0.0812" />
-            <FileData Type="Normal" Path="Resource/Item/goldCoin.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_GuideLine" ActionTag="-292138464" Tag="107" IconVisible="False" LeftMargin="-78.9370" RightMargin="986.9370" TopMargin="1070.4954" BottomMargin="-482.4954" ctype="SpriteObjectData">
@@ -36,7 +36,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0551" Y="-0.7133" />
             <PreSize X="0.0542" Y="0.0812" />
-            <FileData Type="Normal" Path="Resource/Item/guideItem.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/guideItem.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_Heart" ActionTag="-2083823257" Tag="17" IconVisible="False" LeftMargin="-79.0000" RightMargin="981.0000" TopMargin="732.5000" BottomMargin="-147.5000" ctype="SpriteObjectData">
@@ -47,7 +47,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.1875" />
             <PreSize X="0.0604" Y="0.0859" />
-            <FileData Type="Normal" Path="Resource/Item/Heart.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/Heart.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_Enlarge" ActionTag="-1293565433" Tag="106" IconVisible="False" LeftMargin="-73.0000" RightMargin="987.0000" TopMargin="797.0000" BottomMargin="-203.0000" ctype="SpriteObjectData">
@@ -58,7 +58,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.2813" />
             <PreSize X="0.0479" Y="0.0719" />
-            <FileData Type="Normal" Path="Resource/Item/enlargeItem.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/enlargeItem.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_Shink" ActionTag="-101851337" Tag="107" IconVisible="False" LeftMargin="-73.0000" RightMargin="987.0000" TopMargin="857.0000" BottomMargin="-263.0000" ctype="SpriteObjectData">
@@ -69,7 +69,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.3750" />
             <PreSize X="0.0479" Y="0.0719" />
-            <FileData Type="Normal" Path="Resource/Item/shrinkItem.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/shrinkItem.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_Bomb" ActionTag="281585934" Tag="79" IconVisible="False" LeftMargin="-85.5000" RightMargin="974.5000" TopMargin="904.0000" BottomMargin="-336.0000" ctype="SpriteObjectData">
@@ -80,7 +80,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.4688" />
             <PreSize X="0.0740" Y="0.1125" />
-            <FileData Type="Normal" Path="Resource/Item/bomb.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/bomb.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_HeartPlus" ActionTag="1099149520" Tag="127" IconVisible="False" LeftMargin="-149.0000" RightMargin="1051.0000" TopMargin="732.5000" BottomMargin="-147.5000" ctype="SpriteObjectData">
@@ -91,7 +91,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.1250" Y="-0.1875" />
             <PreSize X="0.0604" Y="0.0859" />
-            <FileData Type="Normal" Path="Resource/Item/Heart_plus.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/Heart_plus.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_HeartBrokenRight" ActionTag="-1417470261" Tag="126" IconVisible="False" LeftMargin="-208.5000" RightMargin="1131.5000" TopMargin="732.5000" BottomMargin="-147.5000" ctype="SpriteObjectData">
@@ -102,7 +102,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.1979" Y="-0.1875" />
             <PreSize X="0.0385" Y="0.0859" />
-            <FileData Type="Normal" Path="Resource/Item/Heart_Broken_Right.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/Heart_Broken_Right.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_HeartBrokenLeft" ActionTag="-482909457" Tag="125" IconVisible="False" LeftMargin="-276.0000" RightMargin="1204.0000" TopMargin="732.5000" BottomMargin="-147.5000" ctype="SpriteObjectData">
@@ -113,7 +113,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.2708" Y="-0.1875" />
             <PreSize X="0.0333" Y="0.0859" />
-            <FileData Type="Normal" Path="Resource/Item/Heart_Broken_Left.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/Heart_Broken_Left.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_HeartSecret" ActionTag="1360288294" Tag="249" IconVisible="False" LeftMargin="-359.0000" RightMargin="1261.0000" TopMargin="732.5000" BottomMargin="-147.5000" ctype="SpriteObjectData">
@@ -124,7 +124,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.3438" Y="-0.1875" />
             <PreSize X="0.0604" Y="0.0859" />
-            <FileData Type="Normal" Path="Resource/Item/Heart_Secret.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/Heart_Secret.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_HeartGreenTea" ActionTag="1624181894" Tag="248" IconVisible="False" LeftMargin="-429.0000" RightMargin="1331.0000" TopMargin="732.5000" BottomMargin="-147.5000" ctype="SpriteObjectData">
@@ -135,7 +135,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.4167" Y="-0.1875" />
             <PreSize X="0.0604" Y="0.0859" />
-            <FileData Type="Normal" Path="Resource/Item/Heart_GreenTea.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/Heart_GreenTea.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Sprite_Item_Shield" ActionTag="-1258104373" Tag="100" IconVisible="False" LeftMargin="-79.4371" RightMargin="986.4371" TopMargin="994.0070" BottomMargin="-418.0070" ctype="SpriteObjectData">
@@ -146,7 +146,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0551" Y="-0.6031" />
             <PreSize X="0.0552" Y="0.1000" />
-            <FileData Type="Normal" Path="Resource/Item/shield.png" Plist="" />
+            <FileData Type="MarkedSubImage" Path="Resource/Item/shield.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Text_LevelUp" ActionTag="291493571" Tag="255" IconVisible="False" LeftMargin="404.0000" RightMargin="404.0000" TopMargin="934.0000" BottomMargin="-346.0000" FontSize="36" LabelText="Level Up" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">

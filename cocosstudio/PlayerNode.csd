@@ -105,7 +105,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="1.0294" Y="0.4909" />
                 <PreSize X="1.5588" Y="1.1636" />
-                <FileData Type="Normal" Path="Resource/Item/shield.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/Item/shield.png" Plist="Item.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
             </Children>
