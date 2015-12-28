@@ -366,7 +366,7 @@
       <ObjectData Name="Scene" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Sprite_Cardiogram" ActionTag="-1872641010" Tag="65" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="200.0000" BottomMargin="60.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Cardiogram" ActionTag="-1872641010" Alpha="25" Tag="65" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="120.5000" RightMargin="120.5000" TopMargin="200.0000" BottomMargin="60.0000" ctype="SpriteObjectData">
             <Size X="719.0000" Y="380.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="250.0000" />
@@ -374,14 +374,14 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.3906" />
             <PreSize X="0.7490" Y="0.5938" />
-            <FileData Type="Normal" Path="Resource/Animation/Cardiogram/cardiogram42.png" Plist="" />
+            <FileData Type="Normal" Path="Resource/Animation/Cardiogram/cardiogram01.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Text_Play" ActionTag="-941415148" Tag="79" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="373.5000" RightMargin="373.5000" TopMargin="315.0000" BottomMargin="275.0000" FontSize="40" LabelText="Tap to play" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
             <Size X="213.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="300.0000" />
-            <Scale ScaleX="1.0130" ScaleY="1.0130" />
+            <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="161" B="0" />
             <PrePosition X="0.5000" Y="0.4688" />
             <PreSize X="0.2219" Y="0.0781" />
@@ -430,10 +430,10 @@
                     <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_GoldNumber" ActionTag="-1580652236" Tag="37" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="50.0000" RightMargin="-140.0000" TopMargin="-25.0000" BottomMargin="-27.0000" FontSize="38" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="90.0000" Y="52.0000" />
+                  <AbstractNodeData Name="Text_GoldNumber" ActionTag="-1580652236" Tag="37" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="50.0000" RightMargin="-130.0000" TopMargin="-25.0000" BottomMargin="-21.0000" FontSize="38" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="80.0000" Y="46.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="50.0000" Y="-1.0000" />
+                    <Position X="50.0000" Y="2.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
@@ -459,9 +459,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_Setting_down.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_Setting_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_Setting_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Setting_down.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Setting_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Setting_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -485,9 +485,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_Achievement_down.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_Achievement_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_Achievement_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Achievement_down.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Achievement_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Achievement_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -500,9 +500,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_Leaderboard_down.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_Leaderboard_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_Leaderboard_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Leaderboard_down.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Leaderboard_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Leaderboard_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -515,9 +515,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="26" G="26" B="26" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_disable_long.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_down_long.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_up_long.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable_long.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down_long.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_up_long.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -530,9 +530,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_purchase_noAd_disable.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_purchase_noAd_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_purchase_noAd_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_disable.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -563,9 +563,9 @@
             <PrePosition X="0.2000" Y="0.2500" />
             <PreSize X="0.1354" Y="0.2031" />
             <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="Normal" Path="Resource/UI/button_Upgrade_down.png" Plist="" />
-            <PressedFileData Type="Normal" Path="Resource/UI/button_Upgrade_down.png" Plist="" />
-            <NormalFileData Type="Normal" Path="Resource/UI/button_Upgrade_up.png" Plist="" />
+            <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_down.png" Plist="UI.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_down.png" Plist="UI.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_up.png" Plist="UI.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
