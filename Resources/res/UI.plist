@@ -7,17 +7,6 @@
 			<key>Resource/UI/button_disable.png</key>
 			<dict>
 				<key>frame</key>
-				<string>{{0,461},{150,50}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<false />
-				<key>sourceSize</key>
-				<string>{150,50}</string>
-			</dict>
-			<key>Resource/UI/button_down.png</key>
-			<dict>
-				<key>frame</key>
 				<string>{{266,452},{160,60}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
@@ -26,7 +15,7 @@
 				<key>sourceSize</key>
 				<string>{160,60}</string>
 			</dict>
-			<key>Resource/UI/button_up.png</key>
+			<key>Resource/UI/button_down.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{426,452},{160,60}}</string>
@@ -37,29 +26,7 @@
 				<key>sourceSize</key>
 				<string>{160,60}</string>
 			</dict>
-			<key>Resource/UI/heart_grey.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{816,154},{58,55}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{58,55}</string>
-			</dict>
-			<key>Resource/UI/heart_left_grey.png</key>
-			<dict>
-				<key>frame</key>
-				<string>{{150,461},{32,55}}</string>
-				<key>offset</key>
-				<string>{0,0}</string>
-				<key>rotated</key>
-				<true />
-				<key>sourceSize</key>
-				<string>{32,55}</string>
-			</dict>
-			<key>Resource/UI/button_orange_down.png</key>
+			<key>Resource/UI/button_up.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{586,452},{160,60}}</string>
@@ -70,10 +37,43 @@
 				<key>sourceSize</key>
 				<string>{160,60}</string>
 			</dict>
-			<key>Resource/UI/button_orange_up.png</key>
+			<key>Resource/UI/heart_grey.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{906,358},{58,55}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{58,55}</string>
+			</dict>
+			<key>Resource/UI/heart_left_grey.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,461},{32,55}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{32,55}</string>
+			</dict>
+			<key>Resource/UI/button_orange_down.png</key>
 			<dict>
 				<key>frame</key>
 				<string>{{746,452},{160,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{160,60}</string>
+			</dict>
+			<key>Resource/UI/button_orange_up.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{816,154},{160,60}}</string>
 				<key>offset</key>
 				<string>{0,0}</string>
 				<key>rotated</key>

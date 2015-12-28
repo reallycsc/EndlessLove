@@ -72,15 +72,15 @@
                 <PrePosition X="0.5800" Y="0.5000" />
                 <PreSize X="0.0000" Y="0.0000" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Setting" ActionTag="-535048533" Tag="417" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="176.5000" RightMargin="176.5000" BottomMargin="497.0000" FontSize="72" LabelText="Setting" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="247.0000" Y="103.0000" />
+              <AbstractNodeData Name="Text_Setting" ActionTag="-535048533" Tag="417" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="183.5000" RightMargin="183.5000" BottomMargin="509.0000" FontSize="72" LabelText="Setting" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="233.0000" Y="91.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
                 <Position X="300.0000" Y="600.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="1.0000" />
-                <PreSize X="0.4117" Y="0.1717" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <PreSize X="0.3883" Y="0.1517" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <OutlineColor A="255" R="191" G="191" B="191" />
                 <ShadowColor A="255" R="0" G="0" B="0" />
               </AbstractNodeData>
@@ -92,7 +92,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.2000" />
                 <PreSize X="0.3833" Y="0.1000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_orange_down.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_orange_down.png" Plist="UI.plist" />
@@ -108,7 +108,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.3333" Y="0.0667" />
                 <PreSize X="0.2667" Y="0.1000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />
@@ -124,7 +124,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.6667" Y="0.0667" />
                 <PreSize X="0.2667" Y="0.1000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />
@@ -135,15 +135,15 @@
               <AbstractNodeData Name="Node_Chinese" ActionTag="816871038" Tag="187" IconVisible="True" LeftMargin="150.0000" RightMargin="450.0000" TopMargin="200.0000" BottomMargin="400.0000" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="Text" ActionTag="-728670764" Tag="188" IconVisible="False" LeftMargin="20.5000" RightMargin="-119.5000" TopMargin="14.0000" BottomMargin="-46.0000" FontSize="24" LabelText="简体中文" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="99.0000" Y="32.0000" />
+                  <AbstractNodeData Name="Text" ActionTag="-728670764" Tag="188" IconVisible="False" LeftMargin="21.5000" RightMargin="-118.5000" TopMargin="16.0000" BottomMargin="-44.0000" FontSize="24" LabelText="简体中文" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="97.0000" Y="28.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="70.0000" Y="-30.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                    <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -183,15 +183,15 @@
               <AbstractNodeData Name="Node_English" ActionTag="-1895475500" Tag="446" IconVisible="True" LeftMargin="350.0000" RightMargin="250.0000" TopMargin="200.0000" BottomMargin="400.0000" ctype="SingleNodeObjectData">
                 <Size X="0.0000" Y="0.0000" />
                 <Children>
-                  <AbstractNodeData Name="Text" ActionTag="-1366757121" Tag="450" IconVisible="False" LeftMargin="29.0000" RightMargin="-111.0000" TopMargin="14.0000" BottomMargin="-46.0000" FontSize="24" LabelText="English" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="82.0000" Y="32.0000" />
+                  <AbstractNodeData Name="Text" ActionTag="-1366757121" Tag="450" IconVisible="False" LeftMargin="29.5000" RightMargin="-110.5000" TopMargin="16.0000" BottomMargin="-44.0000" FontSize="24" LabelText="English" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="81.0000" Y="28.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="70.0000" Y="-30.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                    <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>

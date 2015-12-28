@@ -50,25 +50,25 @@
             <FileData Type="MarkedSubImage" Path="Resource/Item/Heart.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Item_Enlarge" ActionTag="-1293565433" Tag="106" IconVisible="False" LeftMargin="-73.0000" RightMargin="987.0000" TopMargin="797.0000" BottomMargin="-203.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Item_Enlarge" ActionTag="-1293565433" Tag="106" IconVisible="False" LeftMargin="-75.5000" RightMargin="984.5000" TopMargin="794.0000" BottomMargin="-206.0000" ctype="SpriteObjectData">
             <Size X="51.0000" Y="52.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-50.0000" Y="-180.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.2813" />
-            <PreSize X="0.0479" Y="0.0719" />
+            <PreSize X="0.0531" Y="0.0812" />
             <FileData Type="MarkedSubImage" Path="Resource/Item/enlargeItem.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Sprite_Item_Shink" ActionTag="-101851337" Tag="107" IconVisible="False" LeftMargin="-73.0000" RightMargin="987.0000" TopMargin="857.0000" BottomMargin="-263.0000" ctype="SpriteObjectData">
+          <AbstractNodeData Name="Sprite_Item_Shink" ActionTag="-101851337" Tag="107" IconVisible="False" LeftMargin="-75.5000" RightMargin="984.5000" TopMargin="854.5000" BottomMargin="-265.5000" ctype="SpriteObjectData">
             <Size X="51.0000" Y="51.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="-50.0000" Y="-240.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="-0.0521" Y="-0.3750" />
-            <PreSize X="0.0479" Y="0.0719" />
+            <PreSize X="0.0531" Y="0.0797" />
             <FileData Type="MarkedSubImage" Path="Resource/Item/shrinkItem.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
@@ -149,15 +149,15 @@
             <FileData Type="MarkedSubImage" Path="Resource/Item/shield.png" Plist="Item.plist" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_LevelUp" ActionTag="291493571" Tag="255" IconVisible="False" LeftMargin="404.0000" RightMargin="404.0000" TopMargin="934.0000" BottomMargin="-346.0000" FontSize="36" LabelText="Level Up" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="152.0000" Y="52.0000" />
+          <AbstractNodeData Name="Text_LevelUp" ActionTag="291493571" Tag="255" IconVisible="False" LeftMargin="405.0000" RightMargin="405.0000" TopMargin="937.5000" BottomMargin="-342.5000" FontSize="36" LabelText="Level Up" HorizontalAlignmentType="HT_Center" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="150.0000" Y="45.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="-320.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="-0.5000" />
-            <PreSize X="0.1583" Y="0.0812" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <PreSize X="0.1563" Y="0.0703" />
+            <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

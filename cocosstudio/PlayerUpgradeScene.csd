@@ -6,15 +6,15 @@
       <ObjectData Name="Scene" Tag="237" ctype="GameNodeObjectData">
         <Size X="960.0000" Y="640.0000" />
         <Children>
-          <AbstractNodeData Name="Text_Title" ActionTag="797562638" Tag="388" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="353.0000" RightMargin="353.0000" BottomMargin="553.0000" FontSize="60" LabelText="Upgrade" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-            <Size X="254.0000" Y="87.0000" />
+          <AbstractNodeData Name="Text_Title" ActionTag="797562638" Tag="388" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="363.5000" RightMargin="363.5000" BottomMargin="563.0000" FontSize="60" LabelText="Upgrade" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+            <Size X="233.0000" Y="77.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
             <Position X="480.0000" Y="640.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="1.0000" />
-            <PreSize X="0.2646" Y="0.1359" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <PreSize X="0.2427" Y="0.1203" />
+            <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
             <OutlineColor A="255" R="255" G="165" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
@@ -43,15 +43,15 @@
                 <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_GoldNumber" ActionTag="1727732741" Tag="349" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="-30.0000" RightMargin="-84.0000" TopMargin="-32.5000" BottomMargin="-32.5000" FontSize="48" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="114.0000" Y="65.0000" />
+              <AbstractNodeData Name="Text_GoldNumber" ActionTag="1727732741" Tag="349" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="-30.0000" RightMargin="-79.0000" TopMargin="-28.5000" BottomMargin="-35.5000" FontSize="54" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="109.0000" Y="64.0000" />
                 <AnchorPoint ScaleY="0.5000" />
-                <Position X="-30.0000" />
+                <Position X="-30.0000" Y="-3.5000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -71,7 +71,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.0208" Y="0.9688" />
             <PreSize X="0.1354" Y="0.0938" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
             <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />

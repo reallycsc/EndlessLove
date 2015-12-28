@@ -12,15 +12,15 @@
               <AbstractNodeData Name="ScrollView_Desc" ActionTag="1579981314" Tag="44" IconVisible="False" LeftMargin="20.0000" RightMargin="140.0000" TopMargin="40.0000" BottomMargin="10.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" IsBounceEnabled="True" ScrollDirectionType="Vertical" ctype="ScrollViewObjectData">
                 <Size X="450.0000" Y="50.0000" />
                 <Children>
-                  <AbstractNodeData Name="Text_Desc" ActionTag="-1455824644" Tag="45" IconVisible="False" PositionPercentYEnabled="True" RightMargin="227.0000" BottomMargin="21.0000" FontSize="22" LabelText="Focus on the ground" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                    <Size X="223.0000" Y="29.0000" />
+                  <AbstractNodeData Name="Text_Desc" ActionTag="-1455824644" Tag="45" IconVisible="False" PositionPercentYEnabled="True" RightMargin="239.0000" BottomMargin="25.0000" FontSize="22" LabelText="Focus on the ground" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                    <Size X="211.0000" Y="25.0000" />
                     <AnchorPoint ScaleY="1.0000" />
                     <Position Y="50.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition Y="1.0000" />
-                    <PreSize X="0.4956" Y="0.5800" />
-                    <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                    <PreSize X="0.4689" Y="0.5000" />
+                    <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -37,15 +37,15 @@
                 <ColorVector ScaleY="1.0000" />
                 <InnerNodeSize Width="450" Height="50" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Name" ActionTag="-1012507381" Tag="90" IconVisible="False" LeftMargin="10.0000" RightMargin="478.0000" TopMargin="5.0000" BottomMargin="66.0000" FontSize="22" LabelText="Jump Type:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="122.0000" Y="29.0000" />
+              <AbstractNodeData Name="Text_Name" ActionTag="-1012507381" Tag="90" IconVisible="False" LeftMargin="10.0000" RightMargin="480.0000" TopMargin="5.0000" BottomMargin="70.0000" FontSize="22" LabelText="Jump Type:" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="120.0000" Y="25.0000" />
                 <AnchorPoint ScaleY="1.0000" />
                 <Position X="10.0000" Y="95.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="0" />
                 <PrePosition X="0.0164" Y="0.9500" />
-                <PreSize X="0.2000" Y="0.2900" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <PreSize X="0.1967" Y="0.2500" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="26" G="26" B="26" />
               </AbstractNodeData>
@@ -66,15 +66,15 @@
                         <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                         <BlendFunc Src="1" Dst="771" />
                       </AbstractNodeData>
-                      <AbstractNodeData Name="Text_GoldNumber" ActionTag="1527802867" Tag="333" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" RightMargin="-55.0000" TopMargin="-15.5000" BottomMargin="-15.5000" FontSize="22" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                        <Size X="55.0000" Y="31.0000" />
+                      <AbstractNodeData Name="Text_GoldNumber" ActionTag="1527802867" Tag="333" IconVisible="False" PositionPercentYEnabled="True" HorizontalEdge="LeftEdge" RightMargin="-47.0000" TopMargin="-13.5000" BottomMargin="-13.5000" FontSize="22" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                        <Size X="47.0000" Y="27.0000" />
                         <AnchorPoint ScaleY="0.5000" />
                         <Position />
                         <Scale ScaleX="1.0000" ScaleY="1.0000" />
                         <CColor A="255" R="255" G="255" B="255" />
                         <PrePosition />
                         <PreSize X="0.0000" Y="0.0000" />
-                        <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                        <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                         <OutlineColor A="255" R="0" G="0" B="0" />
                         <ShadowColor A="255" R="110" G="110" B="110" />
                       </AbstractNodeData>
@@ -93,7 +93,6 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.8197" Y="0.5000" />
                 <PreSize X="0.1803" Y="0.6000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />
@@ -101,15 +100,15 @@
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Max" Visible="False" ActionTag="1565845575" Tag="95" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="520.0000" RightMargin="36.0000" TopMargin="35.5000" BottomMargin="35.5000" FontSize="22" LabelText="MAX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="54.0000" Y="29.0000" />
+              <AbstractNodeData Name="Text_Max" Visible="False" ActionTag="1565845575" Tag="95" IconVisible="False" PositionPercentYEnabled="True" LeftMargin="520.0000" RightMargin="33.0000" TopMargin="37.5000" BottomMargin="37.5000" FontSize="22" LabelText="MAX" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="57.0000" Y="25.0000" />
                 <AnchorPoint ScaleY="0.5000" />
                 <Position X="520.0000" Y="50.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="0" B="0" />
                 <PrePosition X="0.8525" Y="0.5000" />
-                <PreSize X="0.0885" Y="0.2900" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <PreSize X="0.0934" Y="0.2500" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
