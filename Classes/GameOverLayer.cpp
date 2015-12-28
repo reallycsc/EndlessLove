@@ -28,6 +28,20 @@ GameOverLayer::GameOverLayer(void)
 
 GameOverLayer::~GameOverLayer(void)
 {
+    m_pLayout = NULL;
+    m_pTextHighscore = NULL;
+    m_pTextGoldNumber = NULL;
+    m_pAnimate = NULL;
+    m_pButtonRetry = NULL;
+    m_pButtonMainMenu = NULL;
+    m_pButtonRevive = NULL;
+    m_pButtonDoubleCoin = NULL;
+    m_pSpriteRevivePlay = NULL;
+    m_pSpriteDoublePlay = NULL;
+    
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+    sdkbox::PluginVungle::removeListener();
+#endif
 }
 
 bool GameOverLayer::init()
@@ -131,7 +145,7 @@ void GameOverLayer::showScore() const
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 void GameOverLayer::onVungleCacheAvailable()
 {
-    if (this)
+    if (m_pSpriteRevivePlay && m_pSpriteDoublePlay)
     {
         CCLOG("Video loaded");
         m_pSpriteRevivePlay->setColor(Color3B(255, 255, 255));
