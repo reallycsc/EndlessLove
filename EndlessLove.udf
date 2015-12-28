@@ -32,6 +32,7 @@
       <Value ctype="TabsInfo">
         <OpenedDocuments>
           <FilePathData Path="SettingLayer.csd" />
+          <FilePathData Path="GameOverLayer.csd" />
         </OpenedDocuments>
         <ActiveDocument Path="SettingLayer.csd" />
       </Value>
