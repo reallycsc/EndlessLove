@@ -11,6 +11,7 @@ using namespace std;
 using namespace tinyxml2;
 
 const int GRAVITY = 2940;
+const string BACKGROUND_MUSIC_FILE = "background.mp3";
 
 #define MAXDWORD 0xffffffff
 // Flags 

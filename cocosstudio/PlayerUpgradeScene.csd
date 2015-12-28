@@ -73,9 +73,9 @@
             <PreSize X="0.1354" Y="0.0938" />
             <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="Normal" Path="Resource/UI/button_disable.png" Plist="" />
-            <PressedFileData Type="Normal" Path="Resource/UI/button_down.png" Plist="" />
-            <NormalFileData Type="Normal" Path="Resource/UI/button_up.png" Plist="" />
+            <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_up.png" Plist="UI.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

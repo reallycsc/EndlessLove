@@ -1,6 +1,7 @@
 #include "LoadingLayer.h"
 #include "MainMenuScene.h"
 #include "CSCClass/CSC_IOSHelper.h"
+#include <SimpleAudioEngine.h>
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 #import "PluginVungle/PluginVungle.h"
 #endif
@@ -22,6 +23,8 @@ bool LoadingLayer::init()
     {
         return false;
     }
+	// load music
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BACKGROUND_MUSIC_FILE.c_str());
 
 	CSC_IOSHelper::GameCenter_authenticateLocalUser();
 

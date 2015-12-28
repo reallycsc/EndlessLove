@@ -33,6 +33,12 @@
             <Image Name="button_Upgrade_up.png" />
             <Image Name="button_Pause_down.png.png" />
             <Image Name="button_Pause_up.png" />
+            <Image Name="button_MusicOff_disable.png" />
+            <Image Name="button_MusicOff_down.png" />
+            <Image Name="button_MusicOff_up.png" />
+            <Image Name="button_Music_disable.png" />
+            <Image Name="button_Music_down.png" />
+            <Image Name="button_Music_up.png" />
           </Folder>
           <Folder Name="Item">
             <Image Name="bomb.png" />

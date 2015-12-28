@@ -459,9 +459,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_Setting_down.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_Setting_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_Setting_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Setting_down.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Setting_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Setting_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -485,9 +485,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_Achievement_down.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_Achievement_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_Achievement_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Achievement_down.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Achievement_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Achievement_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -500,9 +500,9 @@
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_Leaderboard_down.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_Leaderboard_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_Leaderboard_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Leaderboard_down.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Leaderboard_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Leaderboard_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -516,9 +516,9 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <TextColor A="255" R="26" G="26" B="26" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_disable_long.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_down_long.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_up_long.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable_long.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down_long.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_up_long.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -532,9 +532,9 @@
                 <PreSize X="0.0000" Y="0.0000" />
                 <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
-                <DisabledFileData Type="Normal" Path="Resource/UI/button_purchase_noAd_disable.png" Plist="" />
-                <PressedFileData Type="Normal" Path="Resource/UI/button_purchase_noAd_down.png" Plist="" />
-                <NormalFileData Type="Normal" Path="Resource/UI/button_purchase_noAd_up.png" Plist="" />
+                <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_disable.png" Plist="UI.plist" />
+                <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_down.png" Plist="UI.plist" />
+                <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_up.png" Plist="UI.plist" />
                 <OutlineColor A="255" R="255" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -566,9 +566,9 @@
             <PreSize X="0.1354" Y="0.2031" />
             <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
-            <DisabledFileData Type="Normal" Path="Resource/UI/button_Upgrade_down.png" Plist="" />
-            <PressedFileData Type="Normal" Path="Resource/UI/button_Upgrade_down.png" Plist="" />
-            <NormalFileData Type="Normal" Path="Resource/UI/button_Upgrade_up.png" Plist="" />
+            <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_down.png" Plist="UI.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_down.png" Plist="UI.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_up.png" Plist="UI.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

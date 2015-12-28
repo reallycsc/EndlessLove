@@ -256,7 +256,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/UI/heart_grey.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/UI/heart_grey.png" Plist="UI.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_HeartLeftGrey" ActionTag="1693082697" Tag="77" IconVisible="False" LeftMargin="-240.0000" RightMargin="208.0000" BottomMargin="-55.0000" ctype="SpriteObjectData">
@@ -267,7 +267,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FileData Type="Normal" Path="Resource/UI/heart_left_grey.png" Plist="" />
+                <FileData Type="MarkedSubImage" Path="Resource/UI/heart_left_grey.png" Plist="UI.plist" />
                 <BlendFunc Src="770" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Sprite_Heart" ActionTag="892188995" Tag="32" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="-120.0000" RightMargin="62.0000" BottomMargin="-55.0000" ctype="SpriteObjectData">

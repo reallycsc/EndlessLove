@@ -2,6 +2,7 @@
 #include "GameMediator.h"
 #include "MainMenuScene.h"
 #include "CSCClass/CSC_IOSHelper.h"
+#include <SimpleAudioEngine.h>
 
 
 SettingLayer::SettingLayer(void)
@@ -9,6 +10,10 @@ SettingLayer::SettingLayer(void)
 	m_pLayout = NULL;
 	m_pCheckBoxCN = NULL;
 	m_pCheckBoxEN = NULL;
+
+	m_pButtonMusicOn = NULL;
+	m_pButtonMusicOff = NULL;
+	m_pSliderMusic = NULL;
 
 	m_languageType = LanguageType::ENGLISH;
 	m_languageTypeOriginal = LanguageType::ENGLISH;
@@ -41,6 +46,26 @@ bool SettingLayer::init()
 		buttonCancel->addClickEventListener(CC_CALLBACK_1(SettingLayer::menuCallback_Cancel, this));
         auto buttonRestore = dynamic_cast<Button*>(m_pLayout->getChildByName("Button_RestorePurcahse"));
         buttonRestore->addClickEventListener(CC_CALLBACK_1(SettingLayer::menuCallback_Restore, this));
+
+		// get music setting
+		auto nodeMusic = dynamic_cast<Node*>(m_pLayout->getChildByName("Node_Music"));
+		m_pButtonMusicOff = dynamic_cast<Button*>(nodeMusic->getChildByName("Button_musicOff"));
+		m_pButtonMusicOff->addClickEventListener(CC_CALLBACK_1(SettingLayer::menuCallback_MusicOff, this));
+		m_pButtonMusicOn = dynamic_cast<Button*>(nodeMusic->getChildByName("Button_musicOn"));
+		m_pButtonMusicOn->addClickEventListener(CC_CALLBACK_1(SettingLayer::menuCallback_MusicOn, this));
+		m_pSliderMusic = dynamic_cast<Slider*>(nodeMusic->getChildByName("Slider_music"));
+		m_pSliderMusic->addEventListener(CC_CALLBACK_2(SettingLayer::onSliderEvent, this));
+		if (CocosDenshion::SimpleAudioEngine::getInstance()->isBackgroundMusicPlaying())
+		{
+			m_pButtonMusicOn->setVisible(false);
+			m_pButtonMusicOn->setEnabled(false);
+		}
+		else
+		{
+			m_pButtonMusicOff->setVisible(false);
+			m_pButtonMusicOff->setEnabled(false);
+			m_pSliderMusic->setEnabled(false);
+		}
 
 		// get checkbox
 		m_pCheckBoxCN = dynamic_cast<CheckBox*>(m_pLayout->getChildByName("Node_Chinese")->getChildByName("CheckBox"));
@@ -124,6 +149,38 @@ void SettingLayer::menuCallback_Cancel(Ref* pSender)
 void SettingLayer::menuCallback_Restore(Ref* pSender)
 {
     CSC_IOSHelper::getInstance()->IAP_restorePurchase();
+}
+
+void SettingLayer::menuCallback_MusicOn(Ref* pSender)
+{
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(BACKGROUND_MUSIC_FILE.c_str(), true);
+	m_pButtonMusicOff->setEnabled(true);
+	m_pButtonMusicOff->setVisible(true);
+	m_pButtonMusicOn->setEnabled(false);
+	m_pButtonMusicOn->setVisible(false);
+	m_pSliderMusic->setEnabled(true);
+}
+
+void SettingLayer::menuCallback_MusicOff(Ref* pSender)
+{
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+	m_pButtonMusicOn->setEnabled(true);
+	m_pButtonMusicOn->setVisible(true);
+	m_pButtonMusicOff->setEnabled(false);
+	m_pButtonMusicOff->setVisible(false);
+	m_pSliderMusic->setEnabled(false);
+}
+
+void SettingLayer::onSliderEvent(Ref* pSender, Slider::EventType type)
+{
+	if (type == Slider::EventType::ON_PERCENTAGE_CHANGED)
+	{
+		// set attribute
+		float percent = m_pSliderMusic->getPercent();
+		float maxPercent = m_pSliderMusic->getMaxPercent();
+		
+		CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(percent / maxPercent);
+	}
 }
 
 void SettingLayer::selectedStateEvent_CN(Ref *pSender, CheckBox::EventType type)

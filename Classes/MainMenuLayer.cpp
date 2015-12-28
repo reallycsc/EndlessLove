@@ -5,6 +5,7 @@
 #include "SettingLayer.h"
 #include "Player.h"
 #include "CSCClass/CSC_IOSHelper.h"
+#include <SimpleAudioEngine.h>
 
 MainMenuLayer::MainMenuLayer(void)
 {
@@ -155,6 +156,10 @@ bool MainMenuLayer::init()
 		DelayTime::create(random(1.0f, 5.0f)),
 		CallFunc::create(CC_CALLBACK_0(MainMenuLayer::playerBlink, this))
 		));
+
+	// Play music
+	CocosDenshion::SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(1.0);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(BACKGROUND_MUSIC_FILE.c_str(), true);
     
     return true;
 }
