@@ -4,7 +4,7 @@
       <Value ctype="CocosRecentOperation">
         <LastPublishType Value="Resource" />
         <IsLastPublish Value="True" />
-        <LastRunType Value="Windows" />
+        <LastRunType Value="Mac" />
       </Value>
     </Item>
     <Item Key="PackageParamsKey">
@@ -30,11 +30,7 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <OpenedDocuments>
-          <FilePathData Path="MainMenuScene.csd" />
-          <FilePathData Path="PlayerLayer.csd" />
-        </OpenedDocuments>
-        <ActiveDocument Path="MainMenuScene.csd" />
+        <ActiveDocument />
       </Value>
     </Item>
   </Properties>
