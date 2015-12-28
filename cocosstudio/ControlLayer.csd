@@ -44,7 +44,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="1.0000" Y="1.1250" />
             <PreSize X="0.1354" Y="0.2031" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <FontResource Type="Normal" Path="" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Pause_down.png.png" Plist="UI.plist" />
             <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Pause_down.png.png" Plist="UI.plist" />

@@ -147,7 +147,7 @@
           <Image Name="Chinese_Flag.png" />
         </Folder>
         <Folder Name="Font">
-          <TTF Name="msyh.ttc" />
+          <TTF Name="fzzj.ttf" />
         </Folder>
         <Project Name="ControlLayer.csd" Type="Layer" />
         <Project Name="PlayerLayer.csd" Type="Layer" />

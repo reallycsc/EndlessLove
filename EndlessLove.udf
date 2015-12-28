@@ -31,12 +31,10 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="SettingLayer.csd" />
-          <FilePathData Path="GameOverLayer.csd" />
-          <FilePathData Path="Background.csi" />
-          <FilePathData Path="Item.csi" />
+          <FilePathData Path="MainMenuScene.csd" />
+          <FilePathData Path="PlayerLayer.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="Item.csi" />
+        <ActiveDocument Path="MainMenuScene.csd" />
       </Value>
     </Item>
   </Properties>

@@ -377,42 +377,42 @@
             <FileData Type="Normal" Path="Resource/Animation/Cardiogram/cardiogram01.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Text_Play" ActionTag="-941415148" Tag="79" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="372.5000" RightMargin="372.5000" TopMargin="311.5000" BottomMargin="271.5000" FontSize="40" LabelText="Tap to play" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-            <Size X="215.0000" Y="57.0000" />
+          <AbstractNodeData Name="Text_Play" ActionTag="-941415148" Tag="79" IconVisible="False" PositionPercentXEnabled="True" LeftMargin="373.5000" RightMargin="373.5000" TopMargin="315.0000" BottomMargin="275.0000" FontSize="40" LabelText="Tap to play" OutlineSize="2" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+            <Size X="213.0000" Y="50.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="480.0000" Y="300.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="161" B="0" />
             <PrePosition X="0.5000" Y="0.4688" />
-            <PreSize X="0.2240" Y="0.0891" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <PreSize X="0.2219" Y="0.0781" />
+            <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
             <OutlineColor A="255" R="0" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
           <AbstractNodeData Name="Node_Up" ActionTag="-965518968" Tag="22" IconVisible="True" PositionPercentXEnabled="True" LeftMargin="480.0000" RightMargin="480.0000" TopMargin="640.0000" ctype="SingleNodeObjectData">
             <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="Text_GameTitle" ActionTag="1879048267" CallBackType="Click" Tag="4" IconVisible="False" LeftMargin="-307.5000" RightMargin="-307.5000" TopMargin="-572.0000" BottomMargin="428.0000" FontSize="100" LabelText="Endless Love" OutlineSize="6" OutlineEnabled="True" ShadowOffsetX="4.0000" ShadowOffsetY="-4.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="615.0000" Y="144.0000" />
+              <AbstractNodeData Name="Text_GameTitle" ActionTag="1879048267" CallBackType="Click" Tag="4" IconVisible="False" LeftMargin="-292.5000" RightMargin="-292.5000" TopMargin="-563.5000" BottomMargin="436.5000" FontSize="100" LabelText="Endless Love" OutlineSize="6" OutlineEnabled="True" ShadowOffsetX="4.0000" ShadowOffsetY="-4.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="585.0000" Y="127.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position Y="500.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <OutlineColor A="255" R="255" G="0" B="236" />
                 <ShadowColor A="255" R="0" G="0" B="0" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Text_Highscore" ActionTag="559115057" Tag="17" IconVisible="False" LeftMargin="-113.5000" RightMargin="-113.5000" TopMargin="-635.0000" BottomMargin="585.0000" FontSize="38" LabelText="Highscore: 0" HorizontalAlignmentType="HT_Center" OutlineSize="2" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                <Size X="227.0000" Y="50.0000" />
+              <AbstractNodeData Name="Text_Highscore" ActionTag="559115057" Tag="17" IconVisible="False" LeftMargin="-109.5000" RightMargin="-109.5000" TopMargin="-632.0000" BottomMargin="588.0000" FontSize="38" LabelText="Highscore: 0" HorizontalAlignmentType="HT_Center" OutlineSize="2" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="219.0000" Y="44.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position Y="610.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="0" G="0" B="0" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="0" />
                 <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
@@ -430,15 +430,15 @@
                     <FileData Type="MarkedSubImage" Path="Resource/Item/goldCoin.png" Plist="Item.plist" />
                     <BlendFunc Src="1" Dst="771" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_GoldNumber" ActionTag="-1580652236" Tag="37" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="50.0000" RightMargin="-139.0000" TopMargin="-25.0000" BottomMargin="-25.0000" FontSize="38" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="90.0000" Y="52.0000" />
+                  <AbstractNodeData Name="Text_GoldNumber" ActionTag="-1580652236" Tag="37" IconVisible="False" HorizontalEdge="LeftEdge" VerticalEdge="TopEdge" LeftMargin="50.0000" RightMargin="-130.0000" TopMargin="-22.0000" BottomMargin="-24.0000" FontSize="38" LabelText="9999" HorizontalAlignmentType="HT_Center" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="80.0000" Y="46.0000" />
                     <AnchorPoint ScaleY="0.5000" />
-                    <Position X="50.0000" />
+                    <Position X="50.0000" Y="-1.0000" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition />
                     <PreSize X="0.0000" Y="0.0000" />
-                    <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                    <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                     <OutlineColor A="255" R="0" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
@@ -514,7 +514,6 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <TextColor A="255" R="26" G="26" B="26" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable_long.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down_long.png" Plist="UI.plist" />
@@ -530,7 +529,6 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition />
                 <PreSize X="0.0000" Y="0.0000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_purchase_noAd_down.png" Plist="UI.plist" />
@@ -564,7 +562,6 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.2000" Y="0.2500" />
             <PreSize X="0.1354" Y="0.2031" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_down.png" Plist="UI.plist" />
             <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_Upgrade_down.png" Plist="UI.plist" />
@@ -580,7 +577,7 @@
             <CColor A="255" R="173" G="216" B="230" />
             <PrePosition X="0.0849" Y="0.8424" />
             <PreSize X="0.1563" Y="0.0781" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
@@ -596,7 +593,7 @@
             <CColor A="255" R="255" G="165" B="0" />
             <PrePosition X="0.0838" Y="0.7456" />
             <PreSize X="0.1563" Y="0.0781" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
@@ -612,7 +609,7 @@
             <CColor A="255" R="173" G="216" B="230" />
             <PrePosition X="0.0839" Y="0.6472" />
             <PreSize X="0.1563" Y="0.0781" />
-            <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+            <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
             <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />

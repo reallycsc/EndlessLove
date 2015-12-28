@@ -9,15 +9,15 @@
           <AbstractNodeData Name="Panel_GamePaused" ActionTag="1601183374" Tag="146" IconVisible="False" LeftMargin="330.0000" RightMargin="330.0000" TopMargin="145.0000" BottomMargin="145.0000" TouchEnable="True" ClipAble="True" BackColorAlpha="191" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="300.0000" Y="350.0000" />
             <Children>
-              <AbstractNodeData Name="Text_Paused" ActionTag="857765707" Tag="156" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="48.0000" RightMargin="48.0000" BottomMargin="247.0000" FontSize="72" LabelText="Pause" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
-                <Size X="204.0000" Y="103.0000" />
+              <AbstractNodeData Name="Text_Paused" ActionTag="857765707" Tag="156" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" LeftMargin="56.0000" RightMargin="56.0000" BottomMargin="259.0000" FontSize="72" LabelText="Pause" OutlineSize="4" OutlineEnabled="True" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ShadowEnabled="True" ctype="TextObjectData">
+                <Size X="188.0000" Y="91.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="1.0000" />
                 <Position X="150.0000" Y="350.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="1.0000" />
-                <PreSize X="0.6800" Y="0.2943" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <PreSize X="0.6267" Y="0.2600" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <OutlineColor A="255" R="0" G="0" B="255" />
                 <ShadowColor A="255" R="0" G="0" B="0" />
               </AbstractNodeData>
@@ -29,7 +29,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.4571" />
                 <PreSize X="0.5333" Y="0.1714" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_orange_down.png" Plist="UI.plist" />
@@ -45,7 +45,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.2571" />
                 <PreSize X="0.5333" Y="0.1714" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />
@@ -61,7 +61,7 @@
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5000" Y="0.0571" />
                 <PreSize X="0.5333" Y="0.1714" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />

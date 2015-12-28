@@ -43,7 +43,7 @@
                 <CColor A="255" R="173" G="216" B="230" />
                 <PrePosition X="0.5000" Y="0.0250" />
                 <PreSize X="0.3810" Y="0.1000" />
-                <FontResource Type="Normal" Path="Font/msyh.ttc" Plist="" />
+                <FontResource Type="Normal" Path="Font/fzzj.ttf" Plist="" />
                 <TextColor A="255" R="65" G="65" B="70" />
                 <DisabledFileData Type="MarkedSubImage" Path="Resource/UI/button_disable.png" Plist="UI.plist" />
                 <PressedFileData Type="MarkedSubImage" Path="Resource/UI/button_down.png" Plist="UI.plist" />
