@@ -30,7 +30,10 @@
     </Item>
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
-        <ActiveDocument />
+        <OpenedDocuments>
+          <FilePathData Path="GameOverLayer.csd" />
+        </OpenedDocuments>
+        <ActiveDocument Path="GameOverLayer.csd" />
       </Value>
     </Item>
   </Properties>
