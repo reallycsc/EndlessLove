@@ -31,9 +31,9 @@
     <Item Key="TabsParamsKey">
       <Value ctype="TabsInfo">
         <OpenedDocuments>
-          <FilePathData Path="GameOverLayer.csd" />
+          <FilePathData Path="LoadingScene.csd" />
         </OpenedDocuments>
-        <ActiveDocument Path="GameOverLayer.csd" />
+        <ActiveDocument Path="LoadingScene.csd" />
       </Value>
     </Item>
   </Properties>

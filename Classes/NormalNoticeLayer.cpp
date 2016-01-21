@@ -54,7 +54,7 @@ bool NormalNoticeLayer::init(const string &title, const string &info)
 	// set all text
 	textTitle->setString(title);
 	textInfo->setString(info);
-	CSC::setScrollViewTextAutoWrap(scrollView, textInfo);
+	CSCClass::setScrollViewTextAutoWrap(scrollView, textInfo);
 	buttonOK->setTitleText(GameMediator::getInstance()->getGameText()->at("ID_NOTICE_OK"));
 
 	// run animation

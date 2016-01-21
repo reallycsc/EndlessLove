@@ -257,13 +257,13 @@ void GameOverLayer::realRevive()
     m_pGameMediator->increaseReviveNumber();
 	// update GameCenter Achievement
 	long long reviveNum = m_pGameMediator->getPlayerData()->getReviveNumber();
-	CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.revive1");
+	CSCClass::CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.revive1");
     if (reviveNum > 1)
-		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive10", reviveNum * 10);
+	    CSCClass::CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive10", reviveNum * 10);
     if (reviveNum > 10)
-		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive50", reviveNum * 2);
+	    CSCClass::CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive50", reviveNum * 2);
     if (reviveNum > 50)
-		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive100", reviveNum);
+	    CSCClass::CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.revive100", reviveNum);
     // close the ui & resume
 	m_pLayout->runAction(Sequence::create(
 		MoveTo::create(0.2f, cocos2d::Point(winSize.width / 2, winSize.height + m_pLayout->getContentSize().height)),
@@ -308,7 +308,7 @@ void GameOverLayer::realDouble()
 	int m_nToGoldNumber = m_nFromGoldNumber * 2;
 	float duration = 0.5f;
 	m_pTextGoldNumber->runAction(Sequence::create(
-		TextNumChange::create(duration, m_nFromGoldNumber, m_nToGoldNumber),
+		CSCClass::TextNumChange::create(duration, m_nFromGoldNumber, m_nToGoldNumber),
 		DelayTime::create(0.5f),
 		CallFuncN::create(CC_CALLBACK_1(GameOverLayer::menuCallback_MainMenu, this)),
 		NULL));
@@ -322,11 +322,11 @@ void GameOverLayer::realDouble()
 
     // update GameCenter Achievement
     long long doubleNum = playerData->getDoubleNumber();
-	CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.double1");
+	CSCClass::CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.double1");
     if (doubleNum > 1)
-		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double10", doubleNum * 10);
+	    CSCClass::CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double10", doubleNum * 10);
     if (doubleNum > 10)
-		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double50", doubleNum * 2);
+	    CSCClass::CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double50", doubleNum * 2);
     if (doubleNum > 50)
-		CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double100", doubleNum);
+	    CSCClass::CSC_IOSHelper::GameCenter_unlockAchievementPercent("com.reallycsc.endlesslove.double100", doubleNum);
 }

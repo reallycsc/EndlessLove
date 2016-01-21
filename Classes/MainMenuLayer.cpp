@@ -85,7 +85,7 @@ bool MainMenuLayer::init()
 	buttonPurchase->setVisible(false);
 	buttonReset->setVisible(false);
 #endif
-    if (CSC_IOSHelper::GameCenter_isAuthenticated()) {
+    if (CSCClass::CSC_IOSHelper::GameCenter_isAuthenticated()) {
         buttonAchievement->setPositionY(10);
         buttonLeaderboard->setPositionY(10);
         buttonSignIn->setPositionY(-200);
@@ -108,9 +108,9 @@ bool MainMenuLayer::init()
 	}
 	else {
 #if IAPTEST_FLAG == 1
-		CSC_IOSHelper::IAP_requestAllPurchasedProducts(true);
+		CSCClass::CSC_IOSHelper::IAP_requestAllPurchasedProducts(true);
 #else
-        CSC_IOSHelper::IAP_requestAllPurchasedProducts(false);
+		CSCClass::CSC_IOSHelper::IAP_requestAllPurchasedProducts(false);
 #endif
         auto listener = EventListenerCustom::create(EVENT_RESTORED + "com.reallycsc.endlesslove.adremove", [=](EventCustom* event) {
             m_pGameMediator->setIsAd(false);
@@ -122,7 +122,7 @@ bool MainMenuLayer::init()
             m_pGameMediator->setIsAd(false);
             m_pGameMediator->setIsGuidelineForever(true);
             buttonPurchaseNoAd->runAction(MoveTo::create(0.5f, Point(buttonPurchaseNoAd->getPositionX(), -200)));
-			CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.adremove");
+			CSCClass::CSC_IOSHelper::GameCenter_checkAndUnlockAchievement("com.reallycsc.endlesslove.adremove");
         });
         _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	}
@@ -193,30 +193,30 @@ void MainMenuLayer::menuCallback_Setting(Ref* pSender)
 
 void MainMenuLayer::menuCallback_SignIn(Ref* pSender)
 {
-    if (CSC_IOSHelper::GameCenter_isAuthenticated()) {
+    if (CSCClass::CSC_IOSHelper::GameCenter_isAuthenticated()) {
         Director::getInstance()->getEventDispatcher()->dispatchCustomEvent(EVENT_GAMECENTER_AUTHENTICATED);
     }
     else {
-		CSC_IOSHelper::GameCenter_authenticateLocalUser();
+	    CSCClass::CSC_IOSHelper::GameCenter_authenticateLocalUser();
     }
 }
 
 void MainMenuLayer::menuCallback_Leaderboard(Ref* pSender)
 {
-	CSC_IOSHelper::GameCenter_showLeaderboard("Highscore");
+	CSCClass::CSC_IOSHelper::GameCenter_showLeaderboard("Highscore");
 }
 
 void MainMenuLayer::menuCallback_Achievement(Ref* pSender)
 {
-	CSC_IOSHelper::GameCenter_showAchievements();
+	CSCClass::CSC_IOSHelper::GameCenter_showAchievements();
 }
 
 void MainMenuLayer::menuCallback_PurchaseNoAd(Ref* pSender)
 {
 #if (IAPTEST_FLAG == 1)
-	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(true, "com.reallycsc.endlesslove.adremove");
+	CSCClass::CSC_IOSHelper::getInstance()->IAP_purchaseProduct(true, "com.reallycsc.endlesslove.adremove");
 #else
-	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(false, "com.reallycsc.endlesslove.adremove");
+	CSCClass::CSC_IOSHelper::getInstance()->IAP_purchaseProduct(false, "com.reallycsc.endlesslove.adremove");
 #endif
 }
 
@@ -242,10 +242,10 @@ void MainMenuLayer::menuCallback_Purchase(Ref* pSender)
 
 void MainMenuLayer::menuCallback_Reset(Ref* pSender)
 {
-	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("Highscore", 0);
-	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumber", 0);
-	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumberAll", 0);
-	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("ReviveNumber", 0);
-	CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("DoubleNumber", 0);
-	CSC_IOSHelper::GameCenter_resetAchievements();
+	CSCClass::CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("Highscore", 0);
+	CSCClass::CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumber", 0);
+	CSCClass::CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("GoldNumberAll", 0);
+	CSCClass::CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("ReviveNumber", 0);
+	CSCClass::CSC_IOSHelper::GameCenter_reportScoreForLeaderboard("DoubleNumber", 0);
+	CSCClass::CSC_IOSHelper::GameCenter_resetAchievements();
 }

@@ -95,7 +95,7 @@ void GameLayer::update(float dt)
 		{
 			if (m_pEnemyLayer->playerEnemyIntersect(player))
 			{
-				this->runAction(Shake::create(0.2f, 3));
+				this->runAction(CSCClass::Shake::create(0.2f, 3));
 				m_pPlayerLayer->addHeartNumber(-1);
 			}
 		}
@@ -181,14 +181,14 @@ void GameLayer::checkItemIntersect(Player* player)
 	case ITEMTYPE_HEARTSECRET:
 		if (!player->getIsShield())
 		{
-			this->runAction(Shake::create(0.2f, 3));
+			this->runAction(CSCClass::Shake::create(0.2f, 3));
 			m_pPlayerLayer->addHeartNumber(-1);
 		}
 		break;
 	case ITEMTYPE_HEARTGREENTEA:
 		if (!player->getIsShield())
 		{
-			this->runAction(Shake::create(0.2f, 3));
+			this->runAction(CSCClass::Shake::create(0.2f, 3));
 			m_pPlayerLayer->addHeartNumber(-2);
 		}
 		break;

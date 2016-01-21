@@ -9,7 +9,7 @@
 LoadingLayer::LoadingLayer(void)
 {
 	GameMediator::getInstance();
-	CSC_IOSHelper::getInstance();
+	CSCClass::CSC_IOSHelper::getInstance();
 }
 
 
@@ -26,11 +26,11 @@ bool LoadingLayer::init()
 	// load music
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BACKGROUND_MUSIC_FILE.c_str());
 
-	CSC_IOSHelper::GameCenter_authenticateLocalUser();
+	CSCClass::CSC_IOSHelper::GameCenter_authenticateLocalUser();
 
 	vector<string> products;
 	products.push_back("com.reallycsc.endlesslove.adremove");
-	CSC_IOSHelper::IAP_initWithProductSet(&products);
+	CSCClass::CSC_IOSHelper::IAP_initWithProductSet(&products);
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 	sdkbox::PluginVungle::init();

@@ -4,7 +4,6 @@
 #include "CSCClass/CSC_IOSHelper.h"
 #include <SimpleAudioEngine.h>
 
-
 SettingLayer::SettingLayer(void)
 {
 	m_pLayout = NULL;
@@ -148,7 +147,7 @@ void SettingLayer::menuCallback_Cancel(Ref* pSender)
 
 void SettingLayer::menuCallback_Restore(Ref* pSender)
 {
-    CSC_IOSHelper::getInstance()->IAP_restorePurchase();
+	CSCClass::CSC_IOSHelper::getInstance()->IAP_restorePurchase();
 }
 
 void SettingLayer::menuCallback_MusicOn(Ref* pSender)

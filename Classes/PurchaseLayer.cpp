@@ -50,9 +50,9 @@ bool PurchaseLayer::init()
         
 		// request IAP
 #if IAPTEST_FLAG == 1
-		CSC_IOSHelper::getInstance()->IAP_requestAllPurchasedProductsWithCallback(true, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
+		CSCClass::CSC_IOSHelper::getInstance()->IAP_requestAllPurchasedProductsWithCallback(true, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
 #else
-		CSC_IOSHelper::getInstance()->IAP_requestAllPurchasedProductsWithCallback(false, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
+	    CSCClass::CSC_IOSHelper::getInstance()->IAP_requestAllPurchasedProductsWithCallback(false, CC_CALLBACK_0(PurchaseLayer::showListItems, this));
 #endif
 		
         bRet = true;
@@ -63,26 +63,26 @@ bool PurchaseLayer::init()
 
 void PurchaseLayer::showListItems()
 {
-    for (int i = 0; i < CSC_IOSHelper::IAP_getProductsCount(); i++) {
+    for (int i = 0; i < CSCClass::CSC_IOSHelper::IAP_getProductsCount(); i++) {
         Node* itemNode = CSLoader::getInstance()->createNodeWithFlatBuffersFile("PurchaseItemNode.csb");
         Layout* layout = dynamic_cast<Layout*>(itemNode->getChildByName("Panel_PurchaseItem"));
         Text* itemName = dynamic_cast<Text*>(layout->getChildByName("Text_ItemName"));
         ScrollView* scrollView = dynamic_cast<ScrollView*>(layout->getChildByName("ScrollView_Desc"));
         Text* itemDesc = dynamic_cast<Text*>(scrollView->getChildByName("Text_Desc"));
         Button* button = dynamic_cast<Button*>(layout->getChildByName("Button_Buy"));
-		const char* productID = CSC_IOSHelper::IAP_getProductID(i);
+		const char* productID = CSCClass::CSC_IOSHelper::IAP_getProductID(i);
         button->addClickEventListener(CC_CALLBACK_1(PurchaseLayer::menuCallback_Buy, this, button, productID));
         
-        itemName->setString(CSC_IOSHelper::IAP_getProductTitle(i));
-        itemDesc->setString(CSC_IOSHelper::IAP_getProductDescription(i));
-		CSC::setScrollViewTextAutoWrap(scrollView, itemDesc);
+        itemName->setString(CSCClass::CSC_IOSHelper::IAP_getProductTitle(i));
+        itemDesc->setString(CSCClass::CSC_IOSHelper::IAP_getProductDescription(i));
+		CSCClass::setScrollViewTextAutoWrap(scrollView, itemDesc);
 
-        button->setTitleText(CSC_IOSHelper::IAP_getProductPrice(i));
+        button->setTitleText(CSCClass::CSC_IOSHelper::IAP_getProductPrice(i));
         
         layout->removeFromParentAndCleanup(false);
         m_pListView->pushBackCustomItem(layout);
         
-        if (CSC_IOSHelper::IAP_isPurchased(productID)) {
+        if (CSCClass::CSC_IOSHelper::IAP_isPurchased(productID)) {
 			button->setEnabled(false);
         }
     }
@@ -91,9 +91,9 @@ void PurchaseLayer::showListItems()
 void PurchaseLayer::menuCallback_Buy(Ref* pSender, Button* button, const char* id)
 {
 #if IAPTEST_FLAG == 1
-	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(true, id);
+	CSCClass::CSC_IOSHelper::getInstance()->IAP_purchaseProduct(true, id);
 #else
-	CSC_IOSHelper::getInstance()->IAP_purchaseProduct(false, id);
+	CSCClass::CSC_IOSHelper::getInstance()->IAP_purchaseProduct(false, id);
 #endif
 }
 
