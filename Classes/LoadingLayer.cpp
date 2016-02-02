@@ -27,6 +27,11 @@ bool LoadingLayer::init()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BACKGROUND_MUSIC_FILE.c_str());
 
 	CSCClass::CSC_IOSHelper::GameCenter_authenticateLocalUser();
+	CSCClass::CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("Highscore");
+	CSCClass::CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("GoldNumber");
+	CSCClass::CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("GoldNumberAll");
+	CSCClass::CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("ReviveNumber");
+	CSCClass::CSC_IOSHelper::GameCenter_retriveScoreFromLeaderboard("DoubleNumber");
 
 	vector<string> products;
 	products.push_back("com.reallycsc.endlesslove.adremove");
